@@ -26,6 +26,13 @@ export interface ISeoTags {
   url?: string;
   image?: string;
 }
+export declare namespace Broadcast {
+  interface Base {
+    title?: string;
+    label?: string;
+    onClick?: (e: SyntheticEvent) => void;
+  }
+}
 export declare namespace Button {
   interface Base {
     route?: string;
