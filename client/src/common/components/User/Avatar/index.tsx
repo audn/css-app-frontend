@@ -7,8 +7,6 @@ function UserAvatar({
   className?: string;
   [x: string]: any;
 }) {
-  console.log(user);
-
   return (
     <img
       src={user.profile_image_url}

@@ -2,7 +2,9 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import { Button } from '../common/components/Buttons';
 import { Form } from '../common/components/Form';
 import Animate from '../common/components/layout/Animate';
+import Auth from '../common/components/layout/Auth';
 import Alpha from '../common/components/layout/headings/Alpha';
+import Bravo from '../common/components/layout/headings/Bravo';
 import P from '../common/components/layout/headings/P';
 import Category from '../common/components/misc/Category';
 import { User } from '../common/components/User';
@@ -63,7 +65,7 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      {isLoggedIn ? (
+      <Auth.User>
         <Animate variants={fadeIn} className="max-w-2xl mx-auto text-left">
           <Alpha>Hey, {currentUser.name}👋</Alpha>
           <div className="flex mt-12">
@@ -85,17 +87,17 @@ export default function Home() {
             </div>
           </div>
         </Animate>
-      ) : (
         <Animate variants={fadeIn} className="flex flex-col items-center ">
           <div className="flex flex-col items-center p-8 px-12 rounded-2xl bg-types-100">
-            <Alpha>Let the brainstorming begin!</Alpha>
-            <P className="text-lg">
+            <Bravo>Let the brainstorming begin!</Bravo>
+            <P className="mb-8 text-lg text-on-150">
               Do you have an idea of what css.app can be built into?
             </P>
-            <Button.TwitterAuth className="flex mt-5" />
+            <Button.TwitterAuth />
           </div>
         </Animate>
-      )}
+      </Auth.User>
+
       <div className="max-w-2xl mx-auto mt-16">
         <div className="flex flex-wrap justify-center mb-10 space-x-2">
           <Category

@@ -27,8 +27,6 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
 export default Idea;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  console.log(ctx.params);
-
   const idea = (ctx.params?.idea || '') as string;
 
   const data = await getSpecificIdea(idea);
