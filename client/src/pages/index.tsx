@@ -70,6 +70,7 @@ export default function Home() {
             <User.Avatar {...currentUser!} />
             <div className="flex flex-col items-end w-full ml-4">
               <Form.Textarea
+                id="message"
                 value={message}
                 onChange={setMessage}
                 error={error}

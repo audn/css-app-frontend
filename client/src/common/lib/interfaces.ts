@@ -57,6 +57,7 @@ export declare namespace Button {
 
 export declare namespace Form {
   interface Body {
+    id: string;
     placeholder: string;
     onChange: (value: string) => void;
     value: string;

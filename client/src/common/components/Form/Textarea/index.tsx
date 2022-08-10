@@ -1,10 +1,11 @@
 import { Form } from '../../../lib/interfaces';
 
-function Textarea({ value, onChange, placeholder, error }: Form.Textarea) {
+function Textarea({ value, onChange, id, placeholder, error }: Form.Textarea) {
   return (
-    <label className="w-full">
+    <label className="w-full" htmlFor={id}>
       <textarea
         placeholder={placeholder}
+        id={id}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         rows={3}
