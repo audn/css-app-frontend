@@ -24,7 +24,7 @@ function Header() {
     },
     {
       label: 'Sign out',
-      className: 'hover:bg-opacity-10 hover:bg-red-500 hover:text-red-500',
+      className: 'hover:bg-opacity-10 hover:bg-red-500 hover:!text-red-500',
       icon: 'fa-solid fa-sign-out-alt',
       onClick: () => useLogout(),
     },
