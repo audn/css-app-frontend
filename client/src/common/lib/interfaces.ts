@@ -26,11 +26,22 @@ export interface ISeoTags {
   url?: string;
   image?: string;
 }
+export declare namespace Hydration {
+  interface Data<T> {
+    data?: T;
+    refetch: () => void;
+    isRefetching: boolean;
+    isLoading: boolean;
+    error: unknown;
+  }
+  interface Ideas extends Data<Idea.Idea[]> {}
+}
 export declare namespace Broadcast {
   interface Base {
     title?: string;
     label?: string;
     onClick?: (e: SyntheticEvent) => void;
+    isLoading?: boolean;
   }
 }
 export declare namespace Button {

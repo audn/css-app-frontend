@@ -3,7 +3,7 @@ import { Idea } from './../../lib/interfaces';
 import { getIdeas } from './api/ideas';
 
 export const useIdeas = (sort: Idea.SortBy) => {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch, isRefetching } = useQuery(
     [`/ideas?sort=${sort}`],
     () => getIdeas(sort),
     {
@@ -12,5 +12,5 @@ export const useIdeas = (sort: Idea.SortBy) => {
     },
   );
 
-  return { isLoading, error, data: data };
+  return { isLoading, error, data: data, refetch, isRefetching };
 };

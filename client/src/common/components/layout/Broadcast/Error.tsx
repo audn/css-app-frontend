@@ -3,11 +3,7 @@ import { Button } from '../../Buttons';
 import Bravo from '../headings/Bravo';
 import P from '../headings/P';
 
-function Error({ title, label, onClick }: Broadcast.Base) {
-  const error = {
-    fetch:
-      'An error occoured while trying to retrieve ideas. Please try agian later.',
-  };
+function Error({ title, label, onClick, isLoading }: Broadcast.Base) {
   return (
     <div className="flex flex-col items-center p-4 mx-auto rounded-md">
       <Bravo>{title ? title : 'Something went wrong..'}</Bravo>
@@ -15,9 +11,11 @@ function Error({ title, label, onClick }: Broadcast.Base) {
         {label}
         <br /> Please try agian later.
       </P>
-      <Button.Primary
+      <Button.White
         label="Try again"
-        className="w-auto mt-8 bg-white text-types-50"
+        className="w-auto mt-8"
+        onClick={onClick}
+        isLoading={isLoading}
       />
     </div>
   );

@@ -17,7 +17,14 @@ import { useAuthState } from '../store/auth';
 export default function Home() {
   let [sort, setSort] = useState<Idea.SortBy>('votes');
 
-  const { data, isLoading, error: fetchError } = useIdeas(sort);
+  const {
+    data,
+    isLoading,
+    error: fetchError,
+    refetch,
+    isRefetching,
+  } = useIdeas(sort);
+
   let [ideas, setIdeas] = useState<Idea.Idea[] | undefined>(
     data?.payload?.results,
   );
@@ -107,7 +114,13 @@ export default function Home() {
           />
         </div>
 
-        <Hydrate.Ideas data={ideas} error={fetchError} isLoading={isLoading} />
+        <Hydrate.Ideas
+          data={ideas}
+          error={fetchError}
+          isLoading={isLoading}
+          refetch={refetch}
+          isRefetching={isRefetching}
+        />
       </div>
     </DefaultLayout>
   );

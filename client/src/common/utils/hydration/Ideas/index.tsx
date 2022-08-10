@@ -2,18 +2,16 @@ import { AnimatePresence } from 'framer-motion';
 import IdeaCard from '../../../components/IdeaCard';
 import Animate from '../../../components/layout/Animate';
 import Error from '../../../components/layout/Broadcast/Error';
-import { Idea } from '../../../lib/interfaces';
+import { Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../data/animations';
 
 function IdeasHydration({
   data,
   error,
   isLoading,
-}: {
-  data?: Idea.Idea[];
-  isLoading: boolean;
-  error: unknown;
-}) {
+  refetch,
+  isRefetching,
+}: Hydration.Ideas) {
   if (isLoading) {
     return <>loading..</>;
   } else if (error) {
@@ -21,6 +19,8 @@ function IdeasHydration({
       <Error
         title="Couldn't get data"
         label={`An error occoured while trying to retrieve ideas.`}
+        onClick={refetch}
+        isLoading={isRefetching}
       />
     );
   } else

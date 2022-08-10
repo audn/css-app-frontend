@@ -1,14 +1,8 @@
-import { Idea } from '../../lib/interfaces';
+import { Hydration } from '../../lib/interfaces';
 import IdeasHydration from './Ideas';
 
 export const Hydrate = {
-  Ideas: ({
-    ...props
-  }: {
-    data?: Idea.Idea[];
-    isLoading: boolean;
-    error: unknown;
-  }) => {
+  Ideas: ({ ...props }: Hydration.Ideas) => {
     return <IdeasHydration {...props} />;
   },
 };
