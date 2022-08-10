@@ -1,15 +1,15 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { GA_TRACKING_ID } from '../common/utils/analytics';
+import { GA_TRACKING_ID } from '../common/utils/data/analytics';
 
 export default class extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
-          {/* <script
+          <script
             src="https://kit.fontawesome.com/84c3028184.js"
             crossOrigin="anonymous"
-          ></script> */}
+          ></script>
 
           <meta name="application-TileColor" content="#4d7fff" />
           <meta name="theme-color" content="#4d7fff" />

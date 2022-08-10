@@ -7,13 +7,13 @@ function Error({ title, label, onClick, isLoading }: Broadcast.Base) {
   return (
     <div className="flex flex-col items-center p-4 mx-auto rounded-md">
       <Bravo>{title ? title : 'Something went wrong..'}</Bravo>
-      <P className="text-on-100">
+      <P className="mb-8 text-on-100">
         {label}
         <br /> Please try agian later.
       </P>
       <Button.White
+        className="w-auto"
         label="Try again"
-        className="w-auto mt-8"
         onClick={onClick}
         isLoading={isLoading}
       />

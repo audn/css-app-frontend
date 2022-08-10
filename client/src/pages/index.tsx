@@ -40,7 +40,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log('refetching');
       if (data?.payload?.results) {
         setIdeas(data?.payload?.results);
       }
@@ -91,7 +90,7 @@ export default function Home() {
             <Alpha>Let the brainstorming begin!</Alpha>
             <P className="text-lg">
               Do you have an idea of what css.app can be built into?
-            </P>{' '}
+            </P>
             <Button.TwitterAuth className="flex mt-5" />
           </div>
         </Animate>
@@ -113,7 +112,6 @@ export default function Home() {
             icon="calendar"
           />
         </div>
-
         <Hydrate.Ideas
           data={ideas}
           error={fetchError}

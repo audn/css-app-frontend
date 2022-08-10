@@ -3,7 +3,7 @@ import { ILayout } from '../lib/interfaces';
 import SeoTags from '../components/SeoTags';
 
 import Router from 'next/router';
-import { trackPageview } from '../utils/analytics';
+import { trackPageview } from '../utils/data/analytics';
 
 Router.events.on('routeChangeComplete', (url) => {
   trackPageview(url);
