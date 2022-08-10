@@ -4,7 +4,9 @@ import { Button } from '../common/components/Buttons';
 import { Form } from '../common/components/Form';
 import IdeaCard from '../common/components/IdeaCard';
 import Animate from '../common/components/layout/Animate';
-import { Alpha, P } from '../common/components/layout/Headings';
+import Error from '../common/components/layout/Broadcast/Error';
+import Alpha from '../common/components/layout/headings/Alpha';
+import P from '../common/components/layout/headings/P';
 import Category from '../common/components/misc/Category';
 import { User } from '../common/components/User';
 import { DefaultLayout } from '../common/layouts/Default';
@@ -17,7 +19,7 @@ import { useAuthState } from '../store/auth';
 export default function Home() {
   let [sort, setSort] = useState<Idea.SortBy>('votes');
 
-  const { data, isLoading } = useIdeas(sort);
+  const { data, isLoading, error: fetchError } = useIdeas(sort);
   let [ideas, setIdeas] = useState<Idea.Idea[] | undefined>(
     data?.payload?.results,
   );
@@ -82,7 +84,9 @@ export default function Home() {
         <Animate variants={fadeIn} className="flex flex-col items-center ">
           <div className="flex flex-col items-center p-8 px-12 rounded-2xl bg-types-100">
             <Alpha>Let the brainstorming begin!</Alpha>
-            <P>Do you have an idea of what css.app can be built into?</P>{' '}
+            <P className="text-lg">
+              Do you have an idea of what css.app can be built into?
+            </P>{' '}
             <Button.TwitterAuth className="flex mt-5" />
           </div>
         </Animate>
@@ -106,6 +110,12 @@ export default function Home() {
           />
         </div>
         <AnimatePresence>
+          {fetchError && (
+            <Error
+              title="Couldn't get data"
+              label={`An error occoured while trying to retrieve ideas.`}
+            />
+          )}
           <Animate variants={fadeIn} className="grid grid-cols-1 gap-5">
             {ideas?.map((idea, i) => (
               <IdeaCard {...idea} key={i} />
