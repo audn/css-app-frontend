@@ -1,10 +1,7 @@
-import { AnimatePresence } from 'framer-motion';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { Button } from '../common/components/Buttons';
 import { Form } from '../common/components/Form';
-import IdeaCard from '../common/components/IdeaCard';
 import Animate from '../common/components/layout/Animate';
-import Error from '../common/components/layout/Broadcast/Error';
 import Alpha from '../common/components/layout/headings/Alpha';
 import P from '../common/components/layout/headings/P';
 import Category from '../common/components/misc/Category';
@@ -14,6 +11,7 @@ import { Idea } from '../common/lib/interfaces';
 import { fadeIn } from '../common/utils/data/animations';
 import { postIdea } from '../common/utils/hooks/api/ideas';
 import { useIdeas } from '../common/utils/hooks/ideas';
+import { Hydrate } from '../common/utils/hydration';
 import { useAuthState } from '../store/auth';
 
 export default function Home() {
@@ -108,19 +106,8 @@ export default function Home() {
             icon="calendar"
           />
         </div>
-        <AnimatePresence>
-          {fetchError && (
-            <Error
-              title="Couldn't get data"
-              label={`An error occoured while trying to retrieve ideas.`}
-            />
-          )}
-          <Animate variants={fadeIn} className="grid grid-cols-1 gap-5">
-            {ideas?.map((idea, i) => (
-              <IdeaCard {...idea} key={i} />
-            ))}
-          </Animate>
-        </AnimatePresence>
+
+        <Hydrate.Ideas data={ideas} error={fetchError} isLoading={isLoading} />
       </div>
     </DefaultLayout>
   );
