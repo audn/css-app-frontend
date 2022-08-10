@@ -46,6 +46,7 @@ export declare namespace Broadcast {
 }
 export declare namespace Button {
   interface Base {
+    icon?: string;
     route?: string;
     onClick?: (e: SyntheticEvent) => void;
     label?: string;

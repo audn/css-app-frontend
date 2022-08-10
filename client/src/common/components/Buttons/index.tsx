@@ -1,6 +1,7 @@
 import { Button as IButton } from '../../lib/interfaces';
 import Controller from './components/Controller';
 import PrimaryButton from './Primary';
+import SecondaryButton from './Secondary';
 import TwitterAuth from './TwitterAuth';
 import WhiteButton from './White';
 
@@ -9,6 +10,13 @@ export const Button = {
     return (
       <Controller {...props}>
         <PrimaryButton {...props} />
+      </Controller>
+    );
+  },
+  Secondary: ({ ...props }: IButton.Base) => {
+    return (
+      <Controller {...props}>
+        <SecondaryButton {...props} />
       </Controller>
     );
   },

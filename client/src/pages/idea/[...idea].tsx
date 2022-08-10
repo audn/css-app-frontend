@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import router from 'next/router';
+import { Button } from '../../common/components/Buttons';
 import IdeaCard from '../../common/components/IdeaCard';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { Idea as IIDea } from '../../common/lib/interfaces';
@@ -10,15 +11,12 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
     <DefaultLayout title={`${idea.user?.username}'s idea`}>
       <div className="flex flex-col max-w-2xl mx-auto mt-16">
         <div className="flex">
-          <button
+          <Button.Secondary
+            className="mb-8 text-on-100"
+            label="Back"
             onClick={() => router.back()}
-            className="flex items-center justify-start w-auto px-4 py-2 mb-8 rounded-full bg-types-100 animate hover:bg-types-150"
-          >
-            <span className="flex items-center mr-2 text-lg">
-              <i className="fa-regular fa-arrow-left" />
-            </span>
-            Back
-          </button>
+            icon="fa-regular fa-arrow-left"
+          />
         </div>
         <IdeaCard {...idea} />{' '}
       </div>

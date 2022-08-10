@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { ReactElement, SyntheticEvent } from 'react';
+import { ReactElement, SyntheticEvent } from 'react';
 import { Button } from '../../../lib/interfaces';
 
 function Controller({
@@ -13,7 +13,8 @@ function Controller({
       router.push(route);
     } else if (onClick) onClick(e);
   }
-  return <>{React.cloneElement(children, { onClick: handleClick })}</>;
+
+  return <span onClick={handleClick}>{children}</span>;
 }
 
 export default Controller;
