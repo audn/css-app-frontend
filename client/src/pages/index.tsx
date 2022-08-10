@@ -1,23 +1,20 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../common/components/Buttons';
-import { Form } from '../common/components/Form';
 import Animate from '../common/components/layout/Animate';
 import Auth from '../common/components/layout/Auth';
-import Alpha from '../common/components/layout/headings/Alpha';
 import Bravo from '../common/components/layout/headings/Bravo';
 import P from '../common/components/layout/headings/P';
 import Category from '../common/components/misc/Category';
-import { User } from '../common/components/User';
 import { DefaultLayout } from '../common/layouts/Default';
 import { Idea } from '../common/lib/interfaces';
+import NewIdea from '../common/pages/home/screens/NewIdea';
+import { useHomeState } from '../common/pages/home/store';
 import { fadeIn } from '../common/utils/data/animations';
-import { postIdea } from '../common/utils/hooks/api/ideas';
 import { useIdeas } from '../common/utils/hooks/ideas';
 import { Hydrate } from '../common/utils/hydration';
-import { useAuthState } from '../store/auth';
 
 export default function Home() {
-  let [sort, setSort] = useState<Idea.SortBy>('votes');
+  const { sort } = useHomeState();
 
   const {
     data,
@@ -31,15 +28,6 @@ export default function Home() {
     data?.payload?.results,
   );
 
-  const { currentUser, isLoggedIn } = useAuthState((s) => ({
-    isLoggedIn: s.isLoggedIn,
-    currentUser: s.user,
-  }));
-
-  let [isPosting, setPosting] = useState<boolean>(false);
-  let [message, setMessage] = useState<string>('');
-  let [error, setError] = useState<string>('');
-
   useEffect(() => {
     if (!isLoading) {
       if (data?.payload?.results) {
@@ -48,45 +36,10 @@ export default function Home() {
     }
   }, [data]);
 
-  async function onPost(event: SyntheticEvent) {
-    event.preventDefault();
-    setPosting(true);
-    const { error, payload } = await postIdea({ message });
-    if (error) {
-      setError(error);
-    }
-    if (payload) {
-      setMessage('');
-      ideas?.unshift(payload?.results);
-      setSort('date');
-    }
-    setPosting(false);
-  }
-
   return (
     <DefaultLayout>
       <Auth.User>
-        <Animate variants={fadeIn} className="max-w-2xl mx-auto text-left">
-          <Alpha>Hey, {currentUser.name}👋</Alpha>
-          <div className="flex mt-12">
-            <User.Avatar {...currentUser!} />
-            <div className="flex flex-col items-end w-full ml-4">
-              <Form.Textarea
-                id="message"
-                value={message}
-                onChange={setMessage}
-                error={error}
-                placeholder="Your idea"
-              />
-              <Button.Primary
-                label="Post idea"
-                onClick={onPost}
-                disabled={message.length < 10}
-                isLoading={isPosting}
-              />
-            </div>
-          </div>
-        </Animate>
+        <NewIdea />
         <Animate variants={fadeIn} className="flex flex-col items-center ">
           <div className="flex flex-col items-center p-8 px-12 rounded-2xl bg-types-100">
             <Bravo>Let the brainstorming begin!</Bravo>
@@ -102,14 +55,14 @@ export default function Home() {
         <div className="flex flex-wrap justify-center mb-10 space-x-2">
           <Category
             activeSort={sort}
-            onClick={setSort}
+            onClick={(sort) => useHomeState.setState({ sort })}
             label="Most voted"
             value="votes"
             icon="angle-up"
           />
           <Category
             activeSort={sort}
-            onClick={setSort}
+            onClick={(sort) => useHomeState.setState({ sort })}
             label="Recently added"
             value="date"
             icon="calendar"
