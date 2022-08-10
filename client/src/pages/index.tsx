@@ -91,7 +91,6 @@ export default function Home() {
           </div>
         </Animate>
       )}
-
       <div className="max-w-2xl mx-auto mt-16">
         <div className="flex flex-wrap justify-center mb-10 space-x-2">
           <Category
