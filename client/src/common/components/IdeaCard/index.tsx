@@ -8,14 +8,7 @@ import Delete from './components/Delete';
 import Upvote from './components/Upvote';
 import { onDeleteIdea, onUpvoteIdea } from './services';
 
-function IdeaCard({
-  dateAdded,
-  id,
-  upvotes,
-  message,
-  userId,
-  user,
-}: Idea.Idea) {
+function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
   const currentUser = useAuthState((s) => s.user);
 
   let [votes, setVotes] = useState<number>(upvotes?.length ?? 0);
@@ -36,26 +29,28 @@ function IdeaCard({
   }
 
   return (
-    <Link href={`/idea/${id}`} className="relative text-on-150">
-      <div className="flex items-center">
-        <div className="flex w-full">
-          <User.Avatar {...user!} />
-          <div className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 bosrder pyd-5 border-types-100 group">
-            <div className="flex space-x-2 text-[15px]">
-              <h3 className="font-semibold text-white">{user!.name}</h3>
-              <h5>@{user!.username}</h5>
-              <span>·</span>
-              <TimeAgo date={dateAdded} />
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="mt-1 text-white">{message}</p>
-              <Delete onClick={handleDelete} />
+    <div className="relative text-on-150">
+      <div className="flex items-center w-full">
+        <Link href={`/idea/${id}`} className="w-full">
+          <div className="flex w-full">
+            <User.Avatar {...user!} />
+            <div className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 bosrder pyd-5 border-types-100 group">
+              <div className="flex space-x-2 text-[15px]">
+                <h3 className="font-semibold text-white">{user!.name}</h3>
+                <h5>@{user!.username}</h5>
+                <span>·</span>
+                <TimeAgo date={dateAdded} />
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="mt-1 text-white">{message}</p>
+                <Delete onClick={handleDelete} />
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
         <Upvote handleUpvote={handleUpvote} upvoted={upvoted} votes={votes} />
       </div>
-    </Link>
+    </div>
   );
 }
 

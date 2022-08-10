@@ -14,7 +14,7 @@ function Header() {
     {
       label: 'About',
       icon: 'fa-solid fa-info-circle',
-      onClick: () => useLogout(),
+      route: '#',
     },
 
     {
