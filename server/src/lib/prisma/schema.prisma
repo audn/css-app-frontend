@@ -2,61 +2,61 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+            provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+            provider = "postgresql"
+            url      = env("DATABASE_URL")
 }
 
 enum Role {
-  USER
-  ADMIN
+            USER
+            ADMIN
 }
 
 model Idea {
-  id String @id @default(cuid())
+            id String @id @default(cuid())
 
-  message String
+            message String
 
-  user   User   @relation(fields: [author], references: [id], onDelete: Cascade)
-  author String
+            user   User   @relation(fields: [author], references: [id], onDelete: Cascade)
+            author String
 
-  upvotes Upvote[]
+            upvotes Upvote[]
 
-  dateAdded DateTime @default(now())
+            dateAdded DateTime @default(now())
 
-  @@map("ideas")
+            @@map("ideas")
 }
 
 model Upvote {
-  id String @id @default(cuid())
+            id String @id @default(cuid())
 
-  idea   Idea   @relation(fields: [ideaId], references: [id], onDelete: Cascade)
-  ideaId String
+            idea   Idea   @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+            ideaId String
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+            user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+            userId String
 
-  likedAt DateTime @default(now())
+            likedAt DateTime @default(now())
 
-  @@map("upvotes")
+            @@map("upvotes")
 }
 
 model User {
-  id String @id @unique
+            id String @id @unique
 
-  verified          Boolean
-  username          String  @unique
-  name              String
-  profile_image_url String
-  role              Role    @default(USER)
-  ideas             Idea[]
+            verified          Boolean
+            username          String  @unique
+            name              String
+            profile_image_url String
+            role              Role    @default(USER)
+            ideas             Idea[]
 
-  upvotedIdeas Upvote[]
+            upvotedIdeas Upvote[]
 
-  createdAt DateTime @default(now())
+            createdAt DateTime @default(now())
 
-  @@map("users")
+            @@map("users")
 }
