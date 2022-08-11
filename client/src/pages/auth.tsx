@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { DefaultLayout } from '../common/layouts/Default';
+import { CenterLayout } from '../common/layouts/Center';
 import { useCurrentUser } from '../common/utils/hooks/user';
 
 export default function Home() {
@@ -12,13 +12,5 @@ export default function Home() {
     router.push('/');
   }
 
-  return (
-    <DefaultLayout title={'Index'}>
-      <div className="fixed inset-0 z-50 h-screen min-h-screen bg-types-150">
-        <div className="flex items-center justify-center h-full text-2xl font-semibold">
-          Authorizing...
-        </div>
-      </div>
-    </DefaultLayout>
-  );
+  return <CenterLayout>Authorizing..</CenterLayout>;
 }
