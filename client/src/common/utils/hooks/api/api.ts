@@ -1,4 +1,4 @@
-const base = 'http://localhost:4000';
+const base = process.env.NEXT_PUBLIC_API_URL;
 
 async function get(endpoint: string, requireAuth: boolean, headers?: object) {
   return request(endpoint, 'GET', requireAuth, undefined, headers);
