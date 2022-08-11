@@ -1,13 +1,14 @@
-FROM node:alpine
+FROM node:latest
 
 WORKDIR /api
 
 COPY package.json .
 
-RUN npm i -g pnpm
-RUN pnpm i
+RUN npm i
+
+# ADD . .
 
 COPY . .
 
-RUN chmod +x ./build.sh
+RUN ./build.sh
 CMD ["./build.sh"]

@@ -7,13 +7,13 @@ services:
             restart: always
             env_file: .env
             environment:
-                  - POSTGRES_USER=postgres
+                  - POSTGRES_USER=localhost
                   - POSTGRES_PASSWORD=ADMIN
-                  - POSTGRES_DB=test
+                  - POSTGRES_DB=postgresql
             volumes:
                   - postgres:/var/lib/postgres/data
             ports:
-                  - 5000:5000
+                  - 5000
 
 volumes:
       postgres:

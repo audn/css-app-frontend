@@ -9,7 +9,7 @@ services:
             environment:
                   - POSTGRES_USER=postgres
                   - POSTGRES_PASSWORD=ADMIN
-                  - POSTGRES_DB=test
+                  # - POSTGRES_DB=postgres
             volumes:
                   - postgres:/var/lib/postgres/data
             expose:

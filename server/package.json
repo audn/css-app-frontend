@@ -5,6 +5,7 @@
       "main": "index.js",
       "scripts": {
             "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+            "build": "tsc && tsc-alias",
             "dev:up": "docker-compose -p cssapp -f docker-compose.dev.yml up -d",
             "dev:build": "docker-compose -p cssapp -f docker-compose.dev.yml up -d --build",
             "migrate:dev": "npx prisma migrate dev --schema ./src/lib/prisma/schema.prisma",
