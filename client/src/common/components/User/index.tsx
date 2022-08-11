@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { User as IUser } from '../../lib/interfaces';
 import UserAuthor from './Author';
 import UserAvatar from './Avatar';
 
@@ -15,7 +16,7 @@ export const User = {
   Avatar: ({ ...props }: { className?: string; [x: string]: any }) => {
     return <UserAvatar {...props} />;
   },
-  Author: ({ ...props }: { children: ReactNode; route: string }) => {
+  Author: ({ ...props }: { children: ReactNode; user?: IUser.User }) => {
     return <UserAuthor {...props} />;
   },
 };

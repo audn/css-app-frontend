@@ -31,23 +31,26 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
   return (
     <div className="relative text-on-150">
       <div className="flex items-center w-full">
-        <Link href={`/idea/${id}`} className="w-full">
-          <div className="flex w-full">
-            <User.Avatar {...user!} />
-            <div className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 bosrder pyd-5 border-types-100 group">
-              <div className="flex space-x-2 text-[15px]">
-                <h3 className="font-semibold text-white">{user!.name}</h3>
-                <h5>@{user!.username}</h5>
-                <span>·</span>
-                <TimeAgo date={dateAdded} />
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="mt-1 text-white">{message}</p>
-                <Delete onClick={handleDelete} />
-              </div>
+        <div className="flex w-full">
+          <User.Author user={user}>
+            <User.Avatar {...user} />
+          </User.Author>
+          <Link
+            href={`/idea/${id}`}
+            className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 hover:bg-opacity-50 animate"
+          >
+            <div className="flex space-x-2 text-[15px]">
+              <h3 className="font-semibold text-white">{user!.name}</h3>
+              <h5>@{user!.username}</h5>
+              <span>·</span>
+              <TimeAgo date={dateAdded} />
             </div>
-          </div>
-        </Link>
+            <div className="flex items-center justify-between">
+              <p className="mt-1 text-white">{message}</p>
+              <Delete onClick={handleDelete} />
+            </div>
+          </Link>
+        </div>
         <Upvote handleUpvote={handleUpvote} upvoted={upvoted} votes={votes} />
       </div>
     </div>
