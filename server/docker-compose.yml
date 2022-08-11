@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+      postgres:
+            container_name: cssapp_postgres
+            image: postgres:latest
+            restart: always
+            env_file: .env
+            environment:
+                  - POSTGRES_USER=postgres
+                  - POSTGRES_PASSWORD=ADMIN
+                  - POSTGRES_DB=test
+            volumes:
+                  - postgres:/var/lib/postgres/data
+            expose:
+                  - 5000
+
+      api:
+            container_name: cssapp_api
+            restart: unless-stopped
+            env_file: .env
+            build:
+                  context: ./
+                  dockerfile: Dockerfile
+            ports:
+                  - 80:4000
+
+volumes:
+      postgres:

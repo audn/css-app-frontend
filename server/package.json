@@ -5,9 +5,8 @@
       "main": "index.js",
       "scripts": {
             "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-            "dev:up": "docker-compose -p dstyle -f docker-compose.dev.yml up -d",
-            "dev:build": "docker-compose -p dstyle -f docker-compose.dev.yml up -d --build",
-            "dev:down": "docker-compose -p dstyle -f docker-compose.dev.yml down",
+            "dev:up": "docker-compose -p cssapp -f docker-compose.dev.yml up -d",
+            "dev:build": "docker-compose -p cssapp -f docker-compose.dev.yml up -d --build",
             "migrate:dev": "npx prisma migrate dev --schema ./src/lib/prisma/schema.prisma",
             "migrate:prod": "npx prisma migrate deploy --schema ./src/lib/prisma/schema.prisma",
             "generate": "npx prisma generate --schema ./src/lib/prisma/schema.prisma",
