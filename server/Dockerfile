@@ -1,10 +1,11 @@
-FROM node:latest
+FROM node:alpine
 
 WORKDIR /api
 
 COPY package.json .
 
-RUN npm i
+RUN npm i -g pnpm
+RUN pnpm i
 
 COPY . .
 
