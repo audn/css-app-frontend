@@ -6,9 +6,7 @@ COPY package.json .
 
 RUN npm i
 
-# ADD . .
-
 COPY . .
 
-RUN ./build.sh
+RUN chmod +x ./build.sh
 CMD ["./build.sh"]

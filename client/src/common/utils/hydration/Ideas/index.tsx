@@ -27,8 +27,8 @@ function IdeasHydration({
     return (
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="grid grid-cols-1 gap-5">
-          {data?.map((idea, i) => (
-            <IdeaCard {...idea} key={i} />
+          {data?.map((idea) => (
+            <IdeaCard key={idea.id} {...idea} />
           ))}
         </Animate>
       </AnimatePresence>

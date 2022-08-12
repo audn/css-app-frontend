@@ -39,7 +39,7 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
             href={`/idea/${id}`}
             className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 hover:bg-opacity-50 animate"
           >
-            <div className="flex space-x-2 text-[15px]">
+            <div className="flex gap-x-2 text-[15px]">
               <h3 className="font-semibold text-white">{user!.name}</h3>
               <h5>@{user!.username}</h5>
               <span>·</span>
