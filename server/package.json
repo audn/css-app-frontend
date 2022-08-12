@@ -10,7 +10,7 @@
       "dev:up": "docker-compose -p cssapp -f docker-compose.dev.yml up -d",
       "dev:build": "docker-compose -p cssapp -f docker-compose.dev.yml up -d --build",
       "migrate:dev": "pnpx prisma migrate dev --schema ./src/lib/prisma/schema.prisma",
-      "migrate:prod": "pnpx prisma migrate deploy --schema ./src/lib/prisma/schema.prisma",
+      "migrate:prod": "sudo su pnpx prisma migrate deploy --schema ./src/lib/prisma/schema.prisma",
       "generate": "pnpx prisma generate --schema ./src/lib/prisma/schema.prisma",
       "studio": "pnpx prisma studio --schema ./src/lib/prisma/schema.prisma",
       "env": "pnpx gen-env-types .env -o src/lib/env.types.ts -e ."
