@@ -1,4 +1,4 @@
-npm run migrate:dev &&
-npm run generate &&
-npm run build &&
-npm run dev
+pnpm run migrate:dev &&
+pnpm run generate &&
+pnpm run build &&
+pnpm run dev
