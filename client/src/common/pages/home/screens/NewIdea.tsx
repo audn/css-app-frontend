@@ -19,7 +19,7 @@ function NewIdea() {
     <Animate variants={fadeIn} className="max-w-2xl mx-auto text-left">
       <Alpha>Hey, {currentUser.name}👋</Alpha>
       <div className="flex mt-12">
-        <User.Avatar {...currentUser!} />
+        <User.Avatar user={currentUser} />
         <div className="flex flex-col items-end w-full ml-4">
           <Form.Textarea
             id="message"
