@@ -1,5 +1,5 @@
-import { fadeIn } from '../../../utils/data/animations';
-import Animate from '../../layout/Animate';
+import { fadeIn } from '../../../../../../utils/data/animations';
+import Animate from '../../../../../layout/Animate';
 
 function Downvoted() {
   return (
