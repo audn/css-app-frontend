@@ -5,7 +5,10 @@ import { Idea } from '../../lib/interfaces';
 import Link from '../layout/Link';
 import { User } from '../User';
 import Delete from './components/Delete';
-import Upvote from './components/Upvote';
+import Downvote from './components/voting/Downvote';
+import Upvote from './components/voting/Upvote';
+import VoteDetails from './components/voting/VoteDetails';
+import VoteWrapper from './components/voting/VoteWrapper';
 import { onDeleteIdea, onUpvoteIdea } from './services';
 
 function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
@@ -27,31 +30,45 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
   function handleUpvote() {
     onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
   }
+  function handleDownvote() {
+    //    onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
+  }
 
   return (
     <div className="relative text-on-150">
       <div className="flex items-center w-full">
         <div className="flex w-full">
-          <User.Author user={user}>
-            <User.Avatar {...user} />
-          </User.Author>
           <Link
             href={`/idea/${id}`}
-            className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 hover:bg-opacity-50 animate"
+            className="flex w-full px-3 py-2 sm:px-4 sm:py-3 sm:ml-3 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 animate"
           >
-            <div className="flex gap-x-2 text-[15px]">
-              <h3 className="font-semibold text-white">{user!.name}</h3>
-              <h5>@{user!.username}</h5>
-              <span>·</span>
-              <TimeAgo date={dateAdded} />
+            <div className="flex flex-col justify-between w-full ">
+              <div className="flex gap-x-1 sm:gap-x-2 items-center text-[13px] sm:text-[15px]">
+                <User.Author user={user}>
+                  <User.Avatar
+                    user={user}
+                    className="!w-6 !h-6 sm:!w-7 sm:!h-7"
+                  />
+                </User.Author>
+                <User.DisplayName user={user} />
+                <User.Username user={user} />
+                <span className="hidden text-sm sm:flex gap-x-2">
+                  <span>·</span>
+                  <TimeAgo date={dateAdded} />
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="mt-1 text-white break-all">{message}</p>
+                <Delete onClick={handleDelete} />
+              </div>
             </div>
-            <div className="flex items-center justify-between">
-              <p className="mt-1 text-white">{message}</p>
-              <Delete onClick={handleDelete} />
-            </div>
+            <VoteDetails votes={votes} />
+            <VoteWrapper>
+              <Upvote onClick={handleUpvote} active={false} />
+              <Downvote onClick={handleDownvote} active={false} />
+            </VoteWrapper>
           </Link>
         </div>
-        <Upvote handleUpvote={handleUpvote} upvoted={upvoted} votes={votes} />
       </div>
     </div>
   );

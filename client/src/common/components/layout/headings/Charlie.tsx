@@ -1,8 +1,22 @@
 import { ReactNode } from 'react';
+import concat from '../../../utils/helpers/concat';
 
-function Charlie({ children }: { children: ReactNode }) {
+function Charlie({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <h3 className={'text-xl font-bold text-center leading-8'}>{children}</h3>
+    <h3
+      className={concat(
+        className ? className : '',
+        'text-xl font-bold text-center leading-8',
+      )}
+    >
+      {children}
+    </h3>
   );
 }
 

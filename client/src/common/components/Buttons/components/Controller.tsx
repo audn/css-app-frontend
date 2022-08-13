@@ -6,6 +6,7 @@ function Controller({
   route,
   onClick,
   children,
+  layoutClass,
 }: Button.Base & { children: ReactElement }) {
   const router = useRouter();
   function handleClick(e: SyntheticEvent) {
@@ -14,7 +15,11 @@ function Controller({
     } else if (onClick) onClick(e);
   }
 
-  return <span onClick={handleClick}>{children}</span>;
+  return (
+    <span className={layoutClass ? layoutClass : ''} onClick={handleClick}>
+      {children}
+    </span>
+  );
 }
 
 export default Controller;

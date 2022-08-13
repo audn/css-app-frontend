@@ -16,11 +16,17 @@ function NewIdea() {
   const { message, ideas, error, isPosting } = useHomeState();
 
   return (
-    <Animate variants={fadeIn} className="max-w-2xl mx-auto text-left">
+    <Animate
+      variants={fadeIn}
+      className="max-w-2xl mx-auto text-center sm:text-left"
+    >
       <Alpha>Hey, {currentUser.name}👋</Alpha>
       <div className="flex mt-12">
-        <User.Avatar {...currentUser!} />
-        <div className="flex flex-col items-end w-full ml-4">
+        <User.Avatar
+          user={currentUser}
+          className="!w-10 !h-10 sm:!w-12 sm:!h-12 hidden sm:flex"
+        />
+        <div className="flex flex-col items-end w-full sm:ml-4">
           <Form.Textarea
             id="message"
             value={message}
@@ -30,6 +36,8 @@ function NewIdea() {
           />
           <Button.Primary
             label="Post idea"
+            layoutClass="w-full sm:w-auto"
+            className="w-full"
             onClick={(event) => onPostIdea({ event, message, ideas })}
             disabled={message.length < 10}
             isLoading={isPosting}
