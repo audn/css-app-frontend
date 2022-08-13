@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 import { User } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
 import Link from '../../layout/Link';
@@ -8,7 +8,7 @@ function UserAuthor({
   user,
   className,
 }: {
-  children: ReactElement;
+  children: ReactNode;
   user?: User.User;
   className?: string;
 }) {
