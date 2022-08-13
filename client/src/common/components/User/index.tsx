@@ -4,9 +4,11 @@ import UserAuthor from './Author';
 import UserAvatar from './Avatar';
 
 export const User = {
-  EmptyUserObject: () => {
+  EmptyUserObject: (): IUser.User => {
     return {
+      role: 'USER',
       verified: false,
+
       username: '',
       profile_image_url: '',
       name: '',

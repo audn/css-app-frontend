@@ -16,7 +16,7 @@ export const useUserProfile = (id: string) => {
   return { isLoading, error, data: data };
 };
 
-export const useCurrentUser = async () => {
+export const setCurrentUser = async () => {
   const { payload, error } = await getCurrentUser();
 
   if (!error) {
@@ -27,7 +27,7 @@ export const useCurrentUser = async () => {
   }
 };
 
-export const useLogout = async () => {
+export const logout = async () => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('access_token');
     if (token) {

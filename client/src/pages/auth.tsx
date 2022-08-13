@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { CenterLayout } from '../common/layouts/Center';
-import { useCurrentUser } from '../common/utils/hooks/user';
+import { setCurrentUser } from '../common/utils/hooks/user';
 
 export default function Home() {
   const router = useRouter();
@@ -8,7 +8,7 @@ export default function Home() {
 
   if (token) {
     localStorage.setItem('access_token', token);
-    useCurrentUser();
+    setCurrentUser();
     router.push('/');
   }
 

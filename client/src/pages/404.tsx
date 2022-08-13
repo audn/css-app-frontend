@@ -12,7 +12,7 @@ export default function Custom404() {
             404
           </h4>
           <h1 className={'font-bold text-white text-3xl mb-6'}>
-            We couldn't find this page.
+            We couldn&apos;t find this page.
           </h1>
         </div>
       </Animate>

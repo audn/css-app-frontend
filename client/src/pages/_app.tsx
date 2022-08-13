@@ -6,13 +6,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import Header from '../common/components/Header';
-import { useCurrentUser } from '../common/utils/hooks/user';
+import { setCurrentUser } from '../common/utils/hooks/user';
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
-    useCurrentUser();
+    setCurrentUser();
   }, []);
 
   return (

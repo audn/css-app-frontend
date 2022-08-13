@@ -6,11 +6,6 @@ export default class extends Document {
     return (
       <Html lang="en">
         <Head>
-          <script
-            src="https://kit.fontawesome.com/84c3028184.js"
-            crossOrigin="anonymous"
-          ></script>
-
           <meta name="application-TileColor" content="#4d7fff" />
           <meta name="theme-color" content="#4d7fff" />
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
