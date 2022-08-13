@@ -1,12 +1,23 @@
-import VotesPeer from './Upvote/component/VotesPeer';
+import concat from '../../../../utils/helpers/concat';
 
-function VoteDetails({ votes }: { votes: number }) {
+function VoteDetails({
+  votes,
+  className,
+}: {
+  votes: number;
+  className?: string;
+}) {
   return (
-    <div className="flex items-center justify-center">
-      <span className="p-1 mt-1 -m-1 text-sm font-bold rounded-lg cursor-default peer animate hover:bg-types-150">
+    <div className={'flex items-center justify-center'}>
+      <span
+        className={concat(
+          className ? className : '',
+          'text-sm font-bold rounded-lg cursor-default mt-1',
+        )}
+      >
         {votes}
       </span>
-      <VotesPeer />
+      {/* <VotesPeer /> */}
     </div>
   );
 }

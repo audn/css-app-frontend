@@ -4,7 +4,7 @@ import Animate from '../../../../../layout/Animate';
 function Upvoted() {
   return (
     <Animate variants={fadeIn} key={'upvote'}>
-      <i className="text-lg fak fa-upvote-1" />
+      <i className="text-sm sm:text-lg fak fa-upvote-1" />
     </Animate>
   );
 }

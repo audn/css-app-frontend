@@ -11,10 +11,7 @@ function Upvote({
   votes: number;
 }) {
   return (
-    <button
-      onClick={handleUpvote}
-      className="animate hover:text-white text-on-150"
-    >
+    <button onClick={handleUpvote} className="animate hover:text-white">
       {upvoted ? <Upvoted /> : <Downvoted />}
     </button>
   );
