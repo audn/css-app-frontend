@@ -7,19 +7,20 @@ function VoteDetails({
   votes: number;
   className?: string;
 }) {
-  return (
-    <div className={'flex items-center justify-center'}>
-      <span
-        className={concat(
-          className ? className : '',
-          'text-sm font-bold rounded-lg cursor-default mt-1',
-        )}
-      >
-        {votes}
-      </span>
-      {/* <VotesPeer /> */}
-    </div>
-  );
+  if (votes > 0) {
+    return (
+      <div className={'flex items-center justify-center text-on-100'}>
+        <span
+          className={concat(
+            className ? className : '',
+            'text-sm font-bold rounded-lg cursor-default mt-1',
+          )}
+        >
+          {votes}
+        </span>
+      </div>
+    );
+  } else return <></>;
 }
 
 export default VoteDetails;

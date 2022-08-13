@@ -5,8 +5,10 @@ import { Idea } from '../../lib/interfaces';
 import Link from '../layout/Link';
 import { User } from '../User';
 import Delete from './components/Delete';
+import Downvote from './components/voting/Downvote';
 import Upvote from './components/voting/Upvote';
 import VoteDetails from './components/voting/VoteDetails';
+import VoteWrapper from './components/voting/VoteWrapper';
 import { onDeleteIdea, onUpvoteIdea } from './services';
 
 function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
@@ -27,6 +29,9 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
   }
   function handleUpvote() {
     onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
+  }
+  function handleDownvote() {
+    //    onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
   }
 
   return (
@@ -57,14 +62,11 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
                 <Delete onClick={handleDelete} />
               </div>
             </div>
-            <div className="flex-col items-center hidden p-1 ml-6 rounded-full animate group-hover:bg-types-200 sm:flex text-on-100-dark">
-              <Upvote
-                handleUpvote={handleUpvote}
-                upvoted={upvoted}
-                votes={votes}
-              />
-              <VoteDetails votes={votes} />
-            </div>
+            <VoteDetails votes={votes} />
+            <VoteWrapper>
+              <Upvote onClick={handleUpvote} active={false} />
+              <Downvote onClick={handleDownvote} active={false} />
+            </VoteWrapper>
           </Link>
         </div>
       </div>
