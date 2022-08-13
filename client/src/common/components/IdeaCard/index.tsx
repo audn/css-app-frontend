@@ -58,7 +58,7 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <p className="mt-1 text-white">{message}</p>
+                <p className="mt-1 text-white break-all">{message}</p>
                 <Delete onClick={handleDelete} />
               </div>
             </div>

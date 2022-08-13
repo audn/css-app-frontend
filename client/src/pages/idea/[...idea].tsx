@@ -12,7 +12,7 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
       <div className="flex flex-col max-w-2xl mx-auto mt-16">
         <div className="flex">
           <Button.Secondary
-            className="mb-8 text-on-100"
+            className="flex mb-8 text-on-100"
             label="Back"
             onClick={() => router.back()}
             icon="fa-regular fa-arrow-left"
