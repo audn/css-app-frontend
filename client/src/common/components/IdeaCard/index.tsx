@@ -33,17 +33,19 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
       <div className="flex items-center w-full">
         <div className="flex w-full">
           <User.Author user={user}>
-            <User.Avatar {...user} />
+            <User.Avatar user={user} className="w-10 h-10 sm:w-12 sm:h-12" />
           </User.Author>
           <Link
             href={`/idea/${id}`}
-            className="w-full px-4 py-3 ml-3 bg-opacity-50 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 hover:bg-opacity-50 animate"
+            className="w-full px-4 py-3 ml-2 bg-opacity-50 sm:ml-3 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 hover:bg-opacity-50 animate"
           >
-            <div className="flex gap-x-2 text-[15px]">
-              <h3 className="font-semibold text-white">{user!.name}</h3>
-              <h5>@{user!.username}</h5>
-              <span>·</span>
-              <TimeAgo date={dateAdded} />
+            <div className="flex gap-x-1 sm:gap-x-2 text-[15px]">
+              <User.DisplayName user={user} />
+              <User.Username user={user} />
+              <span className="hidden text-sm sm:flex gap-x-2">
+                <span>·</span>
+                <TimeAgo date={dateAdded} />
+              </span>
             </div>
             <div className="flex items-center justify-between">
               <p className="mt-1 text-white">{message}</p>

@@ -1,7 +1,7 @@
 import { User } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
 
-function UserAvatar({
+function DisplayName({
   className,
   user,
 }: {
@@ -9,11 +9,12 @@ function UserAvatar({
   user?: User.User;
 }) {
   return (
-    <img
-      src={user.profile_image_url}
-      className={concat(className ? className : '', 'w-12 h-12 rounded-full')}
-    />
+    <h3
+      className={concat(className ? className : '', 'font-semibold text-white')}
+    >
+      {user?.name}
+    </h3>
   );
 }
 
-export default UserAvatar;
+export default DisplayName;

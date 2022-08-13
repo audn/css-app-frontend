@@ -34,7 +34,7 @@ function Header() {
     <div className="fixed top-0 flex justify-end w-full p-5">
       {isLoggedIn && (
         <Dropdown list={navigation}>
-          <User.Avatar {...currentUser} className="w-9 h-9" />
+          <User.Avatar user={currentUser} className="w-9 h-9" />
         </Dropdown>
       )}
     </div>
