@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Auth from '../common/components/layout/Auth';
 import Category from '../common/components/misc/Category';
 import { DefaultLayout } from '../common/layouts/Default';
-import { Idea } from '../common/lib/interfaces';
 import Login from '../common/pages/home/screens/Login';
 import NewIdea from '../common/pages/home/screens/NewIdea';
 import { useHomeState } from '../common/pages/home/store';
@@ -10,7 +9,7 @@ import { useIdeas } from '../common/utils/hooks/ideas';
 import { Hydrate } from '../common/utils/hydration';
 
 export default function Home() {
-  const { sort } = useHomeState();
+  const { sort, ideas } = useHomeState();
 
   const {
     data,
@@ -20,14 +19,12 @@ export default function Home() {
     isRefetching,
   } = useIdeas(sort);
 
-  let [ideas, setIdeas] = useState<Idea.Idea[] | undefined>(
-    data?.payload?.results,
-  );
-
   useEffect(() => {
     if (!isLoading) {
       if (data?.payload?.results) {
-        setIdeas(data?.payload?.results);
+        useHomeState.setState({
+          ideas: data?.payload?.results,
+        });
       }
     }
   }, [data]);

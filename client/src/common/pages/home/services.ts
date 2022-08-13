@@ -20,9 +20,9 @@ export async function onPostIdea({
     useHomeState.setState({ error });
   }
   if (payload) {
-    useHomeState.setState({ message: '' });
     ideas?.unshift(payload?.results);
-    useHomeState.setState({ sort: 'date' });
+
+    useHomeState.setState({ message: '', ideas, sort: 'date' });
   }
   useHomeState.setState({ isPosting: false });
 }
