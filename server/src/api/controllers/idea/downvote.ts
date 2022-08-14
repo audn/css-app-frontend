@@ -66,7 +66,7 @@ export const downvote = async (
                   },
                   where: { id: req.params.id },
             });
-            return res.json({ message: 'Removed previously downvote on post' });
+            return res.json({ payload: { results: idea.voteCount + 1 } });
       } else {
             await prisma.downvote.create({
                   data: {
@@ -90,7 +90,7 @@ export const downvote = async (
                   },
                   where: { id: req.params.id },
             });
-            return res.json({ payload: { results: idea } });
+            return res.json({ payload: { results: idea.voteCount - 1 } });
       }
 };
 export default downvote;

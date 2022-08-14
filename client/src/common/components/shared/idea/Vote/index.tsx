@@ -9,77 +9,81 @@ import VoteIcons from './components/VoteIcons';
 import VoteWrapper from './components/VoteWrapper';
 
 function IdeaVote({ idea }: { idea: Idea.Idea }) {
-  const currentUser = useAuthState((s) => s.user);
+  const { currentUser, isLoggedIn } = useAuthState((s) => ({
+    currentUser: s.user,
+    isLoggedIn: s.isLoggedIn,
+  }));
 
   let [votes, setVotes] = useState<number>(idea?.voteCount || 0);
   let [upvoted, setUpvoted] = useState<boolean>(false);
   let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
-    if (idea?.upvotes?.filter((x) => x.user.id === currentUser.id).length) {
+    if (currentUser.upvotedIdeas?.filter((x) => x.ideaId === idea?.id).length) {
       setUpvoted(true);
       setDownvoted(false);
     } else {
+      setUpvoted(false);
       if (
         currentUser.downvotedIdeas?.filter((x) => x.ideaId === idea?.id).length
       ) {
         setDownvoted(true);
       }
-      setUpvoted(false);
     }
-
-    setVotes(idea?.voteCount || 0);
-  }, [currentUser, idea]);
+  }, [isLoggedIn]);
 
   async function handleUpvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const success = await onUpvoteIdea(idea!.id);
-    if (success) {
+    const { error, payload } = await onUpvoteIdea(idea!.id);
+    if (!error) {
+      if (downvoted) {
+        removeUserState('upvotedIdeas');
+      } else {
+        addUserState('upvotedIdeas');
+        removeUserState('downvotedIdeas');
+      }
       setDownvoted(false);
-      if (upvoted) {
-        setVotes(votes - 1);
-      } else setVotes(votes + 1);
       setUpvoted(!upvoted);
+      setVotes(payload?.results || 0);
     }
   }
 
   async function handleDownvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const success = await onDownvoteIdea(idea!.id);
-    if (success) {
-      setUpvoted(false);
+    const { error, payload } = await onDownvoteIdea(idea!.id);
+    if (!error) {
       if (downvoted) {
-        setVotes(votes + 1);
-        removeDownvoted();
+        removeUserState('downvotedIdeas');
       } else {
-        addDownvoted();
-        setVotes(votes - 1);
+        addUserState('downvotedIdeas');
+        removeUserState('upvotedIdeas');
       }
-
+      setUpvoted(false);
       setDownvoted(!downvoted);
+      setVotes(payload?.results || 0);
     }
   }
-  const removeDownvoted = () => {
-    const data = currentUser.downvotedIdeas;
+  const removeUserState = (where: 'downvotedIdeas' | 'upvotedIdeas') => {
+    const data = currentUser[where];
     data.splice(
-      currentUser.downvotedIdeas.findIndex((x) => x.ideaId === idea.id),
+      currentUser[where].findIndex((x) => x.ideaId === idea.id),
       1,
     ),
       useAuthState.setState({
         user: {
           ...currentUser,
-          downvotedIdeas: [...data],
+          [where]: [...data],
         },
       });
   };
-  const addDownvoted = () => {
+  const addUserState = (where: 'downvotedIdeas' | 'upvotedIdeas') => {
     useAuthState.setState({
       user: {
         ...currentUser,
-        downvotedIdeas: [
-          ...currentUser.downvotedIdeas,
+        [where]: [
+          ...currentUser[where],
           {
             id: '',
             ideaId: idea.id,
@@ -90,20 +94,14 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
       },
     });
   };
+  console.log(currentUser);
+
   return (
     <VoteWrapper>
       <VoteDetails votes={votes} />
       <VoteIcons>
-        <Upvote
-          onClick={handleUpvote}
-          active={upvoted}
-          key={`${idea?.id}_upvote`}
-        />
-        <Downvote
-          onClick={handleDownvote}
-          active={downvoted}
-          key={`${idea?.id}_downvote`}
-        />
+        <Upvote onClick={handleUpvote} active={upvoted} />
+        <Downvote onClick={handleDownvote} active={downvoted} />
       </VoteIcons>
     </VoteWrapper>
   );

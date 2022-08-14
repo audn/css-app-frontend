@@ -12,13 +12,13 @@ export async function onDeleteIdea(id: string) {
 }
 
 export async function onUpvoteIdea(id: string) {
-  const { error } = await upvoteIdea(id);
+  const { error, payload } = await upvoteIdea(id);
 
-  return !error;
+  return { error, payload };
 }
 
 export async function onDownvoteIdea(id: string) {
-  const { error } = await downvoteIdea(id);
+  const { error, payload } = await downvoteIdea(id);
 
-  return !error;
+  return { error, payload };
 }

@@ -14,7 +14,9 @@ function Upvote({
       <button
         onClick={(e) => onClick(e as SyntheticEvent)}
         className={concat(
-          active ? 'bg-types-200 text-indigo-500' : 'hover:bg-types-200',
+          active
+            ? 'bg-indigo-500 bg-opacity-10 text-indigo-500'
+            : 'hover:bg-types-200',
           'flex items-center justify-center rounded-full w-7 h-7 ',
         )}
       >

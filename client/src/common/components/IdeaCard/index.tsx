@@ -16,6 +16,7 @@ function IdeaCard({ idea }: { idea: Idea.Idea }) {
     upvotes,
     user,
   } = idea;
+
   return (
     <div className="relative text-on-150">
       <div className="flex items-center w-full">

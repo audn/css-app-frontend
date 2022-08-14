@@ -63,7 +63,7 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                   },
                   where: { id: req.params.id },
             });
-            return res.json({ message: 'Unvoted post' });
+            return res.json({ payload: { results: idea.voteCount - 1 } });
       } else {
             await prisma.upvote.create({
                   data: {
@@ -87,7 +87,7 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                   },
                   where: { id: req.params.id },
             });
-            return res.json({ payload: { results: idea } });
+            return res.json({ payload: { results: idea.voteCount + 1 } });
       }
 };
 export default upvote;
