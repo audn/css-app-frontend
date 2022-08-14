@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import prisma from '../../../lib/prisma';
 import { GetIdea } from '../../../lib/schema/idea';
+import { isAdmin } from './../../../lib/utils/isAdmin';
 export const anyIdea = async (
       req: Request<GetIdea['params']>,
       res: Response
@@ -17,11 +18,13 @@ export const anyIdea = async (
                               user: true,
                         },
                   },
-                  downvotes: {
-                        include: {
-                              user: true,
+                  ...((await isAdmin(req, res)) && {
+                        downvotes: {
+                              select: {
+                                    user: true,
+                              },
                         },
-                  },
+                  }),
                   user: true,
             },
       });

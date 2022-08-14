@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../../../lib/prisma';
+import isAdmin from '../../../lib/utils/isAdmin';
 
 type Sort = 'date' | 'verifiedAuthor' | 'votes';
 
@@ -8,6 +9,9 @@ export const get = async (req: Request, res: Response) => {
 
       const verifiedAuthor = sort == 'verifiedAuthor';
       const mostVotes = sort == 'votes';
+      const admin = await isAdmin(req, res);
+
+      console.log(admin);
 
       let ideas;
       const include = {
@@ -17,11 +21,13 @@ export const get = async (req: Request, res: Response) => {
                         user: true,
                   },
             },
-            downvotes: {
-                  select: {
-                        user: true,
+            ...((await isAdmin(req, res)) && {
+                  downvotes: {
+                        select: {
+                              user: true,
+                        },
                   },
-            },
+            }),
       };
 
       if (verifiedAuthor) {
