@@ -69,12 +69,20 @@ export declare namespace Form {
 }
 
 export declare namespace User {
+  interface Vote {
+    id: string;
+    ideaId: string;
+    userId: string;
+    createdAt: string;
+  }
   interface User {
     verified: boolean;
     username: string;
     profile_image_url: string;
     name: string;
     id: string;
+    upvotedIdeas: Vote[];
+    downvotedIdeas: Vote[];
     role: Role;
   }
 
@@ -87,11 +95,14 @@ export declare namespace Idea {
   interface NewIdea {
     message: string;
   }
+
   interface Idea extends NewIdea {
     id: string;
     userId: string;
     dateAdded: Date;
+    voteCount: number;
     upvotes?: { user: User.User }[];
+    downvotes?: { user: User.User }[];
     user?: User.User;
   }
 }

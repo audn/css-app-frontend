@@ -5,9 +5,9 @@ import { ISeoTags } from '../lib/interfaces';
 const SeoTags = ({
   title,
   defaultTitle = 'css.app',
-  desc = 'Simple, pre-setup and free-to-use front-end boilerplate including React, Next.js & TailwindCSS',
-  url = 'https://align-items.center',
-  image = 'https://opengraph.githubassets.com/fa53ec3abce99887a2167be84b9fb267f5d08e05d9d5779866d47922e5af1983/audn/frontend-boilerplate',
+  desc = 'Do you have an idea of what css.app can be built into?',
+  url = 'https://css.app',
+  image = 'https://opengraph.githubassets.com/b11463c912f553b952cfbc8594fef5f545f2ff2b6589a92a30448363c3edddcc/audn/css.app',
 }: ISeoTags) => {
   const metaTitle = title ? title + ' | css.app' : defaultTitle;
   return (

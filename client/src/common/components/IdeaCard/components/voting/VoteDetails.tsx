@@ -7,7 +7,7 @@ function VoteDetails({
   votes: number;
   className?: string;
 }) {
-  if (votes > 0) {
+  if (votes !== 0) {
     return (
       <div className={'flex items-center justify-center text-on-100'}>
         <span

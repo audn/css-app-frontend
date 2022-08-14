@@ -3,7 +3,10 @@ import prisma from '../../../lib/prisma';
 import { GetIdea } from '../../../lib/schema/idea';
 import { APIJson } from '../../../lib/types';
 
-export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
+export const downvote = async (
+      req: Request<GetIdea['params']>,
+      res: APIJson
+) => {
       const userId = res.locals.userId;
       const ideaId = req.params.id;
 
@@ -13,34 +16,11 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
             },
             include: {
                   user: true,
-                  upvotes: true,
+                  downvotes: true,
             },
       });
 
       if (!idea) return res.status(404).json({ error: 'Not found' });
-
-      const hasPreviouslyDownvoted = await prisma.downvote.findFirst({
-            where: {
-                  ideaId,
-                  userId,
-            },
-      });
-
-      if (hasPreviouslyDownvoted) {
-            await prisma.downvote.delete({
-                  where: {
-                        id: hasPreviouslyDownvoted.id,
-                  },
-            });
-            await prisma.idea.update({
-                  data: {
-                        voteCount: {
-                              increment: 1,
-                        },
-                  },
-                  where: { id: req.params.id },
-            });
-      }
 
       const hasPreviouslyUpvoted = await prisma.upvote.findFirst({
             where: {
@@ -63,9 +43,32 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                   },
                   where: { id: req.params.id },
             });
-            return res.json({ message: 'Unvoted post' });
+      }
+
+      const hasPreviouslyDownvoted = await prisma.downvote.findFirst({
+            where: {
+                  ideaId,
+                  userId,
+            },
+      });
+
+      if (hasPreviouslyDownvoted) {
+            await prisma.downvote.delete({
+                  where: {
+                        id: hasPreviouslyDownvoted.id,
+                  },
+            });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              increment: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
+            });
+            return res.json({ message: 'Removed previously downvote on post' });
       } else {
-            await prisma.upvote.create({
+            await prisma.downvote.create({
                   data: {
                         idea: {
                               connect: {
@@ -82,7 +85,7 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
             await prisma.idea.update({
                   data: {
                         voteCount: {
-                              increment: 1,
+                              decrement: 1,
                         },
                   },
                   where: { id: req.params.id },
@@ -90,4 +93,4 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
             return res.json({ payload: { results: idea } });
       }
 };
-export default upvote;
+export default downvote;

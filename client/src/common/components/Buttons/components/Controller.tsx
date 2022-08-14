@@ -10,6 +10,7 @@ function Controller({
 }: Button.Base & { children: ReactElement }) {
   const router = useRouter();
   function handleClick(e: SyntheticEvent) {
+    e.stopPropagation();
     if (route) {
       router.push(route);
     } else if (onClick) onClick(e);

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 function Animate({
   children,
@@ -8,7 +8,7 @@ function Animate({
   className?: string;
   children: ReactNode;
   variants: any;
-  onClick?: () => void;
+  onClick?: (e?: SyntheticEvent) => void;
 }) {
   return (
     <motion.div
