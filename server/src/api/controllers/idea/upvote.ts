@@ -19,6 +19,21 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
 
       if (!idea) return res.status(404).json({ error: 'Not found' });
 
+      const hasPreviouslyDownvoted = await prisma.downvote.findFirst({
+            where: {
+                  ideaId,
+                  userId,
+            },
+      });
+
+      if (hasPreviouslyDownvoted) {
+            await prisma.downvote.delete({
+                  where: {
+                        id: hasPreviouslyDownvoted.id,
+                  },
+            });
+      }
+
       const hasPreviouslyUpvoted = await prisma.upvote.findFirst({
             where: {
                   ideaId,

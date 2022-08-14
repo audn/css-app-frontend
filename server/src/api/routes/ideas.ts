@@ -10,6 +10,7 @@ import { getIdea } from '../../lib/schema/idea';
 
 const ideas = Router();
 
+import downvote from '../controllers/idea/downvote';
 import get from '../controllers/idea/get';
 import post from '../controllers/idea/post';
 import { remove } from '../controllers/idea/remove';
@@ -18,19 +19,27 @@ import { upvote } from '../controllers/idea/upvote';
 ideas.get('/:id', anyIdea);
 ideas.get('/', get);
 ideas.post(
-    '/',
-    [
-        requireAuth,
-        validateResource(createIdeaSchema),
-        addRatelimiter({ amount: 5, wait: 0 }),
-    ],
-    post
+      '/',
+      [
+            requireAuth,
+            validateResource(createIdeaSchema),
+            addRatelimiter({ amount: 5, wait: 0 }),
+      ],
+      post
 );
+
 ideas.put(
-    '/:id',
-    [requireAuth, validateResource(getIdea), addRatelimiter({ amount: 1 })],
-    upvote
+      '/:id/upvote',
+      [requireAuth, validateResource(getIdea), addRatelimiter({ amount: 1 })],
+      upvote
 );
+
+ideas.put(
+      '/:id/downvote',
+      [requireAuth, validateResource(getIdea), addRatelimiter({ amount: 1 })],
+      downvote
+);
+
 ideas.delete('/:id', requireAdmin, remove);
 
 export default ideas;
