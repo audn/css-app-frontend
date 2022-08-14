@@ -11,13 +11,13 @@ export async function onDeleteIdea(id: string) {
   }
 }
 export async function onUpvoteIdea(id: string) {
-  const { error, payload } = await upvoteIdea(id);
+  const { error } = await upvoteIdea(id);
 
-  return { error, data: payload?.results };
+  return !error;
 }
 
 export async function onDownvoteIdea(id: string) {
-  const { error, payload } = await downvoteIdea(id);
+  const { error } = await downvoteIdea(id);
 
-  return { error, data: payload?.results };
+  return !error;
 }
