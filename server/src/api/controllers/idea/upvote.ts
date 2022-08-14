@@ -32,6 +32,14 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                         id: hasPreviouslyDownvoted.id,
                   },
             });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              increment: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
+            });
       }
 
       const hasPreviouslyUpvoted = await prisma.upvote.findFirst({
@@ -46,6 +54,14 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                   where: {
                         id: hasPreviouslyUpvoted.id,
                   },
+            });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              decrement: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
             });
             return res.json({ message: 'Unvoted post' });
       } else {
@@ -62,6 +78,14 @@ export const upvote = async (req: Request<GetIdea['params']>, res: APIJson) => {
                               },
                         },
                   },
+            });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              increment: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
             });
             return res.json({ payload: { results: idea } });
       }

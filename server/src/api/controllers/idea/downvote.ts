@@ -35,6 +35,14 @@ export const downvote = async (
                         id: hasPreviouslyUpvoted.id,
                   },
             });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              decrement: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
+            });
       }
 
       const hasPreviouslyDownvoted = await prisma.downvote.findFirst({
@@ -50,7 +58,14 @@ export const downvote = async (
                         id: hasPreviouslyDownvoted.id,
                   },
             });
-
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              increment: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
+            });
             return res.json({ message: 'Removed previously downvote on post' });
       } else {
             await prisma.downvote.create({
@@ -66,6 +81,14 @@ export const downvote = async (
                               },
                         },
                   },
+            });
+            await prisma.idea.update({
+                  data: {
+                        voteCount: {
+                              decrement: 1,
+                        },
+                  },
+                  where: { id: req.params.id },
             });
             return res.json({ payload: { results: idea } });
       }

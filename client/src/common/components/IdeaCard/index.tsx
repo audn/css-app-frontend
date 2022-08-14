@@ -14,7 +14,6 @@ function IdeaCard({
   dateAdded,
   id,
   upvotes,
-  downvotes,
   message,
   user,
   voteCount,
@@ -26,7 +25,6 @@ function IdeaCard({
   let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(currentUser);
     if (upvotes?.filter((x) => x.user.id === currentUser.id).length) {
       setUpvoted(true);
       setDownvoted(false);

@@ -9,9 +9,6 @@ export const get = async (req: Request, res: Response) => {
 
       const verifiedAuthor = sort == 'verifiedAuthor';
       const mostVotes = sort == 'votes';
-      const admin = await isAdmin(req, res);
-
-      console.log(admin);
 
       let ideas;
       const include = {

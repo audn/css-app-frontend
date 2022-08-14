@@ -20,8 +20,9 @@ model Idea {
 
             message String
 
-            user   User   @relation(fields: [author], references: [id], onDelete: Cascade)
-            author String
+            user      User   @relation(fields: [author], references: [id], onDelete: Cascade)
+            author    String
+            voteCount Int    @default(0)
 
             upvotes   Upvote[]
             downvotes Downvote[]
