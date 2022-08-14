@@ -1,10 +1,10 @@
-import concat from '../../../../utils/helpers/concat';
+import concat from '../../../../../utils/helpers/concat';
 
 function VoteDetails({
   votes,
   className,
 }: {
-  votes: number;
+  votes?: number;
   className?: string;
 }) {
   if (votes !== 0) {

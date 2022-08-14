@@ -1,8 +1,6 @@
 import { SyntheticEvent } from 'react';
-import Tooltip from '../../../../layouts/Tooltip';
-import { fadeIn } from '../../../../utils/data/animations';
-import concat from '../../../../utils/helpers/concat';
-import Animate from '../../../layout/Animate';
+import Tooltip from '../../../../../layouts/Tooltip';
+import concat from '../../../../../utils/helpers/concat';
 
 function Downvote({
   onClick,
@@ -13,8 +11,7 @@ function Downvote({
 }) {
   return (
     <Tooltip text="Downvote" id="downvote" options={{ place: 'right' }}>
-      <Animate
-        variants={fadeIn}
+      <button
         onClick={(e) => onClick(e as SyntheticEvent)}
         className={concat(
           active ? 'bg-types-200 text-indigo-500' : 'hover:bg-types-200',
@@ -22,7 +19,7 @@ function Downvote({
         )}
       >
         <i className="text-sm sm:text-lg fa-solid fa-caret-down !leading-0" />
-      </Animate>
+      </button>
     </Tooltip>
   );
 }

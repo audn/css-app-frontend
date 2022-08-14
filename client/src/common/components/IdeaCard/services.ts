@@ -10,6 +10,7 @@ export async function onDeleteIdea(id: string) {
     console.log('success');
   }
 }
+
 export async function onUpvoteIdea(id: string) {
   const { error } = await upvoteIdea(id);
 

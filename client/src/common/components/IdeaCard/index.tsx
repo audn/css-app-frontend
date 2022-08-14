@@ -1,75 +1,21 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
 import TimeAgo from 'react-timeago';
-import { useAuthState } from '../../../store/auth';
 import { Idea } from '../../lib/interfaces';
+import P from '../layout/headings/P';
 import Link from '../layout/Link';
+import IdeaVote from '../shared/idea/Vote';
 import { User } from '../User';
-import Downvote from './components/voting/Downvote';
-import Upvote from './components/voting/Upvote';
-import VoteDetails from './components/voting/VoteDetails';
-import VoteWrapper from './components/voting/VoteWrapper';
-import { onDownvoteIdea, onUpvoteIdea } from './services';
 
-function IdeaCard({
-  dateAdded,
-  id,
-  upvotes,
-  message,
-  user,
-  voteCount,
-}: Idea.Idea) {
-  const currentUser = useAuthState((s) => s.user);
-
-  let [votes, setVotes] = useState<number>(voteCount);
-  let [upvoted, setUpvoted] = useState<boolean>(false);
-  let [downvoted, setDownvoted] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (upvotes?.filter((x) => x.user.id === currentUser.id).length) {
-      setUpvoted(true);
-      setDownvoted(false);
-    } else if (
-      currentUser.downvotedIdeas?.filter((x) => x.ideaId === id).length
-    ) {
-      setDownvoted(true);
-      setUpvoted(false);
-    }
-    setVotes(voteCount);
-  }, [currentUser, id]);
-
-  const voteController = async (
-    action: 'upvote' | 'downvote',
-    success: Promise<boolean>,
-  ) => {
-    const ready = await success;
-    if (ready) {
-      if (action == 'downvote') {
-        setUpvoted(false);
-        if (downvoted) {
-          setVotes(votes + 1);
-        } else setVotes(votes - 1);
-        setDownvoted(!downvoted);
-      } else if (action == 'upvote') {
-        setDownvoted(false);
-        if (upvoted) {
-          setVotes(votes - 1);
-        } else setVotes(votes + 1);
-        setUpvoted(!upvoted);
-      }
-    }
-  };
-  function handleUpvote(e: SyntheticEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    voteController('upvote', onUpvoteIdea(id));
-  }
-
-  function handleDownvote(e: SyntheticEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    voteController('downvote', onDownvoteIdea(id));
-  }
-
+function IdeaCard({ idea }: { idea: Idea.Idea }) {
+  const {
+    dateAdded,
+    id,
+    message,
+    userId,
+    voteCount,
+    downvotes,
+    upvotes,
+    user,
+  } = idea;
   return (
     <div className="relative text-on-150">
       <div className="flex items-center w-full">
@@ -78,7 +24,7 @@ function IdeaCard({
             href={`/idea/${id}`}
             className="flex w-full px-3 py-2 sm:px-4 sm:py-3 sm:ml-3 rounded-xl bg-types-100 border-types-100 group hover:bg-types-150 animate"
           >
-            <div className="flex flex-col justify-between w-full ">
+            <div className="flex flex-col justify-between w-full pr-4">
               <div className="flex gap-x-1 sm:gap-x-2 items-center text-[13px] sm:text-[15px]">
                 <User.Author user={user}>
                   <User.Avatar
@@ -94,14 +40,12 @@ function IdeaCard({
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <p className="mt-1 text-white break-all">{message}</p>
+                <P className="mt-1 text-white">
+                  {message.slice(0, 150) + (message.length > 150 ? '...' : '')}
+                </P>
               </div>
             </div>
-            <VoteDetails votes={votes} />
-            <VoteWrapper>
-              <Upvote onClick={handleUpvote} active={upvoted} />
-              <Downvote onClick={handleDownvote} active={downvoted} />
-            </VoteWrapper>
+            <IdeaVote idea={idea} />
           </Link>
         </div>
       </div>
