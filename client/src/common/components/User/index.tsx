@@ -10,7 +10,8 @@ export const User = {
     return {
       role: 'USER',
       verified: false,
-
+      downvotedIdeas: [],
+      upvotedIdeas: [],
       username: '',
       profile_image_url: '',
       name: '',
