@@ -4,12 +4,11 @@ import { useAuthState } from '../../../store/auth';
 import { Idea } from '../../lib/interfaces';
 import Link from '../layout/Link';
 import { User } from '../User';
-import Delete from './components/Delete';
 import Downvote from './components/voting/Downvote';
 import Upvote from './components/voting/Upvote';
 import VoteDetails from './components/voting/VoteDetails';
 import VoteWrapper from './components/voting/VoteWrapper';
-import { onDeleteIdea, onUpvoteIdea } from './services';
+import { onUpvoteIdea } from './services';
 
 function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
   const currentUser = useAuthState((s) => s.user);
@@ -24,9 +23,6 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
     setVotes(upvotes?.length || 0);
   }, [currentUser, id]);
 
-  function handleDelete() {
-    onDeleteIdea(id);
-  }
   function handleUpvote() {
     onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
   }
@@ -59,7 +55,6 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
               </div>
               <div className="flex items-center justify-between">
                 <p className="mt-1 text-white break-all">{message}</p>
-                <Delete onClick={handleDelete} />
               </div>
             </div>
             <VoteDetails votes={votes} />
