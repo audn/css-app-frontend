@@ -8,30 +8,62 @@ import Downvote from './components/voting/Downvote';
 import Upvote from './components/voting/Upvote';
 import VoteDetails from './components/voting/VoteDetails';
 import VoteWrapper from './components/voting/VoteWrapper';
-import { onUpvoteIdea } from './services';
+import { onDownvoteIdea, onUpvoteIdea } from './services';
 
-function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
+function IdeaCard({
+  dateAdded,
+  id,
+  upvotes,
+  downvotes,
+  message,
+  user,
+}: Idea.Idea) {
   const currentUser = useAuthState((s) => s.user);
 
   let [votes, setVotes] = useState<number>(upvotes?.length ?? 0);
   let [upvoted, setUpvoted] = useState<boolean>(false);
+  let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
     if (upvotes?.filter((x) => x.user.id === currentUser.id).length) {
       setUpvoted(true);
+    } else if (downvotes?.filter((x) => x.user.id === currentUser.id).length) {
+      setDownvoted(true);
     }
     setVotes(upvotes?.length || 0);
   }, [currentUser, id]);
 
+  const voteController = async (
+    action: 'upvote' | 'downvote',
+    success: Promise<boolean>,
+  ) => {
+    const ready = await success;
+    if (ready) {
+      if (action == 'downvote') {
+        setUpvoted(false);
+        if (downvoted) {
+          setVotes(votes + 1);
+        } else setVotes(votes - 1);
+        setDownvoted(!downvoted);
+      } else if (action == 'upvote') {
+        setDownvoted(false);
+        if (upvoted) {
+          setVotes(votes - 1);
+        } else setVotes(votes + 1);
+        setUpvoted(!upvoted);
+      }
+    }
+  };
   function handleUpvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
+    voteController('upvote', onUpvoteIdea(id));
   }
+
   function handleDownvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    //    onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
+    voteController('downvote', onDownvoteIdea(id));
   }
 
   return (
@@ -63,8 +95,8 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
             </div>
             <VoteDetails votes={votes} />
             <VoteWrapper>
-              <Upvote onClick={handleUpvote} active={false} />
-              <Downvote onClick={handleDownvote} active={false} />
+              <Upvote onClick={handleUpvote} active={upvoted} />
+              <Downvote onClick={handleDownvote} active={downvoted} />
             </VoteWrapper>
           </Link>
         </div>

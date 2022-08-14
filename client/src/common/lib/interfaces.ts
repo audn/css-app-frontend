@@ -92,6 +92,7 @@ export declare namespace Idea {
     userId: string;
     dateAdded: Date;
     upvotes?: { user: User.User }[];
+    downvotes?: { user: User.User }[];
     user?: User.User;
   }
 }
