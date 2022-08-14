@@ -17,22 +17,26 @@ function IdeaCard({
   downvotes,
   message,
   user,
+  voteCount,
 }: Idea.Idea) {
   const currentUser = useAuthState((s) => s.user);
 
-  let [votes, setVotes] = useState<number>(upvotes?.length ?? 0);
+  let [votes, setVotes] = useState<number>(voteCount);
   let [upvoted, setUpvoted] = useState<boolean>(false);
   let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(currentUser);
     if (upvotes?.filter((x) => x.user.id === currentUser.id).length) {
       setUpvoted(true);
       setDownvoted(false);
-    } else if (downvotes?.filter((x) => x.user.id === currentUser.id).length) {
+    } else if (
+      currentUser.downvotedIdeas?.filter((x) => x.ideaId === id).length
+    ) {
       setDownvoted(true);
       setUpvoted(false);
     }
-    setVotes(upvotes?.length || 0);
+    setVotes(voteCount);
   }, [currentUser, id]);
 
   const voteController = async (
