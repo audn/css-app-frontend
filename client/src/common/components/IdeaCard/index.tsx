@@ -27,8 +27,10 @@ function IdeaCard({
   useEffect(() => {
     if (upvotes?.filter((x) => x.user.id === currentUser.id).length) {
       setUpvoted(true);
+      setDownvoted(false);
     } else if (downvotes?.filter((x) => x.user.id === currentUser.id).length) {
       setDownvoted(true);
+      setUpvoted(false);
     }
     setVotes(upvotes?.length || 0);
   }, [currentUser, id]);
