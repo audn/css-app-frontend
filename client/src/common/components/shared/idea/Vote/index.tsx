@@ -94,7 +94,6 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
       },
     });
   };
-  console.log(currentUser);
 
   return (
     <VoteWrapper>
