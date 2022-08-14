@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import TimeAgo from 'react-timeago';
 import { useAuthState } from '../../../store/auth';
 import { Idea } from '../../lib/interfaces';
@@ -23,10 +23,14 @@ function IdeaCard({ dateAdded, id, upvotes, message, user }: Idea.Idea) {
     setVotes(upvotes?.length || 0);
   }, [currentUser, id]);
 
-  function handleUpvote() {
+  function handleUpvote(e: SyntheticEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
   }
-  function handleDownvote() {
+  function handleDownvote(e: SyntheticEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     //    onUpvoteIdea({ id, setUpvoted, setVotes, upvoted, votes });
   }
 

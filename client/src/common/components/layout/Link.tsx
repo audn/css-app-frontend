@@ -14,7 +14,7 @@ function Link({
   href: string;
 }) {
   return (
-    <NextLink href={href}>
+    <NextLink href={href} passHref onClick={(e) => e.stopPropagation()}>
       <a
         {...props}
         target={validateUrl(href) ? '_blank' : '_self'}
