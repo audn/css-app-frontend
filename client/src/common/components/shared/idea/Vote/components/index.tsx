@@ -19,8 +19,6 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
   let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(currentUser);
-
     if (currentUser.upvotedIdeas?.filter((x) => x.ideaId === idea?.id).length) {
       setUpvoted(true);
       setDownvoted(false);
@@ -39,14 +37,14 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
     e.stopPropagation();
     const { error, payload } = await onUpvoteIdea(idea!.id);
     if (!error) {
-      setDownvoted(false);
-      setUpvoted(!upvoted);
-      if (upvoted) {
+      if (downvoted) {
         removeUserState('upvotedIdeas');
       } else {
-        removeUserState('downvotedIdeas');
         addUserState('upvotedIdeas');
+        removeUserState('downvotedIdeas');
       }
+      setDownvoted(false);
+      setUpvoted(!upvoted);
       setVotes(payload?.results || 0);
     }
   }
@@ -54,16 +52,16 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
   async function handleDownvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setUpvoted(false);
-    setDownvoted(!downvoted);
     const { error, payload } = await onDownvoteIdea(idea!.id);
     if (!error) {
       if (downvoted) {
         removeUserState('downvotedIdeas');
       } else {
-        removeUserState('upvotedIdeas');
         addUserState('downvotedIdeas');
+        removeUserState('upvotedIdeas');
       }
+      setUpvoted(false);
+      setDownvoted(!downvoted);
       setVotes(payload?.results || 0);
     }
   }
