@@ -26,9 +26,9 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <User.Avatar user={idea.user} className="mr-2" />
+            <User.Avatar user={idea.user} className="mr-3" />
             <div className="flex flex-col">
-              <Bravo className="mb-0">
+              <Bravo className="!mb-0">
                 <User.DisplayName user={idea.user} />
               </Bravo>
               <User.Username user={idea.user} className="text-on-100" />
