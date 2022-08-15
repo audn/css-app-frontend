@@ -8,9 +8,11 @@ This is a overcomplicated brainstorming app for the purpose of learning backend.
 
 ## 🚀 Installation & Running
 
-_Make sure you're in the **client/** directory_
+_Make sure you're in the **server/** directory_
 
-**Steps below will not work unless you have set up the .env file!**
+Before you can run this locally, you need to install [PostgresSQL](https://www.postgresql.org/).
+
+When installing PostgresSQL, put the master password as `postgres`.
 
 💪🏼 _Install pnpm (package manager)_
 
@@ -26,7 +28,13 @@ pnpm i
 
 👀 Rename `.env.example` to `.env`
 
-_🔨 Run frontend_
+🏘️ _Migrate Prisma Database_
+
+```bash
+pnpm run migrate:dev
+```
+
+_🔨 Runs with **ts-node** whilst watching **src/** for changes_
 
 ```bash
 pnpm run dev
