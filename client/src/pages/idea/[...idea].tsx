@@ -2,12 +2,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import router from 'next/router';
 import { Button } from '../../common/components/Buttons';
 import Bravo from '../../common/components/layout/headings/Bravo';
+import Charlie from '../../common/components/layout/headings/Charlie';
 import P from '../../common/components/layout/headings/P';
 import IdeaVote from '../../common/components/shared/idea/Vote';
 import { User } from '../../common/components/User';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { Idea as IIDea } from '../../common/lib/interfaces';
 import { getSpecificIdea } from '../../common/utils/hooks/api/ideas';
+import LikedBy from './components/LikedBy';
 
 function Idea({ idea }: { idea: IIDea.Idea }) {
   return (
@@ -37,6 +39,14 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
           <IdeaVote idea={idea} />
         </div>
         <P className="px-4 py-3 mt-5 bg-types-100 rounded-xl">{idea.message}</P>
+        {idea.upvotes && idea?.upvotes.length >= 1 && (
+          <div className="flex flex-col px-4 py-3 mt-5 gap-y-3 bg-types-100 rounded-xl">
+            <Charlie className="!text-base">Upvoted by</Charlie>
+            {idea.upvotes?.map((user) => (
+              <LikedBy {...user} />
+            ))}
+          </div>
+        )}
       </div>
     </DefaultLayout>
   );
