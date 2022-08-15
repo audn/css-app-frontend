@@ -36,7 +36,7 @@ function Header() {
         <Dropdown list={navigation}>
           <User.Avatar
             user={currentUser}
-            className="w-[35px] h-[35px] sm:h-12 sm:w-12"
+            className="!w-[35px] !h-[35px] sm:!h-12 sm:!w-12"
           />
         </Dropdown>
       )}
