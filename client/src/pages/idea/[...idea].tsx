@@ -43,7 +43,7 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
           <div className="flex flex-col px-4 py-3 mt-5 gap-y-3 bg-types-100 rounded-xl">
             <Charlie className="!text-base">Upvoted by</Charlie>
             {idea.upvotes?.map((user) => (
-              <LikedBy {...user} />
+              <LikedBy {...user} key={user.user.id} />
             ))}
           </div>
         )}
