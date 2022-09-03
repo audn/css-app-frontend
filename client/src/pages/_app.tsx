@@ -1,5 +1,4 @@
 import { AppProps } from 'next/app';
-import Script from 'next/script';
 import '../assets/css/style.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -18,11 +17,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <CookiesProvider>
-      <Script
-        src="https://kit.fontawesome.com/84c3028184.js"
-        crossOrigin="anonymous"
-        strategy="beforeInteractive"
-      />
       <Toaster position="top-center" reverseOrder={false} />
       <QueryClientProvider client={queryClient}>
         <Header />

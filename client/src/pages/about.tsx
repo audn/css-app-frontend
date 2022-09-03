@@ -20,17 +20,15 @@ function About() {
         <Alpha>About</Alpha>
         <P className="!text-lg text-on-150 !leading-10 mt-10">
           <div>
-            {/* <Delta className="block">Acquisition</Delta> */}
-            <SectionSeparator title="Acquisition" />I <i>"accidentally"</i>{' '}
-            typed in "css.app" in the address-bar and <i>"accidentally"</i>{' '}
-            entered my e-mail in the{' '}
-            <strong>Get a price estimate on this domain</strong> field.
+            <SectionSeparator title="Acquisition" />I{' '}
+            <i>&quot;accidentally&quot;</i> typed in &quot;css.app&quot; in the
+            address-bar and <i>&quot;accidentally&quot;</i> entered my e-mail in
+            the <strong>Get a price estimate on this domain</strong> field.
           </div>
           <div>
             <SectionSeparator title="About me" />
-            {/* <Delta className="block"> me</Delta>I <i>accidentally</i> */}
-            I'm really just another frontend developer, but I've been planning
-            to learn backend for a long time.
+            I&apos;m really just another frontend developer, but I&apos;ve been
+            planning to learn backend for a long time.
           </div>
           <div>
             This project gave me the opportunity to do so - so I can proudly say

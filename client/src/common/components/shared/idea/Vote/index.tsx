@@ -21,8 +21,6 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
   let [downvoted, setDownvoted] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(currentUser);
-
     if (currentUser.upvotedIdeas?.filter((x) => x.ideaId === idea?.id).length) {
       setUpvoted(true);
       setDownvoted(false);
@@ -34,7 +32,7 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
         setDownvoted(true);
       }
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, currentUser]);
 
   async function handleUpvote(e: SyntheticEvent) {
     e.preventDefault();
