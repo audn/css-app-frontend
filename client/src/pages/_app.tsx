@@ -55,7 +55,10 @@ App.getInitialProps = async ({ ctx }: AppContext): Promise<any> => {
       }))
       .catch((error) => ({
         props: {
-          user: error.message,
+          props: {
+            user: error.message,
+            isLoggedIn: false,
+          },
         },
       }));
   }
