@@ -9,7 +9,11 @@ export default function Auth() {
   const [_, setCookie] = useCookies(['access_token']);
 
   if (token) {
-    localStorage.setItem('access_token', token);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('access_token', token);
+    } else {
+      console.warn("didn't set access_token in localStorage");
+    }
     setCookie('access_token', token);
     setCurrentUser();
     router.push('/');
