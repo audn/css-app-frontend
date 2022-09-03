@@ -1,3 +1,4 @@
+import { useCookies } from 'react-cookie';
 import { IListItem } from '../../lib/interfaces';
 import { useAuthState } from '../../lib/store/auth';
 import { logout } from '../../utils/hooks/user';
@@ -5,10 +6,15 @@ import Dropdown from '../Dropdown';
 import { User } from '../User';
 
 function Header() {
+  const [_, setCookie, removeCookie] = useCookies(['access_token']);
   const { currentUser, isLoggedIn } = useAuthState((s) => ({
     currentUser: s.user,
     isLoggedIn: s.isLoggedIn,
   }));
+  function handleLogout() {
+    removeCookie('access_token');
+    logout();
+  }
 
   const navigation = [
     {
@@ -26,7 +32,7 @@ function Header() {
       label: 'Sign out',
       className: 'hover:bg-opacity-10 hover:bg-red-500 hover:!text-red-500',
       icon: 'fa-solid fa-sign-out-alt',
-      onClick: () => logout(),
+      onClick: () => handleLogout(),
     },
   ] as IListItem[];
 

@@ -35,13 +35,12 @@ export default function App({
   );
 }
 App.getInitialProps = async ({ ctx }: AppContext): Promise<any> => {
-  const cookies = ctx.req?.headers.cookie as string;
-
   if (!ctx.req) {
     return {
       props: {},
     };
   } else {
+    const cookies = ctx.req?.headers.cookie as string;
     const token = qs.decode(cookies, '; ');
     return axios
       .get(process.env.NEXT_PUBLIC_API_URL + '/users/me', {

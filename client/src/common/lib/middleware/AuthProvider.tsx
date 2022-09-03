@@ -10,6 +10,7 @@ function AuthProvider({
   children: ReactNode;
 }) {
   useAuthState.setState({ ...auth });
+
   return <div>{children} </div>;
 }
 
