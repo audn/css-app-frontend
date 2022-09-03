@@ -16,10 +16,15 @@ function IdeasHydration({
 }: Hydration.Ideas) {
   if (isLoading) {
     return (
-      <SkeletonTheme color="#272e39" highlightColor="#38414f">
-        <Animate variants={fadeIn} className="grid grid-cols-1 gap-5">
-          {[...Array.from(Array(20)).map((x) => <SkeletonIdeaCard />)]}
-        </Animate>
+      <SkeletonTheme baseColor="#272e39" highlightColor="#38414f">
+        <div className="grid grid-cols-1 gap-5">
+          {[
+            ...Array.from(Array(20)).map((_, i) => (
+              <SkeletonIdeaCard key={`skeleton_${i}`} />
+            )),
+          ]}
+        </div>
+        1
       </SkeletonTheme>
     );
   } else if (error) {

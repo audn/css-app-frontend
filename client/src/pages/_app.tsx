@@ -5,9 +5,9 @@ import '../assets/css/style.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';
+import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../common/components/Header';
 import { setCurrentUser } from '../common/utils/hooks/user';
-
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
