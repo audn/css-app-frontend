@@ -17,9 +17,9 @@ function P({
         )}
       >
         {children.map((x, i) => (
-          <div className="mt-5 first:mt-0" key={`paragraph_${i}`}>
+          <span className="block mt-5 first:mt-0" key={`paragraph_${i}`}>
             {x}
-          </div>
+          </span>
         ))}
       </div>
     );
