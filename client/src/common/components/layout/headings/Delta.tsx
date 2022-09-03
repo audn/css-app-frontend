@@ -1,10 +1,22 @@
 import { ReactNode } from 'react';
+import concat from '../../../utils/helpers/concat';
 
-function Delta({ children }: { children: ReactNode }) {
+function Delta({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <h4 className={'text-lg font-semibold text-center leading-8'}>
+    <h3
+      className={concat(
+        className ? className : '',
+        'text-lg font-bold leading-8',
+      )}
+    >
       {children}
-    </h4>
+    </h3>
   );
 }
 

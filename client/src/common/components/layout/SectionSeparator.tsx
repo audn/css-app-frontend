@@ -11,11 +11,10 @@ function SectionSeparator({
     <div
       className={concat(
         className ? className : '',
-        'flex items-center w-full text-on-100',
+        'flex items-center w-full text-on-150 mb-2',
       )}
     >
-      <div className="w-full h-px bg-types-100" />
-      <div className="flex mx-5 text-sm font-semibold rounded-full whitespace-nowrap bg-tdypes-100">
+      <div className="flex mr-5 text-base font-semibold rounded-full whitespace-nowrap bg-tdypes-100">
         {title}
       </div>
       <div className="w-full h-px bg-types-100" />
