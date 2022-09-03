@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { User } from '../common/lib/interfaces';
+import { User } from '../interfaces';
 
 type Store = {
   isLoggedIn: boolean;

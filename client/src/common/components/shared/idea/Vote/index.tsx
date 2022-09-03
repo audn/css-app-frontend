@@ -1,8 +1,8 @@
 import Router from 'next/router';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useAuthState } from '../../../../../store/auth';
 import { Idea } from '../../../../lib/interfaces';
+import { useAuthState } from '../../../../lib/store/auth';
 import { onDownvoteIdea, onUpvoteIdea } from '../../../IdeaCard/services';
 import Downvote from './components/Downvote';
 import Upvote from './components/Upvote';

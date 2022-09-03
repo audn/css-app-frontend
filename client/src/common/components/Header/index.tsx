@@ -1,5 +1,5 @@
-import { useAuthState } from '../../../store/auth';
 import { IListItem } from '../../lib/interfaces';
+import { useAuthState } from '../../lib/store/auth';
 import { logout } from '../../utils/hooks/user';
 import Dropdown from '../Dropdown';
 import { User } from '../User';

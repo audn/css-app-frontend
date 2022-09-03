@@ -1,9 +1,9 @@
-import { useAuthState } from '../../../../store/auth';
 import { Button } from '../../../components/Buttons';
 import { Form } from '../../../components/Form';
 import Animate from '../../../components/layout/Animate';
 import Alpha from '../../../components/layout/headings/Alpha';
 import { User } from '../../../components/User';
+import { useAuthState } from '../../../lib/store/auth';
 import { fadeIn } from '../../../utils/data/animations';
 import { onPostIdea } from '../services';
 import { useHomeState } from '../store';

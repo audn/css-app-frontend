@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { User } from '../../components/User';
-import { useAuthState } from './../../../store/auth';
+import { useAuthState } from '../../lib/store/auth';
 import { getCurrentUser, getUser } from './api/user';
 
 export const useUserProfile = (id: string) => {

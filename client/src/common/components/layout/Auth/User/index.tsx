@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useAuthState } from '../../../../../store/auth';
+import { useAuthState } from '../../../../lib/store/auth';
 
 function AuthUser({ children }: { children: ReactNode | ReactNode[] }) {
   const isLoggedIn = useAuthState((s) => s.isLoggedIn);

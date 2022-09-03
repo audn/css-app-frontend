@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useAuthState } from '../../../../../store/auth';
+import { useAuthState } from '../../../../lib/store/auth';
 
 function AuthAdmin({ children }: { children: ReactNode }) {
   const user = useAuthState((s) => s.user);
