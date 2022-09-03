@@ -31,10 +31,13 @@ function Header() {
   ] as IListItem[];
 
   return (
-    <div className="fixed top-0 z-50 flex justify-end w-full p-5">
+    <div className="absolute z-50 flex justify-end right-5 top-5">
       {isLoggedIn && (
         <Dropdown list={navigation}>
-          <User.Avatar user={currentUser} className="w-9 h-9" />
+          <User.Avatar
+            user={currentUser}
+            className="!w-[35px] !h-[35px] sm:!h-12 sm:!w-12"
+          />
         </Dropdown>
       )}
     </div>

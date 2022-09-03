@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ideas" ADD COLUMN     "votes" INTEGER NOT NULL DEFAULT 0;

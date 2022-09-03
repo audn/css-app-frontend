@@ -34,8 +34,18 @@ export async function getUserIdeas(
   return res.json();
 }
 
-export async function upvoteIdea(id: string): Promise<APIResponse<Idea.Idea>> {
-  const res = await put(`/ideas/${id}`, true);
+export async function upvoteIdea(
+  id: string,
+): Promise<APIResponse<Idea.Idea['voteCount']>> {
+  const res = await put(`/ideas/${id}/upvote`, true);
+
+  return res.json();
+}
+
+export async function downvoteIdea(
+  id: string,
+): Promise<APIResponse<Idea.Idea['voteCount']>> {
+  const res = await put(`/ideas/${id}/downvote`, true);
 
   return res.json();
 }

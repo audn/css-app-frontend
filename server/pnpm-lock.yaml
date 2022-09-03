@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@prisma/client': ^4.2.1
@@ -47,7 +47,7 @@ dependencies:
   oauth: 0.10.0
   prisma: 4.2.1
   request: 2.88.2
-  ts-node: 10.9.1_591fffec868aed0fa8fffb4d4978119d
+  ts-node: 10.9.1_lep773egrlwq7kh77ngus6artu
   typescript: 4.7.4
   zod: 3.18.0
 
@@ -61,7 +61,7 @@ devDependencies:
   '@types/lodash': 4.14.182
   '@types/node': 18.7.1
   '@types/oauth': 0.9.1
-  ts-node-dev: 2.0.0_591fffec868aed0fa8fffb4d4978119d
+  ts-node-dev: 2.0.0_lep773egrlwq7kh77ngus6artu
   tsc-alias: 1.7.0
 
 packages:
@@ -348,6 +348,8 @@ packages:
       raw-body: 2.5.1
       type-is: 1.6.18
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /brace-expansion/1.1.11:
@@ -510,14 +512,25 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: false
 
-  /debug/3.2.7:
+  /debug/3.2.7_supports-color@5.5.0:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
+      supports-color: 5.5.0
     dev: false
 
   /delayed-stream/1.0.0:
@@ -646,6 +659,8 @@ packages:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /extend/3.0.2:
@@ -699,6 +714,8 @@ packages:
       parseurl: 1.3.3
       statuses: 2.0.1
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /forever-agent/0.6.1:
@@ -1087,7 +1104,7 @@ packages:
     requiresBuild: true
     dependencies:
       chokidar: 3.5.3
-      debug: 3.2.7
+      debug: 3.2.7_supports-color@5.5.0
       ignore-by-default: 1.0.1
       minimatch: 3.1.2
       pstree.remy: 1.1.8
@@ -1423,6 +1440,8 @@ packages:
       on-finished: 2.4.1
       range-parser: 1.2.1
       statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /serve-static/1.15.0:
@@ -1433,6 +1452,8 @@ packages:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.18.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /setprototypeof/1.2.0:
@@ -1569,7 +1590,7 @@ packages:
     hasBin: true
     dev: true
 
-  /ts-node-dev/2.0.0_591fffec868aed0fa8fffb4d4978119d:
+  /ts-node-dev/2.0.0_lep773egrlwq7kh77ngus6artu:
     resolution: {integrity: sha512-ywMrhCfH6M75yftYvrvNarLEY+SUXtUvU8/0Z6llrHQVBx12GiFk5sStF8UdfE/yfzk9IAq7O5EEbTQsxlBI8w==}
     engines: {node: '>=0.8.0'}
     hasBin: true
@@ -1588,7 +1609,7 @@ packages:
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
-      ts-node: 10.9.1_591fffec868aed0fa8fffb4d4978119d
+      ts-node: 10.9.1_lep773egrlwq7kh77ngus6artu
       tsconfig: 7.0.0
       typescript: 4.7.4
     transitivePeerDependencies:
@@ -1597,7 +1618,7 @@ packages:
       - '@types/node'
     dev: true
 
-  /ts-node/10.9.1_591fffec868aed0fa8fffb4d4978119d:
+  /ts-node/10.9.1_lep773egrlwq7kh77ngus6artu:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -1670,7 +1691,6 @@ packages:
     resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
 
   /undefsafe/2.0.5:
     resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}

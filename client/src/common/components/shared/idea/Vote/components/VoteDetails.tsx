@@ -1,13 +1,13 @@
-import concat from '../../../../utils/helpers/concat';
+import concat from '../../../../../utils/helpers/concat';
 
 function VoteDetails({
   votes,
   className,
 }: {
-  votes: number;
+  votes?: number;
   className?: string;
 }) {
-  if (votes > 0) {
+  if (votes !== 0) {
     return (
       <div className={'flex items-center justify-center text-on-100'}>
         <span

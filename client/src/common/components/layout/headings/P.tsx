@@ -12,7 +12,7 @@ function P({
     <p
       className={concat(
         className ? className : '',
-        'text-base text-center leading-8',
+        'text-base leading-8 whitespace-pre-line break-all',
       )}
     >
       {children}

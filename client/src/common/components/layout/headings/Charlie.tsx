@@ -12,7 +12,7 @@ function Charlie({
     <h3
       className={concat(
         className ? className : '',
-        'text-xl font-bold text-center leading-8',
+        'text-xl font-bold leading-8',
       )}
     >
       {children}

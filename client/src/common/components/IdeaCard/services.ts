@@ -1,4 +1,8 @@
-import { deleteIdea, upvoteIdea } from '../../utils/hooks/api/ideas';
+import {
+  deleteIdea,
+  downvoteIdea,
+  upvoteIdea,
+} from '../../utils/hooks/api/ideas';
 
 export async function onDeleteIdea(id: string) {
   const { error } = await deleteIdea(id);
@@ -7,26 +11,14 @@ export async function onDeleteIdea(id: string) {
   }
 }
 
-export async function onUpvoteIdea({
-  id,
-  upvoted,
-  setVotes,
-  setUpvoted,
-  votes,
-}: {
-  id: string;
-  upvoted: boolean;
-  votes: number;
-  setVotes: (val: number) => void;
-  setUpvoted: (val: boolean) => void;
-}) {
-  const { error } = await upvoteIdea(id);
+export async function onUpvoteIdea(id: string) {
+  const { error, payload } = await upvoteIdea(id);
 
-  if (!error) {
-    if (upvoted) {
-      setVotes(votes - 1);
-    } else setVotes(votes + 1);
+  return { error, payload };
+}
 
-    setUpvoted(!upvoted);
-  }
+export async function onDownvoteIdea(id: string) {
+  const { error, payload } = await downvoteIdea(id);
+
+  return { error, payload };
 }

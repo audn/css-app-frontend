@@ -12,6 +12,8 @@ export const useAuthState = create<Store>(() => ({
     id: '',
     name: '',
     profile_image_url: '',
+    upvotedIdeas: [],
+    downvotedIdeas: [],
     username: '',
     verified: false,
     role: 'USER',
