@@ -20,7 +20,7 @@ function Header() {
     {
       label: 'GitHub',
       icon: 'fa-brands fa-github',
-      route: '#',
+      route: 'https://github.com/audn/css.app',
     },
     {
       label: 'Sign out',

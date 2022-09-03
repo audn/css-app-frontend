@@ -1,12 +1,17 @@
 import { useRouter } from 'next/router';
 import { IListItem } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
+import { validateUrl } from '../../../utils/helpers/regex/url';
 
 function ListItem({ label, icon, onClick, route, className }: IListItem) {
   const router = useRouter();
   function handleClick() {
     if (route) {
-      router.push(route);
+      if (validateUrl(route)) {
+        window.open(route, '_blank');
+      } else {
+        router.push(route);
+      }
     } else onClick!();
   }
   return (
