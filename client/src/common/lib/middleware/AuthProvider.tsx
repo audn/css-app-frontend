@@ -10,6 +10,7 @@ function AuthProvider({
   children: ReactNode;
 }) {
   useAuthState.setState({ ...auth });
+  console.log('auths', auth.isLoggedIn);
 
   return <div>{children} </div>;
 }

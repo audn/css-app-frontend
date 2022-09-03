@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { AppContext, AppProps } from 'next/app';
 import qs from 'querystring';
-import { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { Toaster } from 'react-hot-toast';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -9,7 +8,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import '../assets/css/style.css';
 import Header from '../common/components/Header';
 import AuthProvider from '../common/lib/middleware/AuthProvider';
-import { setCurrentUser } from '../common/utils/hooks/user';
 const queryClient = new QueryClient();
 
 export default function App({
@@ -18,12 +16,10 @@ export default function App({
   pageProps,
   router,
 }: AppProps & { props: any }) {
-  useEffect(() => {
-    setCurrentUser();
-  }, []);
+  const { user, isLoggedIn } = props.props;
 
   return (
-    <AuthProvider auth={props.user}>
+    <AuthProvider auth={{ user, isLoggedIn }}>
       <CookiesProvider>
         <Toaster position="top-center" reverseOrder={false} />
         <QueryClientProvider client={queryClient}>
@@ -51,9 +47,10 @@ App.getInitialProps = async ({ ctx }: AppContext): Promise<any> => {
       .then((res) => res)
       .then((data) => ({
         props: {
-          user: data.data
-            ? { ...data.data.payload.results, isLoggedIn: true }
-            : false,
+          props: {
+            user: data.data.payload.results,
+            isLoggedIn: true,
+          },
         },
       }))
       .catch((error) => ({
