@@ -1,4 +1,6 @@
+import Router from 'next/router';
 import { SyntheticEvent, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useAuthState } from '../../../../../store/auth';
 import { Idea } from '../../../../lib/interfaces';
 import { onDownvoteIdea, onUpvoteIdea } from '../../../IdeaCard/services';
@@ -37,35 +39,45 @@ function IdeaVote({ idea }: { idea: Idea.Idea }) {
   async function handleUpvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const { error, payload } = await onUpvoteIdea(idea!.id);
-    if (!error) {
-      setDownvoted(false);
-      setUpvoted(!upvoted);
-      if (upvoted) {
-        removeUserState('upvotedIdeas');
-      } else {
-        removeUserState('downvotedIdeas');
-        addUserState('upvotedIdeas');
+    if (isLoggedIn) {
+      const { error, payload } = await onUpvoteIdea(idea!.id);
+      if (!error) {
+        setDownvoted(false);
+        setUpvoted(!upvoted);
+        if (upvoted) {
+          removeUserState('upvotedIdeas');
+        } else {
+          removeUserState('downvotedIdeas');
+          addUserState('upvotedIdeas');
+        }
+        setVotes(payload?.results || 0);
       }
-      setVotes(payload?.results || 0);
-    }
+    } else
+      Router.push(
+        `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=dTdacThkLVZER0pCZkZ6SklUTjI6MTpjaQ&redirect_uri=${process.env.NEXT_PUBLIC_API_URL}/auth/twitter/callback&scope=tweet.read%20users.read%20follows.read&state=state&code_challenge=challenge&code_challenge_method=plain`,
+      );
   }
 
   async function handleDownvote(e: SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setUpvoted(false);
-    setDownvoted(!downvoted);
-    const { error, payload } = await onDownvoteIdea(idea!.id);
-    if (!error) {
-      if (downvoted) {
-        removeUserState('downvotedIdeas');
-      } else {
-        removeUserState('upvotedIdeas');
-        addUserState('downvotedIdeas');
-      }
-      setVotes(payload?.results || 0);
-    }
+    if (isLoggedIn) {
+      const { error, payload } = await onDownvoteIdea(idea!.id);
+      if (!error) {
+        setUpvoted(false);
+        setDownvoted(!downvoted);
+        if (downvoted) {
+          removeUserState('downvotedIdeas');
+        } else {
+          removeUserState('upvotedIdeas');
+          addUserState('downvotedIdeas');
+        }
+        setVotes(payload?.results || 0);
+      } else toast.error('Failed to downvote');
+    } else
+      Router.push(
+        `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=dTdacThkLVZER0pCZkZ6SklUTjI6MTpjaQ&redirect_uri=${process.env.NEXT_PUBLIC_API_URL}/auth/twitter/callback&scope=tweet.read%20users.read%20follows.read&state=state&code_challenge=challenge&code_challenge_method=plain`,
+      );
   }
   const removeUserState = (where: 'downvotedIdeas' | 'upvotedIdeas') => {
     const data = currentUser[where];
