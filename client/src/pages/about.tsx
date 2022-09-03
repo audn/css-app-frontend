@@ -7,7 +7,7 @@ import { DefaultLayout } from '../common/layouts/Default';
 
 function About() {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="About">
       <div className="max-w-2xl mx-auto sm:mt-12">
         <div className="flex">
           <Button.Secondary

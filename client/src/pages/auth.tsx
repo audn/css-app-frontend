@@ -12,5 +12,5 @@ export default function Home() {
     router.push('/');
   }
 
-  return <CenterLayout>Authorizing..</CenterLayout>;
+  return <CenterLayout title="Authorize">Authorizing..</CenterLayout>;
 }
