@@ -19,6 +19,5 @@ export async function onUpvoteIdea(id: string) {
 
 export async function onDownvoteIdea(id: string) {
   const { error, payload } = await downvoteIdea(id);
-
   return { error, payload };
 }
