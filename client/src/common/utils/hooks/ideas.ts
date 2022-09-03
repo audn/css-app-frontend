@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from 'react-query';
 import { Idea } from './../../lib/interfaces';
 import { getIdeas } from './api/ideas';
 

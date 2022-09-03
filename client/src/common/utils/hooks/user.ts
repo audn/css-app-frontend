@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from 'react-query';
 import { User } from '../../components/User';
 import { useAuthState } from './../../../store/auth';
 import { getCurrentUser, getUser } from './api/user';
