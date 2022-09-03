@@ -14,7 +14,7 @@ function IdeasHydration({
   refetch,
   isRefetching,
 }: Hydration.Ideas) {
-  if (!isLoading) {
+  if (isLoading) {
     return (
       <SkeletonTheme color="#272e39" highlightColor="#38414f">
         <Animate variants={fadeIn} className="grid grid-cols-1 gap-5">
