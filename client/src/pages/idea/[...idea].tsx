@@ -91,7 +91,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const idea = (ctx.params?.idea || '') as string;
 
   const data = await getSpecificIdea(idea);
-  console.log(data);
 
   if (!data) {
     return {

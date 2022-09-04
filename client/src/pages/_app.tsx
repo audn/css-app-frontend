@@ -16,7 +16,7 @@ export default function App({
   pageProps,
   router,
 }: AppProps & { props: any }) {
-  const { user, isLoggedIn } = props.props;
+  const { user, isLoggedIn } = props;
 
   return (
     <AuthProvider auth={{ user, isLoggedIn }}>
@@ -30,36 +30,31 @@ export default function App({
     </AuthProvider>
   );
 }
+
 App.getInitialProps = async ({ ctx }: AppContext): Promise<any> => {
-  if (!ctx.req) {
-    return {
-      props: {},
-    };
-  } else {
-    const cookies = ctx.req?.headers.cookie as string;
-    const token = qs.decode(cookies, '; ');
-    return axios
-      .get(process.env.NEXT_PUBLIC_API_URL + '/users/me', {
-        headers: {
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      })
-      .then((res) => res)
-      .then((data) => ({
-        props: {
-          props: {
-            user: data.data.payload.results,
-            isLoggedIn: true,
-          },
-        },
-      }))
-      .catch((error) => ({
-        props: {
-          props: {
-            user: error.message,
-            isLoggedIn: false,
-          },
-        },
-      }));
-  }
+  const cookies = ctx.req?.headers.cookie as string;
+  const token =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('access_token')
+      : qs.decode(cookies, '; ').access_token;
+
+  return axios
+    .get(process.env.NEXT_PUBLIC_API_URL + '/users/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res)
+    .then((data) => ({
+      props: {
+        user: data.data.payload.results,
+        isLoggedIn: true,
+      },
+    }))
+    .catch((error) => ({
+      props: {
+        user: error.message,
+        isLoggedIn: false,
+      },
+    }));
 };

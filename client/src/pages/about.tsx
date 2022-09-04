@@ -8,7 +8,7 @@ import { DefaultLayout } from '../common/layouts/Default';
 function About() {
   return (
     <DefaultLayout title="About">
-      <div className="max-w-2xl mx-auto sm:mt-12">
+      <div className="max-w-2xl mx-auto ">
         <div className="flex">
           <Button.Secondary
             className="flex mb-8 text-on-100"
