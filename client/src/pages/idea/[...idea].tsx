@@ -46,7 +46,7 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
           <Button.Secondary
             className="flex mb-8 text-on-100"
             label="Back"
-            onClick={() => router.back()}
+            route="/"
             icon="fa-regular fa-arrow-left"
           />
           <Auth.Admin>
