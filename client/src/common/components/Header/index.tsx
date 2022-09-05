@@ -4,6 +4,7 @@ import { useAuthState } from '../../lib/store/auth';
 import { logout } from '../../utils/hooks/user';
 import Dropdown from '../Dropdown';
 import { User } from '../User';
+import MenuItems from './components/MenuItems';
 
 function Header() {
   const [_, setCookie, removeCookie] = useCookies(['access_token']);
@@ -16,18 +17,13 @@ function Header() {
     logout();
   }
 
-  const navigation = [
+  const dropdown = [
     {
-      label: 'About',
-      icon: 'fa-solid fa-info-circle',
-      route: '/about',
+      label: 'My profile',
+      icon: 'fa-solid fa-user',
+      route: '/user/me',
     },
 
-    {
-      label: 'GitHub',
-      icon: 'fa-brands fa-github',
-      route: 'https://github.com/audn/css.app',
-    },
     {
       label: 'Sign out',
       className: 'hover:bg-opacity-10 hover:bg-red-500 hover:!text-red-500',
@@ -37,15 +33,15 @@ function Header() {
   ] as IListItem[];
 
   return (
-    <div className="absolute z-50 flex justify-end right-5 top-5">
-      {isLoggedIn && (
-        <Dropdown list={navigation}>
-          <User.Avatar
-            user={currentUser}
-            className="!w-[35px] !h-[35px] sm:!h-12 sm:!w-12"
-          />
-        </Dropdown>
-      )}
+    <div className="absolute inset-x-0">
+      <div className="relative flex justify-between p-8 mx-auto mdax-w-2xl">
+        <MenuItems />
+        {isLoggedIn && (
+          <Dropdown list={dropdown}>
+            <User.Avatar user={currentUser} className="!w-[35px] !h-[35px]" />
+          </Dropdown>
+        )}
+      </div>
     </div>
   );
 }

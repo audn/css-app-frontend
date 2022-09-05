@@ -27,12 +27,12 @@ function Dropdown({ children, list }: Props) {
   );
   return (
     <div ref={menuRef} onClick={toggle} className="relative">
-      <button>{children}</button>
+      <button className="flex">{children}</button>
       <AnimatePresence>
         {isOpen && (
           <Animate
             variants={fadeInFromBottomAndOutBottom}
-            className="absolute right-0 top-14 shadow-lg min-w-[200px] border border-types-150 rounded-lg"
+            className="absolute right-0 top-10 shadow-lg min-w-[200px] border border-types-150 rounded-lg"
           >
             <ul className="p-2 space-y-1 rounded-lg whitespace-nowrap text-on-100 bg-types-100">
               {list.map((item, i) => (
