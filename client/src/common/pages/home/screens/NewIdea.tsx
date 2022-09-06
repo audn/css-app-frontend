@@ -16,7 +16,7 @@ function NewIdea() {
   const { message, ideas, error, isPosting } = useHomeState();
 
   return (
-    <Animate variants={fadeIn} className="max-w-2xl mx-auto text-left">
+    <Animate variants={fadeIn}>
       <Alpha>Hey, {currentUser.name}👋</Alpha>
       <div className="flex mt-12">
         <User.Avatar

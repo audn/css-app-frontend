@@ -35,7 +35,7 @@ export default function Home() {
         <NewIdea />
         <Login />
       </Auth.User>
-      <div className="max-w-2xl mx-auto mt-16">
+      <div className="mt-16">
         <div className="flex flex-wrap justify-center mb-10 space-x-2">
           <Category
             activeSort={sort}

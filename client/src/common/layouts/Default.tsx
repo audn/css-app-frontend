@@ -23,7 +23,7 @@ export const DefaultLayout = ({
       <main
         className={concat(
           className ? className : '',
-          'w-full px-5 py-4 mx-auto',
+          'w-full px-5 py-4 mx-auto flex flex-col max-w-2xl',
         )}
       >
         {children}

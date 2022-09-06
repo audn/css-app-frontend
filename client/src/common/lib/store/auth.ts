@@ -10,6 +10,7 @@ export const useAuthState = create<Store>(() => ({
   isLoggedIn: false,
   user: {
     id: '',
+    ideas: [],
     name: '',
     profile_image_url: '',
     upvotedIdeas: [],

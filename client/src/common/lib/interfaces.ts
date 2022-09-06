@@ -82,6 +82,7 @@ export declare namespace User {
     profile_image_url: string;
     name: string;
     id: string;
+    ideas: Idea.Idea[];
     upvotedIdeas: Vote[];
     downvotedIdeas: Vote[];
     role: Role;
