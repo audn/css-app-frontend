@@ -37,52 +37,47 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
     }
   }
   return (
-    <DefaultLayout
-      title={`${idea.user?.username}'s idea`}
-      className="py-5 sm:py-20"
-    >
-      <div className="flex flex-col max-w-2xl mx-auto ">
-        <div className="flex space-x-2">
+    <DefaultLayout title={`${idea.user?.username}'s idea`}>
+      <div className="flex space-x-2">
+        <Button.Secondary
+          className="flex mb-8 text-on-100"
+          label="Back"
+          route="/"
+          icon="fa-regular fa-arrow-left"
+        />
+        <Auth.Admin>
           <Button.Secondary
-            className="flex mb-8 text-on-100"
-            label="Back"
-            route="/"
-            icon="fa-regular fa-arrow-left"
+            danger={warn}
+            className={'flex mb-8 text-on-100'}
+            label={warn ? 'Are you sure?' : 'Delete'}
+            onClick={handleDeleteIdea}
+            icon="fa-regular fa-trash-alt"
           />
-          <Auth.Admin>
-            <Button.Secondary
-              danger={warn}
-              className={'flex mb-8 text-on-100'}
-              label={warn ? 'Are you sure?' : 'Delete'}
-              onClick={handleDeleteIdea}
-              icon="fa-regular fa-trash-alt"
-            />
-          </Auth.Admin>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <User.Avatar user={idea.user} className="mr-3" />
-            <div className="flex flex-col">
-              <Bravo className="!mb-0">
-                <User.DisplayName user={idea.user} />
-              </Bravo>
-              <User.Username user={idea.user} className="text-on-100" />
-            </div>
-          </div>
-          <IdeaVote idea={idea} />
-        </div>
-        <P className="w-full px-4 py-3 mt-5 break-words bg-types-100 rounded-xl">
-          {idea.message}
-        </P>
-        {idea.upvotes && idea?.upvotes.length >= 1 && (
-          <div className="flex flex-col px-4 py-3 mt-5 gap-y-3 bg-types-100 rounded-xl">
-            <Charlie className="!text-base">Upvoted by</Charlie>
-            {idea.upvotes?.map((user) => (
-              <LikedBy {...user} key={user.user.id} />
-            ))}
-          </div>
-        )}
+        </Auth.Admin>
       </div>
+      <div className="flex items-center justify-between">
+        <User.Author user={idea.user}>
+          <User.Avatar user={idea.user} className="mr-3" />
+          <div className="flex flex-col">
+            <Bravo className="!mb-0">
+              <User.DisplayName user={idea.user} />
+            </Bravo>
+            <User.Username user={idea.user} className="text-on-100" />
+          </div>
+        </User.Author>
+        <IdeaVote idea={idea} />
+      </div>
+      <P className="w-full px-4 py-3 mt-5 break-words bg-types-100 rounded-xl">
+        {idea.message}
+      </P>
+      {idea.upvotes && idea?.upvotes.length >= 1 && (
+        <div className="flex flex-col px-4 py-3 mt-5 gap-y-3 bg-types-100 rounded-xl">
+          <Charlie className="!text-base">Upvoted by</Charlie>
+          {idea.upvotes?.map((user) => (
+            <LikedBy {...user} key={user.user.id} />
+          ))}
+        </div>
+      )}
     </DefaultLayout>
   );
 }

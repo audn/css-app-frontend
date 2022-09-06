@@ -21,7 +21,7 @@ function UserAuthor({
         'self-start flex flex-shrink-0 group hover:opacity-90 animate',
       )}
     >
-      <div className="relative overflow-hidden rounded-full ">{children}</div>
+      {children}
     </Link>
   );
 }
