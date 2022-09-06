@@ -4,11 +4,13 @@ import concat from '../../../utils/helpers/concat';
 function P({
   children,
   className,
+  block,
 }: {
+  block?: boolean;
   children: ReactNode | ReactNode[];
   className?: string;
 }) {
-  if (Array.isArray(children)) {
+  if (Array.isArray(children) && block) {
     return (
       <div
         className={concat(
@@ -17,22 +19,22 @@ function P({
         )}
       >
         {children.map((x, i) => (
-          <span className="block mt-5 first:mt-0" key={`paragraph_${i}`}>
+          <p className="block mt-5 first:mt-0" key={`paragraph_${i}`}>
             {x}
-          </span>
+          </p>
         ))}
       </div>
     );
   } else
     return (
-      <span
+      <p
         className={concat(
           className ? className : '',
           'text-base leading-8 whitespace-pre-line break-word w-full',
         )}
       >
         {children}
-      </span>
+      </p>
     );
 }
 

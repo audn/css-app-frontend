@@ -12,22 +12,23 @@ app.use(express.json());
 app.use(deserializeUse);
 
 app.listen(config.port, async () => {
-   app.use(
-      cors({
-         origin: [
-            'http://localhost:3000',
-            'https://css.app',
-            'https://www.css.app',
-         ],
-         credentials: true,
-      })
-   );
-   console.log(
-      chalk.hex('#3498DB')('\nLOG @ ') +
-         chalk.hex('#AF7AC5')('server:: ') +
-         'running on ' +
-         chalk.hex('#5DADE2')(':' + config.port) +
-         '\n'
-   );
-   app.use('/', api);
+      app.use(
+            cors({
+                  origin: [
+                        'http://localhost:3000',
+                        'https://css.app',
+                        'https://www.css.app',
+                        'audun.local:3000',
+                  ],
+                  credentials: true,
+            })
+      );
+      console.log(
+            chalk.hex('#3498DB')('\nLOG @ ') +
+                  chalk.hex('#AF7AC5')('server:: ') +
+                  'running on ' +
+                  chalk.hex('#5DADE2')(':' + config.port) +
+                  '\n'
+      );
+      app.use('/', api);
 });
