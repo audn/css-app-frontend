@@ -18,12 +18,12 @@ export const DefaultLayout = ({
   children,
 }: ILayout & { className?: string }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <SeoTags title={title} desc={desc} url={url} />
       <main
         className={concat(
           className ? className : '',
-          'w-full px-5 py-4 mx-auto flex flex-col max-w-2xl',
+          'w-full px-5 py-4 pb-16 mx-auto flex flex-col max-w-2xl',
         )}
       >
         {children}
