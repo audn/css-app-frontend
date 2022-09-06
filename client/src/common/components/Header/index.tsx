@@ -21,7 +21,7 @@ function Header() {
     {
       label: 'My profile',
       icon: 'fa-solid fa-user',
-      route: '/user/me',
+      route: `/user/${currentUser.id}`,
     },
 
     {
