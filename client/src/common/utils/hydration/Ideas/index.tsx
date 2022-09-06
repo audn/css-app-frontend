@@ -24,7 +24,6 @@ function IdeasHydration({
             )),
           ]}
         </div>
-        1
       </SkeletonTheme>
     );
   } else if (error) {
