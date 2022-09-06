@@ -17,18 +17,16 @@ function UserProfile({ user }: { user: IUser.User }) {
           icon="fa-regular fa-arrow-left"
         />
       </div>
-      <div className="flex items-center justify-between">
-        <User.Author user={user}>
-          <User.Avatar user={user} className="mr-3" />
-          <div className="flex flex-col">
-            <Bravo className="!mb-0">
-              <User.DisplayName user={user} />
-            </Bravo>
-            <User.Username user={user} className="text-on-100" />
-          </div>
-        </User.Author>
-      </div>
-      <div className="mt-5">
+      <User.Author user={user}>
+        <User.Avatar user={user} className="mr-3" />
+        <div className="flex flex-col">
+          <Bravo className="!mb-0">
+            <User.DisplayName user={user} />
+          </Bravo>
+          <User.Username user={user} className="text-on-100" />
+        </div>
+      </User.Author>
+      <div className="mt-8">
         <User.Ideas user={user} />
       </div>
     </DefaultLayout>
