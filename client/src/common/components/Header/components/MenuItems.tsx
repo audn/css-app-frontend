@@ -22,8 +22,13 @@ function MenuItems() {
   const active = (route: string) => router.asPath === route;
   return (
     <div className="flex space-x-3 sm:space-x-5">
-      {navigation.map((x) => (
-        <NavItem active={active(x.route!)} label={x.label} route={x.route} />
+      {navigation.map((x, i) => (
+        <NavItem
+          active={active(x.route!)}
+          label={x.label}
+          route={x.route}
+          key={i}
+        />
       ))}
     </div>
   );
