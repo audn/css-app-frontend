@@ -41,7 +41,7 @@ function IdeaCard({ idea }: { idea: Idea.Idea }) {
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <P className="mt-1 text-white">
+                <P className="mt-1 text-white break-all">
                   {message.slice(0, 150) + (message.length > 150 ? '...' : '')}
                 </P>
               </div>

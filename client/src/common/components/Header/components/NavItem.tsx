@@ -14,7 +14,7 @@ function NavItem({ label, active, route }: Props) {
       href={route!}
       className={concat(
         active ? 'text-white' : 'text-on-100',
-        'text-lg font-semibold ',
+        'text-xl sm:text-lg font-semibold ',
       )}
     >
       {label}

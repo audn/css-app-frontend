@@ -34,7 +34,7 @@ function Header() {
 
   return (
     <div className="absolute inset-x-0">
-      <div className="relative flex justify-between p-8 mx-auto mdax-w-2xl">
+      <div className="relative flex justify-between p-5 mx-auto sm:p-8">
         <MenuItems />
         {isLoggedIn && (
           <Dropdown list={dropdown}>
