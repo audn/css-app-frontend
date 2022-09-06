@@ -19,8 +19,6 @@ function MenuItems() {
       route: 'https://github.com/audn/css.app',
     },
   ] as IListItem[];
-  console.log(router);
-
   const active = (route: string) => router.asPath === route;
   return (
     <div className="flex space-x-3 sm:space-x-5">

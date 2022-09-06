@@ -18,7 +18,8 @@ app.listen(config.port, async () => {
                         'http://localhost:3000',
                         'https://css.app',
                         'https://www.css.app',
-                        'audun.local:3000',
+                        'http://audun.local:3000',
+                        'http://www.audun.local:3000',
                   ],
                   credentials: true,
             })

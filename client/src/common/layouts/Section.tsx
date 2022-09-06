@@ -8,8 +8,6 @@ type Props = {
   children: ReactNode | ReactNode[];
 };
 export function Section({ title, children }: Props) {
-  console.log(children);
-
   return (
     <div>
       <SectionSeparator title={title!} />

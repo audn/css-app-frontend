@@ -15,6 +15,7 @@
     "> 1%",
     "not dead"
   ],
+  "proxy": "http://audun.local:4000/",
   "dependencies": {
     "@tanstack/react-query": "^4.0.10",
     "axios": "^0.27.2",

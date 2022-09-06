@@ -1,4 +1,7 @@
-const base = process.env.NEXT_PUBLIC_API_URL;
+const base =
+  typeof window !== 'undefined' && window?.location.hostname === 'localhost'
+    ? process.env.NEXT_PUBLIC_API_URL
+    : 'http://audun.local:4000';
 
 async function get(endpoint: string, requireAuth: boolean, headers?: object) {
   return request(endpoint, 'GET', requireAuth, undefined, headers);
