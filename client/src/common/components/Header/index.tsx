@@ -33,15 +33,13 @@ function Header() {
   ] as IListItem[];
 
   return (
-    <div className="absolute inset-x-0">
-      <div className="relative flex justify-between p-5 mx-auto sm:p-8">
-        <MenuItems />
-        {isLoggedIn && (
-          <Dropdown list={dropdown}>
-            <User.Avatar user={currentUser} className="!w-[35px] !h-[35px]" />
-          </Dropdown>
-        )}
-      </div>
+    <div className="relative flex justify-between p-5 mx-auto sm:p-8">
+      <MenuItems />
+      {isLoggedIn && (
+        <Dropdown list={dropdown}>
+          <User.Avatar user={currentUser} className="!w-[35px] !h-[35px]" />
+        </Dropdown>
+      )}
     </div>
   );
 }
