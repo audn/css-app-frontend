@@ -11,7 +11,16 @@ export const anyUser = async (req: Request, res: APIJson) => {
                         id: user,
                   },
                   include: {
-                        ideas: true,
+                        ideas: {
+                              select: {
+                                    user: true,
+                                    downvotes: true,
+                                    id: true,
+                                    upvotes: true,
+                                    voteCount: true,
+                                    message: true,
+                              },
+                        },
                         upvotedIdeas: true,
                   },
             });
