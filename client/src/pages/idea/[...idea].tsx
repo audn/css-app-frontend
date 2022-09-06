@@ -71,7 +71,9 @@ function Idea({ idea }: { idea: IIDea.Idea }) {
           </div>
           <IdeaVote idea={idea} />
         </div>
-        <P className="px-4 py-3 mt-5 bg-types-100 rounded-xl">{idea.message}</P>
+        <P className="w-full px-4 py-3 mt-5 break-words bg-types-100 rounded-xl">
+          {idea.message}
+        </P>
         {idea.upvotes && idea?.upvotes.length >= 1 && (
           <div className="flex flex-col px-4 py-3 mt-5 gap-y-3 bg-types-100 rounded-xl">
             <Charlie className="!text-base">Upvoted by</Charlie>
