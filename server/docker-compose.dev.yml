@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+   postgres:
+      container_name: cssapp_postgres
+      image: postgres:latest
+      restart: always
+      environment:
+         - POSTGRES_USER=cssapp
+         - POSTGRES_PASSWORD=cssapp
+         - POSTGRES_DB=cssapp
+      volumes:
+         - postgres:/var/lib/postgres/data
+      ports:
+         - 5432:5432
+
+volumes:
+   postgres:
