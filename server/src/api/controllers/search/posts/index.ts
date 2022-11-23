@@ -5,21 +5,29 @@ import { APIJson } from '../../../../lib/types/types';
 export const searchPosts = async (req: Request, res: APIJson) => {
     const { q, filter, category } = req.body as {
         q: string;
-        filter: { animated: boolean; theme: 'light' | 'dark' };
+        filter: { animated: boolean; theme: 'light' | 'dark'; libary: string };
         category: string;
     };
     try {
+        const query = q
+            .split(' ')
+            .map((x) => x)
+            .join('|');
+
         const posts = await prisma.post.findMany({
             where: {
-                description: {
-                    search: q,
+                title: {
+                    search: query,
                 },
                 OR: {
-                    title: {
-                        search: q,
+                    description: {
+                        search: query,
                     },
                 },
                 AND: {
+                    library: {
+                        equals: filter.libary,
+                    },
                     animated: {
                         equals: filter.animated,
                     },

@@ -18,7 +18,8 @@ enum Role {
 }
 
 model Post {
-    id String @id @unique @default(cuid())
+    id      String @id @unique @default(cuid())
+    library String @default("")
 
     title       String
     code        Json?
@@ -53,9 +54,10 @@ model User {
     twitterId String? @unique
     discordId String? @unique
 
-    username String
-    avatar   String
-    role     Role   @default(USER)
+    username    String
+    avatar      String
+    role        Role   @default(USER)
+    preferences Json?
 
     posts Post[]
 
