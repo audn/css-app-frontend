@@ -5,12 +5,17 @@ type Send<T = Response> = (body?: APIResponse) => T;
 export interface APIJson extends Response {
     json: Send<this>;
 }
-export interface IGetUserAuthInfoRequest extends Request {
-    user: string; // or any other type
+
+export interface APIRequest extends Request {
+    json: Send<this>;
+    user: IUser.User;
 }
 export interface APIResponse {
     payload?: {
-        [key: string]: any;
+        results: {
+            [key: string]: any;
+        };
+        count?: number;
     };
     error?: string;
     message?: string;
@@ -25,6 +30,20 @@ export declare module IUser {
         avatar: string;
         role: Roles;
         createdAt: string;
+    }
+}
+export declare module IPost {
+    export type Roles = 'ADMIN' | 'USER' | 'MOD';
+    export interface Post {
+        id: string;
+        title: string;
+        code: any;
+        description: string;
+        generatedImage?: string;
+        animated: boolean;
+        theme: string;
+
+        author: IUser.User;
     }
 }
 export declare namespace ITwitter {
