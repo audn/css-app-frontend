@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import prisma from '../../../../lib/prisma';
+import { APIJson } from '../../../../lib/types/types';
 
-export const me = async (req: Request, res: Response) => {
-    const userId = res.locals.userId;
-    console.log(req.user);
+export const me = async (req: Request, res: APIJson) => {
+    const userId = req?.user?.id;
 
     try {
         const user = await prisma.user.findUnique({
