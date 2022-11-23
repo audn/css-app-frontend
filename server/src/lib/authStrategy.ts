@@ -1,6 +1,6 @@
 import config from '../config';
 import prisma from './prisma';
-import { ITwitter, IUser } from './types';
+import { ITwitter, IUser } from './types/types';
 
 const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;

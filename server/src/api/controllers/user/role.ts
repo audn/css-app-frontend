@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import prisma from '../../../lib/prisma';
 import { UpdateUserRole } from '../../../lib/schema/user';
-import { IUserRoles } from '../../../lib/types';
+import { IUserRoles } from '../../../lib/types/types';
 
 export const changeRole = async (
     req: Request<UpdateUserRole['body']>,
