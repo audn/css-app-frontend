@@ -19,6 +19,6 @@ auth.get(
         res.redirect('/');
     }
 );
-auth.get('/logout', logout);
+auth.post('/logout', logout);
 
 export default auth;
