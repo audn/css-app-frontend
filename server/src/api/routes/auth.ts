@@ -1,12 +1,8 @@
 import { Router } from 'express';
 import passport from 'passport';
+import logout from '../controllers/auth/logout';
 
 const auth = Router();
-// auth.get('/login', (_, res: Response) => {
-//     res.redirect(config.twitter.login__url);
-// });
-
-// auth.get('/twitter/callback', callback);
 
 auth.get(
     '/twitter',
@@ -17,11 +13,12 @@ auth.get(
 );
 auth.get(
     '/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: '/' }),
+    passport.authenticate('twitter', { failureRedirect: '/error' }),
 
     function (req, res) {
         res.redirect('/');
     }
 );
+auth.get('/logout', logout);
 
 export default auth;

@@ -1,24 +1,22 @@
+import config from '../config';
 import prisma from './prisma';
+import { ITwitter, IUser } from './types';
 
 const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;
 
 export default function authStrategy() {
-    passport.serializeUser((user: any, done: any) => {
-        console.log('serializeUser', user);
-
+    passport.serializeUser((user: IUser.User, done: any) => {
         done(null, user);
     });
-    passport.deserializeUser(async (profile: any, done: any) => {
-        console.log('deserializeUser', profile);
-
+    passport.deserializeUser(async (profile: IUser.User, done: any) => {
         const user = await prisma.user.findUnique({
             where: {
-                twitterId: profile.id,
+                twitterId: profile.twitterId,
             },
         });
 
-        if (user) done(null, user);
+        if (user) done(null, profile);
         else {
             done(null, false);
         }
@@ -29,10 +27,15 @@ export default function authStrategy() {
             {
                 consumerKey: process.env.API_KEY,
                 consumerSecret: process.env.API_SECRET,
-                callbackURL: 'http://localhost:4000/auth/twitter/callback',
+                callbackURL: config.twitter.redirect_uri,
             },
-            async (_: any, tokenSecret: any, profile: any, done: any) => {
-                const data = profile._json;
+            async (
+                _: any,
+                tokenSecret: any,
+                profile: ITwitter.User,
+                done: any
+            ) => {
+                const data = profile;
 
                 try {
                     const user = await prisma.user.findUnique({
@@ -44,8 +47,8 @@ export default function authStrategy() {
                     } else {
                         const newUser = await prisma.user.create({
                             data: {
-                                avatar: data.profile_image_url,
-                                username: data.screen_name,
+                                avatar: data.photos[0].value,
+                                username: data.username,
                                 twitterId: String(data.id),
                             },
                         });

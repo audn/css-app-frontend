@@ -5,9 +5,9 @@ export const requireAuth = async (
     res: Response,
     next: NextFunction
 ) => {
-    const userId = res.locals.userId;
-    if (!userId) {
-        res.sendStatus(401);
+    const user = req.user;
+    if (!user) {
+        res.status(401).json({ error: true, message: 'auth issue' });
     } else {
         next();
     }
