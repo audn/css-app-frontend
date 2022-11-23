@@ -6,11 +6,9 @@ import user from './routes/user';
 const api = Router();
 
 api.get('/', (req: Request, res: Response) => {
-    const isAuth = res.locals.userId;
-    res.json({
-        message: 'based',
-        isAuth,
-    });
+    console.log(req.user);
+
+    res.json(req.user);
 });
 
 api.use('/ideas', ideas);

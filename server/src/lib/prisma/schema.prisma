@@ -17,16 +17,16 @@ enum Role {
 }
 
 model Post {
-    id String @id @unique @default(cuid())
+    id String @id @unique @default(uuid())
 
     title       String
-    code        Json
-    description String
+    code        Json?
+    description String?
 
     generatedImage String?
 
-    animated Boolean
-    theme    String
+    animated Boolean?
+    theme    String?
 
     author User?   @relation(fields: [userId], references: [id])
     userId String?
@@ -35,11 +35,14 @@ model Post {
 }
 
 model User {
-    id String @id @unique
+    id String @id @unique @default(uuid())
+
+    twitterId String? @unique
+    discordId String? @unique
 
     username String
     avatar   String
-    role     Role
+    role     Role   @default(USER)
 
     posts Post[]
 

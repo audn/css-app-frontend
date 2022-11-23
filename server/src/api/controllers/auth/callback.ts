@@ -18,12 +18,16 @@ export const callback = async (req: Request, res: APIJson) => {
     async function findOrCreateUser(user: Twitter.User) {
         const findUser = await prisma.user.findUnique({
             where: {
-                id: user.id,
+                twitterId: user.id,
             },
         });
         if (!findUser) {
-            await prisma.user.createMany({
-                data: user,
+            await prisma.user.create({
+                data: {
+                    avatar: user.profile_image_url,
+                    username: user.username,
+                    twitterId: user.id,
+                },
             });
         }
         return user;
@@ -77,9 +81,7 @@ export const callback = async (req: Request, res: APIJson) => {
             }
         );
 
-        return res.redirect(
-            `${process.env.FRONTEND_URL}/auth?code=${accessToken}`
-        );
+        return res.redirect(`/?code=${accessToken}`);
     } catch (error: any) {
         return res.status(400).json({ error: error.message });
     }
