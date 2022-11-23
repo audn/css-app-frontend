@@ -4,15 +4,38 @@ import { APIJson } from '../../../lib/types/types';
 
 export const createPost = async (req: Request, res: APIJson) => {
     const userId = req?.user?.id;
+    const {
+        title,
+        animated,
+        author,
+        code,
+        description,
+        generatedImage,
+        id,
+        theme,
+    } = req.body;
     try {
+        //TODO: check if category exists before adding
         const added = await prisma.post.create({
             data: {
-                author: {
+                userId: {
                     connect: {
                         id: userId,
                     },
                 },
-                ...req.body,
+                categoryId: {
+                    connect: {
+                        value: req.body.category,
+                    },
+                },
+                title,
+                animated,
+                author,
+                code,
+                description,
+                generatedImage,
+                id,
+                theme,
             },
         });
         if (!added) {

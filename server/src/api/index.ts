@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import auth from './routes/auth';
+import categories from './routes/categories';
 import posts from './routes/posts';
 import user from './routes/user';
 
@@ -12,5 +13,6 @@ api.get('/', (req: Request, res: Response) => {
 api.use('/auth', auth);
 api.use('/users', user);
 api.use('/posts', posts);
+api.use('/categories', categories);
 
 export default api;

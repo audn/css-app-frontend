@@ -17,7 +17,7 @@ enum Role {
 }
 
 model Post {
-    id String @id @unique @default(uuid())
+    id String @id @unique @default(cuid())
 
     title       String
     code        Json?
@@ -28,14 +28,26 @@ model Post {
     animated Boolean?
     theme    String?
 
-    author User?   @relation(fields: [userId], references: [id])
-    userId String?
+    userId User   @relation(fields: [author], references: [id])
+    author String
+
+    categoryId Category? @relation(fields: [category], references: [value])
+    category   String
 
     @@map("posts")
 }
 
+model Category {
+    value String @id @unique
+    label String
+
+    count Post[]
+
+    @@map("categories")
+}
+
 model User {
-    id String @id @unique @default(uuid())
+    id String @id @unique @default(cuid())
 
     twitterId String? @unique
     discordId String? @unique
