@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import requireAuth from '../../lib/middleware/requireAuth';
 
 const posts = Router();
 
@@ -8,8 +9,8 @@ import { removePost } from '../controllers/posts/delete';
 import { getPost } from '../controllers/posts/get';
 
 posts.get('/', allPosts);
-posts.post('/', createPost);
+posts.post('/', requireAuth, createPost);
 posts.get('/:id', getPost);
-posts.delete('/:id', removePost);
+posts.delete('/:id', requireAuth, removePost);
 
 export default posts;

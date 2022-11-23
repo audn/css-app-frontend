@@ -57,7 +57,7 @@ model User {
     username    String
     avatar      String
     role        Role   @default(USER)
-    preferences Json?
+    preferences Json[] @default([])
 
     posts Post[]
 

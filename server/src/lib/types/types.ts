@@ -28,6 +28,9 @@ export declare module IUser {
         discordId?: string;
         username: string;
         avatar: string;
+        preferences: {
+            preferredLibrary: string;
+        };
         role: Roles;
         createdAt: string;
     }
