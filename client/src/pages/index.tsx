@@ -1,16 +1,21 @@
 import { NextSeo } from 'next-seo';
 import { Hydrate } from '../common/components/Hydrate';
 import { FadedLayout } from '../common/layouts/FadeLayout';
-import { useAllPosts } from '../common/utils/hooks/posts';
+import { API } from '../common/lib/interfaces';
+import { useSearchPosts } from '../common/utils/hooks/posts';
 
 export default function Home() {
+  const query: API.Requests.SearchPosts = {
+    q: '*',
+    filter: { library: 'TailwindCSS' },
+  };
   const {
     data,
     isLoading,
     error: fetchError,
     refetch,
     isRefetching,
-  } = useAllPosts();
+  } = useSearchPosts(query);
 
   return (
     <FadedLayout
@@ -18,7 +23,7 @@ export default function Home() {
       h3=" Guides, Product Updates and Research from Senja"
     >
       <NextSeo />
-      <div className="p-6">
+      <div className="p-6 mt-10">
         <Hydrate.Posts
           data={data}
           error={fetchError}

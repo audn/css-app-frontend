@@ -25,11 +25,13 @@ export const searchPosts = async (req: Request, res: APIJson) => {
                     ? {}
                     : {
                           title: {
-                              search: query,
+                              contains: query,
+                              mode: 'insensitive',
                           },
                           OR: {
                               description: {
-                                  search: query,
+                                  contains: query,
+                                  mode: 'insensitive',
                               },
                           },
                       }),
@@ -48,6 +50,7 @@ export const searchPosts = async (req: Request, res: APIJson) => {
                     },
                 },
             },
+            include: { userId: true },
         });
         if (!posts) {
             throw new Error('Post not found');

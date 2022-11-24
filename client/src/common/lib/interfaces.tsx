@@ -17,6 +17,17 @@ export type IDropdown = {
 };
 
 export declare namespace API {
+  namespace Requests {
+    interface SearchPosts {
+      q?: string;
+      filter?: {
+        animated?: boolean;
+        theme?: string;
+        library?: string;
+      };
+      category?: string;
+    }
+  }
   interface Response<T = { T?: any }> {
     payload?: {
       results: T;
