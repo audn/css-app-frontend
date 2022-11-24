@@ -6,16 +6,16 @@ html {
 }
 body {
   overflow-x: hidden;
-  color: #eff3f6;
+  color: rgba(255, 255, 255, 0.69);
   font-family: 'Inter', sans-serif;
-  background-color: #151515;
+  background-color: #212121;
 }
 .animate {
   @apply transition-all duration-100 ease-out;
 }
 .container {
   @apply mx-auto;
-  max-width: 80rem !important;
+  max-width: 85rem !important;
 }
 .will-change {
   will-change: transform;

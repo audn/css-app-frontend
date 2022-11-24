@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo';
 import { Button } from '../common/components/Buttons';
 import { Hydrate } from '../common/components/Hydrate';
 import Text from '../common/components/layout/headings/Text';
-import { DefaultLayout } from '../common/layouts/Default';
+import { FadedLayout } from '../common/layouts/FadeLayout';
 import { useAllPosts } from '../common/utils/hooks/posts';
 
 export default function Home() {
@@ -15,9 +15,12 @@ export default function Home() {
   } = useAllPosts();
 
   return (
-    <DefaultLayout>
+    <FadedLayout
+      h1="Library for hand-crafted components"
+      h3=" Guides, Product Updates and Research from Senja"
+    >
       <NextSeo />
-      <div className="flex flex-col items-center justify-center mx-auto mt-12 text-center md:mt-0 md:py-24 rounded-2xl md:bg-types-d100">
+      <div className="flex flex-col items-center justify-center mx-auto mt-12 text-center md:mt-0 md:py-24 rounded-2xl ">
         Boilerplate for building web applications with React
         <Text className="max-w-2xl mt-8">
           <p>
@@ -40,6 +43,6 @@ export default function Home() {
           isRefetching={isRefetching}
         />
       </div>
-    </DefaultLayout>
+    </FadedLayout>
   );
 }
