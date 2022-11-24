@@ -4,7 +4,7 @@ import { APIJson } from '../../../lib/types/types';
 
 export const allPosts = async (req: Request, res: APIJson) => {
     try {
-        const posts = await prisma.post.findMany();
+        const posts = await prisma.post.findMany({ include: { userId: true } });
         if (!posts) {
             throw new Error('No posts');
         } else
