@@ -6,9 +6,9 @@ const auth = Router();
 
 auth.get(
     '/twitter',
-    passport.authenticate('twitter', { failureRedirect: '/' }),
+    passport.authenticate('twitter', { failureRedirect: '/error' }),
     function (req, res) {
-        res.redirect('/');
+        res.redirect(process.env.FRONTEND_URL);
     }
 );
 auth.get(
@@ -16,7 +16,7 @@ auth.get(
     passport.authenticate('twitter', { failureRedirect: '/error' }),
 
     function (req, res) {
-        res.redirect('/');
+        res.redirect(process.env.FRONTEND_URL);
     }
 );
 auth.post('/logout', logout);

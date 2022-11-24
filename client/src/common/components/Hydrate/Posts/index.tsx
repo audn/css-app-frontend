@@ -5,18 +5,18 @@ import { fadeIn } from '../../../utils/data/animations';
 import HydrationError from '../../layout/Alerts/HydrationError';
 import Animate from '../../layout/Animate';
 
-function CatsHydration({
+function PostsHydration({
   data,
   error,
   isLoading,
   refetch,
   isRefetching,
-}: Hydration.Cats) {
+}: Hydration.Posts) {
   if (isLoading) {
     return (
       <SkeletonTheme baseColor="#272e39" highlightColor="#38414f">
         <div className="flex flex-col items-center p-4 mx-auto rounded-md">
-          loading cats...
+          loading posts
         </div>
       </SkeletonTheme>
     );
@@ -33,16 +33,12 @@ function CatsHydration({
     return (
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="flex flex-wrap gap-5">
-          {data?.map((cat) => (
-            <img
-              key={cat.id}
-              src={`https://cataas.com/cat/${cat.id}`}
-              className="w-auto h-full"
-            />
+          {data?.payload?.results?.map((post) => (
+            <div>{post.title}</div>
           ))}
         </Animate>
       </AnimatePresence>
     );
 }
 
-export default CatsHydration;
+export default PostsHydration;

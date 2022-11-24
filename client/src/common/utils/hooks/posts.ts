@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCats } from './api/cats';
+import { getAllPosts } from './api/posts';
 
-export const useCats = () => {
+export const useAllPosts = () => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`/cats/`],
-    () => getCats(),
+    [`/posts`],
+    () => getAllPosts(),
     {
       refetchOnWindowFocus: false,
-      onError: (e) => console.error(`Error getting cats: ${e}`),
+      onError: (e) => console.error(`Error getting posts: ${e}`),
     },
   );
 

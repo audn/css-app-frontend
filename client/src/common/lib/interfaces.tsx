@@ -17,6 +17,17 @@ export type IDropdown = {
 };
 
 export declare namespace API {
+  interface Response<T> {
+    payload?: {
+      results: T;
+      count?: number;
+    };
+    error?: string;
+    message?: string;
+  }
+  type UserRoles = 'ADMIN' | 'USER' | 'MOD';
+  type UserPreferences = { preferredLibrary: string };
+
   namespace Models {
     interface Category {
       label: string;
@@ -25,17 +36,15 @@ export declare namespace API {
         linkedTemplates: number;
       };
     }
-    type Roles = 'ADMIN' | 'USER' | 'MOD';
+
     interface User {
       id: string;
       twitterId?: string;
       discordId?: string;
       username: string;
       avatar: string;
-      preferences: {
-        preferredLibrary: string;
-      };
-      role: Roles;
+      preferences: UserPreferences;
+      role: UserRoles;
       createdAt: string;
     }
     interface Post {
@@ -52,6 +61,9 @@ export declare namespace API {
   }
 }
 
+// type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+// type MyPropType = ObjType['key'];
+
 export declare namespace Hydration {
   type ReactQueryProps = {
     refetch: () => void;
@@ -59,10 +71,10 @@ export declare namespace Hydration {
     isLoading: boolean;
     error: unknown;
   };
-  interface Model<T> extends ReactQueryProps {
-    data?: T;
+
+  interface Posts extends ReactQueryProps {
+    data?: API.Response<API.Models.Post[]>;
   }
-  interface Posts extends Model<API.Models.Post[]> {}
 }
 export declare namespace Alert {
   interface Base {

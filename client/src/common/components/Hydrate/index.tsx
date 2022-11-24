@@ -1,8 +1,8 @@
 import { Hydration } from '../../lib/interfaces';
-import CatsHydration from './Cats';
+import PostsHydration from './Posts';
 
 export const Hydrate = {
-  Cats: ({ ...props }: Hydration.Cats) => {
-    return <CatsHydration {...props} />;
+  Posts: ({ ...props }: Hydration.Posts) => {
+    return <PostsHydration {...props} />;
   },
 };

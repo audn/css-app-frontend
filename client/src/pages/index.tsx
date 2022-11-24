@@ -4,7 +4,7 @@ import { Hydrate } from '../common/components/Hydrate';
 import H1 from '../common/components/layout/headings/H1';
 import Text from '../common/components/layout/headings/Text';
 import { DefaultLayout } from '../common/layouts/Default';
-import { useCats } from '../common/utils/hooks/cats';
+import { useAllPosts } from '../common/utils/hooks/posts';
 
 export default function Home() {
   const {
@@ -13,7 +13,8 @@ export default function Home() {
     error: fetchError,
     refetch,
     isRefetching,
-  } = useCats();
+  } = useAllPosts();
+
   return (
     <DefaultLayout>
       <NextSeo />
@@ -34,7 +35,7 @@ export default function Home() {
       </div>
 
       <div className="mt-12">
-        <Hydrate.Cats
+        <Hydrate.Posts
           data={data}
           error={fetchError}
           isLoading={isLoading}
