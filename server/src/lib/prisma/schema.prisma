@@ -27,8 +27,9 @@ model Post {
 
     generatedImage String?
 
-    animated Boolean?
-    theme    String?
+    animated   Boolean?
+    responsive Boolean?
+    theme      String?
 
     userId User   @relation(fields: [author], references: [id])
     author String
