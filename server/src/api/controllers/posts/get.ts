@@ -10,6 +10,9 @@ export const getPost = async (req: Request, res: APIJson) => {
             where: {
                 id,
             },
+            include: {
+                userId: true,
+            },
         });
         if (!post) {
             throw new Error('Post not found');
