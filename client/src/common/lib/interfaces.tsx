@@ -17,7 +17,7 @@ export type IDropdown = {
 };
 
 export declare namespace API {
-  interface Response<T> {
+  interface Response<T = { T?: any }> {
     payload?: {
       results: T;
       count?: number;
@@ -60,9 +60,6 @@ export declare namespace API {
     }
   }
 }
-
-// type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
-// type MyPropType = ObjType['key'];
 
 export declare namespace Hydration {
   type ReactQueryProps = {
