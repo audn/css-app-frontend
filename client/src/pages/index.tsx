@@ -18,7 +18,7 @@ export default function Home() {
       h3=" Guides, Product Updates and Research from Senja"
     >
       <NextSeo />
-      <div className="mt-12">
+      <div className="p-6">
         <Hydrate.Posts
           data={data}
           error={fetchError}
