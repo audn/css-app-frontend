@@ -1,17 +1,11 @@
 import useAuthState from '../../../../store/auth';
 import { signOutUser } from '../../../../utils/hooks/api/user';
 import { Button } from '../../../Buttons';
+import Auth from '../../../layout/Auth';
 import { routes } from '../../routes';
 import NavItem from './components/NavItem';
 
 function DesktopMenu() {
-  //   const user = useAuthState((s) => s.user);
-  //   const isLoggedIn = useAuthState((s) => s.isLoggedIn);
-  const { user, isLoggedIn } = useAuthState((s) => ({
-    user: s.user,
-    isLoggedIn: s.isLoggedIn,
-  }));
-
   async function handleLogout() {
     const signedOut = await signOutUser();
     if (!signedOut.error) {
@@ -24,15 +18,13 @@ function DesktopMenu() {
       {routes.map((x, i) => (
         <NavItem {...x} key={i} />
       ))}
-      {/* <Auth */}
-      {!isLoggedIn ? (
+      <Auth.User>
+        <Button.Secondary title="Logout" onClick={handleLogout} />
         <Button.Secondary
           title="Sign in"
           route={'http://localhost:4000/auth/twitter'}
         />
-      ) : (
-        <Button.Secondary title="Logout" onClick={handleLogout} />
-      )}
+      </Auth.User>
     </div>
   );
 }
