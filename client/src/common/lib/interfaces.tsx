@@ -1,4 +1,5 @@
 import { HTMLInputTypeAttribute, ReactNode, SyntheticEvent } from 'react';
+import { INavItem } from './types';
 
 // export interface IBase {
 //   children?: ReactNode;
@@ -17,13 +18,40 @@ export type IDropdown = {
 
 export declare namespace API {
   namespace Models {
-    interface Cat {
+    interface Category {
+      label: string;
+      value: string;
+      _count: {
+        linkedTemplates: number;
+      };
+    }
+    type Roles = 'ADMIN' | 'USER' | 'MOD';
+    interface User {
       id: string;
-      created_at: string;
-      tags: string[];
+      twitterId?: string;
+      discordId?: string;
+      username: string;
+      avatar: string;
+      preferences: {
+        preferredLibrary: string;
+      };
+      role: Roles;
+      createdAt: string;
+    }
+    interface Post {
+      id: string;
+      title: string;
+      code: any;
+      description: string;
+      generatedImage?: string;
+      animated: boolean;
+      theme: string;
+
+      author: User;
     }
   }
 }
+
 export declare namespace Hydration {
   type ReactQueryProps = {
     refetch: () => void;
@@ -34,7 +62,7 @@ export declare namespace Hydration {
   interface Model<T> extends ReactQueryProps {
     data?: T;
   }
-  interface Cats extends Model<API.Models.Cat[]> {}
+  interface Posts extends Model<API.Models.Post[]> {}
 }
 export declare namespace Alert {
   interface Base {
@@ -44,14 +72,7 @@ export declare namespace Alert {
     isLoading?: boolean;
   }
 }
-export interface INavItem {
-  label: string;
-  onClick?: () => void;
-  route?: string;
-  className?: string;
-  icon?: string;
-  list?: INavItem[]; //activates dropdown
-}
+
 export declare namespace Form {
   interface InputBase {
     placeholder: string;

@@ -1,4 +1,4 @@
-import { INavItem } from '../../lib/interfaces';
+import { INavItem } from '../../lib/types';
 const dropdown = [
   {
     label: 'My profile',

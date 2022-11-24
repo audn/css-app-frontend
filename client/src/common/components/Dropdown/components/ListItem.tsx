@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { INavItem } from '../../../lib/interfaces';
+import { INavItem } from '../../../lib/types';
 import concat from '../../../utils/helpers/concat';
 import { validateUrl } from '../../../utils/helpers/regex/url';
 

@@ -1,4 +1,4 @@
-import { INavItem } from '../../../lib/interfaces';
+import { INavItem } from '../../../lib/types';
 import Link from '../../layout/Link';
 
 function NavItem({ label, route }: INavItem) {

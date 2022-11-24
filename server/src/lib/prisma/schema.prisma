@@ -43,7 +43,7 @@ model Category {
     value String @id @unique
     label String
 
-    count Post[]
+    linkedTemplates Post[]
 
     @@map("categories")
 }

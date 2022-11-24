@@ -23,7 +23,7 @@ export const editPost = async (req: Request, res: APIJson) => {
                 },
             });
             if (edited) {
-                return res.json({ payload: { results: post } });
+                return res.json({ payload: { results: edited } });
             } else {
                 res.status(400).json({ error: 'Failed to update post' });
             }
