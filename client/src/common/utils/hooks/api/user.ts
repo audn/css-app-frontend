@@ -1,7 +1,7 @@
 import { API } from '../../../lib/interfaces';
 import { get, post, put } from './api';
 
-export async function getCurrentMe(): Promise<API.Response<API.Models.User>> {
+export async function getCurrentUser(): Promise<API.Response<API.Models.User>> {
   const res = await get('/users/me', true);
   return res.json();
 }

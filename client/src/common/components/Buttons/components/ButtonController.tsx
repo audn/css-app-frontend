@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { ReactElement, SyntheticEvent } from 'react';
 import { Button } from '../../../lib/interfaces';
+import concat from '../../../utils/helpers/concat';
 import { validateUrl } from '../../../utils/helpers/regex/url';
 
 function ButtonController({
@@ -21,9 +22,12 @@ function ButtonController({
   }
 
   return (
-    <span className={layoutClass ? layoutClass : ''} onClick={handleClick}>
+    <div
+      className={concat(layoutClass ? layoutClass : '', '')}
+      onClick={handleClick}
+    >
       {React.cloneElement(children, { className })}
-    </span>
+    </div>
   );
 }
 

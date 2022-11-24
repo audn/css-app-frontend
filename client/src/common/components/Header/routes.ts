@@ -24,10 +24,6 @@ const routes: Array<INavItem> = [
     route: 'https://github.com/audn/frontend-boilerplate',
     icon: 'fa-solid fa-external-link-alt',
   },
-  {
-    label: 'Dropdown',
-    list: dropdown,
-  },
 ];
 
 export { routes, dropdown };
