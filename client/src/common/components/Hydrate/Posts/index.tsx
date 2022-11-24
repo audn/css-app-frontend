@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
+import PostCard from '../../Cards/Post';
 import HydrationError from '../../layout/Alerts/HydrationError';
 import Animate from '../../layout/Animate';
 
@@ -32,9 +33,9 @@ function PostsHydration({
   } else
     return (
       <AnimatePresence initial={false}>
-        <Animate variants={fadeIn} className="flex flex-wrap gap-5">
+        <Animate variants={fadeIn} className="grid grid-cols-3 gap-5">
           {data?.payload?.results?.map((post) => (
-            <div>{post.title}</div>
+            <PostCard {...post} />
           ))}
         </Animate>
       </AnimatePresence>

@@ -24,6 +24,7 @@ function DesktopMenu() {
       {routes.map((x, i) => (
         <NavItem {...x} key={i} />
       ))}
+      {/* <Auth */}
       {!isLoggedIn ? (
         <Button.Secondary
           title="Sign in"

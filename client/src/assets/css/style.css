@@ -15,7 +15,7 @@ body {
 }
 .container {
   @apply mx-auto;
-  max-width: 85rem !important;
+  max-width: 92rem !important;
 }
 .will-change {
   will-change: transform;
