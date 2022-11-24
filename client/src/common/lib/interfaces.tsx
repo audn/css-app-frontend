@@ -51,6 +51,7 @@ export declare namespace API {
       id: string;
       title: string;
       code: any;
+      library: string;
       description: string;
       generatedImage?: string;
       animated: boolean;

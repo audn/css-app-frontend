@@ -11,8 +11,10 @@ type Props = {
 };
 export const DefaultLayout = ({ children }: Props) => {
   return (
-    <div className="container flex flex-col min-h-screen">
-      <main className={'flex-1 w-full text-on-100'}>{children}</main>
+    <div className="container flex flex-col min-h-screen px-5 ">
+      <div className="mt-24">
+        <main className={'flex-1 w-full text-on-100'}>{children}</main>
+      </div>
     </div>
   );
 };

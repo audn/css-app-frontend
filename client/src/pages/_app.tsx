@@ -19,6 +19,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Header />
       <DefaultSeo {...SEO} />
+
       <Component {...pageProps} key={router.route} />
       <Footer />
     </QueryClientProvider>
