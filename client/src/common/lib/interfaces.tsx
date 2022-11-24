@@ -56,7 +56,8 @@ export declare namespace API {
       animated: boolean;
       theme: string;
 
-      author: User;
+      //   author: User;
+      userId: User;
     }
   }
 }
