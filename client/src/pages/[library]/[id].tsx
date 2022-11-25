@@ -8,11 +8,13 @@ import { getPostFromId } from '../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
   const {
-    animated,
-    userId,
+    author,
     description,
+    responsive,
     id,
     library,
+    animated,
+    category,
     theme,
     title,
     generatedImage,
@@ -28,12 +30,12 @@ function Post({ post }: { post: API.Models.Post }) {
             <Text>{description}</Text>
           </div>
           <div className="flex items-center mt-5">
-            <img src={userId.avatar} className="w-6 h-6 mr-2 rounded-full" />
+            <img src={author.avatar} className="w-6 h-6 mr-2 rounded-full" />
             <Link
-              href={`/user/${userId.id}`}
+              href={`/user/${author.id}`}
               className="hover:text-white animate"
             >
-              <h3>{userId?.username}</h3>
+              <h3>{author?.username}</h3>
             </Link>
           </div>
         </div>
@@ -52,21 +54,21 @@ function Post({ post }: { post: API.Models.Post }) {
               <i className="mr-2 fa-regular fa-circle-play" />
               Animated
             </div>
-            <div className="text-on-50">No</div>
+            <div className="text-on-50"> {JSON.stringify(animated)}</div>
           </div>
           <div className="flex items-center font-medium">
             <div className="w-60">
               <i className="mr-2 fa-regular fa-up-right-and-down-left-from-center" />
               Responsive
             </div>
-            Yes
+            {JSON.stringify(responsive)}
           </div>
           <div className="flex items-center font-medium">
             <div className="w-60">
               <i className="mr-2 fa-regular fa-eye" />
               Theme
             </div>
-            Dark
+            {theme}
           </div>
         </div>
       </div>

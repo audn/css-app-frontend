@@ -11,7 +11,7 @@ export const getPost = async (req: Request, res: APIJson) => {
                 id,
             },
             include: {
-                userId: true,
+                author: true,
             },
         });
         if (!post) {
