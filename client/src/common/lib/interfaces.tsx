@@ -8,6 +8,7 @@ import { INavItem } from './types';
 export type IDropdown = {
   children: ReactNode;
   active?: string;
+  className?:string;:
   isLoading?: boolean;
   list?: { value: string; label: string }[] & Partial<INavItem[]>;
   onClick: (val: string) => void;

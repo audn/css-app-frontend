@@ -12,6 +12,7 @@ function Dropdown({
   list,
   active,
   isLoading,
+  className,
   onClick,
   options = { caret: true, position: 'center' },
 }: IDropdown) {
@@ -30,13 +31,14 @@ function Dropdown({
     }),
   );
   return (
-    <div ref={menuRef} onClick={toggle} className="relative w-[fit-content]">
+    <div ref={menuRef} onClick={toggle} className="relative right-0">
       <button
         className={concat(
+          className ? className : '',
           options.box
-            ? 'bg-types-100 px-3 text-sm py-[0.3rem] rounded-lg border hover:bg-types-150 animate shadow-lg border-types-150 hover:bg-types-200/50 focus:ring-2'
+            ? 'bg-types-200 px-3 text-sm py-[0.3rem] rounded-lg border hover:bg-types-150 animate shadow-lg border-types-250 hover:bg-types-200/50 focus:ring-2'
             : '',
-          'flex items-center font-medium text-on-50',
+          'flex items-center font-medium text-white/70 justify-between',
         )}
       >
         {children}

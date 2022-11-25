@@ -14,7 +14,7 @@ function SecondaryButton({
       disabled={disabled}
       className={concat(
         className ? className : '',
-        'flex whitespace-nowrap w-full items-center justify-center px-4 py-2 font-semibold text-on-100 bg-types-150 outline-none active:opacity-90  rounded-md disabled:bg-types-100 hover:opacity-80 animate disabled:opacity-50 text-[15px]',
+        'flex whitespace-nowrap w-full items-center justify-center px-3 py-[0.3rem] text-on-100 bg-types-200 outline-none active:opacity-90 rounded-md disabled:bg-types-100 hover:opacity-80 animate disabled:opacity-50 text-sm font-medium border border-types-250',
       )}
     >
       {isLoading ? (

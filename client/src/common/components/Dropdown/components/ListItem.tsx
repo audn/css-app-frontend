@@ -25,12 +25,14 @@ function ListItem({
   return (
     <li
       className={concat(
-        activeItem ? 'bg-types-150 text-on-150' : 'hover:bg-types-150',
         className ? className : '',
-        'flex items-center p-2 rounded cursor-pointer font-medium animate hover:text-on-150 text-sm text-on-50 active:bg-opacity-80',
+        'flex items-center p-2 rounded cursor-pointer font-medium animate hover:text-on-150 text-sm text-white active:bg-opacity-80 hover:bg-brand-primary-150/10',
       )}
       onClick={handleClick}
     >
+      <div className="w-4">
+        {activeItem && <i className="text-[10px] fa-regular fa-check" />}
+      </div>
       {icon && (
         <div className="flex-shrink-0 w-6 text-sm text-left">
           <i className={`${icon}`} />
