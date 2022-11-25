@@ -17,7 +17,6 @@ export const searchPosts = async (req: Request, res: APIJson) => {
             ?.split(' ')
             .map((x) => x)
             .join('|');
-        console.log(q, filter, category);
 
         const posts = await prisma.post.findMany({
             where: {

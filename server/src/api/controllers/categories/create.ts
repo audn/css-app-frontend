@@ -11,7 +11,7 @@ export const addCategory = async (req: Request, res: APIJson) => {
             },
         });
         if (!added) {
-            throw new Error('Failed to add post');
+            throw new Error('Failed to add category');
         } else return res.json({ payload: { results: added } });
     } catch (error: any) {
         res.status(400).json({
