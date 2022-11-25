@@ -54,7 +54,7 @@ export declare namespace API {
       label: string;
       value: string;
       _count: {
-        linkedTemplates: number;
+        posts: number;
       };
     }
 
@@ -72,14 +72,15 @@ export declare namespace API {
       id: string;
       title: string;
       code: any;
-      library: string;
       description: string;
       generatedImage?: string;
       animated: boolean;
       theme: string;
 
       //   author: User;
+      category: string;
       author: User;
+      library: string;
     }
   }
 }

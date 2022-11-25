@@ -7,33 +7,37 @@ export const createPost = async (req: Request, res: APIJson) => {
     const {
         title,
         animated,
-        author,
-        library,
         code,
         description,
         generatedImage,
         id,
         theme,
+        responsive,
     } = req.body;
     try {
         //TODO: check if category exists before adding
+
         const added = await prisma.post.create({
             data: {
-                userId: {
+                authorId: {
                     connect: {
                         id: userId,
                     },
                 },
-                categoryId: {
+                categoryRelations: {
                     connect: {
                         value: req.body.category,
                     },
                 },
+                libraryRelations: {
+                    connect: {
+                        value: req.body.library,
+                    },
+                },
                 title,
                 animated,
-                author,
                 code,
-                library,
+                responsive,
                 description,
                 generatedImage,
                 id,
@@ -44,6 +48,8 @@ export const createPost = async (req: Request, res: APIJson) => {
             res.status(404).json({ error: 'Failed to add post' });
         } else return res.json({ payload: { results: added } });
     } catch (error: any) {
+        console.log(error.message);
+
         res.status(400).json({
             error: error.message,
         });

@@ -30,14 +30,14 @@ model Post {
     responsive Boolean?
     theme      String?
 
-    author       User   @relation(fields: [userRelation], references: [id])
-    userRelation String
+    author   User   @relation(fields: [authorId], references: [id])
+    authorId String
 
-    category         Category? @relation(fields: [categoryRelation], references: [value], onDelete: SetDefault)
-    categoryRelation String    @default("Unknown")
+    categoryRelations Category? @relation(fields: [category], references: [value], onDelete: SetDefault)
+    category          String    @default("Unknown")
 
-    library         Library? @relation(fields: [libraryRelation], references: [value], onDelete: SetDefault)
-    libraryRelation String?  @default("Unknown")
+    libraryRelations Library? @relation(fields: [library], references: [value], onDelete: SetDefault)
+    library          String?  @default("Unknown")
 
     @@map("posts")
 }
