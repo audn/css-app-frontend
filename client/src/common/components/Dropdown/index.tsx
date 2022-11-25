@@ -31,7 +31,7 @@ function Dropdown({
     }),
   );
   return (
-    <div ref={menuRef} onClick={toggle} className="relative right-0">
+    <div ref={menuRef} onClick={toggle} className="relative">
       <button
         className={concat(
           className ? className : '',
