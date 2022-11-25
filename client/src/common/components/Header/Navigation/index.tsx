@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { fadeIn } from '../../../utils/data/animations';
 import Animate from '../../layout/Animate';
-import Hamburger from './components/Hamburger';
+import Hamburger from '../components/Hamburger';
 import DesktopMenu from './Desktop';
 import PhoneMenu from './Phone';
 
