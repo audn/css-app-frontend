@@ -5,7 +5,7 @@ export async function searchPosts(
   data: API.Requests.SearchPosts,
 ): Promise<API.Response<API.Models.Post[]>> {
   console.log(data);
-  const res = await post('/search/', false, data);
+  const res = await post('/search', false, data);
   return res.json();
 }
 

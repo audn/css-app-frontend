@@ -9,7 +9,7 @@ export default function Home() {
   const user = useAuthState((s) => s.user);
   const query: API.Requests.SearchPosts = {
     q: '*',
-    filter: { library: user.preferences?.preferredLibrary },
+    filter: { library: user.preferences?.preferredLibrary?.toLowerCase() },
   };
   const {
     data,
