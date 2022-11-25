@@ -2,7 +2,7 @@ import { API } from '../../../lib/interfaces';
 import { del, get, post, put } from './api';
 
 export async function getLibraries(): Promise<
-  API.Response<API.Models.Library>
+  API.Response<API.Models.Library[]>
 > {
   const res = await get(`/library/`, false);
   return res.json();

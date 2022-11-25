@@ -8,7 +8,8 @@ import { INavItem } from './types';
 export type IDropdown = {
   children: ReactNode;
   active?: string;
-  list: INavItem[];
+  isLoading?: boolean;
+  list?: { value: string; label: string }[] & Partial<INavItem[]>;
   onClick: (val: string) => void;
   options?: {
     caret?: boolean;
@@ -78,7 +79,7 @@ export declare namespace API {
       theme: string;
 
       //   author: User;
-      userId: User;
+      author: User;
     }
   }
 }

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { IDropdown } from '../../lib/interfaces';
 import concat from '../../utils/helpers/concat';
 import listenForOutsideClick from '../../utils/helpers/listenForOutsideClick';
+import LoadingIcon from '../misc/LoadingIcon';
 import DropdownWrapper from './components/DropdownWrapper';
 import ListItem from './components/ListItem';
 
@@ -10,6 +11,7 @@ function Dropdown({
   children,
   list,
   active,
+  isLoading,
   onClick,
   options = { caret: true, position: 'center' },
 }: IDropdown) {
@@ -52,9 +54,15 @@ function Dropdown({
       <AnimatePresence>
         {isOpen && (
           <DropdownWrapper>
-            {list.map((item, i) => (
-              <ListItem active={active} {...item} key={i} onClick={onClick} />
-            ))}
+            {isLoading ? (
+              <div className="flex justify-center">
+                <LoadingIcon />
+              </div>
+            ) : (
+              list?.map((item, i) => (
+                <ListItem active={active} {...item} key={i} onClick={onClick} />
+              ))
+            )}
           </DropdownWrapper>
         )}
       </AnimatePresence>

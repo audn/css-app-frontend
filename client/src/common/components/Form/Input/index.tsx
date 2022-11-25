@@ -24,7 +24,7 @@ function Input({
   };
 
   return (
-    <div className="w-full ">
+    <div>
       <FormLabel
         id={id}
         description={description}
