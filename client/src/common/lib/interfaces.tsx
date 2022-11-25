@@ -7,7 +7,9 @@ import { INavItem } from './types';
 // }
 export type IDropdown = {
   children: ReactNode;
+  active?: string;
   list: INavItem[];
+  onClick: (val: string) => void;
   options?: {
     caret?: boolean;
     position?: 'start' | 'center' | 'end';

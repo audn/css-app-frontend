@@ -9,6 +9,8 @@ import ListItem from './components/ListItem';
 function Dropdown({
   children,
   list,
+  active,
+  onClick,
   options = { caret: true, position: 'center' },
 }: IDropdown) {
   const menuRef = useRef(null);
@@ -51,7 +53,7 @@ function Dropdown({
         {isOpen && (
           <DropdownWrapper>
             {list.map((item, i) => (
-              <ListItem {...item} key={i} />
+              <ListItem active={active} {...item} key={i} onClick={onClick} />
             ))}
           </DropdownWrapper>
         )}

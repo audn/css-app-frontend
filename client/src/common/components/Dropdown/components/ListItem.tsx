@@ -3,7 +3,15 @@ import { INavItem } from '../../../lib/types';
 import concat from '../../../utils/helpers/concat';
 import { validateUrl } from '../../../utils/helpers/regex/url';
 
-function ListItem({ label, icon, onClick, route, className }: INavItem) {
+function ListItem({
+  label,
+  active,
+  icon,
+  onClick,
+  route,
+  className,
+}: INavItem) {
+  const activeItem = active == label;
   const router = useRouter();
   function handleClick() {
     if (route) {
@@ -12,13 +20,14 @@ function ListItem({ label, icon, onClick, route, className }: INavItem) {
       } else {
         router.push(route);
       }
-    } else onClick!();
+    } else onClick!(label);
   }
   return (
     <li
       className={concat(
+        activeItem ? 'bg-types-150 text-on-150' : 'hover:bg-types-150',
         className ? className : '',
-        'flex items-center p-2 rounded cursor-pointer font-medium hover:bg-types-150 animate hover:text-on-150 text-sm text-on-50 active:bg-opacity-80',
+        'flex items-center p-2 rounded cursor-pointer font-medium animate hover:text-on-150 text-sm text-on-50 active:bg-opacity-80',
       )}
       onClick={handleClick}
     >
