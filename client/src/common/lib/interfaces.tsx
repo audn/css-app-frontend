@@ -82,6 +82,7 @@ export declare namespace API {
       generatedImage?: string;
       animated: boolean;
       theme: string;
+      responsive: boolean;
 
       //   author: User;
       category: string;
@@ -126,6 +127,7 @@ export declare namespace Form {
     description?: string | ReactNode;
     label?: string;
     regex?: (val: string) => void;
+    autoFocus?: boolean;
   }
 
   interface Toggle extends Base {
@@ -141,6 +143,8 @@ export declare namespace Form {
   interface Label extends Base {}
   interface Input extends Base, InputBase {
     type?: HTMLInputTypeAttribute;
+    onFocus?: () => void;
+    onBlur?: () => void;
   }
 }
 export declare namespace Button {
