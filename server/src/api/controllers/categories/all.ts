@@ -8,7 +8,7 @@ export const allCategories = async (req: Request, res: APIJson) => {
             include: {
                 _count: {
                     select: {
-                        count: true,
+                        posts: true,
                     },
                 },
             },
