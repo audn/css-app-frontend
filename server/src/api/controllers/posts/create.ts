@@ -19,7 +19,7 @@ export const createPost = async (req: Request, res: APIJson) => {
 
         const added = await prisma.post.create({
             data: {
-                authorId: {
+                author: {
                     connect: {
                         id: userId,
                     },

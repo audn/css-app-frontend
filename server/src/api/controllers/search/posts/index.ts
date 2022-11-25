@@ -49,7 +49,7 @@ export const searchPosts = async (req: Request, res: APIJson) => {
                     },
                 },
             },
-            include: { userId: true },
+            include: { author: true },
         });
         if (!posts) {
             throw new Error('Post not found');
