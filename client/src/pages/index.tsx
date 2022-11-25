@@ -7,9 +7,12 @@ import { useSearchPosts } from '../common/utils/hooks/posts';
 
 export default function Home() {
   const user = useAuthState((s) => s.user);
+  const library = user.preferences?.preferredLibrary || 'TailwindCSS';
   const query: API.Requests.SearchPosts = {
     q: '*',
-    filter: { library: user.preferences?.preferredLibrary?.toLowerCase() },
+    filter: {
+      library: library.toLowerCase(),
+    },
   };
   const {
     data,
@@ -21,8 +24,13 @@ export default function Home() {
 
   return (
     <FadedLayout
-      h1="Library for hand-crafted components"
-      h3=" Guides, Product Updates and Research from Senja"
+      h1={
+        <>
+          A free library for hand-crafted components using{' '}
+          <span className="text-brand-primary-150">{library}</span>
+        </>
+      }
+      h3="Guides, Product Updates and Research from Senja"
     >
       <NextSeo />
       <div className="p-6 mt-10">

@@ -7,6 +7,7 @@ function ListItem({
   label,
   active,
   icon,
+  _count,
   onClick,
   route,
   className,
@@ -26,19 +27,26 @@ function ListItem({
     <li
       className={concat(
         className ? className : '',
-        'flex items-center p-2 rounded cursor-pointer font-medium animate hover:text-on-150 text-sm text-white active:bg-opacity-80 hover:bg-brand-primary-150/10',
+        'flex items-center p-2 rounded cursor-pointer font-medium animate text-sm text-white/90 hover:text-white justify-between active:bg-opacity-80 hover:bg-brand-primary-150/10',
       )}
       onClick={handleClick}
     >
-      <div className="w-4">
-        {activeItem && <i className="text-[10px] fa-regular fa-check" />}
-      </div>
-      {icon && (
-        <div className="flex-shrink-0 w-6 text-sm text-left">
-          <i className={`${icon}`} />
+      <div className="flex items-center">
+        <div className="w-4">
+          {activeItem && <i className="text-[10px] fa-regular fa-check" />}
         </div>
+        {icon && (
+          <div className="flex-shrink-0 w-6 text-sm text-left">
+            <i className={`${icon}`} />
+          </div>
+        )}
+        {label}
+      </div>
+      {_count && (
+        <span className="flex items-center justify-center w-5 h-5 text-[10px] rounded-full bg-types-150/60 text-on-50">
+          {_count[Object.keys(_count)[0]]}
+        </span>
       )}
-      {label}
     </li>
   );
 }
