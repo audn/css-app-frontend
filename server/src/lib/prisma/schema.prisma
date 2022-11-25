@@ -18,8 +18,7 @@ enum Role {
 }
 
 model Post {
-    id      String @id @unique @default(cuid())
-    library String @default("")
+    id String @id @unique @default(cuid())
 
     title       String
     code        Json?
@@ -31,11 +30,14 @@ model Post {
     responsive Boolean?
     theme      String?
 
-    userId User   @relation(fields: [author], references: [id])
-    author String
+    author       User   @relation(fields: [userRelation], references: [id])
+    userRelation String
 
-    categoryId Category? @relation(fields: [category], references: [value])
-    category   String
+    category         Category? @relation(fields: [categoryRelation], references: [value], onDelete: SetDefault)
+    categoryRelation String    @default("Unknown")
+
+    library         Library? @relation(fields: [libraryRelation], references: [value], onDelete: SetDefault)
+    libraryRelation String?  @default("Unknown")
 
     @@map("posts")
 }
@@ -44,9 +46,18 @@ model Category {
     value String @id @unique
     label String
 
-    linkedTemplates Post[]
+    posts Post[]
 
     @@map("categories")
+}
+
+model Library {
+    value String @id @unique
+    label String
+
+    posts Post[]
+
+    @@map("libraries")
 }
 
 model User {

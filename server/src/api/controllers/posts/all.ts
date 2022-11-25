@@ -4,9 +4,9 @@ import { APIJson } from '../../../lib/types/types';
 
 export const allPosts = async (req: Request, res: APIJson) => {
     try {
-        const posts = await prisma.post.findMany({ include: { userId: true } });
+        const posts = await prisma.post.findMany({ include: { author: true } });
         if (!posts) {
-            throw new Error('No posts');
+            res.status(404).json({ error: 'No posts' });
         } else
             return res.json({
                 payload: { results: posts, count: posts.length },

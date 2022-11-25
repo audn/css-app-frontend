@@ -41,7 +41,7 @@ export const createPost = async (req: Request, res: APIJson) => {
             },
         });
         if (!added) {
-            throw new Error('Failed to add post');
+            res.status(404).json({ error: 'Failed to add post' });
         } else return res.json({ payload: { results: added } });
     } catch (error: any) {
         res.status(400).json({
