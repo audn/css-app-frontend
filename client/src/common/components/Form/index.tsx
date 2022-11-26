@@ -16,7 +16,13 @@ export const Form = {
   }) => {
     return <Layout {...props} />;
   },
-  Wrapper: ({ ...props }: { className?: string; children: ReactNode }) => {
+  Wrapper: ({
+    ...props
+  }: {
+    className?: string;
+    column?: boolean;
+    children: ReactNode;
+  }) => {
     return <FormWrapper {...props} />;
   },
   Textarea: ({ ...props }: IForm.Textarea) => {
