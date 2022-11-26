@@ -53,6 +53,24 @@ body {
   border-right: 5px solid rgba(255, 255, 255, 0);
   cursor: col-resize;
 }
+.__react_component_tooltip {
+  background-color: #fff !important;
+  color: #182338 !important;
+  opacity: 0 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 5px !important;
+  padding: 2px 8px !important;
+  /* margin-top: -5px; */
+  transition: opacity 0.3s ease-in-out !important;
+  visibility: hidden;
+}
+
+.__react_component_tooltip.show {
+  visibility: visible;
+  /* margin-top: 0px; */
+  opacity: 1 !important;
+}
 
 .Resizer.vertical:hover {
   border-left: 5px solid rgba(0, 0, 0, 0.5);
