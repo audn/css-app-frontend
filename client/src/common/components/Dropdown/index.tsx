@@ -31,12 +31,12 @@ function Dropdown({
     }),
   );
   return (
-    <div ref={menuRef} onClick={toggle} className="relative">
+    <div ref={menuRef} onClick={toggle} className="relative z-50">
       <button
         className={concat(
           className ? className : '',
           options.box
-            ? 'bg-types-200/80 px-3 text-sm py-[0.3rem] rounded-lg bordder hover:bg-types-150 animate shadow-lg border-types-250 hover:bg-types-200/50 focus:ring-2'
+            ? 'bg-types-200/80 px-4 text-sm py-[0.5rem] rounded-lg bordder hover:bg-types-150 animate shadow border-types-250 hover:bg-types-200/50 focus:ring-2'
             : '',
           'flex items-center font-medium text-white/90 justify-between',
         )}
