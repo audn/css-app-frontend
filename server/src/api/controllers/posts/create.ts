@@ -15,38 +15,46 @@ export const createPost = async (req: Request, res: APIJson) => {
         responsive,
     } = req.body;
     try {
-        //TODO: check if category exists before adding
-
-        const added = await prisma.post.create({
-            data: {
-                author: {
-                    connect: {
-                        id: userId,
-                    },
-                },
-                categoryRelations: {
-                    connect: {
-                        value: req.body.category,
-                    },
-                },
-                libraryRelations: {
-                    connect: {
-                        value: req.body.library,
-                    },
-                },
-                title,
-                animated,
-                code,
-                responsive,
-                description,
-                generatedImage,
-                id,
-                theme,
-            },
+        const category = await prisma.category.findUnique({
+            where: { value: req.body.category },
         });
-        if (!added) {
-            res.status(404).json({ error: 'Failed to add post' });
-        } else return res.json({ payload: { results: added } });
+
+        if (!category) {
+            return res.status(400).json({
+                error: `Category ${req.body.category} does not exist.`,
+            });
+        } else {
+            const added = await prisma.post.create({
+                data: {
+                    author: {
+                        connect: {
+                            id: userId,
+                        },
+                    },
+                    categoryRelations: {
+                        connect: {
+                            value: req.body.category,
+                        },
+                    },
+                    libraryRelations: {
+                        connect: {
+                            value: req.body.library,
+                        },
+                    },
+                    title,
+                    animated,
+                    code,
+                    responsive,
+                    description,
+                    generatedImage,
+                    id,
+                    theme,
+                },
+            });
+            if (!added) {
+                res.status(404).json({ error: 'Failed to add post' });
+            } else return res.json({ payload: { results: added } });
+        }
     } catch (error: any) {
         console.log(error.message);
 

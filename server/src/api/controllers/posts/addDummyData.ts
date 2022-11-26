@@ -91,31 +91,43 @@ export const addDummyData = async (req: Request, res: APIJson) => {
     ];
 
     try {
-        //TODO: check if category exists before adding
-        posts.map(async (x) => {
-            await prisma.post.create({
-                data: {
-                    author: {
-                        connect: {
-                            id: userId,
-                        },
-                    },
-                    categoryRelations: {
-                        connect: {
-                            value: x.category,
-                        },
-                    },
-                    libraryRelations: {
-                        connect: {
-                            value: x.library,
-                        },
-                    },
-                    ...(({ library, category, ...o }) => o)(x),
-                },
-            });
+        const category = await prisma.category.findUnique({
+            where: { value: req.body.category },
         });
 
-        res.json({ error: 'Added' });
+        if (!category) {
+            return res.status(400).json({
+                error: `Category ${req.body.category} does not exist.`,
+            });
+        } else {
+            const added = posts.map(async (x) => {
+                await prisma.post.create({
+                    data: {
+                        author: {
+                            connect: {
+                                id: userId,
+                            },
+                        },
+                        categoryRelations: {
+                            connect: {
+                                value: x.category,
+                            },
+                        },
+                        libraryRelations: {
+                            connect: {
+                                value: x.library,
+                            },
+                        },
+                        ...(({ library, category, ...o }) => o)(x),
+                    },
+                });
+            });
+            if (added) {
+                res.json({ message: 'Added' });
+            } else {
+                res.status(400).json({ error: 'somethign happened' });
+            }
+        }
     } catch (error: any) {
         console.log(error.message);
 

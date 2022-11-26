@@ -14,18 +14,28 @@ export const editPost = async (req: Request, res: APIJson) => {
         if (!post) {
             res.status(404).json({ error: 'Post not found' });
         } else {
-            const edited = await prisma.post.update({
-                where: {
-                    id: postId,
-                },
-                data: {
-                    ...req.body,
-                },
+            const category = await prisma.category.findUnique({
+                where: { value: req.body.category },
             });
-            if (edited) {
-                return res.json({ payload: { results: edited } });
+
+            if (!category) {
+                return res.status(400).json({
+                    error: `Category ${req.body.category} does not exist.`,
+                });
             } else {
-                res.status(400).json({ error: 'Failed to update post' });
+                const edited = await prisma.post.update({
+                    where: {
+                        id: postId,
+                    },
+                    data: {
+                        ...req.body,
+                    },
+                });
+                if (edited) {
+                    return res.json({ payload: { results: edited } });
+                } else {
+                    res.status(400).json({ error: 'Failed to update post' });
+                }
             }
         }
     } catch (error: any) {
