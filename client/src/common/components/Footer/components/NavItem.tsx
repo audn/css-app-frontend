@@ -10,7 +10,6 @@ function NavItem({ label, route }: INavItem) {
       >
         {label}
       </Link>
-      s
     </li>
   );
 }
