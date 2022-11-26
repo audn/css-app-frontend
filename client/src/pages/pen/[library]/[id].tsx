@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Text from '../../../common/components/layout/headings/Text';
@@ -8,20 +9,24 @@ import Tooltip from '../../../common/components/layout/Tooltip';
 import Preview from '../../../common/components/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
+import concat from '../../../common/utils/helpers/concat';
 import {
   deletePost,
   getPostFromId,
 } from '../../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
+  const router = useRouter();
   const [warning, setWarning] = useState<boolean>(false);
   async function onDelete() {
     if (!warning) {
       setWarning(true);
-    }
-    const deleted = await deletePost(post.id);
-    if (!deleted.error) {
-      toast.success('Deleted');
+    } else {
+      const deleted = await deletePost(post.id);
+      if (!deleted.error) {
+        router.push('/');
+        toast.success('Deleted');
+      }
     }
   }
   const {
@@ -46,8 +51,20 @@ function Post({ post }: { post: API.Models.Post }) {
           <div className="flex items-center">
             <h1 className="mr-3 text-2xl font-semibold text-white">{title}</h1>
             <Tooltip id="delete" text="Delete pen">
-              <button className="flex items-center justify-center rounded-full w-7 h-7 bg-types-200">
-                <i className="text-xs fa-solid fa-trash-alt" />
+              <button
+                onClick={onDelete}
+                className={concat(
+                  warning
+                    ? 'bg-orange-500 bg-opacity-20 text-orange-500 px-3 py-[0.3rem] rounded-full text-xs'
+                    : 'bg-types-200  w-7 h-7 ',
+                  'flex items-center justify-center rounded-full',
+                )}
+              >
+                {warning ? (
+                  'Are you sure?'
+                ) : (
+                  <i className="text-xs fa-solid fa-trash-alt" />
+                )}
               </button>
             </Tooltip>
           </div>{' '}
