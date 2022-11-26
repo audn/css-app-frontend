@@ -12,13 +12,16 @@ function ButtonController({
   className,
 }: Button.Base & { children: ReactElement }) {
   const router = useRouter();
+
   function handleClick(e: SyntheticEvent) {
     e.stopPropagation();
     if (route) {
       if (validateUrl(route)) {
         window.open(route);
       } else router.push(route);
-    } else if (onClick) onClick(e);
+    } else if (onClick) {
+      onClick(e);
+    }
   }
 
   return (

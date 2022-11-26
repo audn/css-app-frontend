@@ -1,18 +1,36 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import Text from '../../common/components/layout/headings/Text';
-import Link from '../../common/components/layout/Link';
-import { DefaultLayout } from '../../common/layouts/Default';
-import { API } from '../../common/lib/interfaces';
-import { getPostFromId } from '../../common/utils/hooks/api/posts';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import Text from '../../../common/components/layout/headings/Text';
+import Link from '../../../common/components/layout/Link';
+import Tooltip from '../../../common/components/layout/Tooltip';
+import Preview from '../../../common/components/Pen/Preview';
+import { DefaultLayout } from '../../../common/layouts/Default';
+import { API } from '../../../common/lib/interfaces';
+import {
+  deletePost,
+  getPostFromId,
+} from '../../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
+  const [warning, setWarning] = useState<boolean>(false);
+  async function onDelete() {
+    if (!warning) {
+      setWarning(true);
+    }
+    const deleted = await deletePost(post.id);
+    if (!deleted.error) {
+      toast.success('Deleted');
+    }
+  }
   const {
     author,
     description,
     responsive,
     id,
     library,
+    code,
     animated,
     category,
     theme,
@@ -23,9 +41,16 @@ function Post({ post }: { post: API.Models.Post }) {
     <DefaultLayout>
       <NextSeo title={title} />
       {/* tailwindcss@2.0.2 */}
-      <div className="space-y-12">
+      <div className="space-y-12 mt-[95px]">
         <div className="flex flex-col">
-          <h1 className="text-2xl font-semibold text-white">{title}</h1>
+          <div className="flex items-center">
+            <h1 className="mr-3 text-2xl font-semibold text-white">{title}</h1>
+            <Tooltip id="delete" text="Delete pen">
+              <button className="flex items-center justify-center rounded-full w-7 h-7 bg-types-200">
+                <i className="text-xs fa-solid fa-trash-alt" />
+              </button>
+            </Tooltip>
+          </div>{' '}
           <div className="mt-2">
             <Text>{description}</Text>
           </div>
@@ -40,7 +65,9 @@ function Post({ post }: { post: API.Models.Post }) {
           </div>
         </div>
 
-        <div className="bg-types-100 h-[500px] rounded-lg"></div>
+        <div className="relative h-screen rounded-lg bg-types-100">
+          <Preview code={code} />
+        </div>
         <div className="flex flex-col space-y-3">
           <div className="flex items-center font-medium">
             <div className="w-60">
