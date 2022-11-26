@@ -22,7 +22,7 @@ export const FadedLayout = ({ h1, h3, children }: Props) => {
           <H3 className="mt-3 !font-medium">{h3}</H3>
         </div>
       </div>
-      <div className="container flex flex-col min-h-screen">
+      <div className="container flex flex-col">
         <main className={'flex-1 w-full'}>{children}</main>
       </div>
     </>
