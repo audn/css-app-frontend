@@ -12,7 +12,6 @@ export default class extends Document {
             crossOrigin="anonymous"
             strategy="beforeInteractive"
           />
-
           <meta name="application-TileColor" content="#4d7fff" />
           <meta name="theme-color" content="#4d7fff" />
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
@@ -20,8 +19,22 @@ export default class extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />{' '}
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          /> */}
+          {/* <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          /> */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
           <script
