@@ -2,7 +2,7 @@ import { API } from '../../../lib/interfaces';
 import { del, get, post, put } from './api';
 
 export async function getCategories(): Promise<
-  API.Response<API.Models.Category>
+  API.Response<API.Models.Category[]>
 > {
   const res = await get(`/categories`, false);
   return res.json();

@@ -1,12 +1,11 @@
 import Editor from '@monaco-editor/react';
 // import delve from 'dlv';
 import * as monaco from 'monaco-editor';
-import { SyntheticEvent } from 'react';
 // import * as monaco from '@monaco-editor/react';
 
 type Props = {
   initialContent: string;
-  onChange: (value?: string, event?: SyntheticEvent) => void;
+  onChange: (value: string) => void;
 };
 function PenEditor({ initialContent, onChange }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
@@ -28,7 +27,7 @@ function PenEditor({ initialContent, onChange }: Props) {
   return (
     <Editor
       theme="vs-dark"
-      onChange={(value, event) => onChange(value)}
+      onChange={(value) => onChange(value ?? '')}
       options={MONACO_OPTIONS}
       height="90vh"
       defaultLanguage="html"

@@ -3,11 +3,24 @@ import SplitPane from 'react-split-pane';
 import { Form } from '../common/components/Form';
 import PenEditor from '../common/components/Pen/Editor';
 import Preview from '../common/components/Pen/Preview';
-import { DefaultLayout } from '../common/layouts/Default';
 import { API } from '../common/lib/interfaces';
+import useAuthState from '../common/store/auth';
+import { useCategories } from '../common/utils/hooks/categories';
 
 function NewComponent() {
-  const [data, setData] = useState<Partial<API.Models.Post>>({});
+  const user = useAuthState((s) => s.user);
+  const [data, setData] = useState<Partial<API.Models.Post>>({
+    code: `<div class="p-4 bg-red-500">
+   <div class="card">
+      <div class="card-body">
+         <h5 class="card-title">Special title treatment</h5>
+         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+         <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+   </div>
+</div>`,
+  });
+  const { data: categories, isLoading } = useCategories();
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
     setData((d) => ({
@@ -15,6 +28,9 @@ function NewComponent() {
       [key]: value,
     }));
   };
+  useEffect(() => {
+    update('library', user.preferences?.preferredLibrary!);
+  }, [user]);
   const isLg = true;
 
   const [size, setSize] = useState({
@@ -105,25 +121,19 @@ function NewComponent() {
     });
   }, []);
 
-  const [html, setHtml] = useState<string>(`<div class="p-4 bg-red-500">
-   <div class="card">
-      <div class="card-body">
-         <h5 class="card-title">Special title treatment</h5>
-         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-         <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-   </div>
-</div>`);
   return (
-    <DefaultLayout>
+    <div>
       <Form.Wrapper column={true}>
-        <Form.Input
+        {/* <div className="pt-4 pb-6">
+          <h1 className="text-lg font-semibold">Untitled</h1>
+        </div> */}
+        {/* <Form.Input
           label="Title"
           value={data.title}
           onChange={(val: string) => update('title', val)}
           id="title"
           placeholder="ss"
-        />
+        />{' '}
         <Form.Textarea
           label="Description"
           value={data.description}
@@ -131,35 +141,40 @@ function NewComponent() {
           id="description"
           placeholder="ss"
         />
-        <div className="relative h-screen">
-          {/* @ts-ignore */}
-          <SplitPane
-            split={'vertical'}
-            // minSize={size.min}
-            maxSize={1500}
-            size={size.current}
-            onChange={updateCurrentSize}
-            paneStyle={{ marginTop: -1 }}
-            pane1Style={{ display: 'flex', flexDirection: 'column' }}
-            onDragStarted={() => setResizing(true)}
-            onDragFinished={() => setResizing(false)}
-            allowResize={true}
-            resizerClassName={
-              true && size.layout !== 'preview'
-                ? 'Resizer'
-                : 'Resizer-collapsed'
-            }
-          >
-            <div className="flex flex-auto">
-              <PenEditor initialContent={html} onChange={setHtml} />
-            </div>
-            <div className="absolute inset-0 w-full h-full">
-              <Preview code={html} />
-            </div>
-          </SplitPane>
-        </div>
+        <div className="flex flex-wrap space-x-2">
+          {categories?.payload?.results.map((x) => (
+            <button
+              onClick={() => update('category', x.value)}
+              className="px-3 py-1 rounded-md bg-types-200"
+            >
+              {x.label}
+            </button>
+          ))}
+        </div> */}
       </Form.Wrapper>
-    </DefaultLayout>
+      {/* @ts-ignore */}
+      <SplitPane
+        split={'vertical'}
+        // minSize={size.min}
+        maxSize={1500}
+        size={size.current}
+        onChange={updateCurrentSize}
+        className="!relative !h-[fit-content]"
+        paneStyle={{ marginTop: -1 }}
+        onDragStarted={() => setResizing(true)}
+        onDragFinished={() => setResizing(false)}
+        allowResize={true}
+        resizerClassName={
+          true && size.layout !== 'preview' ? 'Resizer' : 'Resizer-collapsed'
+        }
+      >
+        <PenEditor
+          initialContent={data.code}
+          onChange={(val) => update('code', val)}
+        />
+        <Preview code={data.code} />
+      </SplitPane>
+    </div>
   );
 }
 
