@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import useAuthState from '../../store/auth';
 
 function Preview({ code }: { code: string }) {
   const [contentRef, setContentRef] = useState(null);
-
+  const user = useAuthState((s) => s.user);
+  const library = user.preferences?.preferredLibrary || 'TailwindCSS';
   const mountNode = contentRef?.contentWindow?.document?.body;
 
   return (
@@ -58,7 +60,6 @@ function Preview({ code }: { code: string }) {
                     
                     function setCss(css) {
                       const style = document.getElementById('_style')
-                      console.log(style)
                       const newStyle = document.createElement('style')
                       newStyle.id = '_style'
                       newStyle.innerHTML = typeof css === 'undefined' ? '' : css
@@ -66,6 +67,12 @@ function Preview({ code }: { code: string }) {
                       hasCss = typeof css === 'undefined' ? false : true
                     }
                     </script>
+                 ${
+                   library == 'TailwindCSS'
+                     ? "<script src='https://cdn.tailwindcss.com'></script>"
+                     : "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css'/>"
+                 }
+                   
                   </head>
                   <body>
                   ${code}

@@ -105,11 +105,7 @@ function NewComponent() {
     });
   }, []);
 
-  const [html, setHtml] = useState<string>(`<div class="p-4">
-   <div class="alert alert-warning" role="alert">
-      Bootstrap 5 CSS injected
-   </div>
-
+  const [html, setHtml] = useState<string>(`<div class="p-4 bg-red-500">
    <div class="card">
       <div class="card-body">
          <h5 class="card-title">Special title treatment</h5>
