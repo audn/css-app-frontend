@@ -27,7 +27,7 @@ function Input({
   };
 
   return (
-    <div>
+    <>
       <FormLabel
         id={id}
         description={description}
@@ -53,7 +53,7 @@ function Input({
         )}
       />
       <FormError label={getErrors()} />
-    </div>
+    </>
   );
 }
 

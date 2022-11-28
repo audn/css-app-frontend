@@ -28,7 +28,6 @@ export const HeaderAddingComponent = ({
       update('title', 'Untitled');
     }
   }
-  console.log(user);
 
   async function publish() {
     setIsPosting(true);
