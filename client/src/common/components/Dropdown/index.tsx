@@ -58,21 +58,14 @@ function Dropdown({
       <AnimatePresence>
         {isOpen && (
           <DropdownWrapper>
-            {list ? (
-              isLoading ? (
-                <div className="flex justify-center">
-                  <LoadingIcon />
-                </div>
-              ) : (
-                list?.map((item, i) => (
-                  <ListItem
-                    active={active}
-                    {...item}
-                    key={i}
-                    onClick={onClick}
-                  />
-                ))
-              )
+            {isLoading ? (
+              <div className="flex justify-center">
+                <LoadingIcon />
+              </div>
+            ) : list ? (
+              list?.map((item, i) => (
+                <ListItem active={active} {...item} key={i} onClick={onClick} />
+              ))
             ) : (
               component
             )}
