@@ -32,7 +32,7 @@ function Modal({ onClose, children, open }: Props) {
           </div>
           <div
             ref={ref}
-            className="z-50 w-full max-w-sm p-6 rounded-lg bg-types-200"
+            className="z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
           >
             {children}
           </div>

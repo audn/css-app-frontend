@@ -78,12 +78,22 @@ function Post({ post }: { post: API.Models.Post }) {
           <h1 className="text-xl font-bold text-center text-white">Edit pen</h1>
           <Form.Wrapper column={true} className="w-full mt-5 space-y-5">
             <div className="flex flex-col w-full">
-              <h3 className="mb-3 font-medium text-[14px]">Ttitle</h3>
+              <h3 className="mb-2 font-medium text-[14px]">Title</h3>
               <Form.Input
                 placeholder={post.title}
                 value={data.title}
                 onChange={(val) => update('title', val)}
                 id="name"
+                inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              />
+            </div>
+            <div className="flex flex-col w-full">
+              <h3 className="mb-2 font-medium text-[14px]">Description</h3>
+              <Form.Textarea
+                placeholder={post.description}
+                value={data.description}
+                onChange={(val) => update('description', val)}
+                id="description"
                 inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
               />
             </div>
@@ -106,6 +116,40 @@ function Post({ post }: { post: API.Models.Post }) {
                   id="responsive"
                   active={data.responsive}
                 />
+              </div>{' '}
+            </div>{' '}
+            <div className="flex flex-col space-y-3">
+              <h3 className="font-medium text-[14px]">Apperance</h3>
+              <div className="flex space-y-2">
+                <div className="flex flex-col items-start w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
+                  <h3 className="flex-1 font-medium">Theme</h3>
+                  <div className="flex flex-col w-full mt-2 space-y-1">
+                    <button
+                      onClick={() => update('theme', 'light')}
+                      className="flex items-center justify-between w-full px-3 py-2 rounded hover:bg-types-200 animate bg-types-150"
+                    >
+                      Light{' '}
+                      <Form.Radio
+                        onClick={() => update('theme', 'light')}
+                        name="light"
+                        id="theme"
+                        active={data.theme == 'light'}
+                      />
+                    </button>
+                    <button
+                      onClick={() => update('theme', 'dark')}
+                      className="flex items-center justify-between w-full px-3 py-2 rounded hover:bg-types-200 animate bg-types-150"
+                    >
+                      Dark{' '}
+                      <Form.Radio
+                        name="dark"
+                        onClick={() => update('theme', 'dark')}
+                        id="theme"
+                        active={data.theme == 'dark'}
+                      />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <Button.Primary
