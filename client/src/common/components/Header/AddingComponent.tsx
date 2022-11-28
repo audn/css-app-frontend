@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { API } from '../../lib/interfaces';
-import useAuthState from '../../store/auth';
 import { addPost } from '../../utils/hooks/api/posts';
+import { useLibraries } from '../../utils/hooks/libraries';
 import { Button } from '../Buttons';
 import Dropdown from '../Dropdown';
 import Link from '../layout/Link';
@@ -16,7 +16,11 @@ export const HeaderAddingComponent = ({
   data: Partial<API.Models.Post>;
   //   onSetting: () => void;
 }) => {
-  const user = useAuthState((s) => s.user);
+  const [library, setLibrary] = useState<string>('TailwindCSS');
+  const [version, setVersion] = useState<string>('v.3.2.0');
+  const [libSource, setLibSource] = useState<string>('v.3.2.0');
+
+  const { data: libs, isLoading } = useLibraries();
   const router = useRouter();
   const [editingTitle, setEditingTitle] = useState<boolean>(false);
   const [isPosting, setIsPosting] = useState<boolean>(false);
@@ -48,6 +52,7 @@ export const HeaderAddingComponent = ({
     }
     setIsPosting(false);
   }
+
   return (
     <header className="z-50 flex items-start justify-between p-6 border-b border-b-types-200">
       <div className="flex flex-col w-full">
@@ -91,31 +96,44 @@ export const HeaderAddingComponent = ({
         {/* @ts-ignore */}
         <Dropdown
           active={'v3.2.0'}
+          isLoading={isLoading}
           options={{ animateCaret: true, box: true, caret: true }}
           component={
             <div className="flex flex-col p-1">
               <span className="mb-2 text-sm">Library</span>
               <select
+                id="library"
                 name="library"
+                value={library}
+                onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+                  setLibrary(event.target.value)
+                }
                 className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
               >
-                <option value="1.2.3">TailwindCSS</option>
-                <option value="1.2.3">Bulma</option>
-                <option value="1.2.3">Bootstrap</option>
+                {libs?.payload?.results.map((x) => (
+                  <option value={x.label}>{x.label}</option>
+                ))}
               </select>
               <span className="mt-2 mb-2 text-sm">Version</span>
               <select
+                id="version"
+                value={version}
                 name="version"
+                onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+                  setVersion(event.target.value)
+                }
                 className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
               >
-                <option value="1.2.3">v1.2.3</option>
-                <option value="1.2.3">v1.2.3</option>
-                <option value="1.2.3">v1.2.3</option>
+                {libs?.payload?.results.map((x) =>
+                  x.versions.map((x) => (
+                    <option value={x.value}>{x.value}</option>
+                  )),
+                )}
               </select>
             </div>
           }
         >
-          TailwindCSS <span className="ml-2 text-xs">(v.3.2.0)</span>
+          {library} <span className="ml-2 text-xs">({version})</span>
         </Dropdown>
         <Button.Secondary
           disabled={isPosting}
