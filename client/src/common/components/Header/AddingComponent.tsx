@@ -92,10 +92,28 @@ export const HeaderAddingComponent = ({
         <Dropdown
           active={'v3.2.0'}
           options={{ animateCaret: true, box: true, caret: true }}
-          list={[
-            { value: '3.2.0', label: 'v3.2.0' },
-            { value: '2.0.0', label: 'v2.0.0' },
-          ]}
+          component={
+            <div className="flex flex-col p-1">
+              <span className="mb-2 text-sm">Library</span>
+              <select
+                name="library"
+                className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
+              >
+                <option value="1.2.3">TailwindCSS</option>
+                <option value="1.2.3">Bulma</option>
+                <option value="1.2.3">Bootstrap</option>
+              </select>
+              <span className="mt-2 mb-2 text-sm">Version</span>
+              <select
+                name="version"
+                className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
+              >
+                <option value="1.2.3">v1.2.3</option>
+                <option value="1.2.3">v1.2.3</option>
+                <option value="1.2.3">v1.2.3</option>
+              </select>
+            </div>
+          }
         >
           TailwindCSS <span className="ml-2 text-xs">(v.3.2.0)</span>
         </Dropdown>

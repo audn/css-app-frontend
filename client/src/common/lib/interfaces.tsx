@@ -16,7 +16,9 @@ export type IDropdown = {
     _count?: { [key: string]: number };
   }[] &
     Partial<INavItem[]>;
+  component?: ReactNode;
   onClick: (val: string) => void;
+
   options?: {
     caret?: boolean;
     position?: 'start' | 'center' | 'end';
