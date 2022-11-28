@@ -3,6 +3,7 @@ import { Form as IForm } from '../../lib/interfaces';
 import FormWrapper from './components/FormWrapper';
 import Input from './Input';
 import Layout from './Layout';
+import Radio from './Radio';
 import Textarea from './Textarea';
 import Toggle from './Toggle';
 
@@ -34,5 +35,8 @@ export const Form = {
   },
   Input: ({ ...props }: IForm.Input) => {
     return <Input {...props} />;
+  },
+  Radio: ({ ...props }: IForm.Radio) => {
+    return <Radio {...props} />;
   },
 };

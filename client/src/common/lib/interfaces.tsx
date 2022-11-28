@@ -137,6 +137,13 @@ export declare namespace Form {
     isLoading?: boolean;
     className?: string;
   }
+  interface Radio extends Base {
+    active?: boolean;
+    name: string;
+    onClick: (val?: boolean) => void;
+    isLoading?: boolean;
+    className?: string;
+  }
   interface Textarea extends Base, InputBase {
     minLength?: number;
     maxLength?: number;
