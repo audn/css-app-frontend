@@ -15,6 +15,8 @@ export const removeLibrary = async (req: Request, res: APIJson) => {
             res.status(404).json({ error: 'Library not found' });
         } else return res.json({ message: 'Deleted library' });
     } catch (error: any) {
+        console.log(error.message);
+
         res.status(400).json({
             error: error.message,
         });

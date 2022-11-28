@@ -8,6 +8,7 @@ export const addLibrary = async (req: Request, res: APIJson) => {
             data: {
                 label: req.body.label,
                 value: req.body.value,
+                versions: req.body.versions,
             },
         });
         if (!added) {

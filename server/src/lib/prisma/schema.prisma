@@ -36,7 +36,7 @@ model Post {
     categoryRelations Category? @relation(fields: [category], references: [value], onDelete: SetDefault)
     category          String    @default("Unknown")
 
-    libraryRelations Library? @relation(fields: [library], references: [value], onDelete: SetDefault)
+    libraryRelations Library? @relation(fields: [library], references: [value], onDelete: SetNull)
     library          String?  @default("Unknown")
 
     @@map("posts")
@@ -52,8 +52,9 @@ model Category {
 }
 
 model Library {
-    value String @id @unique
-    label String
+    value    String @id @unique
+    label    String
+    versions Json[]
 
     posts Post[]
 
