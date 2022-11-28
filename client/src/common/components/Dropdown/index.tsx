@@ -10,6 +10,7 @@ import ListItem from './components/ListItem';
 function Dropdown({
   children,
   list,
+  component,
   active,
   isLoading,
   className,
@@ -20,7 +21,7 @@ function Dropdown({
   const [listening, setListening] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  //   const toggle = () => setIsOpen(!isOpen);
 
   useEffect(
     listenForOutsideClick({
@@ -31,8 +32,9 @@ function Dropdown({
     }),
   );
   return (
-    <div ref={menuRef} onClick={toggle} className="relative z-50">
+    <div className="relative z-50" ref={menuRef}>
       <button
+        onClick={() => setIsOpen(!isOpen)}
         className={concat(
           className ? className : '',
           options.box
@@ -56,14 +58,23 @@ function Dropdown({
       <AnimatePresence>
         {isOpen && (
           <DropdownWrapper>
-            {isLoading ? (
-              <div className="flex justify-center">
-                <LoadingIcon />
-              </div>
+            {list ? (
+              isLoading ? (
+                <div className="flex justify-center">
+                  <LoadingIcon />
+                </div>
+              ) : (
+                list?.map((item, i) => (
+                  <ListItem
+                    active={active}
+                    {...item}
+                    key={i}
+                    onClick={onClick}
+                  />
+                ))
+              )
             ) : (
-              list?.map((item, i) => (
-                <ListItem active={active} {...item} key={i} onClick={onClick} />
-              ))
+              component
             )}
           </DropdownWrapper>
         )}
