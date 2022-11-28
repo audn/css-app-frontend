@@ -1,10 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Button } from '../../../common/components/Buttons';
+import { Form } from '../../../common/components/Form';
 import Text from '../../../common/components/layout/headings/Text';
 import Link from '../../../common/components/layout/Link';
+import Modal from '../../../common/components/layout/Modal';
 import Tooltip from '../../../common/components/layout/Tooltip';
 import Preview from '../../../common/components/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
@@ -12,12 +15,14 @@ import { API } from '../../../common/lib/interfaces';
 import concat from '../../../common/utils/helpers/concat';
 import {
   deletePost,
+  editPost,
   getPostFromId,
 } from '../../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
   const [warning, setWarning] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   async function onDelete() {
     if (!warning) {
       setWarning(true);
@@ -42,32 +47,104 @@ function Post({ post }: { post: API.Models.Post }) {
     title,
     generatedImage,
   } = post;
+
+  const [data, setData] = useState<API.Models.Post>(post);
+
+  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+    setData((d) => ({
+      ...d,
+      [key]: value,
+    }));
+  };
+
+  async function onSave() {
+    const newData = (({ author, authorId, ...o }) => o)(data);
+
+    const saved = await editPost(post.id, newData);
+    if (!saved.error) {
+      toast.success('Saved');
+      post = data;
+      setEdit(false);
+    }
+  }
+
   return (
     <DefaultLayout>
       <NextSeo title={title} />
       {/* tailwindcss@2.0.2 */}
+      <Modal onClose={() => setEdit(false)} open={edit}>
+        <React.Fragment>
+          <h1 className="text-xl font-bold text-center text-white">Edit pen</h1>
+          <Form.Wrapper column={true} className="w-full mt-5 space-y-5">
+            <div className="flex flex-col w-full">
+              <h3 className="mb-3 font-medium text-[14px]">Ttitle</h3>
+              <Form.Input
+                placeholder={post.title}
+                value={data.title}
+                onChange={(val) => update('title', val)}
+                id="name"
+                inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              />
+            </div>
+            <div className="flex flex-col space-y-3">
+              <h3 className="font-medium text-[14px]">Settings</h3>
+              <div className="flex space-y-2">
+                <div className="flex items-center w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
+                  <h3 className="flex-1 font-medium">Animated</h3>
+                  <Form.Toggle
+                    onClick={(val) => update('animated', val)}
+                    id="what"
+                    active={data.animated}
+                  />
+                </div>
+              </div>
+              <div className="flex items-center w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
+                <h3 className="flex-1 font-medium">Theme</h3>
+                <Form.Toggle
+                  onClick={(val) => update('animated', val)}
+                  id="what"
+                  active={data.animated}
+                />
+              </div>
+            </div>
+            <Button.Primary onClick={onSave} title="Save!" />
+          </Form.Wrapper>
+        </React.Fragment>
+      </Modal>
       <div className="space-y-12 mt-[95px]">
         <div className="flex flex-col">
           <div className="flex items-center">
             <h1 className="mr-3 text-2xl font-semibold text-white">{title}</h1>
-            <Tooltip id="delete" text="Delete pen">
-              <button
-                onClick={onDelete}
-                className={concat(
-                  warning
-                    ? 'bg-orange-500 bg-opacity-20 text-orange-500 px-3 py-[0.3rem] rounded-full text-xs'
-                    : 'bg-types-200  w-7 h-7 ',
-                  'flex items-center justify-center rounded-full',
-                )}
-              >
-                {warning ? (
-                  'Are you sure?'
-                ) : (
-                  <i className="text-xs fa-solid fa-trash-alt" />
-                )}
-              </button>
-            </Tooltip>
-          </div>{' '}
+            <div className="flex space-x-2">
+              <Tooltip id="delete" text="Delete pen">
+                <button
+                  onClick={onDelete}
+                  className={concat(
+                    warning
+                      ? 'bg-orange-500 bg-opacity-20 text-orange-500 px-3 py-[0.3rem] rounded-full text-xs'
+                      : 'bg-types-200  w-7 h-7 ',
+                    'flex items-center justify-center rounded-full',
+                  )}
+                >
+                  {warning ? (
+                    'Are you sure?'
+                  ) : (
+                    <i className="text-xs fa-solid fa-trash-alt" />
+                  )}
+                </button>
+              </Tooltip>
+              <Tooltip id="edit" text="Edit pen">
+                <button
+                  onClick={() => setEdit(true)}
+                  className={
+                    'flex items-center justify-center rounded-full w-7 h-7 bg-types-200'
+                  }
+                >
+                  <i className="text-xs fa-solid fa-pen-to-square" />
+                </button>
+              </Tooltip>
+            </div>
+          </div>
           <div className="mt-2">
             <Text>{description}</Text>
           </div>

@@ -86,6 +86,7 @@ export declare namespace API {
 
       //   author: User;
       category: string;
+      authorId: string;
       author: User;
       library: string;
     }
