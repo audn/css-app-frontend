@@ -66,6 +66,8 @@ function Post({ post }: { post: API.Models.Post }) {
       toast.success('Saved');
       post = data;
       setEdit(false);
+    } else {
+      toast.error('Failed to update');
     }
   }
 

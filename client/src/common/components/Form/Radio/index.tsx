@@ -11,7 +11,7 @@ function Radio({ active, name, className, onClick, id }: Form.Radio) {
       >
         <div
           className={concat(
-            'flex items-center justify-center p-[10px] m-[-10px] bg-opacity-0 rounded-full group-hover:bg-opacity-5 animate bg-brand-primary-100',
+            'flex items-center justify-center p-[10px] m-[-10px] bg-opacity-0 rounded-full group-hover:bg-opacity-5 animate bg-brand-primary-150',
           )}
         >
           <input
@@ -20,7 +20,7 @@ function Radio({ active, name, className, onClick, id }: Form.Radio) {
             id={id}
             name={name}
             className={
-              'w-[15px] h-[15px] rounded-full checked:border-brand-primary-100 checked:bg-brand-primary-100 relative group-hover:border-brand-primary-100 appearance-none border-2 box-content  border-on-icon-naked-900 cursor-pointer outline-none transition-all duration-150 ease-out'
+              'w-[15px] h-[15px] rounded-full checked:border-brand-primary-150 checked:bg-brand-primary-150 relative group-hover:border-brand-primary-150 appearance-none border-2 box-content border-types-250 cursor-pointer outline-none transition-all duration-150 ease-out'
             }
           />
           {active && (
