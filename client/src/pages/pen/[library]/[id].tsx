@@ -49,6 +49,7 @@ function Post({ post }: { post: API.Models.Post }) {
   } = post;
 
   const [data, setData] = useState<API.Models.Post>(post);
+  const unsavedChanges = JSON.stringify(data) !== JSON.stringify(post);
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
     setData((d) => ({
@@ -99,15 +100,19 @@ function Post({ post }: { post: API.Models.Post }) {
                 </div>
               </div>
               <div className="flex items-center w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
-                <h3 className="flex-1 font-medium">Theme</h3>
+                <h3 className="flex-1 font-medium">Responsive</h3>
                 <Form.Toggle
-                  onClick={(val) => update('animated', val)}
-                  id="what"
-                  active={data.animated}
+                  onClick={(val) => update('responsive', val)}
+                  id="responsive"
+                  active={data.responsive}
                 />
               </div>
             </div>
-            <Button.Primary onClick={onSave} title="Save!" />
+            <Button.Primary
+              onClick={onSave}
+              title="Save"
+              disabled={!unsavedChanges}
+            />
           </Form.Wrapper>
         </React.Fragment>
       </Modal>

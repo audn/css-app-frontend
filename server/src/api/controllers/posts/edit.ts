@@ -39,6 +39,7 @@ export const editPost = async (req: Request, res: APIJson) => {
             }
         }
     } catch (error: any) {
+        console.log(error.message);
         res.status(400).json({
             error: error.message,
         });
