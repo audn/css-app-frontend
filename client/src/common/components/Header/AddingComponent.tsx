@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { API } from '../../lib/interfaces';
+import useMainState from '../../store/main';
 import { addPost } from '../../utils/hooks/api/posts';
 import { useLibraries } from '../../utils/hooks/libraries';
 import { Button } from '../Buttons';
@@ -16,9 +17,11 @@ export const HeaderAddingComponent = ({
   data: Partial<API.Models.Post>;
   //   onSetting: () => void;
 }) => {
-  const [library, setLibrary] = useState<string>('TailwindCSS');
-  const [version, setVersion] = useState<string>('v.3.2.0');
-  const [libSource, setLibSource] = useState<string>('v.3.2.0');
+  const { library, src, version } = useMainState((s) => ({
+    library: s.library,
+    src: s.src,
+    version: s.version,
+  }));
 
   const { data: libs, isLoading } = useLibraries();
   const router = useRouter();
@@ -52,7 +55,30 @@ export const HeaderAddingComponent = ({
     }
     setIsPosting(false);
   }
+  function changeLib(event: ChangeEvent<HTMLSelectElement>) {
+    const lib = event.target.value;
 
+    const libObject = libs?.payload?.results.filter((x) => x.label == lib)[0];
+    const src = libObject?.versions[0].src;
+    const version = libObject?.versions[0].value;
+
+    useMainState.setState({
+      version,
+      library: lib,
+      src: src,
+    });
+  }
+  function changeVersion(event: ChangeEvent<HTMLSelectElement>) {
+    const version = event.target.value;
+
+    const libObject = libs?.payload?.results.find((x) => x.label == library);
+    const versionObject = libObject?.versions.find((x) => x.value == version);
+
+    useMainState.setState({
+      version: version,
+      src: versionObject?.src,
+    });
+  }
   return (
     <header className="z-50 flex items-start justify-between p-6 border-b border-b-types-200">
       <div className="flex flex-col w-full">
@@ -106,7 +132,7 @@ export const HeaderAddingComponent = ({
                 name="library"
                 value={library}
                 onChange={(event: ChangeEvent<HTMLSelectElement>) =>
-                  setLibrary(event.target.value)
+                  changeLib(event)
                 }
                 className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
               >
@@ -120,7 +146,7 @@ export const HeaderAddingComponent = ({
                 value={version}
                 name="version"
                 onChange={(event: ChangeEvent<HTMLSelectElement>) =>
-                  setVersion(event.target.value)
+                  changeVersion(event)
                 }
                 className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
               >
