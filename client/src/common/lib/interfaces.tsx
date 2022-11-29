@@ -99,6 +99,7 @@ export declare namespace API {
       authorId: string;
       author: User;
       library: string;
+      libraryVersion?: string;
     }
   }
 }
@@ -172,7 +173,7 @@ export declare namespace Button {
     icon?: string;
     route?: string;
     onClick?: (e: SyntheticEvent) => void;
-    title?: string;
+    title?: string | ReactNode;
     disabled?: boolean;
     isLoading?: boolean;
     className?: string;

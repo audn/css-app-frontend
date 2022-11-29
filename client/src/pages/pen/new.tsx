@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
-import { Form } from '../../common/components/Form';
 import { HeaderAddingComponent } from '../../common/components/Header/AddingComponent';
 import { defaultPenData } from '../../common/components/Pen/data';
 import PenEditor from '../../common/components/Pen/Editor';
@@ -17,7 +16,6 @@ function NewComponent() {
     title: 'Untitled',
     code: defaultPenData.find((x) => x.label === library)?.value,
   });
-  //   const { data: categories, isLoading } = useCategories();
 
   useEffect(() => {
     if (library) {
@@ -126,40 +124,8 @@ function NewComponent() {
 
   return (
     <div>
-      <HeaderAddingComponent
-        data={data}
-        update={update}
-        // onSetting={() => console.log('s')}
-      />
-      <Form.Wrapper column={true}>
-        {/* <div className="pt-4 pb-6">
-          <h1 className="text-lg font-semibold">Untitled</h1>
-        </div> */}
-        {/* <Form.Input
-          label="Title"
-          value={data.title}
-          onChange={(val: string) => update('title', val)}
-          id="title"
-          placeholder="ss"
-        />{' '}
-        <Form.Textarea
-          label="Description"
-          value={data.description}
-          onChange={(val: string) => update('description', val)}
-          id="description"
-          placeholder="ss"
-        />
-        <div className="flex flex-wrap space-x-2">
-          {categories?.payload?.results.map((x) => (
-            <button
-              onClick={() => update('category', x.value)}
-              className="px-3 py-1 rounded-md bg-types-200"
-            >
-              {x.label}
-            </button>
-          ))}
-        </div> */}
-      </Form.Wrapper>
+      <HeaderAddingComponent data={data} update={update} />
+
       {/* @ts-ignore */}
       <SplitPane
         split={'vertical'}

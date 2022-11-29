@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import Logo from '../misc/Logo';
 import LibrarySelector from './components/LibrarySelector';
 import Navigation from './Navigation';
 
 export const Header = () => {
   //   const router = useRouter();
-  const [search, setSearch] = useState<string | undefined>('');
+  //   const [search, setSearch] = useState<string | undefined>('');
   //   const [pendingTimeout, setTimeoutHandle] = useState<number | null>(null);
 
   //   const handleSearchOn = () => {

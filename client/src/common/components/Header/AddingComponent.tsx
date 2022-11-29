@@ -1,7 +1,6 @@
-import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { API } from '../../lib/interfaces';
-import { addPost } from '../../utils/hooks/api/posts';
+import PublishModal from '../../pages/pen/components/PublishModal';
 import { Button } from '../Buttons';
 import Link from '../layout/Link';
 import LibraryDropdown from '../Pen/components/LibraryDropdown';
@@ -15,10 +14,8 @@ export const HeaderAddingComponent = ({
   data: Partial<API.Models.Post>;
   //   onSetting: () => void;
 }) => {
-  const router = useRouter();
-
   const [editingTitle, setEditingTitle] = useState<boolean>(false);
-  const [isPosting, setIsPosting] = useState<boolean>(false);
+  const [isPublishingOpen, setIsPublishingOpen] = useState<boolean>(false);
 
   function handleTitleUpdate(e: SyntheticEvent) {
     e.preventDefault();
@@ -28,28 +25,14 @@ export const HeaderAddingComponent = ({
     }
   }
 
-  async function publish() {
-    setIsPosting(true);
-    const posted = await addPost({
-      code: data.code,
-      title: data.title,
-
-      description:
-        "Everything here works just like it does when you're running Tailwind locall with a real build pipeline. You can customize your config file, use features like '@apply', or even add third-party plugins.",
-      library: 'tailwindcss',
-      category: 'buttons',
-    });
-    if (posted.payload?.results) {
-      router.push({
-        pathname: `/pen/[library]/[id]`,
-        query: { library: 'tailwindcss', id: posted.payload.results.id },
-      });
-    }
-    setIsPosting(false);
-  }
-
   return (
-    <header className="z-50 flex items-start justify-between p-6 border-b border-b-types-200">
+    <header className="z-50 flex items-center justify-between p-6 border-b border-b-types-200">
+      <PublishModal
+        update={update}
+        data={data}
+        onClose={() => setIsPublishingOpen(!isPublishingOpen)}
+        isOpen={isPublishingOpen}
+      />
       <div className="flex flex-col w-full">
         <div className="flex items-center">
           <Link
@@ -83,16 +66,15 @@ export const HeaderAddingComponent = ({
             </button>
           )}
         </div>
-        <div className="flex items-center mt-3 text-sm">
+        {/* <div className="flex items-center mt-3 text-sm">
           <i className="mr-2 fa-solid fa-info-circle" /> Draft saved just now
-        </div>
+        </div> */}
       </div>
       <div className="flex space-x-2">
         <LibraryDropdown />
         <Button.Secondary
-          disabled={isPosting}
-          title={isPosting ? 'Publishing' : 'Publish'}
-          onClick={publish}
+          title={'Publish'}
+          onClick={() => setIsPublishingOpen(true)}
           icon={'fa-solid fa-upload text-sm'}
         />
         <Button.Secondary
