@@ -17,9 +17,8 @@ export const HeaderAddingComponent = ({
   data: Partial<API.Models.Post>;
   //   onSetting: () => void;
 }) => {
-  const { library, src, version } = useMainState((s) => ({
+  const { library, version } = useMainState((s) => ({
     library: s.library,
-    src: s.src,
     version: s.version,
   }));
 
