@@ -1,4 +1,9 @@
-import { HTMLInputTypeAttribute, ReactNode, SyntheticEvent } from 'react';
+import {
+  HTMLInputTypeAttribute,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent,
+} from 'react';
 import { INavItem } from './types';
 
 // export interface IBase {
@@ -10,16 +15,18 @@ export type IDropdown = {
   active?: string;
   className?: string;
   isLoading?: boolean;
+  closeDropdown?: boolean;
   list?: {
     value: string;
     label: string;
     _count?: { [key: string]: number };
   }[] &
     Partial<INavItem[]>;
-  component?: ReactNode;
+  component?: ReactElement;
   onClick: (val: string) => void;
 
   options?: {
+    toggleOnClick?: boolean;
     caret?: boolean;
     position?: 'start' | 'center' | 'end';
     box?: boolean;
