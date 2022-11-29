@@ -124,11 +124,13 @@ export const HeaderAddingComponent = ({
                 }
                 className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
               >
-                {libs?.payload?.results.map((x) =>
-                  x.versions.map((x) => (
-                    <option value={x.value}>{x.value}</option>
-                  )),
-                )}
+                {libs?.payload?.results
+                  .filter((x) => x.label === library)
+                  .map((x) =>
+                    x.versions.map((x) => (
+                      <option value={x.value}>{x.value}</option>
+                    )),
+                  )}
               </select>
             </div>
           }
