@@ -21,7 +21,10 @@ app.listen(config.port, async () => {
 
     app.use(
         session({
-            store: new RedisStore({ client: redis }),
+            store: new RedisStore({
+                client: redis,
+                host: 'redis',
+            }),
             secret: 'cssapp-store',
             saveUninitialized: true,
             resave: true,
@@ -43,7 +46,7 @@ app.listen(config.port, async () => {
     app.use(passport.session());
     app.use(
         cors({
-            origin: ['http://localhost:3000'],
+            origin: ['http://localhost:3000', 'https:/css.app', 'www.css.app'],
             credentials: true,
         })
     );
