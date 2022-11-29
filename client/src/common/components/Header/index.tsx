@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from '../Form';
 import Logo from '../misc/Logo';
 import LibrarySelector from './components/LibrarySelector';
@@ -8,7 +8,7 @@ import Navigation from './Navigation';
 export const Header = () => {
   const router = useRouter();
   const [search, setSearch] = useState<string | undefined>('');
-  const [pendingTimeout, setTimeoutHandle] = useState<number | null>(null);
+  // const [pendingTimeout, setTimeoutHandle] = useState<number | null>(null);
 
   const handleSearchOn = () => {
     if (search == undefined || search.length <= 1) {
@@ -29,17 +29,17 @@ export const Header = () => {
       );
     }
   };
-  function handleSearch(event: SyntheticEvent) {
-    event.preventDefault();
-    if (search && search.length < 1) {
-      setTimeout(() => {}, 1000);
-    } else {
-      if (pendingTimeout != null) {
-        clearTimeout(pendingTimeout);
-      }
-      handleSearchOn();
-    }
-  }
+  //   function handleSearch(event: SyntheticEvent) {
+  //     event.preventDefault();
+  //     if (search && search.length < 1) {
+  //       setTimeout(() => {}, 1000);
+  //     } else {
+  //       if (pendingTimeout != null) {
+  //         clearTimeout(pendingTimeout);
+  //       }
+  //       handleSearchOn();
+  //     }
+  //   }
   const handleEmptySearchField = () => {
     if (search == undefined || search.length == 0) {
       void router.push({

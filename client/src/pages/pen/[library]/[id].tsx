@@ -34,19 +34,8 @@ function Post({ post }: { post: API.Models.Post }) {
       }
     }
   }
-  const {
-    author,
-    description,
-    responsive,
-    id,
-    library,
-    code,
-    animated,
-    category,
-    theme,
-    title,
-    generatedImage,
-  } = post;
+  const { author, description, responsive, code, animated, theme, title } =
+    post;
 
   const [data, setData] = useState<API.Models.Post>(post);
   const unsavedChanges = JSON.stringify(data) !== JSON.stringify(post);
