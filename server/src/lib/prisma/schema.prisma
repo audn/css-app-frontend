@@ -40,6 +40,8 @@ model Post {
     library          String?  @default("Unknown")
     libraryVersion   String?
 
+    createdAt DateTime @default(now())
+
     @@map("posts")
 }
 
