@@ -21,7 +21,7 @@ export const defaultPenData = [
             </div>
         </div>
     </div>
-</div>;`,
+</div>`,
   },
   {
     label: 'Bulma',

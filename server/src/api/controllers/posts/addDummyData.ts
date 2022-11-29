@@ -91,42 +91,32 @@ export const addDummyData = async (req: Request, res: APIJson) => {
     ];
 
     try {
-        const category = await prisma.category.findUnique({
-            where: { value: req.body.category },
-        });
-
-        if (!category) {
-            return res.status(400).json({
-                error: `Category ${req.body.category} does not exist.`,
-            });
-        } else {
-            const added = posts.map(async (x) => {
-                await prisma.post.create({
-                    data: {
-                        author: {
-                            connect: {
-                                id: userId,
-                            },
+        const added = posts.map(async (x) => {
+            await prisma.post.create({
+                data: {
+                    author: {
+                        connect: {
+                            id: userId,
                         },
-                        categoryRelations: {
-                            connect: {
-                                value: x.category,
-                            },
-                        },
-                        libraryRelations: {
-                            connect: {
-                                value: x.library,
-                            },
-                        },
-                        ...(({ library, category, ...o }) => o)(x),
                     },
-                });
+                    categoryRelations: {
+                        connect: {
+                            value: x.category,
+                        },
+                    },
+                    libraryRelations: {
+                        connect: {
+                            value: x.library,
+                        },
+                    },
+                    ...(({ library, category, ...o }) => o)(x),
+                },
             });
-            if (added) {
-                res.json({ message: 'Added' });
-            } else {
-                res.status(400).json({ error: 'somethign happened' });
-            }
+        });
+        if (added) {
+            res.json({ message: 'Added' });
+        } else {
+            res.status(400).json({ error: 'somethign happened' });
         }
     } catch (error: any) {
         console.log(error.message);
