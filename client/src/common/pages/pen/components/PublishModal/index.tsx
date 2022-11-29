@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../../components/Buttons';
 import { Form } from '../../../../components/Form';
@@ -66,11 +66,11 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
 
   return (
     <Modal onClose={() => onClose()} open={isOpen}>
-      <React.Fragment>
-        <h1 className="justify-center text-xl font-bold text-center text-white">
-          {view == '1' ? 'Pen Meta' : 'Pen Settings'}
-        </h1>
-        <Form.Wrapper column={true} className="w-full mt-5">
+      <div className="h-[527.5px] flex justify-between flex-col">
+        <Form.Wrapper column={true} className="w-full">
+          <h1 className="justify-center text-xl font-bold text-center text-white">
+            {view == '1' ? 'Pen Meta' : 'Pen Settings'}
+          </h1>{' '}
           <AnimatePresence exitBeforeEnter>
             {view == '1' ? (
               <motion.div
@@ -94,42 +94,42 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
               </motion.div>
             )}
           </AnimatePresence>
-          <Button.Wrapper className="flex !flex-wrap">
-            {view === '2' ? (
-              <div className="flex w-full gap-5">
-                <Button.Secondary
-                  onClick={() => setView('1')}
-                  className="bg-types-250 !py-[0.7em]"
-                  layoutClass="flex-1"
-                  title={`Back`}
-                  disabled={isPosting}
-                />
-                <Button.Primary
-                  layoutClass="flex-1"
-                  onClick={publishPen}
-                  title={
-                    isPosting ? (
-                      <div className="flex justify-center">
-                        <LoadingIcon />
-                      </div>
-                    ) : (
-                      `Publish`
-                    )
-                  }
-                  disabled={!canPost()}
-                />
-              </div>
-            ) : (
+        </Form.Wrapper>
+        <Button.Wrapper className="flex !flex-wrap">
+          {view === '2' ? (
+            <div className="flex w-full gap-5">
+              <Button.Secondary
+                onClick={() => setView('1')}
+                className="bg-types-250 !py-[0.7em]"
+                layoutClass="flex-1"
+                title={`Back`}
+                disabled={isPosting}
+              />
               <Button.Primary
                 layoutClass="flex-1"
-                onClick={() => setView('2')}
-                title={`Next (${view}/2)`}
-                disabled={!canGoToStepTwo()}
+                onClick={publishPen}
+                title={
+                  isPosting ? (
+                    <div className="flex justify-center">
+                      <LoadingIcon />
+                    </div>
+                  ) : (
+                    `Publish`
+                  )
+                }
+                disabled={!canPost()}
               />
-            )}
-          </Button.Wrapper>
-        </Form.Wrapper>
-      </React.Fragment>
+            </div>
+          ) : (
+            <Button.Primary
+              layoutClass="flex-1"
+              onClick={() => setView('2')}
+              title={`Next (${view}/2)`}
+              disabled={!canGoToStepTwo()}
+            />
+          )}
+        </Button.Wrapper>
+      </div>
     </Modal>
   );
 }

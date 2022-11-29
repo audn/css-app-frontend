@@ -26,7 +26,7 @@ function Modal({ onClose, children, open }: Props) {
         >
           <Animate
             variants={fadeIn}
-            className="absolute inset-0 bg-opacity-80 bg-types-body"
+            className="absolute inset-0 bg-opacity-70 bg-types-100 backdrop-blur-sm"
             onClick={() => onClose()}
           >
             &nbsp;
@@ -34,7 +34,7 @@ function Modal({ onClose, children, open }: Props) {
           <Animate
             variants={scaleIn}
             ref={ref}
-            className="max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
+            className="border border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
           >
             {children}
           </Animate>
