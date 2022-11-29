@@ -100,6 +100,7 @@ export declare namespace API {
       author: User;
       library: string;
       libraryVersion?: string;
+      createdAt: string;
     }
   }
 }

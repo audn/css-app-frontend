@@ -25,7 +25,7 @@ function PostsHydration({
     return (
       <HydrationError
         title="Couldn't get data"
-        label={`An error occoured while trying to retrieve cats.`}
+        label={`An error occoured while trying to retrieve pens.`}
         onClick={refetch}
         isLoading={isRefetching}
       />

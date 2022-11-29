@@ -35,8 +35,16 @@ function Post({ post }: { post: API.Models.Post }) {
     }
   }
 
-  const { author, description, responsive, code, animated, theme, title } =
-    post;
+  const {
+    author,
+    description,
+    responsive,
+    code,
+    animated,
+    theme,
+    createdAt,
+    title,
+  } = post;
 
   return (
     <DefaultLayout>
@@ -90,7 +98,6 @@ function Post({ post }: { post: API.Models.Post }) {
             </Link>
           </div>
         </div>
-
         <div className="relative h-screen rounded-lg bg-types-100">
           <Preview code={code} />
         </div>
@@ -98,9 +105,9 @@ function Post({ post }: { post: API.Models.Post }) {
           <div className="flex items-center font-medium">
             <div className="w-60">
               <i className="mr-2 fa-regular fa-clock" />
-              Updated date
+              Posted
             </div>
-            2d ago
+            {createdAt}
           </div>
           <div className="flex items-center font-medium">
             <div className="w-60">
