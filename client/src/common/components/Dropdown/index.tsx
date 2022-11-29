@@ -15,7 +15,7 @@ function Dropdown({
   isLoading,
   className,
   onClick,
-  closeDropdown = false,
+  open,
   options = { caret: true, position: 'center', toggleOnClick: false },
 }: IDropdown) {
   const menuRef = useRef(null);
@@ -23,9 +23,11 @@ function Dropdown({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsOpen(closeDropdown);
+    if (!open) {
+      setIsOpen(false);
+    }
     return () => setIsOpen(false);
-  }, [closeDropdown]);
+  }, [open]);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -37,6 +39,14 @@ function Dropdown({
       setIsOpen,
     }),
   );
+  function handleListClick(val: string) {
+    if (onClick) {
+      onClick(val);
+    }
+    if (options.toggleOnClick) {
+      toggle();
+    }
+  }
   return (
     <div className="relative z-50" ref={menuRef}>
       <button
@@ -74,9 +84,7 @@ function Dropdown({
                   active={active}
                   {...item}
                   key={i}
-                  onClick={(val) => {
-                    onClick(val), options.toggleOnClick && toggle();
-                  }}
+                  onClick={handleListClick}
                 />
               ))
             ) : (

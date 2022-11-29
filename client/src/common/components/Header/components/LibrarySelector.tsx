@@ -25,7 +25,7 @@ function LibrarySelector() {
         toggleOnClick: true,
       }}
       isLoading={isLoading}
-      list={data ? data?.payload?.results : []}
+      list={data?.payload?.results}
       onClick={setLibrary}
     >
       {library}

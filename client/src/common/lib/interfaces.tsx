@@ -15,7 +15,7 @@ export type IDropdown = {
   active?: string;
   className?: string;
   isLoading?: boolean;
-  closeDropdown?: boolean;
+  open?: boolean;
   list?: {
     value: string;
     label: string;
@@ -23,7 +23,7 @@ export type IDropdown = {
   }[] &
     Partial<INavItem[]>;
   component?: ReactElement;
-  onClick: (val: string) => void;
+  onClick?: (val: string) => void;
 
   options?: {
     toggleOnClick?: boolean;

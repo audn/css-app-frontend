@@ -1,10 +1,11 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import useMainState from '../../../store/main';
 import { useLibraries } from '../../../utils/hooks/libraries';
 import Dropdown from '../../Dropdown';
 
 function LibraryDropdown() {
   const { data: libs, isLoading } = useLibraries();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { library, version } = useMainState((s) => ({
     library: s.library,
@@ -35,9 +36,14 @@ function LibraryDropdown() {
       src: versionObject?.src,
     });
   }
+  useEffect(() => {
+    setIsOpen(!isOpen);
+  }, [library]);
+
   return (
     <Dropdown
       active={'v3.2.0'}
+      open={isOpen}
       isLoading={isLoading}
       options={{ animateCaret: true, box: true, caret: true }}
       component={
