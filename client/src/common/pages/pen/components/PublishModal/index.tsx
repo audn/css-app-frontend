@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Button } from '../../../../components/Buttons';
 import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API } from '../../../../lib/interfaces';
 import useMainState from '../../../../store/main';
+import { addPost } from '../../../../utils/hooks/api/posts';
 import { useCategories } from '../../../../utils/hooks/categories';
 import View1 from './screens/View1';
 import View2 from './screens/View2';
@@ -35,24 +37,19 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
   };
   async function publishPen() {
     setIsPosting(true);
-    console.log(data, state.library, state.version);
 
-    // const posted = await addPost({
-    //   code: data.code,
-    //   title: data.title,
-
-    //   description:
-    //    data
-    //   library: 'tailwindcss',
-    //   category: 'buttons',
-    // });
-    // if (posted.payload?.results) {
-    //   toast.success('Posted pen');
-    //   router.push({
-    //     pathname: `/pen/[library]/[id]`,
-    //     query: { library: 'tailwindcss', id: posted.payload.results.id },
-    //   });
-    // }
+    const posted = await addPost({
+      ...data,
+      libraryVersion: state.version,
+      library: state.library.toLowerCase(),
+    });
+    if (posted.payload?.results) {
+      toast.success('Posted pen');
+      router.push({
+        pathname: `/pen/[library]/[id]`,
+        query: { library: 'tailwindcss', id: posted.payload.results.id },
+      });
+    }
     setIsPosting(false);
   }
 

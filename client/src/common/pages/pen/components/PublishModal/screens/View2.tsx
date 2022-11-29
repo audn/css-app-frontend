@@ -44,9 +44,9 @@ function View2({ update, data }: Props) {
             <h3 className="flex-1 text-sm font-medium text-white">Theme</h3>
             <div className="flex flex-col w-full mt-2 space-y-1">
               <button
-                onClick={() => update('theme', 'light')}
+                onClick={() => update('theme', 'Light')}
                 className={concat(
-                  data.theme === 'light'
+                  data.theme === 'Light'
                     ? 'bg-types-250/80 text-white'
                     : 'bg-types-250/50',
                   'flex items-center justify-between w-full px-3 py-3 rounded hover:text-white/70 animate ',
@@ -57,16 +57,16 @@ function View2({ update, data }: Props) {
                   <p className="text-sm">My pen is coded with a light theme</p>
                 </div>
                 <Form.Radio
-                  onClick={() => update('theme', 'light')}
-                  name="light"
+                  onClick={() => update('theme', 'Light')}
+                  name="Light"
                   id="theme"
-                  active={data.theme == 'light'}
+                  active={data.theme == 'Light'}
                 />
               </button>
               <button
-                onClick={() => update('theme', 'dark')}
+                onClick={() => update('theme', 'Dark')}
                 className={concat(
-                  data.theme === 'dark'
+                  data.theme === 'Dark'
                     ? 'bg-types-250/80 text-white'
                     : 'bg-types-250/50',
                   'flex items-center justify-between w-full px-3 py-3 rounded hover:text-white/70 animate ',
@@ -77,10 +77,10 @@ function View2({ update, data }: Props) {
                   <p className="text-sm">My pen is coded with a dark theme</p>
                 </div>
                 <Form.Radio
-                  name="dark"
-                  onClick={() => update('theme', 'dark')}
+                  name="Dark"
+                  onClick={() => update('theme', 'Dark')}
                   id="theme"
-                  active={data.theme == 'dark'}
+                  active={data.theme == 'Dark'}
                 />
               </button>
             </div>
