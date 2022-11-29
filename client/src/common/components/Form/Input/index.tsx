@@ -19,6 +19,7 @@ function Input({
   onFocus,
   onBlur,
   regex,
+  required,
 }: Form.Input) {
   const getErrors = () => {
     if (error) {
@@ -30,6 +31,7 @@ function Input({
     <>
       <FormLabel
         id={id}
+        required={required}
         description={description}
         disabled={disabled}
         label={label}

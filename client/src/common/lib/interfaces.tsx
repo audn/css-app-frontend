@@ -126,7 +126,7 @@ export declare namespace Alert {
 
 export declare namespace Form {
   interface InputBase {
-    placeholder: string;
+    placeholder?: string;
     value?: string;
     inputClassName?: string;
     error?: string;
@@ -137,6 +137,7 @@ export declare namespace Form {
     disabled?: boolean;
     description?: string | ReactNode;
     label?: string;
+    required?: boolean;
     regex?: (val: string) => void;
     autoFocus?: boolean;
   }
