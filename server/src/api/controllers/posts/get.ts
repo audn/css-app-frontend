@@ -12,6 +12,7 @@ export const getPost = async (req: Request, res: APIJson) => {
             },
             include: {
                 author: true,
+                libraryRelations: true,
             },
         });
         if (!post) {

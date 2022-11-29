@@ -35,22 +35,33 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       return true;
     }
   };
-  async function publishPen() {
-    setIsPosting(true);
+  const canPost = () => {
+    return (
+      Boolean(data.theme !== null && typeof data.theme !== 'undefined') &&
+      canGoToStepTwo()
+    );
+  };
 
-    const posted = await addPost({
-      ...data,
-      libraryVersion: state.version,
-      library: state.library.toLowerCase(),
-    });
-    if (posted.payload?.results) {
-      toast.success('Posted pen');
-      router.push({
-        pathname: `/pen/[library]/[id]`,
-        query: { library: 'tailwindcss', id: posted.payload.results.id },
+  async function publishPen() {
+    if (canPost()) {
+      setIsPosting(true);
+
+      const posted = await addPost({
+        ...data,
+        libraryVersion: state.version,
+        library: state.library.toLowerCase(),
       });
+      if (posted.payload?.results) {
+        toast.success('Posted pen');
+        router.push({
+          pathname: `/pen/[library]/[id]`,
+          query: { library: 'tailwindcss', id: posted.payload.results.id },
+        });
+      } else {
+        toast.error('Something failed..');
+      }
+      setIsPosting(false);
     }
-    setIsPosting(false);
   }
 
   return (
@@ -105,7 +116,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
                       `Publish`
                     )
                   }
-                  disabled={isPosting}
+                  disabled={!canPost()}
                 />
               </div>
             ) : (

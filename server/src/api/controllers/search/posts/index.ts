@@ -50,6 +50,7 @@ export const searchPosts = async (req: Request, res: APIJson) => {
                 },
             },
             include: { author: true },
+            orderBy: { createdAt: 'asc' },
         });
         if (!posts) {
             throw new Error('Post not found');

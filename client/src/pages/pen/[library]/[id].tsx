@@ -20,6 +20,12 @@ function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
+  console.log(post);
+
+  const postCss = post.libraryRelations?.versions.find(
+    (x) => x.value === post.libraryVersion,
+  )?.src;
+  console.log(postCss);
 
   const toggleEdit = () => setEdit(false);
 
@@ -99,7 +105,7 @@ function Post({ post }: { post: API.Models.Post }) {
           </div>
         </div>
         <div className="relative h-screen rounded-lg bg-types-100">
-          <Preview code={code} />
+          <Preview code={code} link={postCss!} />
         </div>
         <div className="flex flex-col space-y-3">
           <div className="flex items-center font-medium">

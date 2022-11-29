@@ -8,8 +8,9 @@ import { API } from '../../common/lib/interfaces';
 import useMainState from '../../common/store/main';
 
 function NewComponent() {
-  const { library } = useMainState((s) => ({
+  const { library, src } = useMainState((s) => ({
     library: s.library,
+    src: s.src,
   }));
 
   const [data, setData] = useState<Partial<API.Models.Post>>({
@@ -149,7 +150,7 @@ function NewComponent() {
           initialContent={data.code}
           onChange={(val) => update('code', val)}
         />
-        <Preview code={data.code} />
+        <Preview code={data.code} link={src} />
       </SplitPane>
     </div>
   );

@@ -1,12 +1,4 @@
-import useMainState from '../../store/main';
-
-function Preview({ code }: { code: string }) {
-  const { src } = useMainState((s) => ({
-    src: s.src,
-  }));
-
-  //   const validateSrc = () => {};
-
+function Preview({ code, link }: { code: string; link: string }) {
   return (
     <div className="absolute inset-0 w-full h-full">
       <iframe
@@ -19,7 +11,7 @@ function Preview({ code }: { code: string }) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    ${src}
+    ${link}
   </head>
   <body>
     ${code}

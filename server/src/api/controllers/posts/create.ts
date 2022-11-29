@@ -11,6 +11,7 @@ export const createPost = async (req: Request, res: APIJson) => {
         description,
         generatedImage,
         id,
+        libraryVersion,
         theme,
         responsive,
     } = req.body;
@@ -45,6 +46,7 @@ export const createPost = async (req: Request, res: APIJson) => {
                     animated,
                     code,
                     responsive,
+                    libraryVersion,
                     description,
                     generatedImage,
                     id,
