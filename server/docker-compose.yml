@@ -26,6 +26,7 @@ services:
         container_name: cssapp_api
         restart: unless-stopped
         links:
+            - redis
             - postgres
         env_file: .env.prod
         build:
