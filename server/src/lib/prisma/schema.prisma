@@ -38,6 +38,7 @@ model Post {
 
     libraryRelations Library? @relation(fields: [library], references: [value], onDelete: SetDefault)
     library          String?  @default("Unknown")
+    libraryVersion   String?
 
     @@map("posts")
 }
