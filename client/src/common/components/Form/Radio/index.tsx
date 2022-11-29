@@ -7,7 +7,7 @@ function Radio({ active, name, className, onClick, id }: Form.Radio) {
       <label
         htmlFor={id}
         onClick={() => onClick()}
-        className={concat(className ? className : '', 'flex flex-col')}
+        className={concat(className ? className : '', 'flex flex-col relative')}
       >
         <div
           className={concat(
