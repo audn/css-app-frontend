@@ -20,6 +20,7 @@ function DesktopMenu() {
         </div>
 
         <Button.Secondary
+          trustRoute={true}
           title="Sign in"
           route={'https://api.css.app/auth/twitter'}
         />

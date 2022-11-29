@@ -10,13 +10,14 @@ function ButtonController({
   children,
   layoutClass,
   className,
+  trustRoute,
 }: Button.Base & { children: ReactElement }) {
   const router = useRouter();
 
   function handleClick(e: SyntheticEvent) {
     e.stopPropagation();
     if (route) {
-      if (validateUrl(route)) {
+      if (validateUrl(route) && !trustRoute) {
         window.open(route);
       } else router.push(route);
     } else if (onClick) {
