@@ -46,7 +46,7 @@ app.listen(config.port, async () => {
     app.use(passport.session());
     app.use(
         cors({
-            origin: ['http://localhost:3000', 'https:/css.app', 'www.css.app'],
+            origin: ['http://localhost:3000', 'https://css.app', 'www.css.app'],
             credentials: true,
         })
     );
