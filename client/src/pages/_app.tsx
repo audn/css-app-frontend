@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
 import '../assets/css/style.css';
 
@@ -22,7 +23,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <QueryClientProvider client={queryClient}>
       {nextRouter.asPath == '/pen/new' ? <></> : <Header />}
       {/* {router.asPath == '/new' ? <></> : <Header />} */}
-      <ReactToaster />
+      <Analytics /> <ReactToaster />
       <DefaultSeo {...SEO} />
       <Component {...pageProps} key={router.route} />
       {nextRouter.asPath !== '/pen/new' && <Footer />}

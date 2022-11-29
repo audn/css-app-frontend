@@ -1,12 +1,6 @@
-import Router from 'next/router';
 import { ReactNode } from 'react';
 import H1 from '../components/layout/headings/H1';
 import H3 from '../components/layout/headings/H3';
-import { trackPageview } from '../utils/analytics';
-
-Router.events.on('routeChangeComplete', (url) => {
-  trackPageview(url);
-});
 
 type Props = {
   children: ReactNode;

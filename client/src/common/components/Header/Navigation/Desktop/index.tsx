@@ -21,7 +21,7 @@ function DesktopMenu() {
 
         <Button.Secondary
           title="Sign in"
-          route={'http://localhost:4000/auth/twitter'}
+          route={'https://api.css.app/auth/twitter'}
         />
       </Auth.User>
     </div>
