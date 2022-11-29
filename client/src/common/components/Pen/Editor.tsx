@@ -30,7 +30,7 @@ function PenEditor({ templateCode, initialContent, onChange }: Props) {
       theme="vs-dark"
       onChange={(value) => onChange(value ?? '')}
       options={MONACO_OPTIONS}
-      height="90vh"
+      height="calc(100vh - 109px)"
       defaultLanguage="html"
       value={initialContent}
       defaultValue={templateCode}
