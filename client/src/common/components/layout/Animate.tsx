@@ -9,6 +9,7 @@ function Animate({
   children: ReactNode;
   variants: any;
   onClick?: (e?: SyntheticEvent) => void;
+  ref?: any;
 }) {
   return (
     <motion.div

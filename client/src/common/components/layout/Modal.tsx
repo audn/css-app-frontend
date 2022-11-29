@@ -1,5 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import { ReactNode, useEffect, useRef } from 'react';
+import { fadeIn, scaleIn } from '../../utils/data/animations';
+import handleScrollbarChange from '../../utils/helpers/scrollbarModal';
+import Animate from './Animate';
 
 type Props = {
   onClose: () => void;
@@ -11,10 +14,7 @@ function Modal({ onClose, children, open }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.body.style.overflowY = open ? 'hidden' : 'auto';
-    if (containerRef.current) {
-      containerRef.current.style.overflowY = open ? 'auto' : 'hidden';
-    }
+    handleScrollbarChange(open);
   }, [open, containerRef.current]);
 
   return (
@@ -24,18 +24,20 @@ function Modal({ onClose, children, open }: Props) {
           className="fixed inset-0 z-50 flex items-center justify-center "
           ref={containerRef}
         >
-          <div
+          <Animate
+            variants={fadeIn}
             className="absolute inset-0 bg-opacity-80 bg-types-body"
-            onClick={onClose}
+            onClick={() => onClose()}
           >
             &nbsp;
-          </div>
-          <div
+          </Animate>
+          <Animate
+            variants={scaleIn}
             ref={ref}
-            className="z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
+            className="max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
           >
             {children}
-          </div>
+          </Animate>
         </div>
       )}
     </AnimatePresence>
