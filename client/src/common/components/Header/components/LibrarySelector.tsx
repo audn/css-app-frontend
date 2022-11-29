@@ -18,7 +18,12 @@ function LibrarySelector() {
   return (
     <Dropdown
       active={library}
-      options={{ animateCaret: true, box: true, caret: true }}
+      options={{
+        animateCaret: true,
+        box: true,
+        caret: true,
+        toggleOnClick: true,
+      }}
       isLoading={isLoading}
       list={data ? data?.payload?.results : []}
       onClick={setLibrary}

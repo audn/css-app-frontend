@@ -15,13 +15,19 @@ function Dropdown({
   isLoading,
   className,
   onClick,
-  options = { caret: true, position: 'center' },
+  closeDropdown = false,
+  options = { caret: true, position: 'center', toggleOnClick: false },
 }: IDropdown) {
   const menuRef = useRef(null);
   const [listening, setListening] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  //   const toggle = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    setIsOpen(closeDropdown);
+    return () => setIsOpen(false);
+  }, [closeDropdown]);
+
+  const toggle = () => setIsOpen(!isOpen);
 
   useEffect(
     listenForOutsideClick({
@@ -34,7 +40,7 @@ function Dropdown({
   return (
     <div className="relative z-50" ref={menuRef}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggle}
         className={concat(
           className ? className : '',
           options.box
@@ -64,7 +70,14 @@ function Dropdown({
               </div>
             ) : list ? (
               list?.map((item, i) => (
-                <ListItem active={active} {...item} key={i} onClick={onClick} />
+                <ListItem
+                  active={active}
+                  {...item}
+                  key={i}
+                  onClick={(val) => {
+                    onClick(val), options.toggleOnClick && toggle();
+                  }}
+                />
               ))
             ) : (
               component
