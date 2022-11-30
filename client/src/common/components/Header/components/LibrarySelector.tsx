@@ -1,19 +1,18 @@
-import useAuthState from '../../../store/auth';
+import { useRouter } from 'next/router';
 import { useLibraries } from '../../../utils/hooks/libraries';
 import Dropdown from '../../Dropdown';
 
 function LibrarySelector() {
+  const router = useRouter();
   const { data, isLoading } = useLibraries();
 
-  const library = useAuthState(
-    (s) => s.user.preferences?.preferredLibrary || 'TailwindCSS',
-  );
+  const library =
+    (typeof window !== 'undefined' && localStorage.getItem('library')) ||
+    'TailwindCSS';
+
   const setLibrary = (val: string) => {
-    useAuthState.setState({
-      user: {
-        preferences: { preferredLibrary: val },
-      },
-    });
+    localStorage.setItem('library', val);
+    router.push(`/${val.toLowerCase()}`, undefined, { shallow: true });
   };
   return (
     <Dropdown

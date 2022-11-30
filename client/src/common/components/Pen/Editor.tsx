@@ -34,8 +34,8 @@ function PenEditor({ initialContent, onChange }: Props) {
       options={MONACO_OPTIONS}
       height="calc(100vh - 109px)"
       defaultLanguage="html"
-      value={initialContent}
-      defaultValue={initialContent}
+      value={initialContent || ''}
+      defaultValue={initialContent || ''}
     />
   );
 }
