@@ -53,10 +53,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       });
       if (posted.payload?.results) {
         toast.success('Posted pen');
-        router.push({
-          pathname: `/[library]/[id]`,
-          query: { library: 'tailwindcss', id: posted.payload.results.id },
-        });
+        router.push(`/${state.library}/${posted.payload.results.id}`);
       } else {
         toast.error('Something failed..');
       }

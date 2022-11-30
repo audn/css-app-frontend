@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
-import { HeaderAddingComponent } from '../../common/components/Header/AddingComponent';
-import { defaultPenData } from '../../common/components/Pen/data';
-import PenEditor from '../../common/components/Pen/Editor';
-import Preview from '../../common/components/Pen/Preview';
-import { API } from '../../common/lib/interfaces';
-import useMainState from '../../common/store/main';
+import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
+import { defaultPenData } from '../common/components/Pen/data';
+import PenEditor from '../common/components/Pen/Editor';
+import Preview from '../common/components/Pen/Preview';
+import { API } from '../common/lib/interfaces';
+import useMainState from '../common/store/main';
 
 function NewComponent() {
   const { library, src } = useMainState((s) => ({
