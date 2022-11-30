@@ -73,14 +73,18 @@ function Post({ post }: { post: API.Models.Post }) {
                 className="w-12 h-12 mr-3 rounded-full"
               />
 
-              <h1 className="mr-3 text-xl font-semibold text-white">{title}</h1>
-              <Link
-                href={`/user/${author.id}`}
-                className="hover:text-white animate"
-              >
-                {' '}
-                <h3>{author?.username}</h3>
-              </Link>
+              <div className="flex flex-col justify-center">
+                <h1 className="mr-3 text-xl font-semibold text-white">
+                  {title}
+                </h1>
+                <Link
+                  href={`/user/${author.id}`}
+                  className="hover:text-white animate"
+                >
+                  {' '}
+                  <h3>{author?.username}</h3>
+                </Link>
+              </div>
             </div>
             {description && (
               <div className="max-w-3xl mt-5 leading-relaxed">
