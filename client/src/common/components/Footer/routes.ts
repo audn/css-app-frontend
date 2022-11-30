@@ -13,26 +13,22 @@ const pages: Array<INavItem> = [
 const resources: Array<INavItem> = [
   {
     label: 'CodePen',
-    route: '#',
+    route: 'https://codepen.io/',
   },
   {
-    label: 'TailwindCSS',
-    route: '#',
-  },
-  {
-    label: 'Framer Motion',
-    route: '#',
+    label: 'JSFiddle',
+    route: 'https://jsfiddle.net/',
   },
 ];
 const community: Array<INavItem> = [
   {
     label: 'Discord',
-    route: '#',
+    route: 'https://discord.gg/YA39qjzwNy',
   },
-  {
-    label: 'Twitter',
-    route: '#',
-  },
+  //   {
+  //     label: 'Twitter',
+  //     route: '#',
+  //   },
 ];
 const lists = [
   {
