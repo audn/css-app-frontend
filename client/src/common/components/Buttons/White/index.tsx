@@ -8,9 +8,11 @@ function WhiteButton({
   disabled,
   icon,
   className,
+  onClick,
 }: Button.Base) {
   return (
     <button
+      onClick={onClick}
       disabled={disabled}
       className={concat(
         className ? className : '',

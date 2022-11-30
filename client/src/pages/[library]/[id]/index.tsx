@@ -31,7 +31,7 @@ function Post({ post }: { post: API.Models.Post }) {
     (x) => x.value === post.libraryVersion,
   )?.src;
 
-  const toggleEdit = () => setEdit(false);
+  const toggleEdit = () => setEdit(!isEditing);
 
   async function onDelete() {
     if (!warning) {
@@ -93,11 +93,11 @@ function Post({ post }: { post: API.Models.Post }) {
                   <Button.Secondary
                     icon="fa-regular fa-pen-to-square"
                     title="Edit"
-                    onClick={() => setEdit(true)}
-                  />{' '}
+                    onClick={toggleEdit}
+                  />
                   <Button.Secondary
                     icon="fa-regular fa-trash-alt"
-                    title="Delete"
+                    title={warning ? 'Are you sure?' : 'Delete'}
                     onClick={onDelete}
                   />
                 </Button.Wrapper>
