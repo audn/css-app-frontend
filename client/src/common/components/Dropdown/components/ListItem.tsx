@@ -43,7 +43,7 @@ function ListItem({
         {label}
       </div>
       {_count && (
-        <span className="flex items-center justify-center w-5 h-5 text-[10px] rounded-full bg-types-150/60 text-on-50">
+        <span className="flex items-center justify-center px-2 py-1 h-[24px] text-[12px] rounded-full bg-types-150/60 text-on-50">
           {_count[Object.keys(_count)[0]]}
         </span>
       )}
