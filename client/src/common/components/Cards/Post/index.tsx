@@ -9,7 +9,7 @@ function PostCard({ author, id, library, title }: API.Models.Post) {
         // href={`/${library.toLowerCase()}/${title
         //   .replaceAll(' ', '-')
         //   .toLowerCase()}`}
-        href={`/pen/${library.toLowerCase()}/${id}`}
+        href={`/${library.toLowerCase()}/${id}`}
       >
         <div className="relative w-full h-[235px] bg-types-150 rounded-xl">
           &nbsp;

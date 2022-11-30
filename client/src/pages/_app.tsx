@@ -21,12 +21,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {nextRouter.asPath == '/pen/new' ? <></> : <Header />}
+      {nextRouter.asPath == '/new' ? <></> : <Header />}
       {/* {router.asPath == '/new' ? <></> : <Header />} */}
       <Analytics /> <ReactToaster />
       <DefaultSeo {...SEO} />
       <Component {...pageProps} key={router.route} />
-      {nextRouter.asPath !== '/pen/new' && <Footer />}
+      {nextRouter.asPath !== '/new' && <Footer />}
     </QueryClientProvider>
   );
 }

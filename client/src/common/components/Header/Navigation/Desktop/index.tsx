@@ -15,14 +15,14 @@ function DesktopMenu() {
     <div className="items-center hidden space-x-5 sm:flex">
       <Auth.User>
         <div className="flex space-x-2">
-          <Button.Secondary title="New component" route="/pen/new" />
+          <Button.Secondary title="New component" route="/new" />
           <Button.Secondary title="Logout" onClick={handleLogout} />
         </div>
 
         <Button.Secondary
           trustRoute={true}
           title="Sign in"
-          route={'https://api.css.app/auth/twitter'}
+          route={`${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`}
         />
       </Auth.User>
     </div>
