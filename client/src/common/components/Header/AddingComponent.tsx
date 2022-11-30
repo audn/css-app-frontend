@@ -77,11 +77,9 @@ export const HeaderAddingComponent = ({
           onClick={() => setIsPublishingOpen(true)}
           icon={'fa-solid fa-upload text-sm'}
         />
-        <Button.Secondary
-          title="Settings"
-          icon={'fa-solid fa-cog text-sm'}
-          route="/new"
-        />
+        <Link href="/new">
+          <Button.Secondary title="Settings" icon={'fa-solid fa-cog text-sm'} />
+        </Link>
       </div>
     </header>
   );

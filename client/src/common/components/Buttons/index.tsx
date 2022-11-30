@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Button as IButton } from '../../lib/interfaces';
-import Controller from './components/ButtonController';
 import { ButtonWrapper } from './components/ButtonWrapper';
 import PrimaryButton from './Primary';
 import SecondaryButton from './Secondary';
@@ -11,25 +10,13 @@ export const Button = {
     return <ButtonWrapper {...props} />;
   },
   Primary: ({ ...props }: IButton.Base) => {
-    return (
-      <Controller {...props}>
-        <PrimaryButton {...props} />
-      </Controller>
-    );
+    return <PrimaryButton {...props} />;
   },
 
   White: ({ ...props }: IButton.Base) => {
-    return (
-      <Controller {...props}>
-        <WhiteButton {...props} />
-      </Controller>
-    );
+    return <WhiteButton {...props} />;
   },
   Secondary: ({ ...props }: IButton.Base) => {
-    return (
-      <Controller {...props}>
-        <SecondaryButton {...props} />
-      </Controller>
-    );
+    return <SecondaryButton {...props} />;
   },
 };

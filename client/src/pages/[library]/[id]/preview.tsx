@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { Button } from '../../../common/components/Buttons';
+import Link from '../../../common/components/layout/Link';
 import Preview from '../../../common/components/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
@@ -18,10 +19,9 @@ function PostPreview({ post }: { post: API.Models.Post }) {
       <div className="fixed bottom-0 z-50 justify-center w-full p-4 tex-twhite bg-types-100">
         <div className="grid grid-cols-3">
           <div className="flex items-start">
-            <Button.Secondary
-              title="&larr; Go back"
-              route={router.asPath.replace('/preview', '')}
-            />{' '}
+            <Link href={router.asPath.replace('/preview', '')}>
+              <Button.Secondary title="&larr; Go back" />{' '}
+            </Link>
           </div>
           <div className="flex items-center justify-center">
             Preview of&nbsp;<div className="font-semibold">{post.title}</div>

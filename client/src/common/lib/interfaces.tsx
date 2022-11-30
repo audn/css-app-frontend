@@ -174,7 +174,6 @@ export declare namespace Button {
     layoutClass?: string;
     icon?: string;
     trustRoute?: boolean;
-    route?: string;
     onClick?: (e: SyntheticEvent) => void;
     title?: string | ReactNode;
     disabled?: boolean;

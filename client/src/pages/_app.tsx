@@ -22,12 +22,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {pagesWithoutHeader.includes(nextRouter.pathname) ? <></> : <Header />}
+      {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />}
       {/* {router.asPath == '/new' ? <></> : <Header />} */}
       <Analytics /> <ReactToaster />
       <DefaultSeo {...SEO} />
       <Component {...pageProps} key={router.route} />
-      {pagesWithoutHeader.includes(nextRouter.asPath) && <Footer />}
+      {!pagesWithoutHeader.includes(nextRouter.pathname) && <Footer />}
     </QueryClientProvider>
   );
 }

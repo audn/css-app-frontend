@@ -72,13 +72,13 @@ function Post({ post }: { post: API.Models.Post }) {
                 src={author.avatar}
                 className="w-12 h-12 mr-3 rounded-full"
               />
+
+              <h1 className="mr-3 text-xl font-semibold text-white">{title}</h1>
               <Link
                 href={`/user/${author.id}`}
                 className="hover:text-white animate"
               >
-                <h1 className="mr-3 text-xl font-semibold text-white">
-                  {title}
-                </h1>
+                {' '}
                 <h3>{author?.username}</h3>
               </Link>
             </div>
@@ -87,9 +87,9 @@ function Post({ post }: { post: API.Models.Post }) {
                 <Text>{description}</Text>
               </div>
             )}
-            <div className="flex items-center mt-5">
-              <Button.Wrapper>
-                <Auth.Policy policy={canManagePost()}>
+            <Auth.Policy policy={canManagePost()}>
+              <div className="flex items-center mt-5">
+                <Button.Wrapper>
                   <Button.Secondary
                     icon="fa-regular fa-pen-to-square"
                     title="Edit"
@@ -100,19 +100,23 @@ function Post({ post }: { post: API.Models.Post }) {
                     title="Delete"
                     onClick={onDelete}
                   />
-                </Auth.Policy>
-              </Button.Wrapper>
-            </div>
+                </Button.Wrapper>
+              </div>
+            </Auth.Policy>
           </div>
         </div>
         <div className="relative overflow-hidden border rounded-lg border-types-200">
           <div className="relative z-10 flex justify-between px-5 py-5 bg-types-body">
             <Button.Wrapper>
-              <Button.Secondary
-                icon="fa-regular fa-external-link"
-                title="Fullscreen Preview"
-                route={`/${post.library}/${post.id}/preview`}
-              />
+              <Link
+                href={`/${post.library}/${post.id}/preview`}
+                target="_blank"
+              >
+                <Button.Secondary
+                  icon="fa-regular fa-external-link"
+                  title="Fullscreen Preview"
+                />
+              </Link>
               <Button.Secondary
                 icon="fa-regular fa-code"
                 title="Show code"
