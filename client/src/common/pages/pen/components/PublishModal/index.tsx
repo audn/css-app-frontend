@@ -97,13 +97,12 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
             <div className="flex w-full gap-5">
               <Button.Secondary
                 onClick={() => setView('1')}
-                className="bg-types-250 !py-[0.7em]"
-                layoutClass="flex-1"
+                className="bg-types-250 !py-[0.7em] flex-1"
                 title={`Back`}
                 disabled={isPosting}
               />
               <Button.Primary
-                layoutClass="flex-1"
+                className="flex-1"
                 onClick={publishPen}
                 title={
                   isPosting ? (
@@ -119,7 +118,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
             </div>
           ) : (
             <Button.Primary
-              layoutClass="flex-1"
+              className="flex-1"
               onClick={() => setView('2')}
               title={`Next (${view}/2)`}
               disabled={!canGoToStepTwo()}

@@ -171,13 +171,12 @@ export declare namespace Form {
 }
 export declare namespace Button {
   interface Base {
-    layoutClass?: string;
+    className?: string;
     icon?: string;
     trustRoute?: boolean;
     onClick?: (e: SyntheticEvent) => void;
     title?: string | ReactNode;
     disabled?: boolean;
     isLoading?: boolean;
-    className?: string;
   }
 }
