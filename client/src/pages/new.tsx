@@ -126,7 +126,6 @@ function NewComponent() {
   return (
     <div>
       <HeaderAddingComponent data={data} update={update} />
-
       {/* @ts-ignore */}
       <SplitPane
         split={'vertical'}

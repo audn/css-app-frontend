@@ -63,7 +63,7 @@ export const Header = () => {
   //     });
   //   }, [search]);
   return (
-    <header className="fixed top-0 h-[80px] z-50 flex items-center w-full px-6 bg-types-body/20 filter backdrop-blur">
+    <header className="sticky border-b border-b-types-200 top-0 h-[80px] z-50 flex items-center w-full px-6 bg-types-body/20 filter backdrop-blur">
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Logo />

@@ -10,7 +10,7 @@ type Props = {
 export const FadedLayout = ({ h1, h3, children }: Props) => {
   return (
     <>
-      <div className="flex justify-center h-auto p-5 bg-gradient-to-t from-types-150 to-types-body pt-40 pb-72 max-h-[300px]">
+      <div className="flex justify-center h-auto p-5 bg-gradient-to-t from-types-150 to-types-body pt-24 pb-72 max-h-[300px]">
         <div className="flex flex-col items-center max-w-4xl text-center">
           <H1 className="text-white">{h1}</H1>
           <H3 className="mt-3 !font-medium">{h3}</H3>
