@@ -11,7 +11,7 @@ type Props = {
 export const FadedLayout = ({ h1, h3, children }: Props) => {
   return (
     <>
-      <div className="flex items-center h-auto p-5 bg-gradient-to-t from-types-150 to-types-body pt-12 pb-72 max-h-[300px] flex-col">
+      <div className="flex items-center h-auto p-5 bg-gradient-to-t from-types-150 to-types-body pt-12 pb-14 md:pb-28  max-h-[d300px] flex-col">
         <Banner
           text={
             <>
