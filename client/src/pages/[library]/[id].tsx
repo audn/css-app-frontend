@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import Auth from '../../common/components/layout/Auth';
 import Text from '../../common/components/layout/headings/Text';
 import Link from '../../common/components/layout/Link';
 import Tooltip from '../../common/components/layout/Tooltip';
@@ -10,14 +11,17 @@ import Preview from '../../common/components/Pen/Preview';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { API } from '../../common/lib/interfaces';
 import EditModal from '../../common/pages/pen/components/EditModal';
+import useAuthState from '../../common/store/auth';
 import concat from '../../common/utils/helpers/concat';
 import { deletePost, getPostFromId } from '../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
+  const user = useAuthState((s) => s.user);
+
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
-  console.log(post);
+
   const postCss = post.libraryRelations?.versions.find(
     (x) => x.value === post.libraryVersion,
   )?.src;
@@ -35,6 +39,9 @@ function Post({ post }: { post: API.Models.Post }) {
       }
     }
   }
+  const canManagePost = () => {
+    return user.id == post.authorId || user.role === 'ADMIN';
+  };
 
   const {
     author,
@@ -43,47 +50,52 @@ function Post({ post }: { post: API.Models.Post }) {
     code,
     animated,
     theme,
+    library,
+    libraryVersion,
     createdAt,
     title,
   } = post;
-
   return (
     <DefaultLayout>
       <NextSeo title={title} />
-      {/* tailwindcss@2.0.2 */}
       <EditModal isOpen={isEditing} onClose={toggleEdit} post={post} />
-      <div className="space-y-12 mt-[95px]">
+      <div className="mt-8 space-y-12">
         <div className="flex flex-col">
+          <h4 className="mb-3 text-white/50">
+            {library}@{libraryVersion}
+          </h4>{' '}
           <div className="flex items-center">
-            <h1 className="mr-3 text-2xl font-semibold text-white">{title}</h1>
+            <h1 className="mr-3 text-2xl font-bold text-white">{title}</h1>
             <div className="flex space-x-2">
-              <Tooltip id="delete" text="Delete pen">
-                <button
-                  onClick={onDelete}
-                  className={concat(
-                    warning
-                      ? 'bg-orange-500 bg-opacity-20 text-orange-500 px-3 py-[0.3rem] rounded-full text-xs'
-                      : 'bg-types-200  w-7 h-7 ',
-                    'flex items-center justify-center rounded-full',
-                  )}
-                >
-                  {warning ? (
-                    'Are you sure?'
-                  ) : (
-                    <i className="text-xs fa-solid fa-trash-alt" />
-                  )}
-                </button>
-              </Tooltip>
-              <Tooltip id="edit" text="Edit pen">
-                <button
-                  onClick={() => setEdit(true)}
-                  className={
-                    'flex items-center justify-center rounded-full w-7 h-7 bg-types-200'
-                  }
-                >
-                  <i className="text-xs fa-solid fa-pen-to-square" />
-                </button>
-              </Tooltip>
+              <Auth.Policy policy={canManagePost()}>
+                <Tooltip id="delete" text="Delete pen">
+                  <button
+                    onClick={onDelete}
+                    className={concat(
+                      warning
+                        ? 'bg-orange-500 bg-opacity-20 text-orange-500 px-3 py-[0.3rem] rounded-full text-xs'
+                        : 'bg-types-200  w-7 h-7 ',
+                      'flex items-center justify-center rounded-full',
+                    )}
+                  >
+                    {warning ? (
+                      'Are you sure?'
+                    ) : (
+                      <i className="text-xs fa-solid fa-trash-alt" />
+                    )}
+                  </button>
+                </Tooltip>
+                <Tooltip id="edit" text="Edit pen">
+                  <button
+                    onClick={() => setEdit(true)}
+                    className={
+                      'flex items-center justify-center rounded-full w-7 h-7 bg-types-200'
+                    }
+                  >
+                    <i className="text-xs fa-solid fa-pen-to-square" />
+                  </button>
+                </Tooltip>
+              </Auth.Policy>
             </div>
           </div>
           <div className="mt-2">

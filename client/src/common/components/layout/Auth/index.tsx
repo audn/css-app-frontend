@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import AuthAdmin from './Admin';
+import AuthPolicy from './Policy/Policy';
 import AuthUser from './User';
 
 type Props = {
@@ -11,6 +12,9 @@ const Auth = {
   },
   User: ({ ...props }: Props) => {
     return <AuthUser {...props} />;
+  },
+  Policy: ({ policy, ...props }: Props & { policy: boolean }) => {
+    return <AuthPolicy policy={policy} {...props} />;
   },
 };
 
