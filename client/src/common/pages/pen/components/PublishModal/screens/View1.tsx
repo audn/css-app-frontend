@@ -13,6 +13,7 @@ function View1({ update, data, categories }: Props) {
     <div className="space-y-5">
       <div className="flex flex-col w-full">
         <Form.Input
+          autoFocus={true}
           label="Title"
           required={true}
           placeholder={data.title}

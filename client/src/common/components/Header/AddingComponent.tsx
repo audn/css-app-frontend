@@ -45,6 +45,7 @@ export const HeaderAddingComponent = ({
           {editingTitle ? (
             <form onSubmit={handleTitleUpdate} className="w-full">
               <input
+                placeholder="Untitled"
                 autoFocus={true}
                 value={data?.title}
                 onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -55,7 +56,9 @@ export const HeaderAddingComponent = ({
               />
             </form>
           ) : (
-            <h1 className="text-lg font-medium text-white">{data?.title}</h1>
+            <h1 className="text-lg font-medium text-white">
+              {data?.title || 'Untitled'}
+            </h1>
           )}
           {!editingTitle && (
             <button

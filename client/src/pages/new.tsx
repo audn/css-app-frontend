@@ -12,7 +12,7 @@ function NewComponent() {
   }));
 
   const [data, setData] = useState<Partial<API.Models.Post>>({
-    title: 'Untitled',
+    // title: '',
   });
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
