@@ -1,31 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
-import { defaultPenData } from '../common/components/Pen/data';
 import PenEditor from '../common/components/Pen/Editor';
 import Preview from '../common/components/Pen/Preview';
 import { API } from '../common/lib/interfaces';
 import useMainState from '../common/store/main';
 
 function NewComponent() {
-  const { library, src } = useMainState((s) => ({
-    library: s.library,
+  const { src } = useMainState((s) => ({
     src: s.src,
   }));
 
   const [data, setData] = useState<Partial<API.Models.Post>>({
     title: 'Untitled',
-    code: defaultPenData.find((x) => x.label === library)?.value,
   });
-
-  useEffect(() => {
-    if (library) {
-      update(
-        'code',
-        defaultPenData.find((x) => x.label === library)?.value ?? '',
-      );
-    }
-  }, [library]);
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
     setData((d) => ({
@@ -143,9 +131,6 @@ function NewComponent() {
         }
       >
         <PenEditor
-          templateCode={
-            defaultPenData.find((x) => x.label === library)?.value ?? ''
-          }
           initialContent={data.code}
           onChange={(val) => update('code', val)}
         />

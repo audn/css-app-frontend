@@ -5,10 +5,10 @@ import * as monaco from 'monaco-editor';
 
 type Props = {
   initialContent: string;
-  templateCode: string;
+  templateCode?: string;
   onChange?: (value: string) => void;
 };
-function PenEditor({ templateCode, initialContent, onChange }: Props) {
+function PenEditor({ initialContent, onChange }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
     fontFamily:
       'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -35,7 +35,7 @@ function PenEditor({ templateCode, initialContent, onChange }: Props) {
       height="calc(100vh - 109px)"
       defaultLanguage="html"
       value={initialContent}
-      defaultValue={templateCode}
+      defaultValue={initialContent}
     />
   );
 }
