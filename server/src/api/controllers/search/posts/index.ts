@@ -19,6 +19,7 @@ export const searchPosts = async (req: Request, res: APIJson) => {
             .join('|');
 
         const posts = await prisma.post.findMany({
+            orderBy: { createdAt: 'desc' },
             where: {
                 ...(query == '*'
                     ? {}
@@ -50,7 +51,6 @@ export const searchPosts = async (req: Request, res: APIJson) => {
                 },
             },
             include: { author: true },
-            orderBy: { createdAt: 'asc' },
         });
         if (!posts) {
             throw new Error('Post not found');

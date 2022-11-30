@@ -6,7 +6,7 @@ import * as monaco from 'monaco-editor';
 type Props = {
   initialContent: string;
   templateCode: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 function PenEditor({ templateCode, initialContent, onChange }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
@@ -28,7 +28,9 @@ function PenEditor({ templateCode, initialContent, onChange }: Props) {
   return (
     <Editor
       theme="vs-dark"
-      onChange={(value) => onChange(value ?? '')}
+      onChange={
+        onChange ? (value) => onChange(value ?? '') : () => console.log('s')
+      }
       options={MONACO_OPTIONS}
       height="calc(100vh - 109px)"
       defaultLanguage="html"

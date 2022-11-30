@@ -18,15 +18,16 @@ export default function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     useCurrentUser();
   }, []);
+  const pagesWithoutHeader = ['/new', '/[library]/[id]/preview'];
 
   return (
     <QueryClientProvider client={queryClient}>
-      {nextRouter.asPath == '/new' ? <></> : <Header />}
+      {pagesWithoutHeader.includes(nextRouter.pathname) ? <></> : <Header />}
       {/* {router.asPath == '/new' ? <></> : <Header />} */}
       <Analytics /> <ReactToaster />
       <DefaultSeo {...SEO} />
       <Component {...pageProps} key={router.route} />
-      {nextRouter.asPath !== '/new' && <Footer />}
+      {pagesWithoutHeader.includes(nextRouter.asPath) && <Footer />}
     </QueryClientProvider>
   );
 }

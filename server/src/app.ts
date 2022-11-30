@@ -23,7 +23,6 @@ app.listen(config.port, async () => {
         session({
             store: new RedisStore({
                 client: redis,
-                host: 'redis',
             }),
             secret: 'cssapp-store',
             saveUninitialized: true,
