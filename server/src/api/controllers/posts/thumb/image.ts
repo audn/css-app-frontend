@@ -7,9 +7,8 @@ export const renderImage = async (req: Request, res: APIJson) => {
 
     try {
         let browser = puppeteer.launch({
-            executablePath: '/usr/bin/chromium-browser',
-
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            headless: true,
+            args: ['--no-sandbox', '--disabled-setupid-sandbox'],
         });
 
         console.log(`loads post ${id}`);
