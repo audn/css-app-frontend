@@ -1,7 +1,7 @@
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function PostCard({ author, id, library, title }: API.Models.Post) {
+function PostCard({ author, id, title }: API.Models.Post) {
   return (
     <div className="flex flex-col items-start ">
       <Link
@@ -9,11 +9,11 @@ function PostCard({ author, id, library, title }: API.Models.Post) {
         // href={`/${library.toLowerCase()}/${title
         //   .replaceAll(' ', '-')
         //   .toLowerCase()}`}
-        href={`/component/${library.toLowerCase()}/${id}`}
+        href={`/component/${id}`}
       >
         <div className="absolute inset-0 overflow-hidden" />
         <img
-          src={`${process.env.NEXT_PUBLIC_FRONTEND}/api/post/image?id=${id}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/thumb`}
           className="relative w-full h-[235px] bg-types-150 rounded-xl"
         />
       </Link>
