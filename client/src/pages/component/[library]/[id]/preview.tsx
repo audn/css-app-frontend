@@ -1,11 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { Button } from '../../../common/components/Buttons';
-import Link from '../../../common/components/layout/Link';
-import Preview from '../../../common/components/Pen/Preview';
-import { API } from '../../../common/lib/interfaces';
-import { getPostFromId } from '../../../common/utils/hooks/api/posts';
+import { Button } from '../../../../common/components/Buttons';
+import Link from '../../../../common/components/layout/Link';
+import Preview from '../../../../common/components/Pen/Preview';
+import { API } from '../../../../common/lib/interfaces';
+import { getPostFromId } from '../../../../common/utils/hooks/api/posts';
 
 function PostPreview({ post }: { post: API.Models.Post }) {
   const postCss = post.libraryRelations?.versions.find(

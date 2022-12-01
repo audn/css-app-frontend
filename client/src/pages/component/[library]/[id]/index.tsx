@@ -3,21 +3,21 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Button } from '../../../common/components/Buttons';
-import Auth from '../../../common/components/layout/Auth';
-import Text from '../../../common/components/layout/headings/Text';
-import Link from '../../../common/components/layout/Link';
-import PenEditor from '../../../common/components/Pen/Editor';
-import Preview from '../../../common/components/Pen/Preview';
-import { DefaultLayout } from '../../../common/layouts/Default';
-import { API } from '../../../common/lib/interfaces';
-import EditModal from '../../../common/pages/pen/components/EditModal';
-import InfoTag from '../../../common/pages/pen/components/InfoTag';
-import useAuthState from '../../../common/store/auth';
+import { Button } from '../../../../common/components/Buttons';
+import Auth from '../../../../common/components/layout/Auth';
+import Text from '../../../../common/components/layout/headings/Text';
+import Link from '../../../../common/components/layout/Link';
+import PenEditor from '../../../../common/components/Pen/Editor';
+import Preview from '../../../../common/components/Pen/Preview';
+import { DefaultLayout } from '../../../../common/layouts/Default';
+import { API } from '../../../../common/lib/interfaces';
+import EditModal from '../../../../common/pages/pen/components/EditModal';
+import InfoTag from '../../../../common/pages/pen/components/InfoTag';
+import useAuthState from '../../../../common/store/auth';
 import {
   deletePost,
   getPostFromId,
-} from '../../../common/utils/hooks/api/posts';
+} from '../../../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
