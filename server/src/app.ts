@@ -53,6 +53,8 @@ app.listen(config.port, async () => {
                 'https://css-app-git-vercel-og-audn.vercel.app',
                 'https://www.css-app-git-vercel-og-audn.vercel.app',
                 'www.css-app-git-vercel-og-audn.vercel.app',
+                'https://css-app-git-puppeteer-thumbnails-audn.vercel.app',
+                'https://www.css-app-git-puppeteer-thumbnails-audn.vercel.app',
             ],
             credentials: true,
         })
