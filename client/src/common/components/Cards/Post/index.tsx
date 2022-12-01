@@ -13,7 +13,7 @@ function PostCard({ author, id, library, title }: API.Models.Post) {
       >
         <div className="absolute inset-0 overflow-hidden" />
         <img
-          src={`${process.env.NEXT_PUBLIC_FRONTEND}/api/post/image?id=${id}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/thumb`}
           className="relative w-full h-[235px] bg-types-150 rounded-xl"
         />
       </Link>
