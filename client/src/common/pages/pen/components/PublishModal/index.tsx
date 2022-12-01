@@ -54,7 +54,9 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       if (posted.payload?.results) {
         toast.success('Posted pen');
         router.push(
-          `/${state.library.toLowerCase()}/${posted.payload.results.id}`,
+          `/component/${state.library.toLowerCase()}/${
+            posted.payload.results.id
+          }`,
         );
       } else {
         toast.error('Something failed..');

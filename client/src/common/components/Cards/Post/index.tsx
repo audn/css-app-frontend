@@ -5,15 +5,17 @@ function PostCard({ author, id, library, title }: API.Models.Post) {
   return (
     <div className="flex flex-col items-start ">
       <Link
-        className="w-full"
+        className="relative w-full h-[235px]"
         // href={`/${library.toLowerCase()}/${title
         //   .replaceAll(' ', '-')
         //   .toLowerCase()}`}
-        href={`/${library.toLowerCase()}/${id}`}
+        href={`/component/${library.toLowerCase()}/${id}`}
       >
-        <div className="relative w-full h-[235px] bg-types-150 rounded-xl">
-          &nbsp;
-        </div>
+        <div className="absolute inset-0 overflow-hidden" />
+        <img
+          src={`http://localhost:3000/api/post/image?id=${id}`}
+          className="relative w-full h-[235px] bg-types-150 rounded-xl"
+        />
       </Link>
       <div className="flex flex-col items-start px-2 py-3">
         <h2 className="text-lg text-white">{title}</h2>
