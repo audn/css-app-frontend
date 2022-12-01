@@ -7,6 +7,8 @@ export const renderImage = async (req: Request, res: APIJson) => {
 
     try {
         let browser = puppeteer.launch({
+            executablePath: '/usr/bin/chromium-browser',
+
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
 
