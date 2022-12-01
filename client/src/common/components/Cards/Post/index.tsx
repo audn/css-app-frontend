@@ -1,7 +1,7 @@
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function PostCard({ author, id, library, title }: API.Models.Post) {
+function PostCard({ author, id, title }: API.Models.Post) {
   return (
     <div className="flex flex-col items-start ">
       <Link

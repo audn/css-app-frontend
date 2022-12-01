@@ -22,14 +22,11 @@ export const renderImage = async (req: Request, res: APIJson) => {
 
             const image = await page.screenshot({ fullPage: true });
 
-            // await (await browser).close();
-
             res.set('Content-Type', 'image/png');
             res.send(image);
 
             await page.close();
         })();
-        // });
     } catch (error) {
         console.log(error);
     }
