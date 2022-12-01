@@ -9,7 +9,7 @@ function PostCard({ author, id, library, title }: API.Models.Post) {
         // href={`/${library.toLowerCase()}/${title
         //   .replaceAll(' ', '-')
         //   .toLowerCase()}`}
-        href={`/component/${library.toLowerCase()}/${id}`}
+        href={`/component/${id}`}
       >
         <div className="absolute inset-0 overflow-hidden" />
         <img
