@@ -12,7 +12,9 @@ function LibrarySelector() {
 
   const setLibrary = (val: string) => {
     localStorage.setItem('library', val);
-    router.push(`/${val.toLowerCase()}`, undefined, { shallow: true });
+    router.push(`/components/${val.toLowerCase()}`, undefined, {
+      shallow: true,
+    });
   };
   return (
     <Dropdown
