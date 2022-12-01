@@ -12,7 +12,6 @@ export const previewImage = async (
   const postCss = post?.libraryRelations?.versions.find(
     (x) => x.value === post?.libraryVersion,
   )?.src;
-  console.log(post?.code);
 
   const image = await nodeHtmlToImage({
     html: `
