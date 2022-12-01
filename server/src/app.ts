@@ -50,6 +50,9 @@ app.listen(config.port, async () => {
                 'https://css.app',
                 'https://www.css.app',
                 'www.css.app',
+                'https://css-app-git-vercel-og-audn.vercel.app',
+                'https://www.css-app-git-vercel-og-audn.vercel.app',
+                'www.css-app-git-vercel-og-audn.vercel.app',
             ],
             credentials: true,
         })
