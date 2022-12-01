@@ -13,11 +13,16 @@ export const renderImage = async (req: Request, res: APIJson) => {
         console.log(`loads post ${id}`);
         (async () => {
             const page = await (await browser).newPage();
-            await page.goto(`http://localhost:3000/component/${id}/preview`, {
-                waitUntil: 'networkidle0',
-            });
+            await page.goto(
+                `${process.env.FRONTEND_URL}/component/${id}/preview`,
+                {
+                    waitUntil: 'networkidle0',
+                }
+            );
 
             const image = await page.screenshot({ fullPage: true });
+
+            // await (await browser).close();
 
             res.set('Content-Type', 'image/png');
             res.send(image);
