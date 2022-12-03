@@ -5,14 +5,15 @@ import { API } from '../../../common/lib/interfaces';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 
 function PostPreview({ post }: { post: API.Models.Post }) {
-  const postCss = post.libraryRelations?.versions.find(
-    (x) => x.value === post.libraryVersion,
-  )?.src;
   //   const router = useRouter();
   return (
     <div className="min-h-screen">
       <NextSeo title={post.title} />
-      <Preview code={post.code} link={postCss!} />
+      <Preview
+        code={post.code}
+        library={post.library}
+        version={post.libraryVersion}
+      />
       {/* <div className="fixed bottom-0 z-50 justify-center w-full p-4 tex-twhite bg-types-100">
         <div className="grid grid-cols-3">
           <div className="flex items-start">
