@@ -7,7 +7,7 @@ type Store = {
 };
 const useMainState = create<Store>(() => ({
   library: 'TailwindCSS',
-  version: 'v3.2.4',
+  version: '3.2.4',
   src: "<script src='https://cdn.tailwindcss.com/3.2.4'></script>",
 }));
 

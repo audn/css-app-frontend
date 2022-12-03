@@ -42,7 +42,6 @@ function LibraryDropdown() {
 
   return (
     <Dropdown
-      active={'v3.2.0'}
       open={isOpen}
       isLoading={isLoading}
       options={{ animateCaret: true, box: true, caret: true }}
@@ -76,14 +75,14 @@ function LibraryDropdown() {
               .filter((x) => x.label === library)
               .map((x) =>
                 x.versions.map((x) => (
-                  <option value={x.value}>{x.value}</option>
+                  <option value={x.value}>v{x.value}</option>
                 )),
               )}
           </select>
         </div>
       }
     >
-      {library} <span className="ml-2 text-xs">({version})</span>
+      {library} <span className="ml-2 text-xs">(v{version})</span>
     </Dropdown>
   );
 }
