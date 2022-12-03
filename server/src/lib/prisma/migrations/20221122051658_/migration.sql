@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "users" ALTER COLUMN "discordId" DROP NOT NULL,
-ALTER COLUMN "twitterId" DROP NOT NULL;
