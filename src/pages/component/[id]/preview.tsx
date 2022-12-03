@@ -1,8 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
-import { Button } from '../../../common/components/Buttons';
-import Link from '../../../common/components/layout/Link';
 import Preview from '../../../common/components/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
@@ -11,12 +8,12 @@ function PostPreview({ post }: { post: API.Models.Post }) {
   const postCss = post.libraryRelations?.versions.find(
     (x) => x.value === post.libraryVersion,
   )?.src;
-  const router = useRouter();
+  //   const router = useRouter();
   return (
     <div className="min-h-screen">
       <NextSeo title={post.title} />
       <Preview code={post.code} link={postCss!} />
-      <div className="fixed bottom-0 z-50 justify-center w-full p-4 tex-twhite bg-types-100">
+      {/* <div className="fixed bottom-0 z-50 justify-center w-full p-4 tex-twhite bg-types-100">
         <div className="grid grid-cols-3">
           <div className="flex items-start">
             <Link href={router.asPath.replace('/preview', '')}>
@@ -28,7 +25,7 @@ function PostPreview({ post }: { post: API.Models.Post }) {
           </div>
           <div></div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
