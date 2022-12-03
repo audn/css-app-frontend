@@ -27,9 +27,9 @@ function Post({ post }: { post: API.Models.Post }) {
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
-  const postCss = post.libraryRelations?.versions.find(
-    (x) => x.value === post.libraryVersion,
-  )?.src;
+  //   const postCss = post.libraryRelations?.versions.find(
+  //     (x) => x.value === post.libraryVersion,
+  //   )?.src;
 
   const toggleEdit = () => setEdit(!isEditing);
 
@@ -60,6 +60,8 @@ function Post({ post }: { post: API.Models.Post }) {
     // createdAt,
     title,
   } = post;
+  console.log(post);
+
   return (
     <DefaultLayout className="!max-w-7xl">
       <NextSeo title={title} />
@@ -133,7 +135,7 @@ function Post({ post }: { post: API.Models.Post }) {
                 // onChange={(val) => update('code', val)}
               />
             ) : (
-              <Preview code={code} link={postCss!} />
+              <Preview code={code} library={library} version={libraryVersion} />
             )}
           </div>
         </div>

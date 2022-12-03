@@ -24,7 +24,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
   };
 
   async function onSave() {
-    const newData = (({ author, authorId, libraryRelations, ...o }) => o)(data);
+    const newData = (({ author, authorId, ...o }) => o)(data);
 
     const saved = await editPost(post.id, newData);
     if (!saved.error) {

@@ -1,4 +1,28 @@
-function Preview({ code, link }: { code: string; link: string }) {
+function Preview({
+  code,
+  library,
+  version,
+}: {
+  code: string;
+  library: string;
+  version: string;
+}) {
+  const getLink = () => {
+    console.log({ library, version });
+
+    if (library === 'tailwindcss') {
+      switch (version) {
+        case '3.2.4':
+          return "<script src='https://cdn.tailwindcss.com/3.2.4'></script>";
+        case '2.2.19':
+          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css' />";
+        case '1.9.6':
+          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css' />";
+      }
+    }
+  };
+  console.log(getLink());
+
   return (
     <div className="absolute inset-0 w-full h-full">
       <iframe
@@ -11,7 +35,7 @@ function Preview({ code, link }: { code: string; link: string }) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    ${link}
+    ${getLink()}
   </head>
   <body>
     ${code}

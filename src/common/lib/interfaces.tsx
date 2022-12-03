@@ -99,8 +99,7 @@ export declare namespace API {
       authorId: string;
       author: User;
       library: string;
-      libraryVersion?: string;
-      libraryRelations?: Models.Library;
+      libraryVersion: string;
       createdAt: string;
     }
   }

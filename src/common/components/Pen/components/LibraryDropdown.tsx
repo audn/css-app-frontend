@@ -27,13 +27,8 @@ function LibraryDropdown() {
   }
   function changeVersion(event: ChangeEvent<HTMLSelectElement>) {
     const version = event.target.value;
-
-    const libObject = libs?.payload?.results.find((x) => x.label == library);
-    const versionObject = libObject?.versions.find((x) => x.value == version);
-
     useMainState.setState({
       version: version,
-      src: versionObject?.src,
     });
   }
   useEffect(() => {
