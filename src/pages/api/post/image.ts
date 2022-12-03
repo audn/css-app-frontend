@@ -1,59 +1,45 @@
-import { NextApiResponse } from 'next';
-import nodeHtmlToImage from 'node-html-to-image';
-import { editPost, getPostFromId } from '../../../common/utils/hooks/api/posts';
+import chromium from 'chrome-aws-lambda';
+import playwright from 'playwright-core';
 
-export const renderImage = async (
-  req: { query: { id: string } },
-  res: NextApiResponse,
-) => {
-  const data = await getPostFromId(req.query.id);
-  const post = data.payload?.results;
+export default async function generatePdf(req: any, res: any) {
+  const id = req.query.id;
+  try {
+    console.log(await chromium.executablePath);
 
-  const getLink = () => {
-    if (post?.library === 'tailwindcss') {
-      switch (post.libraryVersion) {
-        case '3.2.4':
-          return "<script src='https://cdn.tailwindcss.com/3.2.4'></script>";
-        case '2.2.19':
-          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css' />";
-        case '1.9.6':
-          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css' />";
-      }
-    }
-  };
-  const image = await nodeHtmlToImage({
-    html: `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-               ${getLink()}
-                </head>
-                <body>
-                <style>
-                    body {
-                    width: 1280px;
-                    height: 720px;
-                    }
-                </style>
-                   ${post?.code}
-                </body>
-                </html>`,
-  });
-  // });
-  if (post) {
-    const newData = (({ author, authorId, ...o }) => o)(post);
-    const b64 = Buffer.from(image as any).toString('base64');
-    const mimeType = 'image/png';
-
-    await editPost(post!.id, {
-      ...newData,
-      generatedImage: `data:${mimeType};base64,${b64}`,
+    const browser = await playwright.chromium.launch({
+      args: [...chromium.args, '--font-render-hinting=none'], // This way fix rendering issues with specific fonts
+      executablePath:
+        process.env.NODE_ENV === 'production'
+          ? await chromium.executablePath
+          : 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+      headless:
+        process.env.NODE_ENV === 'production' ? chromium.headless : true,
     });
 
-    res.send(`<img src="data:${mimeType};base64,${b64}" />`);
-  }
-};
+    const context = await browser.newContext();
 
-export default renderImage;
+    const page = await context.newPage();
+
+    // This is the path of the url which shall be converted to a pdf file
+
+    await page.goto(
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/component/${id}/preview`,
+      {
+        waitUntil: 'load',
+      },
+    );
+
+    const file = await page.screenshot({
+      type: 'png',
+    });
+
+    await browser.close();
+
+    res.setHeader('Content-Type', `image/png`);
+
+    // return the file!
+    return res.end(file);
+  } catch (error: any) {
+    return res.status(error.statusCode || 500).json({ error: error.message });
+  }
+}

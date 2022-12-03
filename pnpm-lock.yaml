@@ -18,6 +18,7 @@ specifiers:
   '@vercel/analytics': ^0.1.5
   '@vercel/og': ^0.0.21
   autoprefixer: ^10.2.6
+  chrome-aws-lambda: ^10.1.0
   dompurify: ^2.4.1
   eslint: 8.21.0
   eslint-config-next: 12.2.5
@@ -28,6 +29,7 @@ specifiers:
   next-seo: ^5.5.0
   next-sitemap: ^3.1.32
   node-html-to-image: ^3.2.4
+  playwright-core: ^1.28.1
   postcss: ^8.3.4
   postcss-preset-env: ^6.7.0
   prettier: ^2.1.2
@@ -48,6 +50,7 @@ dependencies:
   '@tanstack/react-query': 4.10.1_sfoxds7t5ydpegc3knd667wn6m
   '@vercel/analytics': 0.1.5_react@17.0.2
   '@vercel/og': 0.0.21
+  chrome-aws-lambda: 10.1.0
   dompurify: 2.4.1
   framer-motion: 4.1.17_sfoxds7t5ydpegc3knd667wn6m
   monaco-editor: 0.34.1
@@ -55,6 +58,7 @@ dependencies:
   next-seo: 5.5.0_dty4et2pnba4zo7o4cegg6bk2e
   next-sitemap: 3.1.32_next@12.3.1
   node-html-to-image: 3.2.4
+  playwright-core: 1.28.1
   puppeteer: 19.3.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -2004,6 +2008,15 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: false
 
+  /chrome-aws-lambda/10.1.0:
+    resolution: {integrity: sha512-NZQVf+J4kqG4sVhRm3WNmOfzY0OtTSm+S8rg77pwePa9RCYHzhnzRs8YvNI6L9tALIW6RpmefWiPURt3vURXcw==}
+    engines: {node: '>= 10.16'}
+    peerDependencies:
+      puppeteer-core: ^10.1.0
+    dependencies:
+      lambdafs: 2.1.1
+    dev: false
+
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -3162,6 +3175,14 @@ packages:
       object.assign: 4.1.4
     dev: true
 
+  /lambdafs/2.1.1:
+    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
+    engines: {node: '>= 10.16'}
+    hasBin: true
+    dev: false
+    bundledDependencies:
+      - tar-fs
+
   /language-subtag-registry/0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -3621,6 +3642,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: false
+
+  /playwright-core/1.28.1:
+    resolution: {integrity: sha512-3PixLnGPno0E8rSBJjtwqTwJe3Yw72QwBBBxNoukIj3lEeBNXwbNiKrNuB1oyQgTBw5QHUhNO3SteEtHaMK6ag==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: false
 
   /popmotion/9.3.6:
