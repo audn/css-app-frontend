@@ -35,7 +35,7 @@ function PostsHydration({
       <AnimatePresence initial={false}>
         <Animate
           variants={fadeIn}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3"
         >
           {data?.payload?.results?.map((post) => (
             <PostCard {...post} />
