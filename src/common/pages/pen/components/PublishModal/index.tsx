@@ -44,18 +44,18 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
 
   async function publishPen() {
     if (canPost()) {
+      const toaster = toast.loading('Working...');
       setIsPosting(true);
-
       const posted = await addPost({
         ...data,
         libraryVersion: state.version,
         library: state.library.toLowerCase(),
       });
       if (posted.payload?.results) {
-        toast.success('Posted pen');
+        toast.success('Success!', { id: toaster });
         router.push(`/component/${posted.payload.results.id}`);
       } else {
-        toast.error('Something failed..');
+        toast.error('Failed to post', { id: toaster });
       }
       setIsPosting(false);
     }
