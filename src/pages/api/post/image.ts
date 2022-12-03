@@ -1,18 +1,26 @@
 import { NextApiResponse } from 'next';
 import nodeHtmlToImage from 'node-html-to-image';
-import { getPostFromId } from '../../../common/utils/hooks/api/posts';
+import { editPost, getPostFromId } from '../../../common/utils/hooks/api/posts';
 
-export const previewImage = async (
+export const renderImage = async (
   req: { query: { id: string } },
   res: NextApiResponse,
 ) => {
   const data = await getPostFromId(req.query.id);
   const post = data.payload?.results;
 
-  const postCss = post?.libraryRelations?.versions.find(
-    (x) => x.value === post?.libraryVersion,
-  )?.src;
-
+  const getLink = () => {
+    if (post?.library === 'tailwindcss') {
+      switch (post.libraryVersion) {
+        case '3.2.4':
+          return "<script src='https://cdn.tailwindcss.com/3.2.4'></script>";
+        case '2.2.19':
+          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css' />";
+        case '1.9.6':
+          return "<link rel='stylesheet' href='https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css' />";
+      }
+    }
+  };
   const image = await nodeHtmlToImage({
     html: `
                 <!DOCTYPE html>
@@ -20,7 +28,7 @@ export const previewImage = async (
                 <head>
                     <meta charset="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
-               ${postCss}
+               ${getLink()}
                 </head>
                 <body>
                 <style>
@@ -34,9 +42,18 @@ export const previewImage = async (
                 </html>`,
   });
   // });
+  if (post) {
+    const newData = (({ author, authorId, ...o }) => o)(post);
+    const b64 = Buffer.from(image as any).toString('base64');
+    const mimeType = 'image/png';
 
-  res.writeHead(200, { 'Content-Type': 'image/png' });
-  res.end(image, 'binary');
+    await editPost(post!.id, {
+      ...newData,
+      generatedImage: `data:${mimeType};base64,${b64}`,
+    });
+
+    res.send(`<img src="data:${mimeType};base64,${b64}" />`);
+  }
 };
 
-export default previewImage;
+export default renderImage;

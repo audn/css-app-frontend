@@ -8,8 +8,6 @@ function Preview({
   version: string;
 }) {
   const getLink = () => {
-    console.log({ library, version });
-
     if (library === 'tailwindcss') {
       switch (version) {
         case '3.2.4':
@@ -21,7 +19,6 @@ function Preview({
       }
     }
   };
-  console.log(getLink());
 
   return (
     <div className="absolute inset-0 w-full h-full">

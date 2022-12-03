@@ -60,7 +60,6 @@ function Post({ post }: { post: API.Models.Post }) {
     // createdAt,
     title,
   } = post;
-  console.log(post);
 
   return (
     <DefaultLayout className="!max-w-7xl">
@@ -172,7 +171,20 @@ export default Post;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await getPostFromId(id);
+  const data = await (await getPostFromId(id)).payload?.results;
+  if (data?.generatedImage == null) {
+    let options: RequestInit = {
+      method: 'POST',
+      mode: 'cors',
+      referrerPolicy: 'no-referrer',
+      credentials: 'omit',
+    };
+
+    await fetch(
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/image?id=${data?.id}`,
+      options,
+    );
+  }
 
   if (!data) {
     return {
@@ -181,7 +193,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     };
   }
   return {
-    props: { post: data.payload?.results },
+    props: { post: data },
     revalidate: 5,
   };
 };
