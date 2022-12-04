@@ -7,7 +7,7 @@ const pages: Array<INavItem> = [
   },
   {
     label: 'GitHub',
-    route: 'https://github.com/audn/react-boilerplate',
+    route: 'https://github.com/trycssapp/web-front',
   },
 ];
 const resources: Array<INavItem> = [
