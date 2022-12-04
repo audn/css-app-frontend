@@ -51,7 +51,7 @@ function Input({
           disabled
             ? 'bg-opacity-50 cursor-not-allowed text-on-200 after:!text-on-150'
             : 'focus:bg-types-150',
-          'w-full px-4 py-3 transition duration-150 ease-out rounded-lg outline-none scrollbar-none bg-types-100 input-field',
+          'focus:text-white w-full px-4 py-3 transition duration-150 ease-out rounded-lg outline-none scrollbar-none bg-types-100 input-field',
         )}
       />
       <FormError label={getErrors()} />
