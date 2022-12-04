@@ -25,17 +25,6 @@ body {
   -webkit-background-clip: padding;
   background-clip: padding-box;
 }
-.thumb {
-  width: calc(200% + 5px);
-  height: calc(200% + 5px);
-  border: 0;
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background: var(--cp-color-1);
-  transform: scale(0.5);
-  transform-origin: top left;
-}
 .Resizer:hover {
   -webkit-transition: all 2s ease;
   transition: all 2s ease;

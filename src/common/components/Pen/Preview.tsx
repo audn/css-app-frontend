@@ -24,7 +24,7 @@ function Preview({
     <div className="absolute inset-0 w-full h-full">
       <iframe
         title="Preview"
-        className={'absolute inset-0 w-full h-full bg-types-100'}
+        className={'absolute inset-0 w-full h-full bg-white'}
         sandbox="allow-popups-to-escape-sandbox allow-scripts allow-popups allow-forms allow-pointer-lock allow-same-origin allow-top-navigation allow-modals"
         srcDoc={`<html>
         <head>
