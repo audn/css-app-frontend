@@ -42,8 +42,6 @@ export const iframeSrcDoc = ({
         })
         </script>
         </head>
-        <body>
-       ${initialCode}
-        </body>
+        <body>${initialCode}</body>
     </html>`;
 };

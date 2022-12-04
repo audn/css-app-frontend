@@ -27,13 +27,35 @@ function NewComponent() {
       ...d,
       [key]: value,
     }));
-
-    const html = { type: 'html', value };
+    const html = {
+      type: 'html',
+      value,
+    };
     const iframe = document.querySelector('iframe') as HTMLIFrameElement;
     if (typeof window !== 'undefined' && iframe.contentWindow) {
       iframe.contentWindow.postMessage(html, '*');
     }
   };
+
+  useEffect(() => {
+    // const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+    // if (typeof window !== 'undefined' && iframe.contentWindow) {
+    //   const render = iframe.contentWindow.document.body.innerHTML.trim();
+    // }
+    if (data.code) {
+      setTimeout(() => {
+        const html = {
+          type: 'html',
+          value: data.code,
+        };
+        const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+        if (typeof window !== 'undefined' && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(html, '*');
+        }
+      }, 200);
+      //   return () => clearTimeout(render);
+    }
+  }, [library, version]);
 
   const isLg = true;
 
