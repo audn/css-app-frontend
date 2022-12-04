@@ -16,6 +16,8 @@ function NewComponent() {
   const [data, setData] = useState<Partial<API.Models.Post>>({
     // title: '',
     code: '',
+    responsive: false,
+    animated: false,
 
     theme: 'Light',
   });
