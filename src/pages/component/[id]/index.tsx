@@ -178,14 +178,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const data = await (await getPostFromId(id)).payload?.results;
   if (data?.generatedImage == null) {
     let options: RequestInit = {
-      method: 'POST',
+      method: 'PUT',
       mode: 'cors',
       referrerPolicy: 'no-referrer',
       credentials: 'omit',
     };
 
     await fetch(
-      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/image?id=${data?.id}`,
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${data?.id}`,
       options,
     );
   }
