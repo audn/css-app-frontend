@@ -26,7 +26,7 @@ export const HeaderAddingComponent = ({
   }
 
   return (
-    <header className="z-50 flex items-center justify-between p-6 border-b border-b-types-200">
+    <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
       <PublishModal
         update={update}
         data={data}
@@ -73,16 +73,16 @@ export const HeaderAddingComponent = ({
           <i className="mr-2 fa-solid fa-info-circle" /> Draft saved just now
         </div> */}
       </div>
-      <div className="flex space-x-2">
+      <div className="flex items-center space-x-2">
         <LibraryDropdown />
         <Button.Secondary
           title={'Publish'}
           onClick={() => setIsPublishingOpen(true)}
           icon={'fa-solid fa-upload text-sm'}
         />
-        <Link href="/new">
+        {/* <Link href="/new">
           <Button.Secondary title="Settings" icon={'fa-solid fa-cog text-sm'} />
-        </Link>
+        </Link> */}
       </div>
     </header>
   );

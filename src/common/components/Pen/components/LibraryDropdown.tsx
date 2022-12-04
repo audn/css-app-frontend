@@ -38,6 +38,7 @@ function LibraryDropdown() {
   return (
     <Dropdown
       open={isOpen}
+      className="py-[0.4em]"
       isLoading={isLoading}
       options={{ animateCaret: true, box: true, caret: true }}
       component={

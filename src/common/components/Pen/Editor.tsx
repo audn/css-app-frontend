@@ -32,7 +32,7 @@ function PenEditor({ initialContent, onChange }: Props) {
         onChange ? (value) => onChange(value ?? '') : () => console.log('s')
       }
       options={MONACO_OPTIONS}
-      height="calc(100vh - 109px)"
+      height="calc(100vh - 60px)"
       defaultLanguage="html"
       value={initialContent || ''}
       defaultValue={initialContent || ''}
