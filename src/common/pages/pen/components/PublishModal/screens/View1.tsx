@@ -34,11 +34,10 @@ function View1({ update, data, categories }: Props) {
         />
       </div>
       <div className="flex flex-col">
-        <h2 className="text-[14px] text-white font-medium mb-2">Category</h2>
-        <p className="mb-3 text-white/60">
-          Pens without a specified category will not be featured on our
-          homepage.
-        </p>
+        <h2 className="text-[14px] text-white font-medium mb-3">
+          Category <span className="text-red-500">*</span>
+        </h2>
+
         <div className="flex flex-wrap gap-2 mb-3">
           {categories?.payload?.results.map((x) => (
             <button

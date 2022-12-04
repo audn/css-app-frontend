@@ -53,8 +53,8 @@ function View2({ update, data }: Props) {
                 )}
               >
                 <div className="flex flex-col items-start">
-                  <h4 className="font-semibold">Light</h4>
-                  <p className="text-sm">My pen is coded with a light theme</p>
+                  <h4 className="font-medium">Light</h4>
+                  {/* <p className="text-sm">My pen is coded with a light theme</p> */}
                 </div>
                 <Form.Radio
                   onClick={() => update('theme', 'Light')}
@@ -73,8 +73,8 @@ function View2({ update, data }: Props) {
                 )}
               >
                 <div className="flex flex-col items-start">
-                  <h4 className="font-semibold">Dark</h4>
-                  <p className="text-sm">My pen is coded with a dark theme</p>
+                  <h4 className="font-medium">Dark</h4>
+                  {/* <p className="text-sm">My pen is coded with a dark theme</p> */}
                 </div>
                 <Form.Radio
                   name="Dark"

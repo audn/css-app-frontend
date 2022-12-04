@@ -30,7 +30,8 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
     if (
       data.title &&
       data?.title.trim().length > 5 &&
-      data.title !== 'Untitled'
+      data.title !== 'Untitled' &&
+      data.category
     ) {
       return true;
     }
@@ -63,7 +64,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
 
   return (
     <Modal onClose={() => onClose()} open={isOpen}>
-      <div className="h-[527.5px] flex justify-between flex-col">
+      <div className="flex flex-col justify-between h-full transition-all duration-100 ease-out">
         <Form.Wrapper column={true} className="w-full">
           <h1 className="justify-center text-xl font-bold text-center text-white">
             {view == '1' ? 'Pen Meta' : 'Pen Settings'}
@@ -92,7 +93,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
             )}
           </AnimatePresence>
         </Form.Wrapper>
-        <Button.Wrapper className="flex !flex-wrap">
+        <Button.Wrapper className="flex !flex-wrap mt-10">
           {view === '2' ? (
             <div className="flex w-full gap-5">
               <Button.Secondary
