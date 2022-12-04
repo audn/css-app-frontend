@@ -10,7 +10,7 @@ function PostPreview({ post }: { post: API.Models.Post }) {
     <div className="min-h-screen">
       <NextSeo title={post.title} />
       <Preview
-        code={post.code}
+        initialCode={post.code}
         library={post.library}
         version={post.libraryVersion}
       />

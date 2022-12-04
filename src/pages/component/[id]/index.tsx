@@ -134,7 +134,11 @@ function Post({ post }: { post: API.Models.Post }) {
                 // onChange={(val) => update('code', val)}
               />
             ) : (
-              <Preview code={code} library={library} version={libraryVersion} />
+              <Preview
+                initialCode={code}
+                library={library}
+                version={libraryVersion}
+              />
             )}
           </div>
         </div>

@@ -145,11 +145,7 @@ function NewComponent() {
           initialContent={data.code}
           onChange={(val) => update('code', val)}
         />
-        <Preview
-          code={data.code}
-          library={library.toLowerCase()}
-          version={version}
-        />
+        <Preview library={library.toLowerCase()} version={version} />
       </SplitPane>
     </div>
   );

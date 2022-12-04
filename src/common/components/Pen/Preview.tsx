@@ -1,9 +1,9 @@
 function Preview({
-  code,
+  initialCode,
   library,
   version,
 }: {
-  code: string;
+  initialCode?: string;
   library: string;
   version: string;
 }) {
@@ -40,6 +40,7 @@ function Preview({
         </script>
         </head>
         <body>
+        ${initialCode}
         </body>
     </html>`}
       />
