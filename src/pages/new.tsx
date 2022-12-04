@@ -14,6 +14,7 @@ function NewComponent() {
 
   const [data, setData] = useState<Partial<API.Models.Post>>({
     // title: '',
+    code: '',
   });
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
@@ -21,6 +22,12 @@ function NewComponent() {
       ...d,
       [key]: value,
     }));
+
+    const html = { type: 'html', value };
+    const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+    if (typeof window !== 'undefined' && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(html, '*');
+    }
   };
 
   const isLg = true;
@@ -135,11 +142,7 @@ function NewComponent() {
           initialContent={data.code}
           onChange={(val) => update('code', val)}
         />
-        <Preview
-          code={data.code}
-          library={library.toLowerCase()}
-          version={version}
-        />
+        <Preview library={library.toLowerCase()} version={version} />
       </SplitPane>
     </div>
   );
