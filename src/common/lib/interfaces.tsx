@@ -68,7 +68,7 @@ export declare namespace API {
     interface Library {
       label: string;
       value: string;
-      versions: { value: string; src: string }[];
+      versions: string[];
       _count: {
         posts: number;
       };

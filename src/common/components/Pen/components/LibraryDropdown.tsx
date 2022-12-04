@@ -1,11 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 import useMainState from '../../../store/main';
 import { useLibraries } from '../../../utils/hooks/libraries';
 import Dropdown from '../../Dropdown';
 
 function LibraryDropdown() {
   const { data: libs, isLoading } = useLibraries();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { library, version } = useMainState((s) => ({
     library: s.library,
@@ -15,29 +14,22 @@ function LibraryDropdown() {
   function changeLib(event: ChangeEvent<HTMLSelectElement>) {
     const lib = event.target.value;
 
-    const libObject = libs?.payload?.results.filter((x) => x.label == lib)[0];
-    const src = libObject?.versions[0].src;
-    const version = libObject?.versions[0].value;
-
     useMainState.setState({
       version,
       library: lib,
-      src: src,
     });
   }
+
   function changeVersion(event: ChangeEvent<HTMLSelectElement>) {
     const version = event.target.value;
     useMainState.setState({
+      library,
       version: version,
     });
   }
-  useEffect(() => {
-    setIsOpen(!isOpen);
-  }, [library]);
 
   return (
     <Dropdown
-      open={isOpen}
       className="py-[0.4em]"
       isLoading={isLoading}
       options={{ animateCaret: true, box: true, caret: true }}
@@ -70,9 +62,7 @@ function LibraryDropdown() {
             {libs?.payload?.results
               .filter((x) => x.label === library)
               .map((x) =>
-                x.versions.map((x) => (
-                  <option value={x.value}>v{x.value}</option>
-                )),
+                x.versions.map((x) => <option value={x}>v{x}</option>),
               )}
           </select>
         </div>
