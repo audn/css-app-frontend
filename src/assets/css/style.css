@@ -33,13 +33,12 @@ body {
   padding-top: 15px;
 } */
 .monaco-editor,
+.monaco-editor .margin,
 .monaco-editor-background,
 .monaco-editor .inputarea.ime-input {
-  background-color: #212121 !important;
+  background-color: #1a1a1a !important;
 }
-.monaco-editor .margin {
-  background-color: #212121 !important;
-}
+
 .Resizer.horizontal {
   height: 11px;
   margin: -5px 0;
