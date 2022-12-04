@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
+import { useBeforeUnload } from 'react-use';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
 import PenEditor from '../common/components/Pen/Editor';
 import Preview from '../common/components/Pen/Preview';
@@ -118,7 +119,7 @@ function NewComponent() {
       };
     });
   }, []);
-
+  useBeforeUnload(data.code.length >= 1, 'd');
   return (
     <div>
       <HeaderAddingComponent data={data} update={update} />
