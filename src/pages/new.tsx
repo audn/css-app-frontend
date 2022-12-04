@@ -27,13 +27,15 @@ function NewComponent() {
       ...d,
       [key]: value,
     }));
-    const html = {
-      type: 'html',
-      value,
-    };
-    const iframe = document.querySelector('iframe') as HTMLIFrameElement;
-    if (typeof window !== 'undefined' && iframe.contentWindow) {
-      iframe.contentWindow.postMessage(html, '*');
+    if (key === 'code') {
+      const html = {
+        type: 'html',
+        value,
+      };
+      const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+      if (typeof window !== 'undefined' && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(html, '*');
+      }
     }
   };
 
