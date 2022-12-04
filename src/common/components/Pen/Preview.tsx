@@ -40,7 +40,7 @@ function Preview({
         </script>
         </head>
         <body>
-        ${initialCode}
+        ${initialCode || ''}
         </body>
     </html>`}
       />
