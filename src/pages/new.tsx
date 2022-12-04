@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import SplitPane from 'react-split-pane';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
 import PenEditor from '../common/components/Pen/Editor';
@@ -16,11 +17,20 @@ function NewComponent() {
     // title: '',
   });
 
+  const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,
     }));
+
+    const html = { type: 'html', value };
+    if (iframe.contentWindow) {
+      iframe.contentWindow.postMessage(html, '*');
+    } else {
+      toast.error('Something went wrong');
+    }
   };
 
   const isLg = true;
