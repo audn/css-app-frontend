@@ -21,7 +21,7 @@ export const renderImage = async (
     });
     console.log(update);
 
-    return res.json({ payload: update });
+    return res.json({ payload: 'success' });
   } else return res.json({});
 };
 
