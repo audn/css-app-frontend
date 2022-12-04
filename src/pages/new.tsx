@@ -171,7 +171,11 @@ function NewComponent() {
           initialContent={data.code}
           onChange={(val) => update('code', val)}
         />
-        <Preview library={library.toLowerCase()} version={version} />
+        <Preview
+          library={library.toLowerCase()}
+          version={version}
+          className="-z-10"
+        />
       </SplitPane>
     </div>
   );
