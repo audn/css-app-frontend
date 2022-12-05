@@ -11,9 +11,10 @@ type Props = {
 };
 export const FadedLayout = ({ h1, h3, children }: Props) => {
   const [search, setSearch] = useState<string | undefined>('');
+
   return (
     <>
-      <div className="flex items-center h-auto p-5 bg-gradient-to-t from-types-150 to-types-body pt-12 pb-14 md:pb-28  max-h-[d300px] flex-col">
+      <div className="flex flex-col items-center h-auto p-5 pt-12 bg-gradient-to-t from-types-150 to-types-body pb-14 md:pb-20">
         <Banner
           text={
             <>

@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Hydrate } from '../../common/components/Hydrate';
-import { FadedLayout } from '../../common/layouts/FadeLayout';
+import H2 from '../../common/components/layout/headings/H2';
+import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useSearchPosts } from '../../common/utils/hooks/posts';
@@ -56,17 +57,15 @@ export default function Home({ query }: { query: { library: string } }) {
   } = useSearchPosts(apiQuery);
 
   return (
-    <FadedLayout
-      h1={
-        <>
-          A free library for hand-crafted components using{' '}
-          <span className="text-brand-primary-150">{library}</span>
-        </>
-      }
-      h3="Guides, Patch Notes and a warm community surrounding all CSS libraries."
-    >
+    <DefaultLayout>
+      <div className="flex flex-col mt-8">
+        <H2 className="text-white">{library} Components</H2>
+        <h4 className="text-lg mt-3 !font-medium">
+          Browsing components posted by community members.
+        </h4>
+      </div>
       <NextSeo title={`Browse components for ${library}`} />
-      <div className="p-6 mt-10">
+      <div className="mt-10 ">
         <Hydrate.Posts
           data={data}
           error={fetchError}
@@ -76,7 +75,7 @@ export default function Home({ query }: { query: { library: string } }) {
           onClearFilters={resetQueries}
         />
       </div>
-    </FadedLayout>
+    </DefaultLayout>
   );
 }
 export const getStaticProps: GetStaticProps = async (ctx) => {
