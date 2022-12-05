@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Hydrate } from '../../common/components/Hydrate';
 import { FadedLayout } from '../../common/layouts/FadeLayout';
@@ -14,6 +14,13 @@ export default function Home({ query }: { query: { library: string } }) {
   const filters = useFilterState();
 
   const initialLibrary = query.library;
+  const [library, setLibrary] = useState<string | undefined>(
+    useLibraryLabel(initialLibrary),
+  );
+
+  useEffect(() => {
+    setLibrary(filters.library);
+  }, [filters.library]);
 
   useEffect(() => {
     if (initialLibrary) {
@@ -53,14 +60,12 @@ export default function Home({ query }: { query: { library: string } }) {
       h1={
         <>
           A free library for hand-crafted components using{' '}
-          <span className="text-brand-primary-150">{'library'}</span>
+          <span className="text-brand-primary-150">{library}</span>
         </>
       }
       h3="Guides, Patch Notes and a warm community surrounding all CSS libraries."
     >
-      <NextSeo
-        title={`Browse components for ${useLibraryLabel(initialLibrary)}`}
-      />
+      <NextSeo title={`Browse components for ${library}`} />
       <div className="p-6 mt-10">
         <Hydrate.Posts
           data={data}
