@@ -1,4 +1,5 @@
-import { ReactNode, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ReactNode, SyntheticEvent, useState } from 'react';
 import { Form } from '../components/Form';
 import Banner from '../components/layout/Banner';
 import H1 from '../components/layout/headings/H1';
@@ -10,8 +11,27 @@ type Props = {
   h3: string;
 };
 export const FadedLayout = ({ h1, h3, children }: Props) => {
+  const router = useRouter();
   const [search, setSearch] = useState<string | undefined>('');
 
+  const handleSearchOn = () => {
+    void router.push(
+      {
+        pathname: 'search',
+        query: {
+          ...router.query,
+          q: search,
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
+  };
+
+  function handleSearch(e: SyntheticEvent) {
+    e.preventDefault();
+    handleSearchOn();
+  }
   return (
     <>
       <div className="flex flex-col items-center h-auto p-5 pt-12 bg-gradient-to-t from-types-150 to-types-body pb-14 md:pb-20">
@@ -37,14 +57,16 @@ export const FadedLayout = ({ h1, h3, children }: Props) => {
           <span className="absolute text-sm left-5">
             <i className="fa-regular fa-magnifying-glass" />
           </span>
-          <Form.Input
-            onChange={setSearch}
-            value={search}
-            autoFocus={false}
-            id="headerSearch"
-            placeholder="Search..."
-            inputClassName="!bg-types-200 px-4 !pl-11 py-3  rounded-full focus:bg-types-200/80 hover:bg-types-200/80 "
-          />
+          <form onSubmit={(event) => handleSearch(event)} className="w-full">
+            <Form.Input
+              onChange={setSearch}
+              value={search}
+              autoFocus={false}
+              id="headerSearch"
+              placeholder="Search..."
+              inputClassName="!bg-types-200 px-4 !pl-11 py-3  rounded-full focus:bg-types-200/80 hover:bg-types-200/80 "
+            />
+          </form>
         </div>
       </div>
       <div className="container flex flex-col">
