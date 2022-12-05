@@ -14,6 +14,7 @@ import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   getPostFromId,
@@ -29,18 +30,24 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null) {
+      if (post.generatedImage == null && !useLocalhost) {
+        const msg = toast.loading('Generating thumbnail...');
         let options: RequestInit = {
           method: 'PUT',
           mode: 'cors',
           referrerPolicy: 'no-referrer',
           credentials: 'omit',
         };
-        toast.success('updating thumb');
-        await fetch(
+
+        const { status } = await fetch(
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
           options,
         );
+        if (status === 200) {
+          toast.success('Done!', { id: msg });
+        } else {
+          toast.error('Failed to save :(', { id: msg });
+        }
       }
     }
     updateThumbnail();
