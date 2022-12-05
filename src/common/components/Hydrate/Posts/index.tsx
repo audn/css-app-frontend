@@ -13,6 +13,7 @@ function PostsHydration({
   isLoading,
   refetch,
   isRefetching,
+  onClearFilters,
 }: Hydration.Posts) {
   if (isLoading) {
     return (
@@ -45,7 +46,9 @@ function PostsHydration({
       </AnimatePresence>
     );
   } else {
-    return <NothingToHydrate onClick={refetch} isLoading={isRefetching} />;
+    return (
+      <NothingToHydrate onClick={onClearFilters} isLoading={isRefetching} />
+    );
   }
 }
 

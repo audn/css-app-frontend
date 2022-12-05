@@ -111,6 +111,8 @@ export declare namespace Hydration {
     isRefetching: boolean;
     isLoading: boolean;
     error: unknown;
+    //custom prop
+    onClearFilters?: () => void;
   };
 
   interface Posts extends ReactQueryProps {
