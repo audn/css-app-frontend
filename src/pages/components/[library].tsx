@@ -58,7 +58,7 @@ export default function Home({ query }: { query: { library: string } }) {
 
   return (
     <DefaultLayout>
-      <div className="flex flex-col mt-8">
+      <div className="flex flex-col mt-3 md:mt-8">
         <H2 className="text-white">{library} Components</H2>
         <h4 className="text-lg mt-3 !font-medium">
           Browsing components posted by community members.

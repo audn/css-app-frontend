@@ -18,21 +18,23 @@ export default function Home() {
       h3="Guides, Patch Notes and a warm community surrounding all CSS libraries. "
     >
       <NextSeo title={`Browse components for TailwindCSS`} />
-      <div className="flex flex-col mt-10 mb-10">
-        <h2 className="!text-on-100 !text-lg font-semibold">
-          Recently posted components
-        </h2>
-        {/* <h4 className="text-lg mt-3 !font-medium">
+      <div className="px-5">
+        <div className="flex flex-col mt-10 mb-10">
+          <h2 className="!text-on-100 !text-lg font-semibold">
+            Recently posted components
+          </h2>
+          {/* <h4 className="text-lg mt-3 !font-medium">
           Browsing components posted by community members.
         </h4> */}
-      </div>{' '}
-      <Hydrate.Posts
-        data={data}
-        error={fetchError}
-        isLoading={isLoading}
-        refetch={refetch}
-        isRefetching={isRefetching}
-      />
+        </div>
+        <Hydrate.Posts
+          data={data}
+          error={fetchError}
+          isLoading={isLoading}
+          refetch={refetch}
+          isRefetching={isRefetching}
+        />
+      </div>
     </FadedLayout>
   );
 }

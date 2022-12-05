@@ -16,7 +16,7 @@ function H2({
       {...props}
       className={concat(
         className ? className : '',
-        'font-bold text-white text-[1.875rem] !leading-[2.25rem] tracking-[-.015em]',
+        'font-bold text-white text-xl md:text-[1.875rem] !leading-[2.25rem] tracking-[-.015em]',
       )}
     >
       {children}
