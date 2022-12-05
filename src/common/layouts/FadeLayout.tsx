@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import Banner from '../components/layout/Banner';
 import H1 from '../components/layout/headings/H1';
 import H3 from '../components/layout/headings/H3';
@@ -9,8 +9,6 @@ type Props = {
   h3: string;
 };
 export const FadedLayout = ({ h1, h3, children }: Props) => {
-  const [search, setSearch] = useState<string | undefined>('');
-
   return (
     <>
       <div className="flex flex-col items-center h-auto p-5 pt-12 bg-gradient-to-t from-types-150 to-types-body pb-14 md:pb-20">
