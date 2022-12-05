@@ -17,6 +17,15 @@ export const getLibrarySource = (library?: string, version?: string) => {
       default:
         return "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css'/>";
     }
+  } else if (library === 'bootstrap') {
+    switch (version) {
+      case '5.2':
+        return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css" rel="stylesheet"/>';
+      case '4.6':
+        return '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/>';
+      default:
+        return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css" rel="stylesheet"/>';
+    }
   } else return '';
 };
 export const iframeSrcDoc = ({
