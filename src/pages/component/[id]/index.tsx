@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
 import Auth from '../../../common/components/layout/Auth';
@@ -27,9 +27,24 @@ function Post({ post }: { post: API.Models.Post }) {
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
-  //   const postCss = post.libraryRelations?.versions.find(
-  //     (x) => x.value === post.libraryVersion,
-  //   )?.src;
+  useEffect(() => {
+    async function updateThumbnail() {
+      if (post.generatedImage == null) {
+        let options: RequestInit = {
+          method: 'PUT',
+          mode: 'cors',
+          referrerPolicy: 'no-referrer',
+          credentials: 'omit',
+        };
+        toast.success('updating thumb');
+        await fetch(
+          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
+          options,
+        );
+      }
+    }
+    updateThumbnail();
+  }, []);
 
   const toggleEdit = () => setEdit(!isEditing);
 
@@ -176,19 +191,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
   const data = await (await getPostFromId(id)).payload?.results;
-  if (data?.generatedImage == null) {
-    let options: RequestInit = {
-      method: 'PUT',
-      mode: 'cors',
-      referrerPolicy: 'no-referrer',
-      credentials: 'omit',
-    };
-
-    await fetch(
-      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${data?.id}`,
-      options,
-    );
-  }
 
   if (!data) {
     return {
