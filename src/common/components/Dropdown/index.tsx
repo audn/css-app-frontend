@@ -54,7 +54,7 @@ function Dropdown({
         className={concat(
           className ? className : '',
           options.box
-            ? 'bg-types-200/80 px-4 text-sm py-[0.5rem] rounded-lg bordder hover:bg-types-150 animate shadow border-types-250 hover:bg-types-200/50 focus:ring-2'
+            ? 'bg-types-200/80 px-4 text-sm py-[0.4rem] border hover:bg-types-150 animate shadow !rounded-full border-types-250 hover:bg-types-200/50 focus:ring-2'
             : '',
           'flex items-center font-medium text-on-100 justify-between',
         )}
