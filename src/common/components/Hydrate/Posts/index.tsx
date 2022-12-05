@@ -4,6 +4,7 @@ import { Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
 import PostCard from '../../Cards/Post';
 import HydrationError from '../../layout/Alerts/HydrationError';
+import NothingToHydrate from '../../layout/Alerts/NothingToHydrate';
 import Animate from '../../layout/Animate';
 
 function PostsHydration({
@@ -30,7 +31,7 @@ function PostsHydration({
         isLoading={isRefetching}
       />
     );
-  } else
+  } else if (data?.payload?.count! >= 1) {
     return (
       <AnimatePresence initial={false}>
         <Animate
@@ -43,6 +44,9 @@ function PostsHydration({
         </Animate>
       </AnimatePresence>
     );
+  } else {
+    return <NothingToHydrate onClick={refetch} isLoading={isRefetching} />;
+  }
 }
 
 export default PostsHydration;
