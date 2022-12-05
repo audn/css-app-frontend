@@ -28,6 +28,18 @@ export const getLibrarySource = (library?: string, version?: string) => {
     }
   } else return '';
 };
+export const useLibraryLabel = (val: string) => {
+  switch (val) {
+    case 'tailwindcss':
+      return 'TailwindCSS';
+    case 'bulma':
+      return 'Bulma';
+    case 'bootstrap':
+      return 'Bootstrap';
+    default:
+      return 'TailwindCSS';
+  }
+};
 export const iframeSrcDoc = ({
   initialCode = '',
   library,

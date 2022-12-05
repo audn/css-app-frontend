@@ -1,52 +1,45 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { Hydrate } from '../../common/components/Hydrate';
 import { FadedLayout } from '../../common/layouts/FadeLayout';
-import { API } from '../../common/lib/interfaces';
+import useFilterState from '../../common/store/filter';
+import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useSearchPosts } from '../../common/utils/hooks/posts';
 
 export default function Home({ query }: { query: { library: string } }) {
   const router = useRouter();
-  const storage =
-    typeof window !== 'undefined' && localStorage.getItem('library');
+  const filters = useFilterState();
 
-  const [library, setLibrary] = useState<string>('TailwindCSS');
+  const initialLibrary = query.library;
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (!storage) {
-        if (query.library) {
-          localStorage.setItem('libray', libraryValue(query.library));
-        } else {
-          localStorage.setItem('libray', 'TailwindCSS');
-        }
-        console.info('set library to tailwindcss');
-      } else {
-        setLibrary(storage);
-      }
+    if (initialLibrary) {
+      useFilterState.setState({ library: useLibraryLabel(initialLibrary) });
     }
-  }, [storage]);
+  }, [initialLibrary]);
 
-  const apiQuery: API.Requests.SearchPosts = {
+  const setDefaultLibrary = () => {
+    useFilterState.setState({ library: 'TailwindCSS' });
+  };
+
+  const resetQueries = () => {
+    setDefaultLibrary();
+    router.push(`/components/tailwindcss`, undefined, {
+      shallow: true,
+    });
+    toast.success('Reset back to default filters.');
+  };
+
+  const apiQuery = {
     q: (router.query.q as string) || '*',
     filter: {
-      library: library.toLowerCase(),
+      library: filters.library.toLowerCase(),
     },
   };
-  const libraryValue = (val: string) => {
-    switch (val) {
-      case 'tailwindcss':
-        return 'TailwindCSS';
-      case 'bulma':
-        return 'Bulma';
-      case 'bootstrap':
-        return 'Bootstrap';
-      default:
-        return 'TailwindCSS';
-    }
-  };
+
   const {
     data,
     isLoading,
@@ -60,12 +53,14 @@ export default function Home({ query }: { query: { library: string } }) {
       h1={
         <>
           A free library for hand-crafted components using{' '}
-          <span className="text-brand-primary-150">{library}</span>
+          <span className="text-brand-primary-150">{'library'}</span>
         </>
       }
       h3="Guides, Patch Notes and a warm community surrounding all CSS libraries."
     >
-      <NextSeo title={`Browse components for ${libraryValue(query.library)}`} />
+      <NextSeo
+        title={`Browse components for ${useLibraryLabel(initialLibrary)}`}
+      />
       <div className="p-6 mt-10">
         <Hydrate.Posts
           data={data}
@@ -73,6 +68,7 @@ export default function Home({ query }: { query: { library: string } }) {
           isLoading={isLoading}
           refetch={refetch}
           isRefetching={isRefetching}
+          onClearFilters={resetQueries}
         />
       </div>
     </FadedLayout>
