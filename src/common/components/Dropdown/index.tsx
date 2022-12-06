@@ -39,7 +39,7 @@ function Dropdown({
       setIsOpen,
     }),
   );
-  function handleListClick(val: string) {
+  function handleAnyClick(val: string) {
     if (onClick) {
       onClick(val);
     }
@@ -82,9 +82,10 @@ function Dropdown({
               list?.map((item, i) => (
                 <ListItem
                   active={active}
+                  //   onAnyClick={options.toggleOnClick}
                   {...item}
                   key={i}
-                  onGlobalClick={handleListClick}
+                  onGlobalClick={handleAnyClick}
                 />
               ))
             ) : (
