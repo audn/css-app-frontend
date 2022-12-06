@@ -11,7 +11,7 @@ export const DefaultLayout = ({ children, className }: Props) => {
       <div
         className={concat(
           className ? className : '',
-          'max-w-[92rem] mx-auto flex flex-col min-h-screen ',
+          'max-w-[92rem] mx-auto flex flex-col',
         )}
       >
         <main className={'flex-1 w-full text-on-100'}>{children}</main>
