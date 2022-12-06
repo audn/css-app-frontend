@@ -80,7 +80,7 @@ export declare namespace API {
       discordId?: string;
       username: string;
       avatar: string;
-      preferences: UserPreferences;
+      displayName?: string;
       role: UserRoles;
       createdAt: string;
     }
