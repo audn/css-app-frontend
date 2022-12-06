@@ -73,7 +73,7 @@ function Dropdown({
       </button>
       <AnimatePresence>
         {isOpen && (
-          <DropdownWrapper>
+          <DropdownWrapper position={options.position}>
             {isLoading ? (
               <div className="flex justify-center">
                 <LoadingIcon />
