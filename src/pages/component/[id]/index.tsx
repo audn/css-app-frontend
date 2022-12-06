@@ -14,6 +14,7 @@ import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   editPost,
@@ -30,8 +31,7 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null) {
-        const msg = toast.loading('Generating thumbnail...');
+      if (post.generatedImage == null && !useLocalhost) {
         let options: RequestInit = {
           method: 'PUT',
           mode: 'cors',
@@ -43,6 +43,7 @@ function Post({ post }: { post: API.Models.Post }) {
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
           options,
         );
+        // const msg = toast.loading('Generating thumbnail...');
 
         const res = await data.json();
         const buffer = res.data;
@@ -55,10 +56,10 @@ function Post({ post }: { post: API.Models.Post }) {
             generatedImage: `data:${mimeType};base64,${b64}`,
           });
           if (update) {
-            toast.success('Done!', { id: msg });
-          } else return;
+            // toast.success('Done!', { id: msg });
+          } else toast.error('Failed to update thumbnail');
         } else {
-          toast.error(res.errorMessage, { id: msg });
+          toast.error('Failed to update thumbnail');
         }
       }
     }

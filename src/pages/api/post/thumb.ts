@@ -3,7 +3,7 @@ import { NextApiResponse } from 'next';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 
 export const renderImage = async (
-  req: { query: { id: string }; headers: any },
+  req: { query: { id: string } },
   res: NextApiResponse,
 ) => {
   const data = await getPostFromId(req.query.id);
