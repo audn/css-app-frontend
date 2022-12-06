@@ -18,7 +18,23 @@ function UserProfile({ user }: { user: API.Models.User }) {
                 />
               );
             }}
-          </Color>
+          </Color>{' '}
+          {/* <Palette
+            colorCount={10}
+            crossOrigin="anonymous"
+            format="hex"
+            src={user.avatar}
+          >
+            {({ data, loading }) => {
+              if (!loading)
+                return (
+                  <div
+                    className={`h-[200px] w-full`}
+                    style={{ backgroundColor: data[3] }}
+                  />
+                );
+            }}
+          </Palette> */}
           <div className="p-8 -mt-20">
             <div className="flex">
               <img
