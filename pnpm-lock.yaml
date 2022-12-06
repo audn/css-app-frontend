@@ -37,6 +37,7 @@ specifiers:
   react-hot-toast: ^2.4.0
   react-loading-skeleton: ^3.1.0
   react-split-pane: ^0.1.92
+  react-timeago: ^7.1.0
   react-tooltip: ^4.2.21
   react-use: ^17.4.0
   tailwindcss: ^3.0.23
@@ -60,6 +61,7 @@ dependencies:
   react-hot-toast: 2.4.0_sfoxds7t5ydpegc3knd667wn6m
   react-loading-skeleton: 3.1.0_react@17.0.2
   react-split-pane: 0.1.92_sfoxds7t5ydpegc3knd667wn6m
+  react-timeago: 7.1.0_react@17.0.2
   react-tooltip: 4.2.21_sfoxds7t5ydpegc3knd667wn6m
   react-use: 17.4.0_sfoxds7t5ydpegc3knd667wn6m
   typescript: 4.8.4
@@ -4294,6 +4296,14 @@ packages:
     resolution: {integrity: sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==}
     dependencies:
       prop-types: 15.8.1
+    dev: false
+
+  /react-timeago/7.1.0_react@17.0.2:
+    resolution: {integrity: sha512-rouF7MiEm55fH791Y8cg+VobIJgx8gtNJ+gjr86R4ZqO1WKPkXiXjdT/lRzrvEkUzsxT1exHqV2V+Zdi114H3A==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /react-tooltip/4.2.21_sfoxds7t5ydpegc3knd667wn6m:

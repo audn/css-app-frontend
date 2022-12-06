@@ -1,6 +1,7 @@
 import Color from 'color-thief-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import TimeAgo from 'react-timeago';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { API } from '../../common/lib/interfaces';
 import { getUser } from '../../common/utils/hooks/api/user';
@@ -43,7 +44,20 @@ function UserProfile({ user }: { user: API.Models.User }) {
                     @{user.username}
                   </h4>
                 </div>
-                <div className="mt-5">{user.posts?.length} components</div>
+                <div className="mt-5 space-y-2">
+                  <div>
+                    <span className="font-medium">
+                      {user.posts?.length || 0}
+                    </span>{' '}
+                    components
+                  </div>
+                  <div>
+                    Member since{' '}
+                    <span className="font-medium">
+                      <TimeAgo date={user.createdAt} />
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
