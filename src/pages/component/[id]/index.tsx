@@ -54,7 +54,9 @@ function Post({ post }: { post: API.Models.Post }) {
           const update = await editPost(post.id, {
             generatedImage: `data:${mimeType};base64,${b64}`,
           });
-          toast.success('Done!', { id: msg });
+          if (update) {
+            toast.success('Done!', { id: msg });
+          } else return;
         } else {
           toast.error(res.errorMessage, { id: msg });
         }
