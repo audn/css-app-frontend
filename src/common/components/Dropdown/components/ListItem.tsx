@@ -11,7 +11,8 @@ function ListItem({
   onClick,
   route,
   className,
-}: INavItem) {
+  onGlobalClick,
+}: INavItem & { onGlobalClick: (val: string) => void }) {
   const activeItem = active == label;
   const router = useRouter();
   function handleClick() {
@@ -21,7 +22,13 @@ function ListItem({
       } else {
         router.push(route);
       }
-    } else onClick!(label);
+    } else {
+      if (typeof onClick == 'function') {
+        onClick(label);
+      } else {
+        onGlobalClick(label);
+      }
+    }
   }
   return (
     <li

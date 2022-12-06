@@ -84,7 +84,7 @@ function Dropdown({
                   active={active}
                   {...item}
                   key={i}
-                  onClick={handleListClick}
+                  onGlobalClick={handleListClick}
                 />
               ))
             ) : (

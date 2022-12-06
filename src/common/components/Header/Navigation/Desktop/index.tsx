@@ -20,12 +20,16 @@ function DesktopMenu() {
       icon: 'fa-regular fa-user',
       route: `/user/${user.id}`,
     },
-    { label: 'Sign out', icon: 'fa-regular fa-sign-out-alt', route: '/me' },
+    {
+      label: 'Sign out',
+      icon: 'fa-regular fa-sign-out-alt',
+      onClick: () => handleLogout(),
+    },
   ] as INavItem[];
   return (
     <div className="items-center hidden space-x-5 sm:flex">
       <Auth.User>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-5">
           <Link href="/new">
             <Button.Secondary title="New component" />
           </Link>
@@ -33,7 +37,7 @@ function DesktopMenu() {
             <Dropdown
               className="mt-2"
               list={userMenu}
-              options={{ caret: false, position: 'end' }}
+              options={{ caret: false, position: 'end', toggleOnClick: true }}
             >
               <img src={user.avatar} className="w-10 h-10 -mt-2 rounded-full" />
             </Dropdown>
