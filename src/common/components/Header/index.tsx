@@ -1,85 +1,37 @@
+import { useEffect, useState } from 'react';
+import concat from '../../utils/helpers/concat';
 import Logo from '../misc/Logo';
 import LibrarySelector from './components/LibrarySelector';
 import Navigation from './Navigation';
 
 export const Header = () => {
-  //   const router = useRouter();
-  //   const [search, setSearch] = useState<string | undefined>('');
-  //   const [pendingTimeout, setTimeoutHandle] = useState<number | null>(null);
+  const [userHasScrolled, setUserHasScrolled] = useState(false);
+  if (typeof window !== 'undefined') {
+    useEffect(() => {
+      function add() {
+        setUserHasScrolled(window.pageYOffset > 100);
+      }
+      function remove() {
+        setUserHasScrolled(false);
+      }
 
-  //   const handleSearchOn = () => {
-  //     if (search == undefined || search.length <= 1) {
-  //       setTimeout(() => {}, 1000);
-  //     } else {
-  //       //   useMainState.setState({ searchInput: search });
-  //       void router.push(
-  //         {
-  //           pathname: '',
-  //           query: {
-  //             // ...(router.pathname !== '/packs' && { bots: ['bots'] }),
-  //             ...router.query,
-  //             q: search,
-  //           },
-  //         },
-  //         undefined,
-  //         { shallow: true },
-  //       );
-  //     }
-  //   };
-  //   function handleSearch(event: SyntheticEvent) {
-  //     event.preventDefault();
-  //     if (search && search.length < 1) {
-  //       setTimeout(() => {}, 1000);
-  //     } else {
-  //       if (pendingTimeout != null) {
-  //         clearTimeout(pendingTimeout);
-  //       }
-  //       handleSearchOn();
-  //     }
-  //   }
-  //   const handleEmptySearchField = () => {
-  //     if (search == undefined || search.length == 0) {
-  //       void router.push({
-  //         query: {},
-  //       });
-  //       return;
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     // @ts-ignore
-  //     return setTimeoutHandle((v) => {
-  //       if (v != null) {
-  //         clearTimeout(v);
-  //       }
+      window.addEventListener('scroll', add);
 
-  //       return setTimeout(() => {
-  //         handleEmptySearchField();
-  //         if (search?.length == 1) {
-  //           return;
-  //         }
-
-  //         handleSearchOn();
-  //       }, 300);
-  //     });
-  //   }, [search]);
+      return () => window.removeEventListener('scroll', remove);
+    }, []);
+  }
   return (
-    <header className="sticky top-0 h-[80px] z-50 flex items-center w-full px-6 bg-types-body/20 filter backdrop-blur">
+    <header
+      className={concat(
+        userHasScrolled ? 'border-types-200' : 'border-transparent',
+        'sticky top-0 h-[80px] z-50 flex items-center w-full px-6 bg-types-body border-b transition-all ease-out duration-500',
+      )}
+    >
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Logo />
           <div className="flex items-center ml-5 space-x-3">
             <LibrarySelector />
-            {/* <div className="text-lg font-semibold text-white/30">/</div>
-            <div className="flex items-center">
-              <Form.Input
-                onChange={setSearch}
-                value={search}
-                autoFocus={true}
-                id="headerSearch"
-                placeholder="Search..."
-                inputClassName="bg-transparent focus:bg-types-200/80 hover:bg-types-200/80 "
-              />
-            </div> */}
           </div>
         </div>
         <Navigation />

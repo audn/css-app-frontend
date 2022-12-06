@@ -5,7 +5,7 @@ import { lists } from './routes';
 
 function Footer() {
   return (
-    <footer className="flex justify-center w-full mt-32 bg-types-100 text-white/80 sm:text-sm">
+    <footer className="flex justify-center w-full mt-10 bg-types-100 text-white/80 sm:text-sm">
       <div className="grid w-full max-w-6xl gap-8 p-4 py-8 sm:grid-cols-4 sm:gap-y-16 sm:py-16">
         <div className="flex flex-col space-y-5 sm:block">
           <Logo />
