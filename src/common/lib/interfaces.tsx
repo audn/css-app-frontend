@@ -83,6 +83,7 @@ export declare namespace API {
       displayName?: string;
       role: UserRoles;
       createdAt: string;
+      posts?: API.Models.Post[];
     }
     interface Post {
       id: string;
