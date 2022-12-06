@@ -17,7 +17,7 @@ export type IDropdown = {
   isLoading?: boolean;
   open?: boolean;
   list?: {
-    value: string;
+    value?: string;
     label: string;
     _count?: { [key: string]: number };
   }[] &

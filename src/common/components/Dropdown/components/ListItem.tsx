@@ -32,9 +32,11 @@ function ListItem({
       onClick={handleClick}
     >
       <div className="flex items-center">
-        <div className="w-4">
-          {activeItem && <i className="text-[10px] fa-regular fa-check" />}
-        </div>
+        {_count && (
+          <div className="w-4">
+            {activeItem && <i className="text-[10px] fa-regular fa-check" />}
+          </div>
+        )}
         {icon && (
           <div className="flex-shrink-0 w-6 text-sm text-left">
             <i className={`${icon}`} />
