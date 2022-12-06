@@ -2,11 +2,20 @@ import Color from 'color-thief-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import TimeAgo from 'react-timeago';
+import Auth from '../../common/components/layout/Auth';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { API } from '../../common/lib/interfaces';
+import useAuthState from '../../common/store/auth';
 import { getUser } from '../../common/utils/hooks/api/user';
 
 function UserProfile({ user }: { user: API.Models.User }) {
+  const currentUser = useAuthState((s) => s.user);
+  console.log(user.id == currentUser.id || currentUser.role === 'ADMIN');
+
+  const canManage = () => {
+    return user.id == currentUser.id || currentUser.role === 'ADMIN';
+  };
+
   return (
     <DefaultLayout className="mt-3 md:mt-5">
       <NextSeo
@@ -24,17 +33,19 @@ function UserProfile({ user }: { user: API.Models.User }) {
               );
             }}
           </Color>
-          <div className="p-6">
-            <div className="flex justify-between">
+          <div className="p-6 ">
+            <div className="relative flex justify-between">
               <img
                 src={user.avatar}
-                className="w-24 h-24 -mt-20 rounded-full ring-8 ring-types-150"
+                className="w-24 h-24 -mt-20 rounded-full ring-8 ring-types-150 "
               />
-              <button className="flex items-center justify-center w-10 h-10 text-xl rounded-full text-on-50 hover:bg-types-200 hover:text-white animate">
-                <i className="fa-solid fa-ellipsis-vertical" />
-              </button>
+              <Auth.Policy policy={canManage()}>
+                <button className="absolute top-0 right-0 flex items-center justify-center w-10 h-10 text-xl rounded-full text-on-50 hover:bg-types-200 hover:text-white animate">
+                  <i className="fa-solid fa-ellipsis-vertical" />
+                </button>
+              </Auth.Policy>
             </div>
-            <div className="-mt-2">
+            <div className="mt-4">
               <div className="flex flex-col">
                 <div>
                   <h1 className="text-xl font-semibold text-white">

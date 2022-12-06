@@ -1,13 +1,13 @@
 import { NextSeoProps } from 'next-seo';
 
 export default {
-  title: 'react-boilerplate',
-  description: 'react-boilerplate',
+  title: 'css.app',
+  description: 'css.app',
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://www.align-items.center',
-    site_name: 'react-boilerplate',
+    url: 'https://www.css.app',
+    site_name: 'css.app',
     images: [
       {
         url: 'https://opengraph.githubassets.com/fa53ec3abce99887a2167be84b9fb267f5d08e05d9d5779866d47922e5af1983/audn/frontend-boilerplate',

@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { useBeforeUnload } from 'react-use';
@@ -150,6 +151,7 @@ function NewComponent() {
   useBeforeUnload(data.code.length >= 1, 'd');
   return (
     <div>
+      <NextSeo title={`New component`} />{' '}
       <HeaderAddingComponent data={data} update={update} />
       {/* @ts-ignore */}
       <SplitPane
