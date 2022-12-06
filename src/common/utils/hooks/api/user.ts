@@ -6,6 +6,13 @@ export async function getCurrentUser(): Promise<API.Response<API.Models.User>> {
   return res.json();
 }
 
+export async function getUser(
+  id: string,
+): Promise<API.Response<API.Models.User>> {
+  const res = await get(`/users/${id}`, true);
+  return res.json();
+}
+
 export async function editUserPreferences(
   data: API.UserPreferences,
 ): Promise<API.Response<API.Models.User>> {

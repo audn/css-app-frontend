@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import useAuthState from '../../store/auth';
-import { getCurrentUser } from './api/user';
+import { getCurrentUser, getUser } from './api/user';
 
 export async function useCurrentUser() {
   const data = await getCurrentUser();
@@ -10,3 +11,16 @@ export async function useCurrentUser() {
     });
   }
 }
+
+export const useGetUser = (id: string) => {
+  const { isLoading, error, data, refetch, isRefetching } = useQuery(
+    [`/posts`, id],
+    () => getUser(id),
+    {
+      refetchOnWindowFocus: false,
+      onError: (e) => console.error(`Error getting user: ${e}`),
+    },
+  );
+
+  return { isLoading, error, data: data, refetch, isRefetching };
+};
