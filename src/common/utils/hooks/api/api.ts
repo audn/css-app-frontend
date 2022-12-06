@@ -38,14 +38,6 @@ async function request(
     headers.set('Content-Type', 'application/json');
   }
 
-  if (requireAuth) {
-    if (typeof localStorage != 'undefined') {
-      headers.set(
-        'Authorization',
-        `Bearer ${localStorage.getItem('access_token')}`,
-      );
-    }
-  }
   options.headers = headers;
 
   const res = await fetch(`${base}${endpoint}`, options);

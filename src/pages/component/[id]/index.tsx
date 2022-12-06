@@ -16,6 +16,7 @@ import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
 import {
   deletePost,
+  editPost,
   getPostFromId,
 } from '../../../common/utils/hooks/api/posts';
 
@@ -42,9 +43,17 @@ function Post({ post }: { post: API.Models.Post }) {
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
           options,
         );
+
         const res = await data.json();
+        const buffer = res.data;
 
         if (!res.errorMessage) {
+          const b64 = Buffer.from(buffer).toString('base64');
+          const mimeType = 'image/png';
+
+          const update = await editPost(post.id, {
+            generatedImage: `data:${mimeType};base64,${b64}`,
+          });
           toast.success('Done!', { id: msg });
         } else {
           toast.error(res.errorMessage, { id: msg });
