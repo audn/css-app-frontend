@@ -31,10 +31,10 @@ export const fadeInFromTopAndOutBottom = {
 };
 
 export const fadeInFromBottomAndOutBottom = {
-  initial: { y: 30, x: 0, opacity: 0 },
-  enter: { y: 0, opacity: 1 },
+  initial: { translateY: 30, x: 0, opacity: 1 },
+  enter: { translateY: 0, opacity: 1 },
   exit: {
-    y: 25,
+    translateY: 25,
     opacity: 0,
     transition: { duration: 0.2 },
   },
