@@ -36,6 +36,7 @@ export const HeaderEditingComponent = ({
     const newData = (({ author, authorId, ...o }) => o)(data);
     const posted = await editPost(data.id!, {
       ...newData,
+      library: data.library?.toLowerCase(),
     });
     if (posted.payload?.results) {
       toast.success('Saved!', { id: toaster });
