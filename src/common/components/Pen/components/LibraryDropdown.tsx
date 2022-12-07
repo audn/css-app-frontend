@@ -1,31 +1,28 @@
 import { ChangeEvent } from 'react';
-import useMainState from '../../../store/main';
+import { API } from '../../../lib/interfaces';
+import { useLibraryLabel } from '../../../utils/data/libraries';
 import { useLibraries } from '../../../utils/hooks/libraries';
 import Dropdown from '../../Dropdown';
 
-function LibraryDropdown() {
+function LibraryDropdown({
+  data,
+  update,
+}: {
+  update: (key: keyof API.Models.Post, value: string | boolean) => void;
+  data: Partial<API.Models.Post>;
+  //   onSetting: () => void;
+}) {
   const { data: libs, isLoading } = useLibraries();
-
-  const { library, version } = useMainState((s) => ({
-    library: s.library,
-    version: s.version,
-  }));
 
   function changeLib(event: ChangeEvent<HTMLSelectElement>) {
     const lib = event.target.value;
 
-    useMainState.setState({
-      version,
-      library: lib,
-    });
+    update('library', lib);
   }
 
   function changeVersion(event: ChangeEvent<HTMLSelectElement>) {
     const version = event.target.value;
-    useMainState.setState({
-      library,
-      version: version,
-    });
+    update('libraryVersion', version);
   }
 
   return (
@@ -39,7 +36,7 @@ function LibraryDropdown() {
           <select
             id="library"
             name="library"
-            value={library}
+            value={data.library}
             onChange={(event: ChangeEvent<HTMLSelectElement>) =>
               changeLib(event)
             }
@@ -52,7 +49,7 @@ function LibraryDropdown() {
           <span className="mt-2 mb-2 text-sm">Version</span>
           <select
             id="version"
-            value={version}
+            value={data.libraryVersion}
             name="version"
             onChange={(event: ChangeEvent<HTMLSelectElement>) =>
               changeVersion(event)
@@ -60,7 +57,7 @@ function LibraryDropdown() {
             className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
           >
             {libs?.payload?.results
-              .filter((x) => x.label === library)
+              .filter((x) => x.label === data.library)
               .map((x) =>
                 x.versions.map((x) => <option value={x}>v{x}</option>),
               )}
@@ -68,7 +65,8 @@ function LibraryDropdown() {
         </div>
       }
     >
-      {library} <span className="ml-2 text-xs">(v{version})</span>
+      {useLibraryLabel(data.library)}{' '}
+      <span className="ml-2 text-xs">(v{data.libraryVersion})</span>
     </Dropdown>
   );
 }

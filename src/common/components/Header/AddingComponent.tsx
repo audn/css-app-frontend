@@ -74,7 +74,7 @@ export const HeaderAddingComponent = ({
         </div> */}
       </div>
       <div className="flex items-center space-x-2">
-        <LibraryDropdown />
+        <LibraryDropdown data={data} update={update} />
         <Button.Secondary
           title={'Publish'}
           onClick={() => setIsPublishingOpen(true)}

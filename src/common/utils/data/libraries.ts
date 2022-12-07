@@ -28,7 +28,7 @@ export const getLibrarySource = (library?: string, version?: string) => {
     }
   } else return '';
 };
-export const useLibraryLabel = (val: string) => {
+export const useLibraryLabel = (val?: string) => {
   switch (val) {
     case 'tailwindcss':
       return 'TailwindCSS';
