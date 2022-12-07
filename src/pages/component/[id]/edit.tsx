@@ -1,22 +1,15 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
-import { useBeforeUnload } from 'react-use';
-import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
-import PenEditor from '../common/components/layout/Pen/Editor';
-import Preview from '../common/components/layout/Pen/Preview';
-import { API } from '../common/lib/interfaces';
+import { HeaderEditingComponent } from '../../../common/components/Header/EditingComponent';
+import PenEditor from '../../../common/components/layout/Pen/Editor';
+import Preview from '../../../common/components/layout/Pen/Preview';
+import { API } from '../../../common/lib/interfaces';
+import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 
-function NewComponent() {
-  const [data, setData] = useState<Partial<API.Models.Post>>({
-    // title: '',
-    code: '',
-    responsive: false,
-    animated: false,
-    library: 'TailwindCSS',
-    libraryVersion: '3.2.4',
-    theme: 'Light',
-  });
+function EditComponent({ post }: { post: API.Models.Post }) {
+  const [data, setData] = useState<Partial<API.Models.Post>>(post);
 
   const update = (key: keyof API.Models.Post, value: string | boolean) => {
     setData((d) => ({
@@ -36,8 +29,6 @@ function NewComponent() {
   };
 
   useEffect(() => {
-    // this is to "rebuild" the code after user changes library or version
-    // not sure how to avoid this, so feel free to make a PR
     if (data.code) {
       setTimeout(() => {
         const html = {
@@ -49,7 +40,6 @@ function NewComponent() {
           iframe.contentWindow.postMessage(html, '*');
         }
       }, 200);
-      //   return () => clearTimeout(render);
     }
   }, [data.library, data.libraryVersion]);
 
@@ -141,11 +131,11 @@ function NewComponent() {
       };
     });
   }, []);
-  useBeforeUnload(data.code.length >= 1, 'd');
+
   return (
     <div>
-      <NextSeo title={`New component`} />{' '}
-      <HeaderAddingComponent data={data} update={update} />
+      <NextSeo title={`Editing ${post.title}`} />{' '}
+      <HeaderEditingComponent data={data} update={update} />
       {/* @ts-ignore */}
       <SplitPane
         split={'vertical'}
@@ -167,8 +157,8 @@ function NewComponent() {
           onChange={(val) => update('code', val)}
         />
         <Preview
-          library={data.library && data?.library.toLowerCase()}
-          version={data.libraryVersion}
+          library={data.library!.toLowerCase()}
+          version={data.libraryVersion!}
           className="-z-10"
         />
       </SplitPane>
@@ -176,4 +166,24 @@ function NewComponent() {
   );
 }
 
-export default NewComponent;
+export default EditComponent;
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const id = (ctx.params?.id || '') as string;
+
+  const data = await (await getPostFromId(id)).payload?.results;
+
+  if (!data) {
+    return {
+      notFound: true,
+      revalidate: 10,
+    };
+  }
+  return {
+    props: { post: data },
+    revalidate: 5,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = () =>
+  Promise.resolve({ paths: [], fallback: 'blocking' });

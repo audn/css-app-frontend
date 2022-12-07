@@ -1,6 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
 import { ReactNode, useEffect, useRef } from 'react';
-import { fadeIn, scaleIn } from '../../utils/data/animations';
+import {
+  fadeIn,
+  fadeInFromBottomAndOutBottom,
+  scaleIn,
+} from '../../utils/data/animations';
 import handleScrollbarChange from '../../utils/helpers/scrollbarModal';
 import Animate from './Animate';
 
@@ -17,11 +21,15 @@ function Modal({ onClose, children, open }: Props) {
     handleScrollbarChange(open);
   }, [open, containerRef.current]);
 
+  const getAnimation =
+    typeof window !== 'undefined' && window.innerWidth < 640
+      ? fadeInFromBottomAndOutBottom
+      : scaleIn;
   return (
     <AnimatePresence>
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center "
+          className="fixed inset-0 z-50 flex items-end justify-center sm:items-center "
           ref={containerRef}
         >
           <Animate
@@ -32,9 +40,9 @@ function Modal({ onClose, children, open }: Props) {
             &nbsp;
           </Animate>
           <Animate
-            variants={scaleIn}
+            variants={getAnimation}
             ref={ref}
-            className="border border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 rounded-lg bg-types-200"
+            className="border-t h-[-webkit-fill-available] sm:border border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 rounded-t-xl sm:rounded-lg bg-types-200"
           >
             {children}
           </Animate>

@@ -4,13 +4,15 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
+import Dropdown from '../../../common/components/Dropdown';
 import Auth from '../../../common/components/layout/Auth';
 import Text from '../../../common/components/layout/headings/Text';
 import Link from '../../../common/components/layout/Link';
-import PenEditor from '../../../common/components/Pen/Editor';
-import Preview from '../../../common/components/Pen/Preview';
+import PenEditor from '../../../common/components/layout/Pen/Editor';
+import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
+import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
@@ -95,7 +97,24 @@ function Post({ post }: { post: API.Models.Post }) {
     // createdAt,
     title,
   } = post;
-
+  const dropdownList = [
+    {
+      label: 'Edit',
+      icon: 'fa-regular fa-pen-to-square',
+      onClick: () => setEdit(!isEditing),
+    },
+    {
+      label: 'Edit code',
+      icon: 'fa-regular fa-code',
+      route: `/component/${post.id}/edit`,
+    },
+    {
+      label: warning ? 'Are you sure?' : 'Delete component',
+      onClick: () => onDelete(),
+      icon: 'fa-regular fa-trash-can',
+      className: 'hover:!bg-red-500 hover:!bg-opacity-10 hover:text-red-500',
+    },
+  ] as INavItem[];
   return (
     <DefaultLayout className="!max-w-7xl">
       <NextSeo title={title} />
@@ -122,13 +141,14 @@ function Post({ post }: { post: API.Models.Post }) {
                 </Link>
               </div>
             </div>
+
             {description && (
               <div className="max-w-3xl mt-5 leading-relaxed">
                 <Text>{description}</Text>
               </div>
             )}
             <Auth.Policy policy={canManagePost()}>
-              <div className="flex items-center mt-5">
+              <div className="items-center hidden mt-5 sm:flex">
                 <Button.Wrapper>
                   <Button.Secondary
                     icon="fa-regular fa-pen-to-square"
@@ -144,6 +164,17 @@ function Post({ post }: { post: API.Models.Post }) {
               </div>
             </Auth.Policy>
           </div>
+          <Auth.Policy policy={canManagePost()}>
+            <Dropdown
+              list={dropdownList}
+              className="sm:hidden"
+              options={{ caret: false, position: 'end' }}
+            >
+              <button className="flex items-center justify-center w-8 h-8 text-lg rounded-full bg-types-200 text-on-50 hover:bg-types-200 hover:text-white animate">
+                <i className="fa-solid fa-ellipsis-vertical" />
+              </button>
+            </Dropdown>
+          </Auth.Policy>
         </div>
         <div className="relative overflow-hidden border rounded-lg border-types-200">
           <div className="relative z-10 flex justify-between px-5 py-5 bg-types-body">
@@ -151,7 +182,12 @@ function Post({ post }: { post: API.Models.Post }) {
               <Link href={`/component/${post.id}/preview`} target="_blank">
                 <Button.Secondary
                   icon="fa-regular fa-external-link"
-                  title="Fullscreen preview"
+                  title={
+                    <span className="flex">
+                      Fullscreen{' '}
+                      <span className="hidden sm:flex">&nbsp;preview</span>
+                    </span>
+                  }
                 />
               </Link>
               <Button.Secondary
@@ -160,6 +196,17 @@ function Post({ post }: { post: API.Models.Post }) {
                 onClick={() => setSeeCode(!seeCode)}
               />
             </Button.Wrapper>
+            <Auth.Policy policy={canManagePost()}>
+              <Link
+                href={`/component/${post.id}/edit`}
+                className="hidden sm:flex"
+              >
+                <Button.Secondary
+                  icon="fa-regular fa-pen-to-square"
+                  title="Edit code"
+                />
+              </Link>
+            </Auth.Policy>
           </div>
           <div className="relative h-[600px] border border-types-200">
             {seeCode ? (

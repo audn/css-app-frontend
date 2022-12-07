@@ -1,5 +1,5 @@
-import { iframeSrcDoc } from '../../utils/data/libraries';
-import concat from '../../utils/helpers/concat';
+import { iframeSrcDoc } from '../../../utils/data/libraries';
+import concat from '../../../utils/helpers/concat';
 
 function Preview({
   initialCode = '',
@@ -8,8 +8,8 @@ function Preview({
   className,
 }: {
   initialCode?: string;
-  library: string;
-  version: string;
+  library?: string;
+  version?: string;
   className?: string;
 }) {
   return (

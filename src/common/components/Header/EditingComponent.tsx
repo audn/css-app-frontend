@@ -1,11 +1,14 @@
+import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
 import PublishModal from '../../pages/pen/components/PublishModal';
+import { editPost } from '../../utils/hooks/api/posts';
 import { Button } from '../Buttons';
 import Link from '../layout/Link';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
-export const HeaderAddingComponent = ({
+export const HeaderEditingComponent = ({
   data,
   update,
 }: //   onSettings,
@@ -14,6 +17,8 @@ export const HeaderAddingComponent = ({
   data: Partial<API.Models.Post>;
   //   onSetting: () => void;
 }) => {
+  const router = useRouter();
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [editingTitle, setEditingTitle] = useState<boolean>(false);
   const [isPublishingOpen, setIsPublishingOpen] = useState<boolean>(false);
 
@@ -25,6 +30,22 @@ export const HeaderAddingComponent = ({
     }
   }
 
+  async function savePost() {
+    const toaster = toast.loading('Saving...');
+    setIsSaving(true);
+    const newData = (({ author, authorId, ...o }) => o)(data);
+    const posted = await editPost(data.id!, {
+      ...newData,
+      library: data.library?.toLowerCase(),
+    });
+    if (posted.payload?.results) {
+      toast.success('Saved!', { id: toaster });
+      router.push(`/component/${data.id}`);
+    } else {
+      toast.error('Failed to save', { id: toaster });
+    }
+    setIsSaving(false);
+  }
   return (
     <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
       <PublishModal
@@ -76,13 +97,11 @@ export const HeaderAddingComponent = ({
       <div className="flex items-center space-x-2">
         <LibraryDropdown data={data} update={update} />
         <Button.Secondary
-          title={'Publish'}
-          onClick={() => setIsPublishingOpen(true)}
-          icon={'fa-solid fa-upload text-sm'}
+          title={'Save'}
+          disabled={isSaving}
+          onClick={savePost}
+          icon={'fa-solid fa-save text-sm'}
         />
-        {/* <Link href="/new">
-          <Button.Secondary title="Settings" icon={'fa-solid fa-cog text-sm'} />
-        </Link> */}
       </div>
     </header>
   );

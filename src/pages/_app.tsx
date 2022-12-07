@@ -18,7 +18,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     useCurrentUser();
   }, []);
-  const pagesWithoutHeader = ['/new', '/component/[id]/preview'];
+  const pagesWithoutHeader = [
+    '/new',
+    '/component/[id]/preview',
+    '/component/[id]/edit',
+  ];
 
   return (
     <QueryClientProvider client={queryClient}>
