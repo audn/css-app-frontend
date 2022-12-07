@@ -24,17 +24,21 @@ function Modal({ onClose, className, children, open, options }: Props) {
 
   const getExtraClassNames = () => {
     let settings = [];
-    if (options?.mobile?.height == 'auto') {
-      settings.push('h-auto');
-    } else if (options?.mobile?.height == 'full') {
-      settings.push('h-[-webkit-fill-available] sm:h-auto ');
+    if (options?.mobile?.height) {
+      if (options?.mobile?.height == 'auto') {
+        settings.push('h-auto');
+      } else if (options?.mobile?.height == 'full') {
+        settings.push('h-[-webkit-fill-available] sm:h-auto ');
+      }
     }
 
-    if (options?.mobile?.position == 'bottom') {
-      settings.push('border-t sm:border rounded-t-xl sm:rounded-lg');
-    } else if (options?.mobile?.position == 'center') {
-      settings.push('border rounded-lg');
-    }
+    if (options?.mobile?.position) {
+      if (options?.mobile?.position == 'bottom') {
+        settings.push('border-t sm:border rounded-t-xl sm:rounded-lg');
+      } else if (options?.mobile?.position == 'center') {
+        settings.push('border rounded-lg');
+      }
+    } else settings.push('border rounded-lg');
     return settings.join('');
   };
   useEffect(() => {
@@ -50,10 +54,12 @@ function Modal({ onClose, className, children, open, options }: Props) {
       {open && (
         <div
           className={concat(
-            options?.mobile?.position == 'center'
-              ? 'items-center'
-              : 'items-end',
-            'fixed inset-0 z-50 flex justify-center sm:items-center',
+            options?.mobile?.position
+              ? options?.mobile?.position == 'center'
+                ? 'items-center'
+                : 'items-end sm:items-center'
+              : 'items-center',
+            'fixed inset-0 z-50 flex justify-center',
           )}
           ref={containerRef}
         >
