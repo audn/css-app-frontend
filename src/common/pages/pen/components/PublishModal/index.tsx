@@ -7,7 +7,6 @@ import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API } from '../../../../lib/interfaces';
-import useMainState from '../../../../store/main';
 import { addPost } from '../../../../utils/hooks/api/posts';
 import { useCategories } from '../../../../utils/hooks/categories';
 import View1 from './screens/View1';
@@ -20,7 +19,6 @@ type Props = {
   data: Partial<API.Models.Post>;
 };
 function PublishModal({ isOpen, onClose, update, data }: Props) {
-  const state = useMainState();
   const router = useRouter();
   const { data: categories } = useCategories();
 
@@ -49,8 +47,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       setIsPosting(true);
       const posted = await addPost({
         ...data,
-        libraryVersion: state.version,
-        library: state.library.toLowerCase(),
+        library: data.library!.toLowerCase(),
       });
       if (posted.payload?.results) {
         toast.success('Success!', { id: toaster });

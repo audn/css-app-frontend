@@ -159,8 +159,8 @@ function EditComponent({ post }: { post: API.Models.Post }) {
           onChange={(val) => update('code', val)}
         />
         <Preview
-          library={data.library.toLowerCase()}
-          version={data.libraryVersion}
+          library={data.library!.toLowerCase()}
+          version={data.libraryVersion!}
           className="-z-10"
         />
       </SplitPane>

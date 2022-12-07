@@ -46,8 +46,8 @@ export const iframeSrcDoc = ({
   version,
 }: {
   initialCode?: string;
-  library: string;
-  version: string;
+  library?: string;
+  version?: string;
 }) => {
   return `<html>
         <head>

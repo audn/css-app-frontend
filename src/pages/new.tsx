@@ -6,20 +6,15 @@ import { HeaderAddingComponent } from '../common/components/Header/AddingCompone
 import PenEditor from '../common/components/Pen/Editor';
 import Preview from '../common/components/Pen/Preview';
 import { API } from '../common/lib/interfaces';
-import useMainState from '../common/store/main';
 
 function NewComponent() {
-  const { library, version } = useMainState((s) => ({
-    library: s.library,
-    version: s.version,
-  }));
-
   const [data, setData] = useState<Partial<API.Models.Post>>({
     // title: '',
     code: '',
     responsive: false,
     animated: false,
-
+    library: 'TailwindCSS',
+    libraryVersion: '3.2.4',
     theme: 'Light',
   });
 
@@ -41,10 +36,8 @@ function NewComponent() {
   };
 
   useEffect(() => {
-    // const iframe = document.querySelector('iframe') as HTMLIFrameElement;
-    // if (typeof window !== 'undefined' && iframe.contentWindow) {
-    //   const render = iframe.contentWindow.document.body.innerHTML.trim();
-    // }
+    // this is to "rebuild" the code after user changes library or version
+    // not sure how to avoid this, so feel free to make a PR
     if (data.code) {
       setTimeout(() => {
         const html = {
@@ -58,7 +51,7 @@ function NewComponent() {
       }, 200);
       //   return () => clearTimeout(render);
     }
-  }, [library, version]);
+  }, [data.library, data.libraryVersion]);
 
   const isLg = true;
 
@@ -174,8 +167,8 @@ function NewComponent() {
           onChange={(val) => update('code', val)}
         />
         <Preview
-          library={library.toLowerCase()}
-          version={version}
+          library={data.library && data?.library.toLowerCase()}
+          version={data.libraryVersion}
           className="-z-10"
         />
       </SplitPane>

@@ -8,8 +8,8 @@ function Preview({
   className,
 }: {
   initialCode?: string;
-  library: string;
-  version: string;
+  library?: string;
+  version?: string;
   className?: string;
 }) {
   return (
