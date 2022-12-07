@@ -28,20 +28,20 @@ function EditComponent({ post }: { post: API.Models.Post }) {
     }
   };
 
-  //   useEffect(() => {
-  //     if (data.code) {
-  //       setTimeout(() => {
-  //         const html = {
-  //           type: 'html',
-  //           value: data.code,
-  //         };
-  //         const iframe = document.querySelector('iframe') as HTMLIFrameElement;
-  //         if (typeof window !== 'undefined' && iframe.contentWindow) {
-  //           iframe.contentWindow.postMessage(html, '*');
-  //         }
-  //       }, 200);
-  //     }
-  //   }, [library, version]);
+  useEffect(() => {
+    if (data.code) {
+      setTimeout(() => {
+        const html = {
+          type: 'html',
+          value: data.code,
+        };
+        const iframe = document.querySelector('iframe') as HTMLIFrameElement;
+        if (typeof window !== 'undefined' && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(html, '*');
+        }
+      }, 200);
+    }
+  }, [data.library, data.libraryVersion]);
 
   const isLg = true;
 
@@ -131,12 +131,10 @@ function EditComponent({ post }: { post: API.Models.Post }) {
       };
     });
   }, []);
-  console.log(data);
 
-  //   useBeforeUnload(data.code.length >= 1, 'd');
   return (
     <div>
-      <NextSeo title={`New component`} />{' '}
+      <NextSeo title={`Editing ${post.title}`} />{' '}
       <HeaderAddingComponent data={data} update={update} />
       {/* @ts-ignore */}
       <SplitPane

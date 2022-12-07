@@ -42,7 +42,7 @@ function LibraryDropdown({
           <select
             id="library"
             name="library"
-            value={data.library}
+            value={useLibraryLabel(data.library)}
             onChange={(event: ChangeEvent<HTMLSelectElement>) =>
               changeLib(event)
             }
@@ -63,7 +63,7 @@ function LibraryDropdown({
             className="px-3 py-2 text-sm bg-types-250 focus:outline-none"
           >
             {libs?.payload?.results
-              .filter((x) => x.label === data.library)
+              .filter((x) => x.label === useLibraryLabel(data.library))
               .map((x) =>
                 x.versions.map((x) => <option value={x}>v{x}</option>),
               )}
