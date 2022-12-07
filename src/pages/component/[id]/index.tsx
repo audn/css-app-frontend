@@ -151,7 +151,7 @@ function Post({ post }: { post: API.Models.Post }) {
               <Link href={`/component/${post.id}/preview`} target="_blank">
                 <Button.Secondary
                   icon="fa-regular fa-external-link"
-                  title="Fullscreen Preview"
+                  title="Fullscreen preview"
                 />
               </Link>
               <Button.Secondary
