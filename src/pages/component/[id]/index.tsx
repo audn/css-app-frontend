@@ -98,10 +98,19 @@ function Post({ post }: { post: API.Models.Post }) {
     title,
   } = post;
   const dropdownList = [
-    { label: 'Edit', icon: 'fa-regular fa-pen-to-square' },
-    { label: 'Edit code', icon: 'fa-regular fa-code' },
     {
-      label: 'Delete component',
+      label: 'Edit',
+      icon: 'fa-regular fa-pen-to-square',
+      onClick: () => setEdit(!isEditing),
+    },
+    {
+      label: 'Edit code',
+      icon: 'fa-regular fa-code',
+      route: `/component/${post.id}/edit`,
+    },
+    {
+      label: warning ? 'Are you sure?' : 'Delete component',
+      onClick: () => onDelete(),
       icon: 'fa-regular fa-trash-can',
       className: 'hover:!bg-red-500 hover:!bg-opacity-10 hover:text-red-500',
     },
@@ -173,7 +182,12 @@ function Post({ post }: { post: API.Models.Post }) {
               <Link href={`/component/${post.id}/preview`} target="_blank">
                 <Button.Secondary
                   icon="fa-regular fa-external-link"
-                  title="Fullscreen preview"
+                  title={
+                    <span className="flex">
+                      Fullscreen{' '}
+                      <span className="hidden sm:flex">&nbsp;preview</span>
+                    </span>
+                  }
                 />
               </Link>
               <Button.Secondary
