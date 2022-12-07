@@ -160,6 +160,12 @@ function Post({ post }: { post: API.Models.Post }) {
                 onClick={() => setSeeCode(!seeCode)}
               />
             </Button.Wrapper>
+            <Link href={`/component/${post.id}/edit`}>
+              <Button.Secondary
+                icon="fa-regular fa-pen-to-square"
+                title="Edit code"
+              />
+            </Link>
           </div>
           <div className="relative h-[600px] border border-types-200">
             {seeCode ? (
