@@ -61,7 +61,7 @@ function Modal({ onClose, className, children, open, options }: Props) {
             variants={fadeIn}
             className="absolute inset-0 bg-opacity-70 bg-types-100 backdrop-blur-sm"
             onClick={() =>
-              onClose ? onClose : () => console.log('cant close')
+              onClose ? onClose() : () => console.log('cant close')
             }
           >
             &nbsp;
