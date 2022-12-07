@@ -16,8 +16,14 @@ function LibraryDropdown({
 
   function changeLib(event: ChangeEvent<HTMLSelectElement>) {
     const lib = event.target.value;
+    const latestVersion = libs?.payload?.results.filter(
+      (x) => x.label === lib,
+    )[0].versions[0];
 
     update('library', lib);
+    if (latestVersion) {
+      update('libraryVersion', latestVersion);
+    }
   }
 
   function changeVersion(event: ChangeEvent<HTMLSelectElement>) {
