@@ -41,7 +41,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
         <div className="grid grid-cols-3">
           <div></div>
           <h1 className="justify-center text-xl font-bold text-center text-white">
-            Edit pen
+            Edit
           </h1>
           <div className="flex justify-end">
             <button
@@ -55,7 +55,6 @@ function EditModal({ isOpen, onClose, post }: Props) {
         <Form.Wrapper column={true} className="w-full mt-5 space-y-5">
           <div className="flex flex-col w-full">
             <h3 className="mb-2 font-medium text-[14px]">Title</h3>
-
             <Form.Input
               placeholder={post.title}
               value={data.title}
