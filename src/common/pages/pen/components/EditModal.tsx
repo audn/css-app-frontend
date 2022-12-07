@@ -25,7 +25,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
 
   async function onSave() {
     const newData = (({ author, authorId, ...o }) => o)(data);
-
+    2;
     const saved = await editPost(post.id, newData);
     if (!saved.error) {
       toast.success('Saved');
@@ -36,7 +36,11 @@ function EditModal({ isOpen, onClose, post }: Props) {
     }
   }
   return (
-    <Modal onClose={() => onClose()} open={isOpen}>
+    <Modal
+      onClose={() => onClose()}
+      open={isOpen}
+      options={{ mobile: { height: 'full', position: 'bottom' } }}
+    >
       <React.Fragment>
         <div className="grid grid-cols-3">
           <div></div>

@@ -39,7 +39,7 @@ function PhoneMenu({ toggle }: { toggle: (val: boolean) => void }) {
       {!currentUser.isLoggedIn && (
         <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`}>
           <Button.White
-            title="Sign in with Twiter"
+            title="Sign in with Twitter"
             icon={'fa-brands fa-twitter'}
             className="w-full !py-3 mt-5 !text-white bg-blue-500"
           />

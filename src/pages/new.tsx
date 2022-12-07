@@ -5,9 +5,12 @@ import { useBeforeUnload } from 'react-use';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
 import PenEditor from '../common/components/layout/Pen/Editor';
 import Preview from '../common/components/layout/Pen/Preview';
+import NotLoggedInModal from '../common/components/layout/shared/NotLoggedIn';
 import { API } from '../common/lib/interfaces';
+import useAuthState from '../common/store/auth';
 
 function NewComponent() {
+  const user = useAuthState((s) => s.user);
   const [data, setData] = useState<Partial<API.Models.Post>>({
     // title: '',
     code: '',
@@ -144,6 +147,7 @@ function NewComponent() {
   useBeforeUnload(data.code.length >= 1, 'd');
   return (
     <div>
+      {!user.id && <NotLoggedInModal />}
       <NextSeo title={`New component`} />{' '}
       <HeaderAddingComponent data={data} update={update} />
       {/* @ts-ignore */}
