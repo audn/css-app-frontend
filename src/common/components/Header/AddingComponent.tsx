@@ -3,7 +3,7 @@ import { API } from '../../lib/interfaces';
 import PublishModal from '../../pages/pen/components/PublishModal';
 import { Button } from '../Buttons';
 import Link from '../layout/Link';
-import LibraryDropdown from '../Pen/components/LibraryDropdown';
+import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
 export const HeaderAddingComponent = ({
   data,

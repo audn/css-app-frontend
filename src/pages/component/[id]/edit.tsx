@@ -3,8 +3,8 @@ import { NextSeo } from 'next-seo';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { HeaderAddingComponent } from '../../../common/components/Header/AddingComponent';
-import PenEditor from '../../../common/components/Pen/Editor';
-import Preview from '../../../common/components/Pen/Preview';
+import PenEditor from '../../../common/components/layout/Pen/Editor';
+import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 

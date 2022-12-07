@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react';
-import { API } from '../../../lib/interfaces';
-import { useLibraryLabel } from '../../../utils/data/libraries';
-import { useLibraries } from '../../../utils/hooks/libraries';
-import Dropdown from '../../Dropdown';
+import { API } from '../../../../lib/interfaces';
+import { useLibraryLabel } from '../../../../utils/data/libraries';
+import { useLibraries } from '../../../../utils/hooks/libraries';
+import Dropdown from '../../../Dropdown';
 
 function LibraryDropdown({
   data,

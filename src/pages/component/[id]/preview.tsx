@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import Preview from '../../../common/components/Pen/Preview';
+import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 
