@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
-import { HeaderAddingComponent } from '../../../common/components/Header/AddingComponent';
+import { HeaderEditingComponent } from '../../../common/components/Header/EditingComponent';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
@@ -135,7 +135,7 @@ function EditComponent({ post }: { post: API.Models.Post }) {
   return (
     <div>
       <NextSeo title={`Editing ${post.title}`} />{' '}
-      <HeaderAddingComponent data={data} update={update} />
+      <HeaderEditingComponent data={data} update={update} />
       {/* @ts-ignore */}
       <SplitPane
         split={'vertical'}

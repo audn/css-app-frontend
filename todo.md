@@ -1,4 +1,11 @@
+**Extra**
+
 - [ ] tab focus on elements
+
+**Minor**
+
+- [ ] /new and /:id/edit share 90% of the same code
+- [ ] AddingComponent.tsx and EditingComponent.tsx share 90% of the same code
 
 **Roadmap**:
 Editor:

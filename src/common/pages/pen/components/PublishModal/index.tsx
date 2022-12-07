@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../../components/Buttons';
@@ -19,10 +18,8 @@ type Props = {
   data: Partial<API.Models.Post>;
 };
 function PublishModal({ isOpen, onClose, update, data }: Props) {
-  const router = useRouter();
   const { data: categories } = useCategories();
 
-  const [isPosting, setIsPosting] = useState<boolean>(false);
   const [view, setView] = useState<'1' | '2'>('1');
   const canGoToStepTwo = () => {
     if (
