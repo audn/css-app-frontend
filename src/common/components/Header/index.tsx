@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
+import { INavItem } from '../../lib/types';
+import useFilterState from '../../store/filter';
 import concat from '../../utils/helpers/concat';
 import Logo from '../misc/Logo';
 import LibrarySelector from './components/LibrarySelector';
 import Navigation from './Navigation';
+import NavItem from './Navigation/Desktop/components/NavItem';
 
 export const Header = () => {
   const [userHasScrolled, setUserHasScrolled] = useState(false);
+  const library = useFilterState((s) => s.library);
   if (typeof window !== 'undefined') {
     useEffect(() => {
       function add() {
@@ -20,6 +24,12 @@ export const Header = () => {
       return () => window.removeEventListener('scroll', remove);
     }, []);
   }
+  const navItems = [
+    {
+      label: 'Browse',
+      route: `/components/${library.toLowerCase()}`,
+    },
+  ] as INavItem[];
   return (
     <header
       className={concat(
@@ -32,6 +42,10 @@ export const Header = () => {
           <Logo />
           <div className="flex items-center ml-5 space-x-3">
             <LibrarySelector />
+            <div className="font-bold text-on-50">/</div>
+            {navItems.map((x) => (
+              <NavItem {...x} />
+            ))}
           </div>
         </div>
         <Navigation />

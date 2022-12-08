@@ -54,9 +54,9 @@ function Dropdown({
         className={concat(
           className ? className : '',
           options.box
-            ? 'bg-types-200/80 px-4 text-sm py-[0.4rem] border hover:bg-types-150 animate shadow !rounded-full border-types-250 hover:bg-types-200/50 focus:ring-2'
+            ? 'bg-types-200/80 px-3 text-sm py-[0.4rem] bodrder hover:bg-types-150 animate shadow rounded-lg border-types-250 hover:bg-types-200/50 focus:ring-2'
             : '',
-          'flex items-center font-medium text-on-100 justify-between',
+          'flex items-center font-semibold text-on-100 justify-between',
         )}
       >
         {children}
@@ -64,7 +64,7 @@ function Dropdown({
           <span
             className={concat(
               options.animateCaret ? (isOpen ? 'rotate-180' : 'rotate-0') : '',
-              'flex-shrink-0 ml-1 text-xs animate',
+              'flex-shrink-0 ml-1 text-[10px] animate',
             )}
           >
             <i className="fa-solid fa-angle-down" />
