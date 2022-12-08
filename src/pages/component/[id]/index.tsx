@@ -74,10 +74,13 @@ function Post({ post }: { post: API.Models.Post }) {
     if (!warning) {
       setWarning(true);
     } else {
+      const msg = toast.loading('Deleting...');
       const deleted = await deletePost(post.id);
       if (!deleted.error) {
         router.push('/');
-        toast.success('Deleted');
+        toast.success('Deleted', { id: msg });
+      } else {
+        toast.error('Failed to delete', { id: msg });
       }
     }
   }
