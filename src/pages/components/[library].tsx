@@ -8,6 +8,7 @@ import H2 from '../../common/components/layout/headings/H2';
 import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
+import { useCategories } from '../../common/utils/hooks/categories';
 import { useSearchPosts } from '../../common/utils/hooks/posts';
 
 export default function Home({ query }: { query: { library: string } }) {
@@ -18,6 +19,7 @@ export default function Home({ query }: { query: { library: string } }) {
   const [library, setLibrary] = useState<string | undefined>(
     useLibraryLabel(initialLibrary),
   );
+  const [selectedValues, setSelectedValues] = useState<string[]>(['']);
 
   useEffect(() => {
     setLibrary(filters.library);
@@ -56,6 +58,14 @@ export default function Home({ query }: { query: { library: string } }) {
     isRefetching,
   } = useSearchPosts(apiQuery);
 
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: fetchCategoriesError,
+    refetch: refetchCategories,
+    isRefetching: isRefetchingCategories,
+  } = useCategories();
+
   return (
     <DefaultLayout>
       <div className="flex flex-col mt-3 md:mt-8">
@@ -63,6 +73,18 @@ export default function Home({ query }: { query: { library: string } }) {
         <h4 className="text-lg mt-3 !font-medium">
           Browsing components posted by community members.
         </h4>
+        <div className="mt-5">
+          <Hydrate.Categories
+            data={categories}
+            error={fetchCategoriesError}
+            selectedValues={selectedValues}
+            setSelectedValues={setSelectedValues}
+            isLoading={isLoadingCategories}
+            refetch={refetchCategories}
+            isRefetching={isRefetchingCategories}
+            onClearFilters={resetQueries}
+          />
+        </div>
       </div>
       <NextSeo title={`Browse components for ${library}`} />
       <div className="mt-10 ">

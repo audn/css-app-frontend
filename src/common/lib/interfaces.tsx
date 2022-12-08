@@ -61,7 +61,7 @@ export declare namespace API {
     interface Category {
       label: string;
       value: string;
-      _count: {
+      _count?: {
         posts: number;
       };
     }
@@ -118,6 +118,9 @@ export declare namespace Hydration {
 
   interface Posts extends ReactQueryProps {
     data?: API.Response<API.Models.Post[]>;
+  }
+  interface Category extends ReactQueryProps {
+    data?: API.Response<API.Models.Category[]>;
   }
 }
 export declare namespace Alert {
