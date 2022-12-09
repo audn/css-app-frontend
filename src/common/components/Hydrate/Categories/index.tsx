@@ -37,17 +37,19 @@ function CategoryHydration({
         isLoading={isRefetching}
       />
     );
-  } else if (data?.payload?.count! >= 1) {
+  } else if (data?.payload && data?.payload?.count! >= 1) {
     return (
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="flex flex-wrap gap-2">
-          {data?.payload?.results?.map((category) => (
-            <CategoryCard
-              {...category}
-              selectedValues={selectedValues}
-              setSelectedValues={setSelectedValues}
-            />
-          ))}
+          {data.payload.results
+            .sort((a, b) => Number(b._count?.posts) - Number(a._count?.posts))
+            .map((category) => (
+              <CategoryCard
+                {...category}
+                selectedValues={selectedValues}
+                setSelectedValues={setSelectedValues}
+              />
+            ))}
         </Animate>
       </AnimatePresence>
     );
