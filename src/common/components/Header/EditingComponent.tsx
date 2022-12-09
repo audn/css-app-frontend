@@ -2,10 +2,8 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
-import PublishModal from '../../pages/pen/components/PublishModal';
 import { editPost } from '../../utils/hooks/api/posts';
 import { Button } from '../Buttons';
-import Link from '../layout/Link';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
 export const HeaderEditingComponent = ({
@@ -20,7 +18,6 @@ export const HeaderEditingComponent = ({
   const router = useRouter();
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [editingTitle, setEditingTitle] = useState<boolean>(false);
-  const [isPublishingOpen, setIsPublishingOpen] = useState<boolean>(false);
 
   function handleTitleUpdate(e: SyntheticEvent) {
     e.preventDefault();
@@ -48,20 +45,14 @@ export const HeaderEditingComponent = ({
   }
   return (
     <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
-      <PublishModal
-        update={update}
-        data={data}
-        onClose={() => setIsPublishingOpen(!isPublishingOpen)}
-        isOpen={isPublishingOpen}
-      />
       <div className="flex flex-col w-full">
         <div className="flex items-center">
-          <Link
-            href="/"
+          <button
+            onClick={() => router.back()}
             className="flex items-center justify-center mr-3 rounded-full w-7 h-7 bg-types-200"
           >
             <i className="text-xs fa-solid fa-arrow-left" />
-          </Link>
+          </button>
 
           {editingTitle ? (
             <form onSubmit={handleTitleUpdate} className="w-full">
