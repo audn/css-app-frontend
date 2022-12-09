@@ -24,18 +24,18 @@ export default function Home({ query }: { query: { library: string } }) {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
   const handleRouterChange = () => {
-    console.log(selectedValues);
-
-    router.push(
-      {
-        query: {
-          ...router.query,
-          tags: selectedValues.join(' '),
+    if (selectedValues.length) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            tags: selectedValues.join(' '),
+          },
         },
-      },
-      undefined,
-      { shallow: true },
-    );
+        undefined,
+        { shallow: true },
+      );
+    } else router.push(router.asPath.split('?')[0]);
   };
   const updateCategories = (val: string) => {
     if (!selectedValues.includes(val)) {
@@ -51,14 +51,11 @@ export default function Home({ query }: { query: { library: string } }) {
       setSelectedValues(tags.split(' '));
     }
   }, [router.isReady]);
-  console.log(selectedValues);
 
   useEffect(() => {
-    if (selectedValues.length) {
-      console.log(selectedValues);
-
-      handleRouterChange();
-    }
+    // if (selectedValues.length) {
+    handleRouterChange();
+    // }
   }, [selectedValues]);
 
   useEffect(() => {
@@ -80,12 +77,14 @@ export default function Home({ query }: { query: { library: string } }) {
     router.push(`/components/tailwindcss`, undefined, {
       shallow: true,
     });
+    setSelectedValues([]);
     toast.success('Reset back to default filters.');
   };
 
   const apiQuery = {
     q: (router.query.q as string) || '*',
     filter: {
+      categories: selectedValues,
       library: filters.library.toLowerCase(),
     },
   };
