@@ -84,7 +84,7 @@ export default function Home({ query }: { query: { library: string } }) {
   const apiQuery = {
     q: (router.query.q as string) || '*',
     filter: {
-      categories: selectedValues,
+      ...(selectedValues.length && { categories: selectedValues }),
       library: filters.library.toLowerCase(),
     },
   };
