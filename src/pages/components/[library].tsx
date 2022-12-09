@@ -19,8 +19,24 @@ export default function Home({ query }: { query: { library: string } }) {
   const [library, setLibrary] = useState<string | undefined>(
     useLibraryLabel(initialLibrary),
   );
+  const tags = router.query.tags as string;
+
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
+  const handleRouterChange = () => {
+    console.log(selectedValues);
+
+    router.push(
+      {
+        query: {
+          ...router.query,
+          tags: selectedValues.join(' '),
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
+  };
   const updateCategories = (val: string) => {
     if (!selectedValues.includes(val)) {
       setSelectedValues([...selectedValues, val]);
@@ -29,6 +45,21 @@ export default function Home({ query }: { query: { library: string } }) {
       setSelectedValues([...selectedValues]);
     }
   };
+
+  useEffect(() => {
+    if (tags) {
+      setSelectedValues(tags.split(' '));
+    }
+  }, [router.isReady]);
+  console.log(selectedValues);
+
+  useEffect(() => {
+    if (selectedValues.length) {
+      console.log(selectedValues);
+
+      handleRouterChange();
+    }
+  }, [selectedValues]);
 
   useEffect(() => {
     setLibrary(filters.library);
@@ -41,7 +72,7 @@ export default function Home({ query }: { query: { library: string } }) {
   }, [initialLibrary]);
 
   const setDefaultLibrary = () => {
-    useFilterState.setState({ library: 'TailwindCSS' });
+    useFilterState.setState({ library: 'TailwindCSS', version: '3.2.4' });
   };
 
   const resetQueries = () => {
