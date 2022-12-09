@@ -12,7 +12,7 @@ export const Hydrate = {
     ...props
   }: Hydration.Category & {
     selectedValues: string[];
-    setSelectedValues: (val: string[]) => void;
+    setSelectedValues: (val: string) => void;
   }) => {
     return (
       <CategoryHydration

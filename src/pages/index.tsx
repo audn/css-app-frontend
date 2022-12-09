@@ -17,7 +17,7 @@ export default function Home() {
       h1={<>Library for hand-crafted components</>}
       h3="Guides, Patch Notes and a warm community surrounding all CSS libraries. "
     >
-      <NextSeo title={`Browse components for TailwindCSS`} />
+      <NextSeo title={`Browse CSS components`} />
       <div className="px-5">
         <div className="flex flex-col mt-10 mb-10">
           <h2 className="!text-on-100 !text-lg font-semibold">

@@ -15,9 +15,10 @@ function CategoryHydration({
   isRefetching,
   onClearFilters,
   selectedValues,
+  setSelectedValues,
 }: Hydration.Category & {
   selectedValues: string[];
-  setSelectedValues: (val: string[]) => void;
+  setSelectedValues: (val: string) => void;
 }) {
   if (isLoading) {
     return (
@@ -41,7 +42,11 @@ function CategoryHydration({
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="flex flex-wrap gap-2">
           {data?.payload?.results?.map((category) => (
-            <CategoryCard {...category} selectedValues={selectedValues} />
+            <CategoryCard
+              {...category}
+              selectedValues={selectedValues}
+              setSelectedValues={setSelectedValues}
+            />
           ))}
         </Animate>
       </AnimatePresence>

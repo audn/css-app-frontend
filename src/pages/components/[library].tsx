@@ -19,7 +19,16 @@ export default function Home({ query }: { query: { library: string } }) {
   const [library, setLibrary] = useState<string | undefined>(
     useLibraryLabel(initialLibrary),
   );
-  const [selectedValues, setSelectedValues] = useState<string[]>(['']);
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  const updateCategories = (val: string) => {
+    if (!selectedValues.includes(val)) {
+      setSelectedValues([...selectedValues, val]);
+    } else {
+      selectedValues.splice(selectedValues.indexOf(val), 1);
+      setSelectedValues([...selectedValues]);
+    }
+  };
 
   useEffect(() => {
     setLibrary(filters.library);
@@ -78,7 +87,7 @@ export default function Home({ query }: { query: { library: string } }) {
             data={categories}
             error={fetchCategoriesError}
             selectedValues={selectedValues}
-            setSelectedValues={setSelectedValues}
+            setSelectedValues={updateCategories}
             isLoading={isLoadingCategories}
             refetch={refetchCategories}
             isRefetching={isRefetchingCategories}

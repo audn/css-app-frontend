@@ -5,10 +5,14 @@ function CategoryCard({
   selectedValues = [],
   label,
   value,
-}: API.Models.Category & { selectedValues: string[] }) {
+  setSelectedValues,
+}: API.Models.Category & {
+  selectedValues: string[];
+  setSelectedValues: (val: string) => void;
+}) {
   return (
     <button
-      //   onClick={() => update('category', x.value)}
+      onClick={() => setSelectedValues(value)}
       className={concat(
         selectedValues.includes(value)
           ? 'bg-brand-primary-150/80 text-white '
