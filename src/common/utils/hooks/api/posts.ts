@@ -36,6 +36,13 @@ export async function editPost(
   return res.json();
 }
 
+export async function setThumbnail(
+  id: string,
+): Promise<API.Response<API.Models.Post>> {
+  const res = await put(`/posts/${id}/thumbnail`, true);
+  return res.json();
+}
+
 export async function deletePost(
   id: string,
 ): Promise<API.Response<API.Models.Post>> {
