@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
-import { editPost } from '../../utils/hooks/api/posts';
+import { editPost, setThumbnail } from '../../utils/hooks/api/posts';
 import { Button } from '../Buttons';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
@@ -36,7 +36,9 @@ export const HeaderEditingComponent = ({
       library: data.library?.toLowerCase(),
     });
     if (posted.payload?.results) {
+      await setThumbnail(data.id!);
       toast.success('Saved!', { id: toaster });
+
       router.push(`/component/${data.id}`);
     } else {
       toast.error('Failed to save', { id: toaster });
