@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import LibrarySelector from '../../common/components/Header/components/LibrarySelector';
 import { Hydrate } from '../../common/components/Hydrate';
 import H2 from '../../common/components/layout/headings/H2';
 import { DefaultLayout } from '../../common/layouts/Default';
@@ -112,7 +113,8 @@ export default function Home({ query }: { query: { library: string } }) {
         <h4 className="text-lg mt-3 !font-medium">
           Browsing components posted by community members.
         </h4>
-        <div className="mt-5">
+        <div className="flex-col mt-5">
+          <h3 className="mb-2 font-semibold text-on-100">Categories</h3>
           <Hydrate.Categories
             data={categories}
             distribution={data?.payload?.distribution}
@@ -125,6 +127,13 @@ export default function Home({ query }: { query: { library: string } }) {
             onClearFilters={resetQueries}
           />
         </div>
+        <div className="flex flex-col w-full mt-5 sm:hidden">
+          <h3 className="mb-2 font-semibold text-on-100">Library</h3>
+          <LibrarySelector
+            className="w-full !py-2 text-base !font-medium"
+            wrapperClassName="!max-w-[500px] !w-full mt-2"
+          />
+        </div>{' '}
       </div>
       <NextSeo title={`Browse components for ${library}`} />
       <div className="mt-10 ">

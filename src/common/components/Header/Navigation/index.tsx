@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fadeIn } from '../../../utils/data/animations';
 import handleScrollbarChange from '../../../utils/helpers/scrollbarModal';
 import Animate from '../../layout/Animate';
@@ -7,12 +7,18 @@ import Hamburger from '../components/Hamburger';
 import DesktopMenu from './Desktop';
 import PhoneMenu from './Phone';
 
-function Navigation() {
-  const [isOpenPhoneMenu, setIsOpenPhoneMenu] = useState<boolean>(false);
-
+function Navigation({
+  setIsOpenPhoneMenu,
+  isOpenPhoneMenu,
+}: {
+  setIsOpenPhoneMenu: (val: boolean) => void;
+  isOpenPhoneMenu: boolean;
+}) {
   useEffect(() => {
     handleScrollbarChange(isOpenPhoneMenu);
   }, [isOpenPhoneMenu]);
+
+  useEffect(() => {});
 
   return (
     <div>

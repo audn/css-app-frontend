@@ -32,7 +32,7 @@ function PhoneMenu({ toggle }: { toggle: (val: boolean) => void }) {
   ] as INavItem[];
 
   return (
-    <div className="p-4 pt-2 h-screen absolute inset-0 bg-types-body mt-[80px] border-t border-types-200">
+    <div className="p-4 pt-2 h-screen absolute inset-0 bg-types-body mt-[70px] border-t border-types-200">
       {items.map((x) => (
         <NavItem {...x} />
       ))}

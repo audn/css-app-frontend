@@ -3,7 +3,13 @@ import useFilterState from '../../../store/filter';
 import { useLibraries } from '../../../utils/hooks/libraries';
 import Dropdown from '../../Dropdown';
 
-function LibrarySelector() {
+function LibrarySelector({
+  className,
+  wrapperClassName,
+}: {
+  className?: string;
+  wrapperClassName?: string;
+}) {
   const router = useRouter();
   const { data, isLoading } = useLibraries();
 
@@ -19,6 +25,8 @@ function LibrarySelector() {
   };
   return (
     <Dropdown
+      className={className}
+      wrapperClassName={wrapperClassName}
       active={library}
       options={{
         animateCaret: true,

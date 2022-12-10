@@ -6,9 +6,11 @@ import Animate from '../../layout/Animate';
 function DropdownWrapper({
   children,
   position,
+  className,
 }: {
   children: ReactNode;
   position?: 'start' | 'center' | 'end';
+  className?: string;
 }) {
   const getPosition = () => {
     switch (position) {
@@ -25,10 +27,11 @@ function DropdownWrapper({
       variants={dropdown}
       className={concat(
         getPosition(),
-        'absolute border rounded-lg shadow-lg top-10 bg-types-200 border-types-250 w-[200px] dropdown ',
+        className ? className : '',
+        'absolute border max-w-[200px] rounded-lg shadow-lg top-10 bg-types-200 border-types-250 w-[200px] dropdown max-h-96 ',
       )}
     >
-      <ul className="max-w-[200px] p-2 space-y-1 overflow-y-auto max-h-96 scrollbar-content">
+      <ul className="w-full p-2 space-y-1 overflow-y-auto scrollbar-content">
         {children}
       </ul>
     </Animate>

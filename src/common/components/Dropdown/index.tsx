@@ -14,6 +14,7 @@ function Dropdown({
   active,
   isLoading,
   className,
+  wrapperClassName,
   onClick,
   open,
   options = { caret: true, position: 'center', toggleOnClick: false },
@@ -54,7 +55,7 @@ function Dropdown({
         className={concat(
           className ? className : '',
           options.box
-            ? 'bg-types-200/80 px-3 text-sm py-[0.4rem] bodrder hover:bg-types-150 animate shadow rounded-lg border-types-250 hover:bg-types-200/50 focus:ring-2'
+            ? 'bg-types-250/70 px-3 py-[0.3rem] text-sm bodrder animate shadow rounded-md border-types-250 hover:bg-types-250/50 focus:ring-2'
             : '',
           'flex items-center font-semibold text-on-100 justify-between',
         )}
@@ -73,7 +74,10 @@ function Dropdown({
       </button>
       <AnimatePresence>
         {isOpen && (
-          <DropdownWrapper position={options.position}>
+          <DropdownWrapper
+            position={options.position}
+            className={wrapperClassName}
+          >
             {isLoading ? (
               <div className="flex justify-center">
                 <LoadingIcon />

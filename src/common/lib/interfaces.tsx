@@ -14,6 +14,7 @@ export type IDropdown = {
   children: ReactNode;
   active?: string;
   className?: string;
+  wrapperClassName?: string;
   isLoading?: boolean;
   open?: boolean;
   list?: {
