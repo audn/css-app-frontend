@@ -43,8 +43,8 @@ export declare namespace API {
         animated?: boolean;
         theme?: string;
         library?: string;
+        categories?: string[];
       };
-      category?: string;
     }
   }
   interface Response<T = { T?: any }> {
