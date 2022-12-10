@@ -91,7 +91,25 @@ function Post({ post }: { post: API.Models.Post }) {
   ] as INavItem[];
   return (
     <DefaultLayout className="!max-w-7xl">
-      <NextSeo title={title} />
+      <NextSeo
+        title={title}
+        openGraph={{
+          url: `https://css.app/component/${post.id}`,
+          images: [
+            {
+              url: post.generatedImage!,
+              height: 1080,
+              width: 1920,
+              alt: `${post.title}`,
+              type: 'image/jpeg',
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary',
+        }}
+        description={post.description}
+      />
       <EditModal isOpen={isEditing} onClose={toggleEdit} post={post} />
       <div className="mt-8 space-y-12">
         <div className="flex items-center justify-between">
