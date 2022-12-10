@@ -63,9 +63,9 @@ export declare namespace API {
     interface Category {
       label: string;
       value: string;
-      _count?: {
-        posts: number;
-      };
+      //   _count?: {
+      //     posts: number;
+      //   };
     }
     interface Library {
       label: string;

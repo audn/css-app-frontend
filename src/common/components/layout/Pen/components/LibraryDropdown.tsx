@@ -31,6 +31,8 @@ function LibraryDropdown({
     update('libraryVersion', version);
   }
 
+  console.log(data);
+
   return (
     <Dropdown
       className="py-[0.4em]"

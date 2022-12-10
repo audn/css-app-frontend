@@ -44,7 +44,7 @@ function CategoryHydration({
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="flex flex-wrap gap-2">
           {data.payload.results
-            .sort((a, b) => Number(b._count?.posts) - Number(a._count?.posts))
+            // .sort((a, b) => Number(distribution) - Number(a._count?.posts))
             .map((category) => (
               <CategoryCard
                 count={distribution ? distribution[category.value] : 0}
