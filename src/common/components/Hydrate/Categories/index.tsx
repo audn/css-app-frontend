@@ -32,7 +32,7 @@ function CategoryHydration({
     return (
       <HydrationError
         title="Couldn't get data"
-        label={`An error occoured while trying to retrieve components.`}
+        label={`An error occoured while trying to retrieve categories.`}
         onClick={refetch}
         isLoading={isRefetching}
       />
