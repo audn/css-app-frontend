@@ -40,9 +40,11 @@ export const Header = () => {
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Logo />
-          <div className="flex items-center ml-5 space-x-3">
-            <LibrarySelector />
-            <div className="font-bold text-on-50">/</div>
+          <div className="flex items-center ml-5 md:space-x-3">
+            <div className="items-center hidden space-x-3 sm:flex">
+              <LibrarySelector />
+              <div className="font-bold text-on-50">/</div>
+            </div>{' '}
             {navItems.map((x) => (
               <NavItem {...x} />
             ))}

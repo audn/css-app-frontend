@@ -2,7 +2,7 @@ import { NextSeoProps } from 'next-seo';
 
 export default {
   title: 'css.app',
-  description: 'css.app',
+  description: 'Library for hand-crafted components',
   openGraph: {
     type: 'website',
     locale: 'en_IE',
