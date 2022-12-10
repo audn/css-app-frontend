@@ -6,22 +6,24 @@ function CategoryCard({
   label,
   value,
   setSelectedValues,
-  _count,
+
+  count,
 }: API.Models.Category & {
+  count?: number;
   selectedValues: string[];
   setSelectedValues: (val: string) => void;
 }) {
   function handleClick() {
-    if (_count?.posts! >= 1) {
+    if (count! >= 1) {
       setSelectedValues(value);
     }
   }
   return (
     <button
-      disabled={_count?.posts! < 1}
+      disabled={count! < 1}
       onClick={handleClick}
       className={concat(
-        _count?.posts! < 1 ? 'opacity-50' : '',
+        count! < 1 ? 'opacity-50' : '',
         selectedValues.includes(value)
           ? 'bg-brand-primary-150/80 text-white '
           : 'bg-types-250/70 text-white/80',
@@ -29,7 +31,7 @@ function CategoryCard({
       )}
     >
       {label}
-      <div className="ml-2 text-sm text-white/60"> {_count?.posts}</div>
+      <div className="ml-2 text-sm text-white/60"> {count}</div>
     </button>
   );
 }

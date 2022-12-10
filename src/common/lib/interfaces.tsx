@@ -119,7 +119,7 @@ export declare namespace Hydration {
   interface Posts extends ReactQueryProps {
     data?: API.Response<{
       posts: API.Models.Post[];
-      aggregation: API.Models.Category[];
+      aggregation: { [key: string]: number }[];
     }>;
   }
   interface Category extends ReactQueryProps {

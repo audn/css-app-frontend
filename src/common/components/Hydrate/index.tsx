@@ -1,4 +1,4 @@
-import { API, Hydration } from '../../lib/interfaces';
+import { Hydration } from '../../lib/interfaces';
 import CategoryHydration from './Categories';
 import PostsHydration from './Posts';
 
@@ -12,7 +12,7 @@ export const Hydrate = {
     aggregation,
     ...props
   }: Hydration.Category & {
-    aggregation?: API.Models.Category[];
+    aggregation?: { [key: string]: number }[];
     selectedValues: string[];
     setSelectedValues: (val: string) => void;
   }) => {
