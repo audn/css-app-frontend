@@ -16,10 +16,11 @@ export const useAllPosts = () => {
 };
 export const useSearchPosts = (filter: API.Requests.SearchPosts) => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`/posts`, filter],
+    [`posts/search?q=${filter.q}&options=${JSON.stringify(filter)}`],
     () => searchPosts(filter),
     {
       refetchOnWindowFocus: false,
+      staleTime: Infinity,
       onError: (e) => console.error(`Error getting posts: ${e}`),
     },
   );
