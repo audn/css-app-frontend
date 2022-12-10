@@ -1,10 +1,10 @@
 import { API } from '../../../lib/interfaces';
 import { del, get, post, put } from './api';
 
-export async function getCategories(): Promise<
-  API.Response<API.Models.Category[]>
-> {
-  const res = await get(`/categories`, false);
+export async function getCategories(
+  library?: string,
+): Promise<API.Response<API.Models.Category[]>> {
+  const res = await get(`/categories?library=${library}`, false);
   return res.json();
 }
 

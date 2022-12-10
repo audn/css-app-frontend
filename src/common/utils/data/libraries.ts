@@ -37,7 +37,7 @@ export const useLibraryLabel = (val?: string) => {
     case 'bootstrap':
       return 'Bootstrap';
     default:
-      return 'TailwindCSS';
+      return val;
   }
 };
 export const iframeSrcDoc = ({

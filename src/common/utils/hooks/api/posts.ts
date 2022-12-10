@@ -4,7 +4,6 @@ import { del, get, post, put } from './api';
 export async function searchPosts(
   data: API.Requests.SearchPosts,
 ): Promise<API.Response<API.Models.Post[]>> {
-  console.log(data);
   const res = await post('/search', false, data);
   return res.json();
 }
@@ -33,6 +32,13 @@ export async function editPost(
   data: Partial<API.Models.Post>,
 ): Promise<API.Response<API.Models.Post>> {
   const res = await put(`/posts/${id}`, true, data);
+  return res.json();
+}
+
+export async function setThumbnail(
+  id: string,
+): Promise<API.Response<API.Models.Post>> {
+  const res = await put(`/posts/${id}/thumbnail`, true);
   return res.json();
 }
 
