@@ -103,7 +103,7 @@ export default function Home({ query }: { query: { library: string } }) {
     error: fetchCategoriesError,
     refetch: refetchCategories,
     isRefetching: isRefetchingCategories,
-  } = useCategories();
+  } = useCategories(library!);
 
   return (
     <DefaultLayout>
@@ -115,6 +115,7 @@ export default function Home({ query }: { query: { library: string } }) {
         <div className="mt-5">
           <Hydrate.Categories
             data={categories}
+            aggregation={data?.payload?.results.aggregation}
             error={fetchCategoriesError}
             selectedValues={selectedValues}
             setSelectedValues={updateCategories}

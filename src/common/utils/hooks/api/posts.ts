@@ -1,10 +1,12 @@
 import { API } from '../../../lib/interfaces';
 import { del, get, post, put } from './api';
 
-export async function searchPosts(
-  data: API.Requests.SearchPosts,
-): Promise<API.Response<API.Models.Post[]>> {
-  console.log(data);
+export async function searchPosts(data: API.Requests.SearchPosts): Promise<
+  API.Response<{
+    posts: API.Models.Post[];
+    aggregation: API.Models.Category[];
+  }>
+> {
   const res = await post('/search', false, data);
   return res.json();
 }

@@ -5,7 +5,7 @@ import Link from '../../../../layout/Link';
 
 function NavItem({ route, icon, label }: INavItem) {
   const router = useRouter();
-  const active = router.asPath.includes(route);
+  const active = router.asPath.includes(route!);
   return (
     <Link
       href={route ?? '#'}

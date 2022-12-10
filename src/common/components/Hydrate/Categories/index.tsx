@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
-import { Hydration } from '../../../lib/interfaces';
+import { API, Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
 import CategoryCard from '../../Cards/Category';
 import HydrationError from '../../layout/Alerts/HydrationError';
@@ -16,7 +16,9 @@ function CategoryHydration({
   onClearFilters,
   selectedValues,
   setSelectedValues,
+  aggregation,
 }: Hydration.Category & {
+  aggregation?: API.Models.Category[];
   selectedValues: string[];
   setSelectedValues: (val: string) => void;
 }) {
@@ -46,6 +48,7 @@ function CategoryHydration({
             .map((category) => (
               <CategoryCard
                 {...category}
+                key={category.value}
                 selectedValues={selectedValues}
                 setSelectedValues={setSelectedValues}
               />
