@@ -114,7 +114,9 @@ export default function Home({ query }: { query: { library: string } }) {
           Browsing components posted by community members.
         </h4>
         <div className="flex-col mt-5">
-          <h3 className="mb-2 font-semibold text-on-100">Categories</h3>
+          <h3 className="flex mb-2 font-semibold sm:hidden text-on-100">
+            Categories
+          </h3>
           <Hydrate.Categories
             data={categories}
             distribution={data?.payload?.distribution}
