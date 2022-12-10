@@ -19,7 +19,7 @@ export type IDropdown = {
   list?: {
     value?: string;
     label: string;
-    _count?: { [key: string]: number };
+    _count?: Distribution;
   }[] &
     Partial<INavItem[]>;
   component?: ReactElement;
@@ -34,6 +34,7 @@ export type IDropdown = {
   };
 };
 
+export type Distribution = { [key: string]: number };
 export declare namespace API {
   namespace Requests {
     interface SearchPosts {
@@ -49,6 +50,7 @@ export declare namespace API {
   interface Response<T = { T?: any }> {
     payload?: {
       results: T;
+      distribution: Distribution;
       count?: number;
     };
     error?: string;
@@ -117,10 +119,7 @@ export declare namespace Hydration {
   };
 
   interface Posts extends ReactQueryProps {
-    data?: API.Response<{
-      posts: API.Models.Post[];
-      aggregation: { [key: string]: number }[];
-    }>;
+    data?: API.Response<API.Models.Post[]>;
   }
   interface Category extends ReactQueryProps {
     data?: API.Response<API.Models.Category[]>;

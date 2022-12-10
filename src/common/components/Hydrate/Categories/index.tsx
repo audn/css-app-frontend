@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
-import { Hydration } from '../../../lib/interfaces';
+import { Distribution, Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
 import CategoryCard from '../../Cards/Category';
 import HydrationError from '../../layout/Alerts/HydrationError';
@@ -16,9 +16,9 @@ function CategoryHydration({
   onClearFilters,
   selectedValues,
   setSelectedValues,
-  aggregation,
+  distribution,
 }: Hydration.Category & {
-  aggregation?: { [key: string]: number };
+  distribution?: Distribution;
   selectedValues: string[];
   setSelectedValues: (val: string) => void;
 }) {
@@ -47,7 +47,7 @@ function CategoryHydration({
             .sort((a, b) => Number(b._count?.posts) - Number(a._count?.posts))
             .map((category) => (
               <CategoryCard
-                count={aggregation ? aggregation[category.value] : 0}
+                count={distribution ? distribution[category.value] : 0}
                 {...category}
                 key={category.value}
                 selectedValues={selectedValues}

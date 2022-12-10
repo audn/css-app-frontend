@@ -1,4 +1,4 @@
-import { Hydration } from '../../lib/interfaces';
+import { Distribution, Hydration } from '../../lib/interfaces';
 import CategoryHydration from './Categories';
 import PostsHydration from './Posts';
 
@@ -9,17 +9,17 @@ export const Hydrate = {
   Categories: ({
     selectedValues,
     setSelectedValues,
-    aggregation,
+    distribution,
     ...props
   }: Hydration.Category & {
-    aggregation?: { [key: string]: number }[];
+    distribution?: Distribution;
     selectedValues: string[];
     setSelectedValues: (val: string) => void;
   }) => {
     return (
       <CategoryHydration
         {...props}
-        aggregation={aggregation}
+        distribution={distribution}
         selectedValues={selectedValues}
         setSelectedValues={setSelectedValues}
       />

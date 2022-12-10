@@ -115,7 +115,7 @@ export default function Home({ query }: { query: { library: string } }) {
         <div className="mt-5">
           <Hydrate.Categories
             data={categories}
-            aggregation={data?.payload?.results.aggregation}
+            distribution={data?.payload?.distribution}
             error={fetchCategoriesError}
             selectedValues={selectedValues}
             setSelectedValues={updateCategories}
