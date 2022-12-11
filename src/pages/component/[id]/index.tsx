@@ -32,23 +32,25 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null) {
-        let options: RequestInit = {
-          method: 'PUT',
-          mode: 'cors',
-          referrerPolicy: 'no-referrer',
-          credentials: 'omit',
-        };
+      //   if (post.generatedImage == null) {
+      let options: RequestInit = {
+        method: 'PUT',
+        mode: 'cors',
+        referrerPolicy: 'no-referrer',
+        credentials: 'omit',
+      };
 
-        const data = await fetch(
-          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
-          options,
-        );
+      const data = await fetch(
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}&force=true`,
+        options,
+      );
 
-        const res = await data.json();
+      const res = await data.json();
+      if (data.status !== 400) {
         await uploadThumbnail(post.id, res);
       }
     }
+    // }
     updateThumbnail();
   }, []);
 

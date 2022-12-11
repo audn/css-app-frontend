@@ -3,13 +3,14 @@ import { NextApiResponse } from 'next';
 import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 
 export const renderImage = async (
-  req: { query: { id: string } },
+  req: { query: { id: string; force?: boolean } },
   res: NextApiResponse,
 ) => {
+  const force = req.query.force;
   const data = await getPostFromId(req.query.id);
   const post = data.payload?.results;
 
-  if (post && post.generatedImage == null) {
+  if (post && (force || post.generatedImage == null)) {
     return await axios({
       method: 'put',
       data: { id: '' },
@@ -30,7 +31,7 @@ export const renderImage = async (
             originalname: post.id + '.png',
           };
           return res.json(image);
-        } else return res.status(400);
+        } else return res.status(400).json({ error: true });
       })
       .catch((e) => {
         if (e) {
@@ -38,7 +39,7 @@ export const renderImage = async (
           return res.json({ error: 'true', message: e });
         }
       });
-  } else return res.json({});
+  } else return res.status(400).json({ message: 'already has thumbnail' });
 };
 
 export default renderImage;
