@@ -16,7 +16,6 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
-import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   getPostFromId,
@@ -33,7 +32,7 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null && useLocalhost) {
+      if (post.generatedImage == null) {
         let options: RequestInit = {
           method: 'PUT',
           mode: 'cors',
