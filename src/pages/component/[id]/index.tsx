@@ -33,7 +33,10 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null && !useLocalhost) {
+      if (
+        post.generatedImage == null &&
+        (router.query.force == 'true' || !useLocalhost)
+      ) {
         let options: RequestInit = {
           method: 'PUT',
           mode: 'cors',
@@ -200,7 +203,7 @@ function Post({ post }: { post: API.Models.Post }) {
               </Link>
               <Button.Secondary
                 icon="fa-regular fa-code"
-                title="Show code"
+                title={`Show ${seeCode ? 'preview' : 'code'}`}
                 onClick={() => setSeeCode(!seeCode)}
               />
             </Button.Wrapper>
