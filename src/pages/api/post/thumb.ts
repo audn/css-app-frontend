@@ -20,7 +20,15 @@ export const renderImage = async (
       url: `https://7ec94wkd02.execute-api.us-east-1.amazonaws.com/v0/generate-thumbnails?id=${post.id}`,
     })
       .then(async ({ data }) => {
-        res.json(data);
+        const buffer = data.data;
+        const image = {
+          buffer,
+          encoding: '7bit',
+          fieldname: 'thumbnail',
+          mimetype: 'image/png',
+          originalname: post.id + '.png',
+        };
+        return res.json(image);
       })
       .catch((e) => {
         if (e) {

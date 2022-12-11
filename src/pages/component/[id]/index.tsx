@@ -16,10 +16,11 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
-  editPost,
   getPostFromId,
+  uploadThumbnail,
 } from '../../../common/utils/hooks/api/posts';
 
 function Post({ post }: { post: API.Models.Post }) {
@@ -32,7 +33,7 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      if (post.generatedImage == null) {
+      if (post.generatedImage == null && useLocalhost) {
         let options: RequestInit = {
           method: 'PUT',
           mode: 'cors',
@@ -44,24 +45,9 @@ function Post({ post }: { post: API.Models.Post }) {
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}`,
           options,
         );
-        // const msg = toast.loading('Generating thumbnail...');
 
         const res = await data.json();
-        const buffer = res.data;
-
-        if (!res.errorMessage) {
-          const b64 = Buffer.from(buffer).toString('base64');
-          const mimeType = 'image/png';
-
-          const update = await editPost(post.id, {
-            generatedImage: `data:${mimeType};base64,${b64}`,
-          });
-          if (update) {
-            // toast.success('Done!', { id: msg });
-          } else toast.error('Failed to update thumbnail');
-        } else {
-          toast.error('Failed to update thumbnail');
-        }
+        await uploadThumbnail(post.id, res);
       }
     }
     updateThumbnail();
@@ -277,7 +263,7 @@ export default Post;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await (await getPostFromId(id)).payload?.results;
+  const data = await getPostFromId(id);
 
   if (!data) {
     return {
@@ -286,7 +272,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     };
   }
   return {
-    props: { post: data },
+    props: { post: data.payload?.results },
     revalidate: 5,
   };
 };

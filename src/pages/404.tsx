@@ -5,7 +5,7 @@ export default function Custom404() {
   return (
     <DefaultLayout>
       <NextSeo title="Page not found" />
-      error
+      error olol
     </DefaultLayout>
   );
 }

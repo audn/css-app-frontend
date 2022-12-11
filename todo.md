@@ -1,5 +1,6 @@
-**Extra**
+**todo**
 
+- [x] update category count on library change
 - [ ] tab focus on elements
 - [ ] edit category on component
       **Minor**

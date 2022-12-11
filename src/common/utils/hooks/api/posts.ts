@@ -35,6 +35,20 @@ export async function editPost(
   return res.json();
 }
 
+export async function uploadThumbnail(
+  id: string,
+  data: {
+    fieldname: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    buffer: Buffer;
+  },
+): Promise<API.Response<API.Models.Post>> {
+  const res = await put(`/thumbnail/${id}`, true, data);
+  return res.json();
+}
+
 export async function setThumbnail(
   id: string,
 ): Promise<API.Response<API.Models.Post>> {

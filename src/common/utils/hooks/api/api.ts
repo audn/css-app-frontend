@@ -44,4 +44,27 @@ async function request(
 
   return res;
 }
-export { request, get, post, del, put };
+async function sendImage(
+  endpoint: string,
+  requireAuth: boolean,
+  buffer: Buffer,
+) {
+  let options: RequestInit = {
+    method: 'PUT',
+    mode: 'cors',
+    referrerPolicy: 'no-referrer',
+    credentials: requireAuth ? 'include' : 'omit',
+  };
+
+  const headers: HeadersInit = new Headers();
+
+  headers.set('content-type', 'image/png');
+
+  options.headers = headers;
+  options.body = buffer;
+
+  console.log(options);
+
+  return fetch(`${base}${endpoint}`, options);
+}
+export { request, get, post, del, put, sendImage };
