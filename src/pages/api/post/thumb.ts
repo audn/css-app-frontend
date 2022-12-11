@@ -21,14 +21,16 @@ export const renderImage = async (
     })
       .then(async ({ data }) => {
         const buffer = data.data;
-        const image = {
-          buffer,
-          encoding: '7bit',
-          fieldname: 'thumbnail',
-          mimetype: 'image/png',
-          originalname: post.id + '.png',
-        };
-        return res.json(image);
+        if (typeof buffer !== 'undefined') {
+          const image = {
+            buffer,
+            encoding: '7bit',
+            fieldname: 'thumbnail',
+            mimetype: 'image/png',
+            originalname: post.id + '.png',
+          };
+          return res.json(image);
+        } else return res.status(400);
       })
       .catch((e) => {
         if (e) {
