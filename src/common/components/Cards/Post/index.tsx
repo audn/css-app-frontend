@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
@@ -11,7 +12,14 @@ function PostCard({ author, id, title, generatedImage }: API.Models.Post) {
         //   .toLowerCase()}`}
         href={`/component/${id}`}
       >
-        <img src={generatedImage} />
+        {generatedImage && (
+          <Image
+            src={generatedImage}
+            layout="responsive"
+            width={400}
+            height={300}
+          />
+        )}
       </Link>
       <div className="flex flex-col items-start px-2 py-3">
         <h2 className="text-lg text-white">{title}</h2>
