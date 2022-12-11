@@ -16,6 +16,7 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   getPostFromId,
@@ -32,25 +33,25 @@ function Post({ post }: { post: API.Models.Post }) {
 
   useEffect(() => {
     async function updateThumbnail() {
-      //   if (post.generatedImage == null) {
-      let options: RequestInit = {
-        method: 'PUT',
-        mode: 'cors',
-        referrerPolicy: 'no-referrer',
-        credentials: 'omit',
-      };
+      if (post.generatedImage == null && !useLocalhost) {
+        let options: RequestInit = {
+          method: 'PUT',
+          mode: 'cors',
+          referrerPolicy: 'no-referrer',
+          credentials: 'omit',
+        };
 
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}&force=true`,
-        options,
-      );
+        const data = await fetch(
+          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}&force=true`,
+          options,
+        );
 
-      const res = await data.json();
-      if (data.status !== 400) {
-        await uploadThumbnail(post.id, res);
+        const res = await data.json();
+        if (data.status !== 400) {
+          await uploadThumbnail(post.id, res);
+        }
       }
     }
-    // }
     updateThumbnail();
   }, []);
 

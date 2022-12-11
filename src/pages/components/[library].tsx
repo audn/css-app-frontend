@@ -97,6 +97,10 @@ export default function Home({ query }: { query: { library: string } }) {
     refetch,
     isRefetching,
   } = useSearchPosts(apiQuery);
+  useEffect(() => {
+    if (data?.payload?.distribution)
+      setDistribution(data?.payload?.distribution);
+  }, [data]);
 
   const {
     data: categories,
@@ -106,6 +110,9 @@ export default function Home({ query }: { query: { library: string } }) {
     isRefetching: isRefetchingCategories,
   } = useCategories(library!);
 
+  const [distribution, setDistribution] = useState<any>(
+    data?.payload?.distribution,
+  );
   return (
     <DefaultLayout>
       <div className="flex flex-col mt-3 md:mt-8">
@@ -119,7 +126,7 @@ export default function Home({ query }: { query: { library: string } }) {
           </h3>
           <Hydrate.Categories
             data={categories}
-            distribution={data?.payload?.distribution}
+            distribution={distribution}
             error={fetchCategoriesError}
             selectedValues={selectedValues}
             setSelectedValues={updateCategories}
