@@ -9,6 +9,7 @@ import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API } from '../../../../lib/interfaces';
 import { addPost } from '../../../../utils/hooks/api/posts';
 import { useCategories } from '../../../../utils/hooks/categories';
+import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
 import View1 from './screens/View1';
 import View2 from './screens/View2';
 
@@ -50,6 +51,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
         library: data.library!.toLowerCase(),
       });
       if (posted.payload?.results) {
+        await useGenerateThumbnail(posted.payload.results.id);
         toast.success('Success!', { id: toaster });
         router.push(`/component/${posted.payload.results.id}`);
       } else {
