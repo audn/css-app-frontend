@@ -1,4 +1,3 @@
-import html2canvas from 'html2canvas';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -20,8 +19,8 @@ import useAuthState from '../../../common/store/auth';
 import {
   deletePost,
   getPostFromId,
-  uploadThumbnail,
 } from '../../../common/utils/hooks/api/posts';
+import { useGenerateThumbnail } from '../../../common/utils/useGenerateThumbnail';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
@@ -31,36 +30,12 @@ function Post({ post }: { post: API.Models.Post }) {
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
-  async function generateThumb() {
-    let msg = toast.loading('Generating thumbnail');
-    const iframe =
-      typeof window !== 'undefined' &&
-      (document.getElementsByTagName('iframe') as any);
-    const screen = iframe[0]?.contentDocument?.body;
-    html2canvas(screen, {
-      allowTaint: true,
-      useCORS: true,
-      windowWidth: 800,
-      windowHeight: 600,
-    }).then(async (canvas) => {
-      //   scale: 2,
-      const base64image = canvas.toDataURL('image/png');
-
-      const buffer = Buffer.from(
-        base64image.replace(/^data:image\/\w+;base64,/, ''),
-        'base64',
-      );
-      await uploadThumbnail(post.id, {
-        buffer: buffer,
-        encoding: '7bit',
-        fieldname: 'image',
-        mimetype: 'image/png',
-        originalname: post.id,
-      });
-      toast.success('Done!', { id: msg });
-    });
-  }
   useEffect(() => {
+    async function generateThumb() {
+      let msg = toast.loading('Generating thumbnail');
+      await useGenerateThumbnail(post.id);
+      toast.success('Done!', { id: msg });
+    }
     if (post.generatedImage == null) {
       generateThumb();
     }
