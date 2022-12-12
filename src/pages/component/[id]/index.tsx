@@ -16,12 +16,11 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
-import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   getPostFromId,
-  uploadThumbnail,
 } from '../../../common/utils/hooks/api/posts';
+import { useGenerateThumbnail } from '../../../common/utils/useGenerateThumbnail';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
@@ -32,32 +31,15 @@ function Post({ post }: { post: API.Models.Post }) {
   const [isEditing, setEdit] = useState<boolean>(false);
 
   useEffect(() => {
-    async function updateThumbnail() {
-      if (
-        post.generatedImage == null &&
-        (router.query.force == 'true' || !useLocalhost)
-      ) {
-        let options: RequestInit = {
-          method: 'PUT',
-          mode: 'cors',
-          referrerPolicy: 'no-referrer',
-          credentials: 'omit',
-        };
-
-        const data = await fetch(
-          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}&force=true`,
-          options,
-        );
-
-        const res = await data.json();
-        if (data.status !== 400) {
-          await uploadThumbnail(post.id, res);
-        }
-      }
+    async function generateThumb() {
+      let msg = toast.loading('Generating thumbnail');
+      await useGenerateThumbnail(post.id);
+      toast.success('Done!', { id: msg });
     }
-    updateThumbnail();
+    if (post.generatedImage == null) {
+      generateThumb();
+    }
   }, []);
-
   const toggleEdit = () => setEdit(!isEditing);
 
   async function onDelete() {
@@ -74,6 +56,7 @@ function Post({ post }: { post: API.Models.Post }) {
       }
     }
   }
+
   const canManagePost = () => {
     return user.id == post.authorId || user.role === 'ADMIN';
   };
