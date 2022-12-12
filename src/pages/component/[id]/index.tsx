@@ -1,3 +1,4 @@
+import html2canvas from 'html2canvas';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -16,7 +17,6 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
-import { useLocalhost } from '../../../common/utils/helpers/useOnLocal';
 import {
   deletePost,
   getPostFromId,
@@ -31,33 +31,40 @@ function Post({ post }: { post: API.Models.Post }) {
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
+  async function generateThumb() {
+    let msg = toast.loading('Generating thumbnail');
+    const iframe =
+      typeof window !== 'undefined' &&
+      (document.getElementsByTagName('iframe') as any);
+    const screen = iframe[0]?.contentDocument?.body;
+    html2canvas(screen, {
+      allowTaint: true,
+      useCORS: true,
+      windowWidth: 800,
+      windowHeight: 600,
+    }).then(async (canvas) => {
+      //   scale: 2,
+      const base64image = canvas.toDataURL('image/png');
+
+      const buffer = Buffer.from(
+        base64image.replace(/^data:image\/\w+;base64,/, ''),
+        'base64',
+      );
+      await uploadThumbnail(post.id, {
+        buffer: buffer,
+        encoding: '7bit',
+        fieldname: 'image',
+        mimetype: 'image/png',
+        originalname: post.id,
+      });
+      toast.success('Done!', { id: msg });
+    });
+  }
   useEffect(() => {
-    async function updateThumbnail() {
-      if (
-        post.generatedImage == null &&
-        (router.query.force == 'true' || !useLocalhost)
-      ) {
-        let options: RequestInit = {
-          method: 'PUT',
-          mode: 'cors',
-          referrerPolicy: 'no-referrer',
-          credentials: 'omit',
-        };
-
-        const data = await fetch(
-          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/post/thumb?id=${post?.id}&force=true`,
-          options,
-        );
-
-        const res = await data.json();
-        if (data.status !== 400) {
-          await uploadThumbnail(post.id, res);
-        }
-      }
+    if (post.generatedImage == null) {
+      generateThumb();
     }
-    updateThumbnail();
   }, []);
-
   const toggleEdit = () => setEdit(!isEditing);
 
   async function onDelete() {
@@ -74,6 +81,7 @@ function Post({ post }: { post: API.Models.Post }) {
       }
     }
   }
+
   const canManagePost = () => {
     return user.id == post.authorId || user.role === 'ADMIN';
   };
