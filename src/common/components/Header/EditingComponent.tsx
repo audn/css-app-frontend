@@ -3,6 +3,7 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
 import { editPost } from '../../utils/hooks/api/posts';
+import useGenerateThumbnail from '../../utils/useGenerateThumbnail';
 import { Button } from '../Buttons';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
@@ -28,7 +29,7 @@ export const HeaderEditingComponent = ({
   }
 
   async function savePost() {
-    const toaster = toast.loading('Saving...');
+    const msg = toast.loading('Saving...');
     setIsSaving(true);
     const newData = (({ author, authorId, ...o }) => o)(data);
     const posted = await editPost(data.id!, {
@@ -36,12 +37,12 @@ export const HeaderEditingComponent = ({
       library: data.library?.toLowerCase(),
     });
     if (posted.payload?.results) {
-      //   await setThumbnail(data.id!);
-      toast.success('Saved!', { id: toaster });
+      toast.success('Saved!', { id: msg });
 
       router.push(`/component/${data.id}`);
+      await useGenerateThumbnail(data.id!);
     } else {
-      toast.error('Failed to save', { id: toaster });
+      toast.error('Failed to save', { id: msg });
     }
     setIsSaving(false);
   }

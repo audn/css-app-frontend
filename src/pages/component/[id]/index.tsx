@@ -45,6 +45,7 @@ function Post({ post }: { post: API.Models.Post }) {
       }
     }
   }
+
   const canManagePost = () => {
     return user.id == post.authorId || user.role === 'ADMIN';
   };

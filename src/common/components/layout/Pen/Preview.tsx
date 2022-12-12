@@ -14,6 +14,7 @@ function Preview({
 }) {
   return (
     <iframe
+      id="capture"
       title="Preview"
       className={concat(
         className ? className : '',

@@ -27,6 +27,7 @@
     "color-thief-react": "^2.1.0",
     "dompurify": "^2.4.1",
     "framer-motion": "^4.1.17",
+    "html2canvas": "^1.4.1",
     "monaco-editor": "^0.34.1",
     "next": "^12.2.4",
     "next-seo": "^5.5.0",
