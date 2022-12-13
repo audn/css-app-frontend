@@ -1,5 +1,6 @@
 import html2canvas from 'html2canvas';
 import { API } from '../lib/interfaces';
+import { useLocalhost } from './helpers/useOnLocal';
 import { uploadThumbnail } from './hooks/api/posts';
 
 export async function useGenerateThumbnail(
@@ -22,7 +23,9 @@ export async function useGenerateThumbnail(
       base64image.replace(/^data:image\/\w+;base64,/, ''),
       'base64',
     );
-    document.body.appendChild(canvas);
+    {
+      useLocalhost && document.body.appendChild(canvas);
+    }
     return await uploadThumbnail(id, {
       buffer: buffer,
       encoding: '7bit',

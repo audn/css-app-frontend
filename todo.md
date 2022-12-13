@@ -1,9 +1,14 @@
+**bugs**
+
+- [ ] .jpg images does not get included in thumbnail
+
 **todo**
 
 - [x] update category count on library change
 - [ ] tab focus on elements
-- [ ] edit category on component
-      **Minor**
+- [ ] let users edit the category after posting
+
+**Minor**
 
 - [ ] /new and /:id/edit share 90% of the same code
 - [ ] AddingComponent.tsx and EditingComponent.tsx share 90% of the same code
