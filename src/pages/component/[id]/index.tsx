@@ -20,6 +20,7 @@ import {
   deletePost,
   getPostFromId,
 } from '../../../common/utils/hooks/api/posts';
+import useGenerateThumbnail from '../../../common/utils/useGenerateThumbnail';
 
 function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
@@ -49,7 +50,13 @@ function Post({ post }: { post: API.Models.Post }) {
   const canManagePost = () => {
     return user.id == post.authorId || user.role === 'ADMIN';
   };
-
+  const onRefreshThumbnail = async () => {
+    const msg = toast.loading('Refreshing...');
+    const updated = await useGenerateThumbnail(post.id);
+    if (updated.payload?.results) {
+      toast.success('Refreshed!', { id: msg });
+    } else toast.error('Failed to refresh', { id: msg });
+  };
   const {
     author,
     description,
@@ -143,6 +150,13 @@ function Post({ post }: { post: API.Models.Post }) {
                     title={warning ? 'Are you sure?' : 'Delete'}
                     onClick={onDelete}
                   />
+                  <Auth.Admin>
+                    <Button.Secondary
+                      icon="fa-regular fa-image"
+                      title={'Refresh Thumbnail'}
+                      onClick={onRefreshThumbnail}
+                    />
+                  </Auth.Admin>
                 </Button.Wrapper>
               </div>
             </Auth.Policy>
