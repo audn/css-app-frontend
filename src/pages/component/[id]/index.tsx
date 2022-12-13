@@ -256,7 +256,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   const data = await getPostFromId(id);
 
-  if (!data) {
+  if (data.error) {
     return {
       notFound: true,
       revalidate: 10,
