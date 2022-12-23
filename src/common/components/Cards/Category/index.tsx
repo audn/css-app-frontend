@@ -31,7 +31,7 @@ function CategoryCard({
       )}
     >
       {label}
-      <div className="ml-2 text-sm text-white/60"> {count}</div>
+      {/* <div className="ml-2 text-sm text-white/60"> {count}</div> */}
     </button>
   );
 }
