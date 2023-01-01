@@ -26,6 +26,8 @@ function PenEditor({ initialContent, onChange, fullHeight = true }: Props) {
     scrollbar: {
       horizontalScrollbarSize: 21,
     },
+    // padding: { top: 49 },
+
     quickSuggestions: {
       strings: true,
     },

@@ -121,8 +121,8 @@ function Post({ post }: { post: API.Models.Post }) {
       />
       <EditModal isOpen={isEditing} onClose={toggleEdit} post={post} />
       <div className="space-y-12">
-        <div className="grid items-start grid-cols-2 gap-5">
-          <div className="col-span-1">
+        <div className="grid items-start grid-cols-1 gap-5 xl:grid-cols-2">
+          <div>
             <div className="relative h-[450px] rounded-lg overflow-hidden">
               <Preview
                 initialCode={code}
@@ -165,37 +165,12 @@ function Post({ post }: { post: API.Models.Post }) {
             </div>
           </div>
           <div>
-            <div
-            //   className="flex flex-col justify-start overflow-hidden border // bg-types-50 rounded-xl border-types-150"
-            >
-              {simpleInfo.map((x) => (
-                <InfoTag {...x} />
-              ))}
-            </div>
-            {/* <div className="flex items-center justify-start mt-5 space-x-10">
-              {statInfo.map((x) => (
-                <div className="flex flex-col items-center p-4">
-                  <i className={concat('', x.icon)} />
-
-                  <div className="flex flex-col items-center mt-2 text-sm ">
-                    <h2 className="text-white text-[13px] font-medium md:font-normal md:text-base">
-                      {x.value}
-                    </h2>
-                    <h3 className="text-sm text-on-50">{x.label}</h3>
-                  </div>
-                </div>
-              ))}
-            </div> */}
+            {simpleInfo.map((x) => (
+              <InfoTag {...x} />
+            ))}
           </div>
-          {/* <div className="border border-types-150 rounded-xl  py-3 overflow-hidden h-[450px] bg-types-50">
-            <PenEditor
-              templateCode={post.code}
-              fullHeight={false}
-              initialContent={post.code}
-              // onChange={(val) => update('code', val)}
-            />
-          </div> */}
-          <div className="col-span-2 rounded-xl border border-types-150 py-3 overflow-hidden h-[450px] bg-types-50">
+
+          <div className="xl:col-span-2 rounded-xl border border-types-150 py-3 overflow-hidden h-[450px] bg-types-50">
             <PenEditor
               templateCode={post.code}
               fullHeight={false}
