@@ -10,6 +10,11 @@ function Sidebar() {
       icon: 'fa-solid fa-cube',
       route: `/components/${library.toLowerCase()}`,
     },
+    {
+      label: 'Pages',
+      icon: 'fa-solid fa-memo',
+      route: `/pages/${library.toLowerCase()}`,
+    },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },
     { label: 'Roadmap', icon: 'fa-regular fa-info-circle', route: '/roadmap' },
     // { label: 'Settings', icon: 'fa-regular fa-cog', route: '/settings' },

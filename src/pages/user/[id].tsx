@@ -3,9 +3,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import TimeAgo from 'react-timeago';
 import Auth from '../../common/components/layout/Auth';
+import Tooltip from '../../common/components/layout/Tooltip';
 import { DefaultLayout } from '../../common/layouts/Default';
 import { API } from '../../common/lib/interfaces';
 import useAuthState from '../../common/store/auth';
+import toDate from '../../common/utils/helpers/toDate';
 import { getUser } from '../../common/utils/hooks/api/user';
 
 function UserProfile({ user }: { user: API.Models.User }) {
@@ -22,7 +24,7 @@ function UserProfile({ user }: { user: API.Models.User }) {
         title={`${user.displayName ? user.displayName : user.username}`}
       />
       <div className="max-w-3xl mx-auto">
-        <div className="overflow-hidden border bg-types-150 border-types-200 rounded-2xl">
+        <div className="overflow-hidden border bg-types-150 border-types-250 rounded-2xl">
           <Color crossOrigin="anonymous" format="hex" src={user.avatar}>
             {({ data }) => {
               return (
@@ -64,9 +66,22 @@ function UserProfile({ user }: { user: API.Models.User }) {
                   </div>
                   <div>
                     Member since{' '}
-                    <span className="font-medium">
-                      <TimeAgo date={user.createdAt} />
-                    </span>
+                    <Tooltip
+                      text={toDate({
+                        dateString: String(new Date(user.createdAt)),
+                        options: {
+                          show: {
+                            month: 'short',
+                            year: 'numeric',
+                            day: 'numeric',
+                          },
+                        },
+                      })}
+                    >
+                      <span className="font-medium">
+                        <TimeAgo date={user.createdAt} />
+                      </span>
+                    </Tooltip>
                   </div>
                 </div>
               </div>

@@ -1,11 +1,9 @@
-import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
-import Animate from '../../../common/components/layout/Animate';
 import Auth from '../../../common/components/layout/Auth';
 import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
@@ -15,7 +13,7 @@ import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
-import { fadeIn } from '../../../common/utils/data/animations';
+import toDate from '../../../common/utils/helpers/toDate';
 import {
   deletePost,
   getPostFromId,
@@ -96,6 +94,16 @@ function Post({ post }: { post: API.Models.Post }) {
       ),
       icon: 'fa-regular fa-user',
     },
+    {
+      label: 'Added',
+      value: toDate({
+        dateString: String(new Date(post.createdAt)),
+        options: {
+          show: { month: 'short', day: '2-digit', year: 'numeric' },
+        },
+      }),
+      icon: 'fa-regular fa-calendar',
+    },
   ];
   async function onDelete() {
     if (!warning) {
@@ -157,22 +165,18 @@ function Post({ post }: { post: API.Models.Post }) {
               }}
               onMouseLeave={() => setShowToggle(false)}
             >
-              <AnimatePresence>
-                {showToggle && (
-                  <Animate variants={fadeIn} className="">
-                    <button
-                      onClick={() => setDarkMode(!darkMode)}
-                      className="absolute z-50 flex items-center justify-center w-8 h-8 rounded-full bg-types-250 hover:text-white top-5 right-5"
-                    >
-                      {darkMode ? (
-                        <i className="fa-solid fa-moon" />
-                      ) : (
-                        <i className="fa-solid fa-sun-bright" />
-                      )}
-                    </button>
-                  </Animate>
-                )}
-              </AnimatePresence>
+              {showToggle && (
+                <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="absolute z-50 flex items-center justify-center w-8 h-8 rounded-full bg-types-250 hover:text-white top-5 right-5"
+                >
+                  {darkMode ? (
+                    <i className="fa-solid fa-moon" />
+                  ) : (
+                    <i className="fa-solid fa-sun-bright" />
+                  )}
+                </button>
+              )}
               <Preview
                 className={darkMode ? '!bg-[#121212]' : ''}
                 initialCode={code}
