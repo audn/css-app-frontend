@@ -31,7 +31,7 @@ function DesktopMenu() {
       <Auth.User>
         <div className="flex items-center space-x-5">
           <Link href="/new">
-            <Button.Secondary title="New component" />
+            <Button.Secondary title="Open Editor" />
           </Link>
           <div className="relative">
             <Dropdown

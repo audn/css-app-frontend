@@ -5,6 +5,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
 import Auth from '../../../common/components/layout/Auth';
+import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
@@ -16,7 +17,6 @@ import {
   deletePost,
   getPostFromId,
 } from '../../../common/utils/hooks/api/posts';
-import useGenerateThumbnail from '../../../common/utils/useGenerateThumbnail';
 
 function Post({ post }: { post: API.Models.Post }) {
   const {
@@ -57,20 +57,24 @@ function Post({ post }: { post: API.Models.Post }) {
     },
     {
       label: 'Theme',
-      value: theme,
+      value: theme || 'Dark',
       icon: 'fa-regular fa-eye',
     },
-  ];
-  const statInfo = [
     {
-      label: 'Views',
-      value: 52,
-      icon: 'fa-solid fa-eye',
-    },
-    {
-      label: 'Comments',
-      value: 5,
-      icon: 'fa-solid fa-comment',
+      label: 'Author',
+      value: (
+        <>
+          <img src={author.avatar} className="w-5 h-5 mr-2 rounded-full" />
+          <Link
+            href={`/user/${author.id}`}
+            className="hover:text-white animate"
+          >
+            {' '}
+            <h3>{author?.username}</h3>
+          </Link>
+        </>
+      ),
+      icon: 'fa-regular fa-user',
     },
   ];
   async function onDelete() {
@@ -91,13 +95,14 @@ function Post({ post }: { post: API.Models.Post }) {
   const canManagePost = () => {
     return user.id == post.authorId || user.role === 'ADMIN';
   };
-  const onRefreshThumbnail = async () => {
-    const msg = toast.loading('Refreshing...');
-    const updated = await useGenerateThumbnail(post.id);
-    if (updated.payload?.results) {
-      toast.success('Refreshed!', { id: msg });
-    } else toast.error('Failed to refresh', { id: msg });
-  };
+
+  //   const onRefreshThumbnail = async () => {
+  //     const msg = toast.loading('Refreshing...');
+  //     const updated = await useGenerateThumbnail(post.id);
+  //     if (updated.payload?.results) {
+  //       toast.success('Refreshed!', { id: msg });
+  //     } else toast.error('Failed to refresh', { id: msg });
+  //   };
   return (
     <DefaultLayout>
       <NextSeo
@@ -130,18 +135,37 @@ function Post({ post }: { post: API.Models.Post }) {
                 version={libraryVersion}
               />
             </div>
-            <div className="flex items-center mt-5 space-x-3">
-              <Button.Wrapper>
-                <Button.Secondary
-                  icon="fa-brands fa-twitter"
-                  title="Share"
-                  className="!text-white !bg-blue-500"
-                  onClick={toggleEdit}
-                />
-              </Button.Wrapper>
-              <Auth.Policy policy={canManagePost()}>
-                <div className="flex items-center">
-                  <Button.Wrapper>
+            <div className="flex items-center justify-between mt-5 space-x-3">
+              <Button.Secondary
+                icon="fa-brands fa-twitter"
+                title="Share"
+                className="!text-white !bg-blue-500"
+                onClick={toggleEdit}
+              />{' '}
+              <div className="flex items-center">
+                <Button.Wrapper>
+                  <Link href={`/component/${post.id}/preview`} target="_blank">
+                    <Button.Secondary
+                      icon="fa-regular fa-external-link"
+                      title={
+                        <span className="flex">
+                          Fullscreen{' '}
+                          {/* <span className="hidden sm:flex">&nbsp;preview</span> */}
+                        </span>
+                      }
+                    />
+                  </Link>
+                  <Button.Secondary
+                    icon="fa-regular fa-copy"
+                    title="Fork"
+                    onClick={toggleEdit}
+                  />{' '}
+                  <Button.Secondary
+                    icon="fa-regular fa-bookmark"
+                    title="Save"
+                    onClick={toggleEdit}
+                  />
+                  <Auth.Policy policy={canManagePost()}>
                     <Button.Secondary
                       icon="fa-regular fa-pen-to-square"
                       title="Edit"
@@ -152,16 +176,16 @@ function Post({ post }: { post: API.Models.Post }) {
                       title={warning ? 'Are you sure?' : 'Delete'}
                       onClick={onDelete}
                     />
-                    <Auth.Admin>
+                    {/* <Auth.Admin>
                       <Button.Secondary
                         icon="fa-regular fa-image"
                         title={'Refresh Thumbnail'}
                         onClick={onRefreshThumbnail}
                       />
-                    </Auth.Admin>
-                  </Button.Wrapper>
-                </div>
-              </Auth.Policy>
+                    </Auth.Admin> */}
+                  </Auth.Policy>
+                </Button.Wrapper>
+              </div>
             </div>
           </div>
           <div>

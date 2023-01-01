@@ -1,8 +1,9 @@
+import { ReactNode } from 'react';
 import concat from '../../../utils/helpers/concat';
 
 type Props = {
   label: string;
-  value: string | number;
+  value: string | number | ReactNode;
   icon: string;
 };
 function InfoTag({ label, value, icon }: Props) {
