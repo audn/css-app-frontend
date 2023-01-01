@@ -26,7 +26,7 @@ function CategoryCard({
         count! < 1 ? 'opacity-50' : '',
         selectedValues.includes(value)
           ? 'bg-brand-primary-150/80 text-white '
-          : 'bg-types-250/70 text-white/80',
+          : 'bg-types-100 text-white/80',
         'px-3 py-[0.3rem] text-[15px] rounded-md font-medium flex items-center',
       )}
     >

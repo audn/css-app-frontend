@@ -18,17 +18,21 @@ export const Header = () => {
     return () => setIsOpenPhoneMenu(false);
   }, [router]);
   return (
-    <header className={'p-10 flex justify-between w-full'}>
-      {pagesWithLibrarySelector.includes(router.pathname) ? (
-        <LibrarySelector />
-      ) : (
-        <>&nbsp;</>
-      )}
+    <header className={'px-10 pt-8 pb-5 flex justify-between w-full'}>
+      {router.pathname !== '/beta' && (
+        <>
+          {pagesWithLibrarySelector.includes(router.pathname) ? (
+            <LibrarySelector />
+          ) : (
+            <>&nbsp;</>
+          )}
 
-      <Navigation
-        isOpenPhoneMenu={isOpenPhoneMenu}
-        setIsOpenPhoneMenu={setIsOpenPhoneMenu}
-      />
+          <Navigation
+            isOpenPhoneMenu={isOpenPhoneMenu}
+            setIsOpenPhoneMenu={setIsOpenPhoneMenu}
+          />
+        </>
+      )}
     </header>
   );
 };

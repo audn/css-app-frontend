@@ -16,12 +16,16 @@ function Sidebar() {
       route: `/pages/${library.toLowerCase()}`,
     },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },
-    { label: 'Roadmap', icon: 'fa-regular fa-info-circle', route: '/roadmap' },
+    {
+      label: 'Beta Roadmap',
+      icon: 'fa-solid fa-info-circle',
+      route: '/beta',
+    },
     // { label: 'Settings', icon: 'fa-regular fa-cog', route: '/settings' },
   ];
   return (
     <div className="min-w-[290px]  fixed left-0 inset-y-0  p-4 bg-types-body border-r border-types-150 min-h-screen ">
-      <img src={`/logo.svg`} className="w-10 h-10 mt-3 mb-6 rounded-full" />
+      <img src={`/logo.svg`} className="w-10 h-10 rounded-full" />
       <div className="flex flex-col mt-5 space-y-1">
         {items.map((x) => (
           <NavItem {...x} />
@@ -32,7 +36,7 @@ function Sidebar() {
           </div>
           <input
             type="text"
-            className="px-6 pl-10 py-[0.5rem] placeholder:text-white/50 focus:outline-none focus:bg-types-150/80 rounded-full bg-types-150"
+            className="px-6 pl-10 py-[0.5rem] placeholder:text-white/50 focus:outline-none focus:bg-types-150/80 rounded-full bg-types-100"
             placeholder="Search..."
           />
         </div>
