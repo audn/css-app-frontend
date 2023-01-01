@@ -30,15 +30,21 @@ function LibrarySelector({
       active={library}
       options={{
         animateCaret: true,
-        box: true,
-        caret: true,
         toggleOnClick: true,
       }}
       isLoading={isLoading}
       list={data?.payload?.results}
       onClick={setLibrary}
     >
-      {library}
+      <div className="flex items-center border border-types-150 rounded-xl">
+        <div className="flex items-center justify-center w-10 h-10 bg-types-125 rounded-l-xl">
+          <img src={'/libraries/tailwindcss.svg'} className="w-6 h-6" />
+        </div>
+        <div className="px-3 font-normal">
+          {library}
+          <i className="ml-2 text-sm fa-regular fa-angle-down " />
+        </div>
+      </div>
     </Dropdown>
   );
 }

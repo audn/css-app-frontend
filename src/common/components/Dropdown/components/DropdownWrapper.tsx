@@ -28,7 +28,7 @@ function DropdownWrapper({
       className={concat(
         getPosition(),
         className ? className : '',
-        'absolute border max-w-[200px] rounded-lg shadow-lg top-10 bg-types-200 border-types-250 w-[200px] dropdown max-h-96 ',
+        'absolute  max-w-[200px] rounded-lg shadow-lg top-10 bg-types-150 w-[200px] dropdown max-h-96 ',
       )}
     >
       <ul className="w-full p-2 space-y-1 overflow-y-auto scrollbar-content">
