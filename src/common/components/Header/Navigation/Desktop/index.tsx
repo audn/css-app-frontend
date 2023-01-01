@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import { INavItem } from '../../../../lib/types';
 import useAuthState from '../../../../store/auth';
 import { signOutUser } from '../../../../utils/hooks/api/user';
@@ -5,9 +7,11 @@ import { Button } from '../../../Buttons';
 import Dropdown from '../../../Dropdown';
 import Auth from '../../../layout/Auth';
 import Link from '../../../layout/Link';
+import SelectCreateType from '../../SelectType';
 
 function DesktopMenu() {
   const user = useAuthState((s) => s.user);
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   async function handleLogout() {
     const signedOut = await signOutUser();
     if (!signedOut.error) {
@@ -28,11 +32,24 @@ function DesktopMenu() {
   ] as INavItem[];
   return (
     <div className="items-center hidden space-x-5 sm:flex">
+      <AnimatePresence>
+        {isCreateOpen && (
+          <SelectCreateType
+            isOpen={isCreateOpen}
+            onClose={() => setIsCreateOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       <Auth.User>
         <div className="flex items-center space-x-5">
-          <Link href="/new">
+          <Button.Secondary
+            title="Create"
+            onClick={() => setIsCreateOpen(true)}
+          />
+
+          {/* <Link href="/new">
             <Button.Secondary title="Open Editor" />
-          </Link>
+          </Link> */}
           <div className="relative">
             <Dropdown
               className="mt-2"

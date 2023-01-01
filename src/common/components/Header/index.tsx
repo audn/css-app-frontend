@@ -7,7 +7,11 @@ export const Header = () => {
   const router = useRouter();
   const [isOpenPhoneMenu, setIsOpenPhoneMenu] = useState<boolean>(false);
 
-  const pagesWithLibrarytSelector = ['/components/[library]', '/'];
+  const pagesWithLibrarySelector = [
+    '/components/[library]',
+    '/',
+    '/pages/[library]',
+  ];
 
   useEffect(() => {
     setIsOpenPhoneMenu(false);
@@ -15,7 +19,7 @@ export const Header = () => {
   }, [router]);
   return (
     <header className={'p-10 flex justify-between w-full'}>
-      {pagesWithLibrarytSelector.includes(router.pathname) ? (
+      {pagesWithLibrarySelector.includes(router.pathname) ? (
         <LibrarySelector />
       ) : (
         <>&nbsp;</>

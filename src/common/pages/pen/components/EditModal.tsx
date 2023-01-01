@@ -64,7 +64,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
               value={data.title}
               onChange={(val) => update('title', val)}
               id="name"
-              inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              inputClassName="px-4 py-4 bg-types-50/20 border border-types-250"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -74,14 +74,14 @@ function EditModal({ isOpen, onClose, post }: Props) {
               value={data.description}
               onChange={(val) => update('description', val)}
               id="description"
-              inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              inputClassName="px-4 py-4 bg-types-50/20 border border-types-250"
             />
           </div>
           <div className="flex flex-col space-y-3">
             <h3 className="font-medium text-[14px]">Settings</h3>
             <div className="flex space-y-2">
               <button
-                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-100/20 border-types-250"
+                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-50/20 border-types-250"
                 onClick={() => update('animated', !data.animated)}
               >
                 <h3 className="flex-1 font-medium">Animated</h3>
@@ -93,7 +93,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
               </button>
             </div>
             <button
-              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-100/20 border-types-250"
+              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-50/20 border-types-250"
               onClick={() => update('responsive', !data.responsive)}
             >
               <h3 className="flex-1 font-medium">Responsive</h3>
@@ -107,7 +107,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
           <div className="flex flex-col space-y-3">
             <h3 className="font-medium text-[14px]">Apperance</h3>
             <div className="flex space-y-2">
-              <div className="flex flex-col items-start w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
+              <div className="flex flex-col items-start w-full px-4 py-4 border rounded-lg bg-types-50/20 border-types-250">
                 <h3 className="flex-1 text-sm font-medium">Theme</h3>
                 <div className="flex flex-col w-full mt-2 space-y-1">
                   <button

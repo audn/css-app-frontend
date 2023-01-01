@@ -65,7 +65,7 @@ function Modal({ onClose, className, children, open, options }: Props) {
         >
           <Animate
             variants={fadeIn}
-            className="absolute inset-0 bg-opacity-70 bg-types-100 backdrop-blur-sm"
+            className="absolute inset-0 bg-opacity-70 bg-types-50 backdrop-blur-sm"
             onClick={() =>
               onClose ? onClose() : () => console.log('cant close')
             }
@@ -78,7 +78,7 @@ function Modal({ onClose, className, children, open, options }: Props) {
             className={concat(
               getExtraClassNames(),
               className ? className : '',
-              'border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 bg-types-200',
+              'border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 bg-types-150',
             )}
           >
             {children}
