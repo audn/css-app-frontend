@@ -16,7 +16,7 @@ function Circle({ disabled, isLoading, active, onClick, id }: Props) {
       aria-checked="true"
       onClick={() => onClick(!active)}
       className={concat(
-        active ? 'bg-green-500' : 'bg-types-100',
+        active ? 'bg-green-500' : 'bg-black',
         isLoading ? 'opacity-80 cursor-not-allowed' : '',
         'relative transition inline-flex flex-shrink-0 h-6 duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-11 focus:outline-none focus:shadow-outline disabled:cursor-not-allowed focus:ring-2',
       )}
@@ -24,7 +24,7 @@ function Circle({ disabled, isLoading, active, onClick, id }: Props) {
       <span
         aria-hidden="true"
         className={concat(
-          active ? 'translate-x-5 bg-white' : 'translate-x-0 bg-types-200',
+          active ? 'translate-x-5 bg-white' : 'translate-x-0 bg-types-150',
           'relative inline-block w-5 h-5  transition duration-200 ease-in-out transform rounded-full shadow ',
         )}
       >

@@ -7,7 +7,7 @@ import { getPostFromId } from '../../../common/utils/hooks/api/posts';
 function PostPreview({ post }: { post: API.Models.Post }) {
   //   const router = useRouter();
   return (
-    <div className="min-h-screen">
+    <div>
       <NextSeo title={post.title} />
       <Preview
         initialCode={post.code}

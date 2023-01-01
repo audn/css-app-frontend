@@ -14,9 +14,9 @@ function Toggle({
 }: Form.Toggle) {
   return (
     <div className="flex">
-      <label className={concat(className ? className : '', 'flex flex-col')}>
+      <label className={concat(className ? className : '', 'flex')}>
         {label && (
-          <div className={'mb-2'}>
+          <div className={'mr-2'}>
             <h1 className={`font-medium text-on-100 text-base`}>{label}</h1>
             {description && (
               <h3 className="mt-1 text-sm text-on-100 px-d3">{description}</h3>

@@ -1,9 +1,11 @@
+import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
+import Animate from '../../../common/components/layout/Animate';
 import Auth from '../../../common/components/layout/Auth';
 import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
@@ -13,6 +15,7 @@ import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { fadeIn } from '../../../common/utils/data/animations';
 import {
   deletePost,
   getPostFromId,
@@ -35,6 +38,8 @@ function Post({ post }: { post: API.Models.Post }) {
   const router = useRouter();
   const user = useAuthState((s) => s.user);
 
+  const [showToggle, setShowToggle] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
@@ -143,8 +148,33 @@ function Post({ post }: { post: API.Models.Post }) {
       <div className="space-y-12">
         <div className="grid items-start grid-cols-1 gap-5 xl:grid-cols-2">
           <div>
-            <div className="relative h-[450px] rounded-lg overflow-hidden">
+            <div
+              className="relative h-[450px] rounded-lg overflow-hidden "
+              onMouseEnter={() => {
+                // if (!showToggle) {
+                setShowToggle(true);
+                // }
+              }}
+              onMouseLeave={() => setShowToggle(false)}
+            >
+              <AnimatePresence>
+                {showToggle && (
+                  <Animate variants={fadeIn} className="">
+                    <button
+                      onClick={() => setDarkMode(!darkMode)}
+                      className="absolute z-50 flex items-center justify-center w-8 h-8 rounded-full bg-types-250 hover:text-white top-5 right-5"
+                    >
+                      {darkMode ? (
+                        <i className="fa-solid fa-moon" />
+                      ) : (
+                        <i className="fa-solid fa-sun-bright" />
+                      )}
+                    </button>
+                  </Animate>
+                )}
+              </AnimatePresence>
               <Preview
+                className={darkMode ? '!bg-[#121212]' : ''}
                 initialCode={code}
                 library={library}
                 version={libraryVersion}

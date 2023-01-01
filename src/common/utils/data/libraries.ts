@@ -65,6 +65,19 @@ export const iframeSrcDoc = ({
         })
         </script>
         </head>
+        <style>
+        body{
+            background:transparent;
+            width:100%;
+            flex-direction:column;
+            display:flex;
+            min-height:100vh;
+            align-items:center;
+            justify-content:center;
+        }
+</style>
+
+
         <body>${initialCode}</body>
     </html>`;
 };
