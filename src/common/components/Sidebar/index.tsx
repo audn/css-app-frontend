@@ -1,12 +1,14 @@
+import useFilterState from '../../store/filter';
 import NavItem from './components/NavItem';
 
 function Sidebar() {
+  const library = useFilterState((s) => s.library);
   const items = [
     { label: 'Home', icon: 'fa-solid fa-home', route: '/' },
     {
       label: 'Components',
       icon: 'fa-solid fa-cube',
-      route: '/components/tailwindcss',
+      route: `/components/${library.toLowerCase()}`,
     },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },
     { label: 'Roadmap', icon: 'fa-regular fa-info-circle', route: '/roadmap' },
