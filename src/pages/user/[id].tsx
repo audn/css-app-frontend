@@ -67,16 +67,19 @@ function UserProfile({ user }: { user: API.Models.User }) {
                   <div>
                     Member since{' '}
                     <Tooltip
-                      text={toDate({
-                        dateString: String(new Date(user.createdAt)),
-                        options: {
-                          show: {
-                            month: 'short',
-                            year: 'numeric',
-                            day: 'numeric',
+                      id="date"
+                      text={String(
+                        toDate({
+                          dateString: String(new Date(user.createdAt)),
+                          options: {
+                            show: {
+                              month: 'short',
+                              year: 'numeric',
+                              day: 'numeric',
+                            },
                           },
-                        },
-                      })}
+                        }),
+                      )}
                     >
                       <span className="font-medium">
                         <TimeAgo date={user.createdAt} />
