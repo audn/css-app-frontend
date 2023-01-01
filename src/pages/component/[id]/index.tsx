@@ -39,7 +39,7 @@ function Post({ post }: { post: API.Models.Post }) {
   const [isEditing, setEdit] = useState<boolean>(false);
 
   const toggleEdit = () => setEdit(!isEditing);
-  const info = [
+  const simpleInfo = [
     {
       label: 'Library',
       value: `${library}@${libraryVersion}`,
@@ -60,15 +60,17 @@ function Post({ post }: { post: API.Models.Post }) {
       value: theme,
       icon: 'fa-regular fa-eye',
     },
+  ];
+  const statInfo = [
     {
       label: 'Views',
       value: 52,
-      icon: 'fa-regular fa-eyes',
+      icon: 'fa-solid fa-eye',
     },
     {
       label: 'Comments',
       value: 5,
-      icon: 'fa-regular fa-message',
+      icon: 'fa-solid fa-comment',
     },
   ];
   async function onDelete() {
@@ -162,11 +164,28 @@ function Post({ post }: { post: API.Models.Post }) {
               </Auth.Policy>
             </div>
           </div>
+          <div>
+            <div
+            //   className="flex flex-col justify-start overflow-hidden border // bg-types-50 rounded-xl border-types-150"
+            >
+              {simpleInfo.map((x) => (
+                <InfoTag {...x} />
+              ))}
+            </div>
+            {/* <div className="flex items-center justify-start mt-5 space-x-10">
+              {statInfo.map((x) => (
+                <div className="flex flex-col items-center p-4">
+                  <i className={concat('', x.icon)} />
 
-          <div className="flex flex-col justify-start overflow-hidden border bg-types-50 rounded-xl border-types-150">
-            {info.map((x) => (
-              <InfoTag {...x} />
-            ))}
+                  <div className="flex flex-col items-center mt-2 text-sm ">
+                    <h2 className="text-white text-[13px] font-medium md:font-normal md:text-base">
+                      {x.value}
+                    </h2>
+                    <h3 className="text-sm text-on-50">{x.label}</h3>
+                  </div>
+                </div>
+              ))}
+            </div> */}
           </div>
           {/* <div className="border border-types-150 rounded-xl  py-3 overflow-hidden h-[450px] bg-types-50">
             <PenEditor
