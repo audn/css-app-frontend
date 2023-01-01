@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import SEO from '../../next-seo.config';
 import Footer from '../common/components/Footer';
-import { Header } from '../common/components/Header';
 import ReactToaster from '../common/components/layout/Toaster';
+import Sidebar from '../common/components/Sidebar';
 import { useCurrentUser } from '../common/utils/hooks/user';
 const queryClient = new QueryClient();
 
@@ -26,13 +26,16 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen ">
-        {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />}
-        <Analytics /> <ReactToaster />
-        <DefaultSeo {...SEO} />
-        <Component {...pageProps} key={router.route} />
+      <div className="flex min-h-screen ml-[290px]">
+        <Sidebar />
+        <div className="flex flex-col w-full p-14">
+          {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />} */}
+          <Analytics /> <ReactToaster />
+          <DefaultSeo {...SEO} />
+          <Component {...pageProps} key={router.route} />
+          {!pagesWithoutHeader.includes(nextRouter.pathname) && <Footer />}
+        </div>
       </div>
-      {!pagesWithoutHeader.includes(nextRouter.pathname) && <Footer />}
     </QueryClientProvider>
   );
 }
