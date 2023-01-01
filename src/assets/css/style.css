@@ -36,7 +36,7 @@ body {
 .monaco-editor .margin,
 .monaco-editor-background,
 .monaco-editor .inputarea.ime-input {
-  background-color: #1a1a1a !important;
+  background-color: #151515 !important;
 }
 
 .Resizer.horizontal {

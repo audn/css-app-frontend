@@ -1,18 +1,18 @@
 import concat from '../../../utils/helpers/concat';
 
 type Props = {
-  title: string;
-  text: string;
+  label: string;
+  value: string | number;
   icon: string;
 };
-function InfoTag({ title, text, icon }: Props) {
+function InfoTag({ label, value, icon }: Props) {
   return (
-    <div className="flex items-center text-sm font-normal ">
-      <div className="w-60">
+    <div className="flex items-center px-5 py-3 text-sm font-normal hover:bg-types-150/50">
+      <div className="w-40">
         <i className={concat('mr-2', icon)} />
-        {title}
+        {label}
       </div>
-      {text}
+      {value}
     </div>
   );
 }

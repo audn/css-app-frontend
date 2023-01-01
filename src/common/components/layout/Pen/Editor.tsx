@@ -7,8 +7,9 @@ type Props = {
   initialContent: string;
   templateCode?: string;
   onChange?: (value: string) => void;
+  fullHeight?: boolean;
 };
-function PenEditor({ initialContent, onChange }: Props) {
+function PenEditor({ initialContent, onChange, fullHeight = true }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
     fontFamily:
       'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -16,6 +17,11 @@ function PenEditor({ initialContent, onChange }: Props) {
     lineHeight: 21,
     // theme: 'tw-light',
     minimap: { enabled: false },
+
+    wordWrap: 'on',
+    wordWrapColumn: 40,
+    wrappingIndent: 'indent',
+
     fixedOverflowWidgets: true,
     scrollbar: {
       horizontalScrollbarSize: 21,
@@ -32,7 +38,7 @@ function PenEditor({ initialContent, onChange }: Props) {
         onChange ? (value) => onChange(value ?? '') : () => console.log('s')
       }
       options={MONACO_OPTIONS}
-      height="calc(100vh - 60px)"
+      //   height={fullHeight ? 'calc(100vh - 60px)' : ''}
       defaultLanguage="html"
       value={initialContent || ''}
       defaultValue={initialContent || ''}

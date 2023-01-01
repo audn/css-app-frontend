@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import concat from '../../../utils/helpers/concat';
+import Link from '../../layout/Link';
 
 type Props = {
   label: string;
@@ -10,7 +11,8 @@ function NavItem({ label, icon, route }: Props) {
   const router = useRouter();
   const active = route == router.pathname;
   return (
-    <button
+    <Link
+      href={route}
       className={concat(
         active
           ? 'bg-brand-primary-100 text-types-body'
@@ -22,7 +24,7 @@ function NavItem({ label, icon, route }: Props) {
         <i className={concat('mr-2', icon)} />
       </div>{' '}
       {label}
-    </button>
+    </Link>
   );
 }
 
