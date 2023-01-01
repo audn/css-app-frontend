@@ -37,9 +37,9 @@ function LibrarySelector({
       showLibraryVector={true}
       onClick={setLibrary}
     >
-      <div className="flex items-center border border-types-150 rounded-xl">
-        <div className="flex items-center justify-center w-10 h-10 bg-types-125 rounded-l-xl">
-          <img src={`/libraries/${library}.svg`} className="w-6 h-6" />
+      <div className="flex items-center text-[15px] border rounded-lg border-types-150">
+        <div className="flex items-center justify-center w-8 h-8 bg-types-100 rounded-l-md">
+          <img src={`/libraries/${library}.svg`} className="w-5 h-5" />
         </div>
         <div className="px-3 font-normal">
           {library}
