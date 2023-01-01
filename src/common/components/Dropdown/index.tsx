@@ -17,8 +17,9 @@ function Dropdown({
   wrapperClassName,
   onClick,
   open,
+  showLibraryVector,
   options = { caret: true, position: 'center', toggleOnClick: false },
-}: IDropdown) {
+}: IDropdown & { showLibraryVector?: boolean }) {
   const menuRef = useRef(null);
   const [listening, setListening] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -85,6 +86,7 @@ function Dropdown({
             ) : list ? (
               list?.map((item, i) => (
                 <ListItem
+                  showLibraryVector={showLibraryVector}
                   active={active}
                   //   onAnyClick={options.toggleOnClick}
                   {...item}

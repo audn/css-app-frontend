@@ -7,12 +7,15 @@ function ListItem({
   label,
   active,
   icon,
+  showLibraryVector,
   _count,
   onClick,
   route,
+  value,
   className,
   onGlobalClick,
 }: INavItem & {
+  showLibraryVector?: boolean;
   onGlobalClick: (val: string) => void;
 }) {
   const activeItem = active == label;
@@ -47,6 +50,9 @@ function ListItem({
           <div className="flex-shrink-0 w-6 text-sm text-left">
             <i className={`${icon}`} />
           </div>
+        )}
+        {showLibraryVector && (
+          <img src={`/libraries/${value}.svg`} className="w-4 h-4 mr-2" />
         )}
         {label}
       </div>

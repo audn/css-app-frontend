@@ -36,6 +36,8 @@ export const useLibraryLabel = (val?: string) => {
       return 'Bulma';
     case 'bootstrap':
       return 'Bootstrap';
+    case 'css3':
+      return 'CSS3';
     default:
       return val;
   }

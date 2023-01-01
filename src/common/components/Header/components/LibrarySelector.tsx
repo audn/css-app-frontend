@@ -34,6 +34,7 @@ function LibrarySelector({
       }}
       isLoading={isLoading}
       list={data?.payload?.results}
+      showLibraryVector={true}
       onClick={setLibrary}
     >
       <div className="flex items-center border border-types-150 rounded-xl">

@@ -4,7 +4,7 @@ export type IFormErrors = {
 
 export interface INavItem {
   label: string;
-  //   value?: string;
+  value?: string;
   condition?: boolean;
   onClick?: (val: string) => void;
   active?: string;

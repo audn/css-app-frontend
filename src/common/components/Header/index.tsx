@@ -19,8 +19,10 @@ export const Header = () => {
   }, [router]);
   return (
     <header className={'p-10 flex justify-between w-full'}>
-      {pagesWithLibrarytSelector.includes(router.pathname) && (
+      {pagesWithLibrarytSelector.includes(router.pathname) ? (
         <LibrarySelector />
+      ) : (
+        <>&nbsp;</>
       )}
 
       <Navigation
