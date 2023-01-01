@@ -24,7 +24,7 @@ function PostCard({ author, id, title, generatedImage }: API.Models.Post) {
       <div className="flex flex-col items-start px-2 py-3">
         <h2 className="text-lg text-white">{title}</h2>
         <div className="flex items-center mt-2">
-          <img src={author.avatar} className="w-6 h-6 mr-2 rounded-full" />
+          {/* <img src={author.avatar} className="w-6 h-6 mr-2 rounded-full" /> */}
           <Link
             href={`/user/${author.id}`}
             className="hover:text-white animate"

@@ -17,9 +17,9 @@ export default function Home() {
       <NextSeo />
 
       <div className="flex flex-col">
-        <h2 className="!text-on-100 !text-lg font-semibold">
+        <h1 className="mb-10 text-xl font-semibold text-white">
           Recently posted components
-        </h2>
+        </h1>
         {/* <h4 className="text-lg mt-3 !font-medium">
           Browsing components posted by community members.
         </h4> */}
