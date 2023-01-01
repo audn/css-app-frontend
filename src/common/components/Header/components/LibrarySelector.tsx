@@ -38,7 +38,7 @@ function LibrarySelector({
     >
       <div className="flex items-center border border-types-150 rounded-xl">
         <div className="flex items-center justify-center w-10 h-10 bg-types-125 rounded-l-xl">
-          <img src={'/libraries/tailwindcss.svg'} className="w-6 h-6" />
+          <img src={`/libraries/${library}.svg`} className="w-6 h-6" />
         </div>
         <div className="px-3 font-normal">
           {library}
