@@ -9,7 +9,10 @@ type Props = {
 };
 function NavItem({ label, icon, route }: Props) {
   const router = useRouter();
-  const active = route == router.pathname;
+  //   console.log(router);
+
+  const active =
+    route == '/' ? route == router.pathname : router.asPath.includes(route);
   return (
     <Link
       href={route}
