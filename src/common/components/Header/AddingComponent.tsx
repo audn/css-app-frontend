@@ -26,7 +26,7 @@ export const HeaderAddingComponent = ({
   }
 
   return (
-    <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
+    <header className="z-50 flex items-center justify-between px-6 h-[60px]">
       <PublishModal
         update={update}
         data={data}

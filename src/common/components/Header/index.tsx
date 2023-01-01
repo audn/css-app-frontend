@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import useFilterState from '../../store/filter';
 import LibrarySelector from './components/LibrarySelector';
 import Navigation from './Navigation';
 
@@ -8,10 +7,7 @@ export const Header = () => {
   const router = useRouter();
   const [isOpenPhoneMenu, setIsOpenPhoneMenu] = useState<boolean>(false);
 
-  const library = useFilterState((s) => s.library);
-
   const pagesWithLibrarytSelector = ['/components/[library]', '/'];
-  console.log(router);
 
   useEffect(() => {
     setIsOpenPhoneMenu(false);

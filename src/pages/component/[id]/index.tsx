@@ -42,17 +42,32 @@ function Post({ post }: { post: API.Models.Post }) {
   const simpleInfo = [
     {
       label: 'Library',
-      value: `${library}@${libraryVersion}`,
+      value: (
+        <>
+          <img src={`/libraries/${library}.svg`} className="w-5 h-5 mr-2" />{' '}
+          {library}@{libraryVersion}
+        </>
+      ),
       icon: 'fa-regular fa-at',
     },
     {
       label: 'Animated',
-      value: JSON.stringify(animated) == 'null' ? 'False' : 'Yes',
+      value:
+        JSON.stringify(animated) !== 'null' ? (
+          <i className="text-green-500 fa-solid fa-check" />
+        ) : (
+          <i className="text-red-500 fa-solid fa-times" />
+        ),
       icon: 'fa-regular fa-circle-play',
     },
     {
       label: 'Responsive',
-      value: JSON.stringify(responsive) ? 'Yes' : 'No',
+      value:
+        JSON.stringify(responsive) !== 'null' ? (
+          <i className="text-green-500 fa-solid fa-check" />
+        ) : (
+          <i className="text-red-500 fa-solid fa-times" />
+        ),
       icon: 'fa-regular fa-up-right-and-down-left-from-center',
     },
     {
@@ -144,17 +159,16 @@ function Post({ post }: { post: API.Models.Post }) {
               />{' '}
               <div className="flex items-center">
                 <Button.Wrapper>
-                  <Link href={`/component/${post.id}/preview`} target="_blank">
+                  {/* <Link href={`/component/${post.id}/preview`} target="_blank">
                     <Button.Secondary
                       icon="fa-regular fa-external-link"
                       title={
                         <span className="flex">
                           Fullscreen{' '}
-                          {/* <span className="hidden sm:flex">&nbsp;preview</span> */}
                         </span>
                       }
                     />
-                  </Link>
+                  </Link> */}
                   <Button.Secondary
                     icon="fa-regular fa-copy"
                     title="Fork"
