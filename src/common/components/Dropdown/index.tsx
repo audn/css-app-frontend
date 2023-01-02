@@ -50,7 +50,7 @@ function Dropdown({
     }
   }
   return (
-    <div className="relative z-1d0" ref={menuRef}>
+    <div className="relative z-50" ref={menuRef}>
       <button
         onClick={toggle}
         className={concat(

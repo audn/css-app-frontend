@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
+import Dropdown from '../../../common/components/Dropdown';
 import Auth from '../../../common/components/layout/Auth';
 import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
+import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
@@ -131,6 +133,26 @@ function Component({ component }: { component: API.Models.Component }) {
   //       toast.success('Refreshed!', { id: msg });
   //     } else toast.error('Failed to refresh', { id: msg });
   //   };
+
+  const dropdownList = [
+    {
+      label: 'Edit Information',
+      icon: 'fa-regular fa-pen-to-square',
+      onClick: () => setEdit(!isEditing),
+    },
+    {
+      label: 'Edit code',
+      icon: 'fa-regular fa-code',
+      route: `/component/${component.id}/edit`,
+    },
+    {
+      label: warning ? 'Are you sure?' : 'Delete component',
+      onClick: () => onDelete(),
+      icon: 'fa-regular fa-trash-can',
+      className: 'hover:!bg-red-500 hover:!bg-opacity-10 hover:text-red-500',
+    },
+  ] as INavItem[];
+
   return (
     <DefaultLayout>
       <div className="flex flex-col mb-5 space-y-4">
@@ -142,7 +164,20 @@ function Component({ component }: { component: API.Models.Component }) {
             <i className="text-sm fa-regular fa-arrow-left" />
           </button>
         </div>
-        <h1 className="text-xl font-medium text-white">{component.title}</h1>
+        <div className="flex items-center space-x-2">
+          <h1 className="text-xl font-medium text-white">{component.title}</h1>
+          <Auth.Policy policy={canManagePost()}>
+            <Dropdown
+              list={dropdownList}
+              className="z-50"
+              options={{ caret: false, position: 'end' }}
+            >
+              <button className="flex items-center justify-center w-6 h-6 text-lg rounded-full bg-types-150 text-on-50 hover:bg-types-200 hover:text-white animate">
+                <i className="text-sm fa-solid fa-ellipsis-vertical" />
+              </button>
+            </Dropdown>
+          </Auth.Policy>
+        </div>
       </div>
       <NextSeo
         title={title}
@@ -218,35 +253,21 @@ function Component({ component }: { component: API.Models.Component }) {
                       }
                     />
                   </Link> */}
-                  <Button.Secondary
+                  {/* <Button.Secondary
                     icon="fa-regular fa-copy"
                     title="Fork"
                     onClick={toggleEdit}
-                  />{' '}
+                  /> */}
                   <Button.Secondary
-                    icon="fa-regular fa-bookmark"
-                    title="Save"
+                    icon="fa-regular fa-heart"
+                    title="Like"
                     onClick={toggleEdit}
                   />
-                  <Auth.Policy policy={canManagePost()}>
-                    <Button.Secondary
-                      icon="fa-regular fa-pen-to-square"
-                      title="Edit"
-                      onClick={toggleEdit}
-                    />
-                    <Button.Secondary
-                      icon="fa-regular fa-trash-alt"
-                      title={warning ? 'Are you sure?' : 'Delete'}
-                      onClick={onDelete}
-                    />
-                    {/* <Auth.Admin>
-                      <Button.Secondary
-                        icon="fa-regular fa-image"
-                        title={'Refresh Thumbnail'}
-                        onClick={onRefreshThumbnail}
-                      />
-                    </Auth.Admin> */}
-                  </Auth.Policy>
+                  <Button.Secondary
+                    icon="fa-regular fa-bookmark"
+                    title="Bookmark"
+                    onClick={toggleEdit}
+                  />
                 </Button.Wrapper>
               </div>
             </div>
