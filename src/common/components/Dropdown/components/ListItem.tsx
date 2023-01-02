@@ -36,7 +36,7 @@ function ListItem({
     <li
       className={concat(
         className ? className : '',
-        'flex items-center p-2 rounded cursor-pointer font-medium animate text-sm text-white/90 hover:text-white justify-between active:bg-opacity-80 hover:bg-brand-primary-150/10',
+        'flex items-center p-2 rounded cursor-pointer font-medium animate text-sm text-white/90 hover:text-white justify-between active:bg-opacity-80 hover:bg-types-150/50',
       )}
       onClick={handleClick}
     >
