@@ -17,6 +17,10 @@ export default function Beta() {
       done: false,
     },
     {
+      label: `Top creators.`,
+      done: false,
+    },
+    {
       label: `Interactions such as comment, rate, like & bookmark. This can later be added to the sorting methods.`,
       done: false,
     },
