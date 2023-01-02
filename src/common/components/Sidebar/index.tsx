@@ -7,7 +7,6 @@ import Link from '../layout/Link';
 import NavItem from './components/NavItem';
 
 function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
-  const isLoggedIn = useAuthState((s) => s.isLoggedIn);
   const user = useAuthState((s) => s.user);
   const library = useFilterState((s) => s.library);
   async function handleLogout() {

@@ -82,14 +82,37 @@ export declare namespace API {
       twitterId?: string;
       discordId?: string;
       bio?: string;
+      location?: string;
+      websiteUrl?: string;
+      tokens?: string;
+      twitterUsername?: string;
       username: string;
       avatar: string;
       displayName?: string;
       role: UserRoles;
       createdAt: string;
       components?: API.Models.Component[];
+      pages?: API.Models.Page[];
     }
     interface Component {
+      id: string;
+      title: string;
+      code: any;
+      description: string;
+      generatedImage?: string;
+      animated: boolean;
+      theme: string;
+      responsive: boolean;
+
+      //   author: User;
+      category: string;
+      authorId: string;
+      author: User;
+      library: string;
+      libraryVersion: string;
+      createdAt: string;
+    }
+    interface Page {
       id: string;
       title: string;
       code: any;
