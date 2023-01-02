@@ -28,7 +28,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <Sidebar />
         <div className="flex flex-col w-full">
           {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />} */}
-          <div className="p-8">
+          <div className="p-10">
             <Analytics /> <ReactToaster />
             <DefaultSeo {...SEO} />
             <Component {...pageProps} key={router.route} />
