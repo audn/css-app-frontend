@@ -32,7 +32,10 @@ export default function Beta() {
       label: `Add visibility setting to component and pages. (hidden|public|unlisted)`,
       done: false,
     },
-
+    {
+      label: `Fork other components|pages`,
+      done: false,
+    },
     {
       label:
         'Automatically suggest CSS library upon pasting code into the editor.',
