@@ -108,7 +108,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
     error: fetchCategoriesError,
     refetch: refetchCategories,
     isRefetching: isRefetchingCategories,
-  } = useCategories(library!);
+  } = useCategories('pages');
 
   const [distribution, setDistribution] = useState<any>(
     data?.payload?.distribution,

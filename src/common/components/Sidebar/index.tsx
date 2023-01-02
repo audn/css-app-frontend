@@ -87,9 +87,13 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   return (
     <div className="min-w-[290px] fixed left-0 inset-y-0 py-8 px-4 bg-types-body border-r border-types-150 min-h-screen">
       <div className="flex items-center justify-between">
-        <img
+        {/* <img
           src={`/logo.svg`}
           className="ml-[0.35rem] rounded-full w-7 h-7 mr-2"
+        /> */}
+        <img
+          src={`/logo1.svg`}
+          className="ml-[0.35rem] rounded-fdull w-10 h-10 mr-2"
         />
         <button
           onClick={toggleCreateType}

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCategories } from './api/categories';
 
-export const useCategories = (library?: string) => {
+export const useCategories = (type?: 'pages' | 'components') => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
     [`/categories`],
-    () => getCategories(library),
+    () => getCategories(type),
     {
       refetchOnWindowFocus: false,
       onError: (e) => console.error(`Error getting categories: ${e}`),

@@ -4,7 +4,6 @@ import { Distribution, Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
 import CategoryCard from '../../Cards/Category';
 import HydrationError from '../../layout/Alerts/HydrationError';
-import NothingToHydrate from '../../layout/Alerts/NothingToHydrate';
 import Animate from '../../layout/Animate';
 
 function CategoryHydration({
@@ -13,7 +12,6 @@ function CategoryHydration({
   isLoading,
   refetch,
   isRefetching,
-  onClearFilters,
   selectedValues,
   setSelectedValues,
   distribution,
@@ -58,9 +56,7 @@ function CategoryHydration({
       </AnimatePresence>
     );
   } else {
-    return (
-      <NothingToHydrate onClick={onClearFilters} isLoading={isRefetching} />
-    );
+    return <></>;
   }
 }
 

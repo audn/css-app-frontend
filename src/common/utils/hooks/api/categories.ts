@@ -2,9 +2,9 @@ import { API } from '../../../lib/interfaces';
 import { del, get, post, put } from './api';
 
 export async function getCategories(
-  library?: string,
+  type?: 'pages' | 'components',
 ): Promise<API.Response<API.Models.Category[]>> {
-  const res = await get(`/categories?library=${library}`, false);
+  const res = await get(`/categories?type=${type}`, false);
   return res.json();
 }
 
