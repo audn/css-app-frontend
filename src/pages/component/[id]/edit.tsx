@@ -6,7 +6,7 @@ import { HeaderEditingComponent } from '../../../common/components/Header/Editin
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
-import { getPostFromId } from '../../../common/utils/hooks/api/components';
+import { getComponentFromId } from '../../../common/utils/hooks/api/components';
 
 function EditComponent({ post }: { post: API.Models.Component }) {
   const [data, setData] = useState<Partial<API.Models.Component>>(post);
@@ -171,7 +171,7 @@ export default EditComponent;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await (await getPostFromId(id)).payload?.results;
+  const data = await (await getComponentFromId(id)).payload?.results;
 
   if (!data) {
     return {

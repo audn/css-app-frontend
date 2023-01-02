@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
-import { editPost } from '../../utils/hooks/api/components';
+import { editComponent } from '../../utils/hooks/api/components';
 import useGenerateThumbnail from '../../utils/useGenerateThumbnail';
 import { Button } from '../Buttons';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
@@ -32,7 +32,7 @@ export const HeaderEditingComponent = ({
     const msg = toast.loading('Saving...');
     setIsSaving(true);
     const newData = (({ author, authorId, ...o }) => o)(data);
-    const posted = await editPost(data.id!, {
+    const posted = await editComponent(data.id!, {
       ...newData,
       library: data.library?.toLowerCase(),
     });

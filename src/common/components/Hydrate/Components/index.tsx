@@ -2,24 +2,24 @@ import { AnimatePresence } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
-import PostCard from '../../Cards/Post';
+import ComponentCard from '../../Cards/Component';
 import HydrationError from '../../layout/Alerts/HydrationError';
 import NothingToHydrate from '../../layout/Alerts/NothingToHydrate';
 import Animate from '../../layout/Animate';
 
-function PostsHydration({
+function ComponentsHydration({
   data,
   error,
   isLoading,
   refetch,
   isRefetching,
   onClearFilters,
-}: Hydration.Posts) {
+}: Hydration.Components) {
   if (isLoading) {
     return (
       <SkeletonTheme baseColor="#272e39" highlightColor="#38414f">
         <div className="flex flex-col items-center p-4 mx-auto rounded-md">
-          loading posts
+          loading components
         </div>
       </SkeletonTheme>
     );
@@ -39,8 +39,8 @@ function PostsHydration({
           variants={fadeIn}
           className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
-          {data?.payload?.results?.map((post) => (
-            <PostCard {...post} key={post.id} />
+          {data?.payload?.results?.map((component) => (
+            <ComponentCard {...component} key={component.id} />
           ))}
         </Animate>
       </AnimatePresence>
@@ -52,4 +52,4 @@ function PostsHydration({
   }
 }
 
-export default PostsHydration;
+export default ComponentsHydration;

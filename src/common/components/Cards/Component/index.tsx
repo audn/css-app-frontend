@@ -2,7 +2,12 @@ import Image from 'next/image';
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function PostCard({ author, id, title, generatedImage }: API.Models.Component) {
+function ComponentCard({
+  author,
+  id,
+  title,
+  generatedImage,
+}: API.Models.Component) {
   return (
     <div className="flex flex-col items-start">
       <Link
@@ -39,4 +44,4 @@ function PostCard({ author, id, title, generatedImage }: API.Models.Component) {
   );
 }
 
-export default PostCard;
+export default ComponentCard;

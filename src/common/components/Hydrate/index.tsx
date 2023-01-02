@@ -1,10 +1,10 @@
 import { Distribution, Hydration } from '../../lib/interfaces';
 import CategoryHydration from './Categories';
-import PostsHydration from './Posts';
+import ComponentsHydration from './Components';
 
 export const Hydrate = {
-  Posts: ({ ...props }: Hydration.Posts) => {
-    return <PostsHydration {...props} />;
+  Components: ({ ...props }: Hydration.Components) => {
+    return <ComponentsHydration {...props} />;
   },
   Categories: ({
     selectedValues,

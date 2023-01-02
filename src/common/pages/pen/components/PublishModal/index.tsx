@@ -7,7 +7,7 @@ import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API } from '../../../../lib/interfaces';
-import { addPost } from '../../../../utils/hooks/api/components';
+import { addComponent } from '../../../../utils/hooks/api/components';
 import { useCategories } from '../../../../utils/hooks/categories';
 import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
 import View1 from './screens/View1';
@@ -46,7 +46,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
     if (canPost()) {
       const toaster = toast.loading('Working...');
       setIsPosting(true);
-      const posted = await addPost({
+      const posted = await addComponent({
         ...data,
         library: data.library!.toLowerCase(),
       });
@@ -55,7 +55,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
         toast.success('Success!', { id: toaster });
         router.push(`/component/${posted.payload.results.id}`);
       } else {
-        toast.error('Failed to post', { id: toaster });
+        toast.error('Failed to post component', { id: toaster });
       }
       setIsPosting(false);
     }

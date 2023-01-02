@@ -19,10 +19,10 @@ import {
   getComponentFromId,
 } from '../../../common/utils/hooks/api/components';
 
-function Post({ post }: { post: API.Models.Component }) {
+function Component({ component }: { component: API.Models.Component }) {
   const {
     author,
-    description,
+    // description,
     responsive,
     code,
     animated,
@@ -31,7 +31,7 @@ function Post({ post }: { post: API.Models.Component }) {
     libraryVersion,
     // createdAt,
     title,
-  } = post;
+  } = component;
 
   const router = useRouter();
   const user = useAuthState((s) => s.user);
@@ -97,7 +97,7 @@ function Post({ post }: { post: API.Models.Component }) {
     {
       label: 'Added',
       value: toDate({
-        dateString: String(new Date(post.createdAt)),
+        dateString: String(new Date(component.createdAt)),
         options: {
           show: { month: 'short', day: '2-digit', year: 'numeric' },
         },
@@ -110,7 +110,7 @@ function Post({ post }: { post: API.Models.Component }) {
       setWarning(true);
     } else {
       const msg = toast.loading('Deleting...');
-      const deleted = await deleteComponent(post.id);
+      const deleted = await deleteComponent(component.id);
       if (!deleted.error) {
         router.push('/');
         toast.success('Deleted', { id: msg });
@@ -121,12 +121,12 @@ function Post({ post }: { post: API.Models.Component }) {
   }
 
   const canManagePost = () => {
-    return user.id == post.authorId || user.role === 'ADMIN';
+    return user.id == component.authorId || user.role === 'ADMIN';
   };
 
   //   const onRefreshThumbnail = async () => {
   //     const msg = toast.loading('Refreshing...');
-  //     const updated = await useGenerateThumbnail(post.id);
+  //     const updated = await useGenerateThumbnail(component.id);
   //     if (updated.payload?.results) {
   //       toast.success('Refreshed!', { id: msg });
   //     } else toast.error('Failed to refresh', { id: msg });
@@ -136,13 +136,13 @@ function Post({ post }: { post: API.Models.Component }) {
       <NextSeo
         title={title}
         openGraph={{
-          url: `https://css.app/component/${post.id}`,
+          url: `https://css.app/component/${component.id}`,
           images: [
             {
-              url: post.generatedImage!,
+              url: component.generatedImage!,
               height: 1080,
               width: 1920,
-              alt: `${post.title}`,
+              alt: `${component.title}`,
               type: 'image/jpeg',
             },
           ],
@@ -150,9 +150,13 @@ function Post({ post }: { post: API.Models.Component }) {
         twitter={{
           cardType: 'summary',
         }}
-        description={post.description}
+        description={component.description}
       />
-      <EditModal isOpen={isEditing} onClose={toggleEdit} post={post} />
+      <EditModal
+        isOpen={isEditing}
+        onClose={toggleEdit}
+        component={component}
+      />
       <div className="space-y-12">
         <div className="grid items-start grid-cols-1 gap-5 xl:grid-cols-2">
           <div>
@@ -193,7 +197,7 @@ function Post({ post }: { post: API.Models.Component }) {
               />{' '}
               <div className="flex items-center">
                 <Button.Wrapper>
-                  {/* <Link href={`/component/${post.id}/preview`} target="_blank">
+                  {/* <Link href={`/component/${component.id}/preview`} target="_blank">
                     <Button.Secondary
                       icon="fa-regular fa-external-link"
                       title={
@@ -244,9 +248,9 @@ function Post({ post }: { post: API.Models.Component }) {
 
           <div className="xl:col-span-2 rounded-xl border border-types-150 py-3 overflow-hidden h-[450px] bg-types-50">
             <PenEditor
-              templateCode={post.code}
+              templateCode={component.code}
               fullHeight={false}
-              initialContent={post.code}
+              initialContent={component.code}
               // onChange={(val) => update('code', val)}
             />{' '}
           </div>
@@ -256,7 +260,7 @@ function Post({ post }: { post: API.Models.Component }) {
   );
 }
 
-export default Post;
+export default Component;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
@@ -270,7 +274,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     };
   }
   return {
-    props: { post: data.payload?.results },
+    props: { component: data.payload?.results },
     revalidate: 5,
   };
 };

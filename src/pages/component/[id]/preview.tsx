@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
-import { getPostFromId } from '../../../common/utils/hooks/api/components';
+import { getComponentFromId } from '../../../common/utils/hooks/api/components';
 
 function PostPreview({ post }: { post: API.Models.Component }) {
   //   const router = useRouter();
@@ -34,7 +34,7 @@ function PostPreview({ post }: { post: API.Models.Component }) {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await getPostFromId(id);
+  const data = await getComponentFromId(id);
 
   if (!data) {
     return {

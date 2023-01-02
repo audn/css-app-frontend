@@ -135,7 +135,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
         />
       </div>
       <div className="mt-10 ">
-        <Hydrate.Posts
+        <Hydrate.Components
           data={data}
           error={fetchError}
           isLoading={isLoading}
