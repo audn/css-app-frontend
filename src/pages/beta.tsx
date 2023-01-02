@@ -59,7 +59,7 @@ export default function Beta() {
   ];
   return (
     <DefaultLayout className="-mt-10ss">
-      <NextSeo title={`Browse components for `} />
+      <NextSeo title={`Beta Roadmap`} />
       <div className="grid grid-cols-5 gap-5">
         <div className="col-span-3">
           <h1 className="px-2 text-lg text-white">

@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Button } from '../../common/components/Buttons';
@@ -40,6 +41,7 @@ function UserSettings() {
 
   return (
     <DefaultLayout className="max-w-4xl mx-auto">
+      <NextSeo title="Profile Settings" />
       <div className="overflow-hidden border rounded-md bg-types-100 border-types-150">
         <div className="p-4 px-6 border-b border-types-150">
           <div className="flex flex-col">

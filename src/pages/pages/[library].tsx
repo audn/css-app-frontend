@@ -115,7 +115,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
   );
   return (
     <DefaultLayout>
-      <NextSeo title={`Browse components for ${library}`} />
+      <NextSeo title={`Browse Landing Pages made with ${library}`} />
       <LibrarySelector />{' '}
       <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">
         {library} Pages

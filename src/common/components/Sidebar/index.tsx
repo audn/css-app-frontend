@@ -81,7 +81,12 @@ function Sidebar() {
               options={{ caret: false, position: 'start', toggleOnClick: true }}
             >
               <img src={user.avatar} className="w-8 h-8 rounded-full" />
-              <h3 className="ml-2 text-sm text-white/60">@{user.username}</h3>
+              <div className="flex flex-col justify-start ml-2">
+                <h2 className="font-medium text-white">{user.displayName}</h2>
+                <h3 className="text-sm text-white/60 text-start">
+                  @{user.username}
+                </h3>
+              </div>
             </Dropdown>
           </div>
           <div className="flex items-center space-x-[1px] overflow-hidden rounded-lg bg-types-50">
