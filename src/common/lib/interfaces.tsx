@@ -81,6 +81,7 @@ export declare namespace API {
       id: string;
       twitterId?: string;
       discordId?: string;
+      bio?: string;
       username: string;
       avatar: string;
       displayName?: string;

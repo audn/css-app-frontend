@@ -25,7 +25,6 @@ function EditModal({ isOpen, onClose, post }: Props) {
 
   async function onSave() {
     const newData = (({ author, authorId, ...o }) => o)(data);
-    2;
     const saved = await editPost(post.id, newData);
     if (!saved.error) {
       toast.success('Saved');

@@ -20,6 +20,14 @@ export async function editUserPreferences(
   return res.json();
 }
 
+export async function editUser(
+  id: string,
+  data: API.Models.User,
+): Promise<API.Response<API.Models.User>> {
+  const res = await put(`/users/${id}`, true, data);
+  return res.json();
+}
+
 export async function signOutUser(): Promise<API.Response> {
   const res = await post('/auth/logout', true);
   return res.json();
