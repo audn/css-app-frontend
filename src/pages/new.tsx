@@ -11,7 +11,7 @@ import useAuthState from '../common/store/auth';
 
 function NewComponent() {
   const user = useAuthState((s) => s.user);
-  const [data, setData] = useState<Partial<API.Models.Post>>({
+  const [data, setData] = useState<Partial<API.Models.Component>>({
     // title: '',
     code: '',
     responsive: false,
@@ -21,7 +21,7 @@ function NewComponent() {
     theme: 'Light',
   });
 
-  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+  const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,

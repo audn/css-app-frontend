@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
-import { editPost } from '../../utils/hooks/api/posts';
+import { editPost } from '../../utils/hooks/api/components';
 import useGenerateThumbnail from '../../utils/useGenerateThumbnail';
 import { Button } from '../Buttons';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
@@ -12,8 +12,8 @@ export const HeaderEditingComponent = ({
   update,
 }: //   onSettings,
 {
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
   //   onSetting: () => void;
 }) => {
   const router = useRouter();

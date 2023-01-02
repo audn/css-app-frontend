@@ -5,18 +5,18 @@ import { Form } from '../../../components/Form';
 import Modal from '../../../components/layout/Modal';
 import { API } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
-import { editPost } from '../../../utils/hooks/api/posts';
+import { editPost } from '../../../utils/hooks/api/components';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  post: API.Models.Post;
+  post: API.Models.Component;
 };
 function EditModal({ isOpen, onClose, post }: Props) {
-  const [data, setData] = useState<API.Models.Post>(post);
+  const [data, setData] = useState<API.Models.Component>(post);
   const unsavedChanges = JSON.stringify(data) !== JSON.stringify(post);
 
-  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+  const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,

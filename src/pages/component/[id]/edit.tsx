@@ -6,12 +6,12 @@ import { HeaderEditingComponent } from '../../../common/components/Header/Editin
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
-import { getPostFromId } from '../../../common/utils/hooks/api/posts';
+import { getPostFromId } from '../../../common/utils/hooks/api/components';
 
-function EditComponent({ post }: { post: API.Models.Post }) {
-  const [data, setData] = useState<Partial<API.Models.Post>>(post);
+function EditComponent({ post }: { post: API.Models.Component }) {
+  const [data, setData] = useState<Partial<API.Models.Component>>(post);
 
-  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+  const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,

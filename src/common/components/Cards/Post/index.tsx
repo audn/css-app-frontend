@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function PostCard({ author, id, title, generatedImage }: API.Models.Post) {
+function PostCard({ author, id, title, generatedImage }: API.Models.Component) {
   return (
     <div className="flex flex-col items-start">
       <Link

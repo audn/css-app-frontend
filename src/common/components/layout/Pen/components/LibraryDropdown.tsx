@@ -8,8 +8,8 @@ function LibraryDropdown({
   data,
   update,
 }: {
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
   //   onSetting: () => void;
 }) {
   const { data: libs, isLoading } = useLibraries();

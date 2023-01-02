@@ -1,11 +1,11 @@
 import html2canvas from 'html2canvas';
 import { API } from '../lib/interfaces';
 import { useLocalhost } from './helpers/useOnLocal';
-import { uploadThumbnail } from './hooks/api/posts';
+import { uploadThumbnail } from './hooks/api/components';
 
 export async function useGenerateThumbnail(
   id: string,
-): Promise<API.Response<API.Models.Post>> {
+): Promise<API.Response<API.Models.Component>> {
   const iframe = document.getElementsByTagName('iframe');
   const screen = iframe[0]?.contentDocument?.body as HTMLElement;
 

@@ -38,7 +38,7 @@ export type IDropdown = {
 export type Distribution = { [key: string]: number };
 export declare namespace API {
   namespace Requests {
-    interface SearchPosts {
+    interface SearchComponents {
       q?: string;
       filter?: {
         animated?: boolean;
@@ -65,7 +65,7 @@ export declare namespace API {
       label: string;
       value: string;
       //   _count?: {
-      //     posts: number;
+      //     components: number;
       //   };
     }
     interface Library {
@@ -73,7 +73,7 @@ export declare namespace API {
       value: string;
       versions: string[];
       _count: {
-        posts: number;
+        components: number;
       };
     }
 
@@ -87,9 +87,9 @@ export declare namespace API {
       displayName?: string;
       role: UserRoles;
       createdAt: string;
-      posts?: API.Models.Post[];
+      components?: API.Models.Component[];
     }
-    interface Post {
+    interface Component {
       id: string;
       title: string;
       code: any;
@@ -98,6 +98,10 @@ export declare namespace API {
       animated: boolean;
       theme: string;
       responsive: boolean;
+      bio?: string;
+      location?: string;
+      websiteUrl?: string;
+      tokens?: string;
 
       //   author: User;
       category: string;
@@ -120,8 +124,8 @@ export declare namespace Hydration {
     onClearFilters?: () => void;
   };
 
-  interface Posts extends ReactQueryProps {
-    data?: API.Response<API.Models.Post[]>;
+  interface Components extends ReactQueryProps {
+    data?: API.Response<API.Models.Component[]>;
   }
   interface Category extends ReactQueryProps {
     data?: API.Response<API.Models.Category[]>;

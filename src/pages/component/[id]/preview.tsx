@@ -2,9 +2,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
-import { getPostFromId } from '../../../common/utils/hooks/api/posts';
+import { getPostFromId } from '../../../common/utils/hooks/api/components';
 
-function PostPreview({ post }: { post: API.Models.Post }) {
+function PostPreview({ post }: { post: API.Models.Component }) {
   //   const router = useRouter();
   return (
     <div>

@@ -60,7 +60,7 @@ function UserProfile({ user }: { user: API.Models.User }) {
                 <div className="mt-5 space-y-2">
                   <div>
                     <span className="font-medium">
-                      {user.posts?.length || 0}
+                      {user.components?.length || 0}
                     </span>{' '}
                     components
                   </div>

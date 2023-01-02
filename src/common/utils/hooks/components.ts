@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { API } from '../../lib/interfaces';
-import { getAllPosts, searchPosts } from './api/posts';
+import { getAllComponents, searchComponents } from './api/components';
 
 export const useAllPosts = () => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`/posts`],
-    () => getAllPosts(),
+    [`/components`],
+    () => getAllComponents(),
     {
       refetchOnWindowFocus: false,
       onError: (e) => console.error(`Error getting posts: ${e}`),
@@ -14,10 +14,10 @@ export const useAllPosts = () => {
 
   return { isLoading, error, data: data, refetch, isRefetching };
 };
-export const useSearchPosts = (filter: API.Requests.SearchPosts) => {
+export const useSearchPosts = (filter: API.Requests.SearchComponents) => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`posts/search?q=${filter.q}&options=${JSON.stringify(filter)}`],
-    () => searchPosts(filter),
+    [`components/search?q=${filter.q}&options=${JSON.stringify(filter)}`],
+    () => searchComponents(filter),
     {
       refetchOnWindowFocus: false,
       staleTime: Infinity,

@@ -7,7 +7,7 @@ import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API } from '../../../../lib/interfaces';
-import { addPost } from '../../../../utils/hooks/api/posts';
+import { addPost } from '../../../../utils/hooks/api/components';
 import { useCategories } from '../../../../utils/hooks/categories';
 import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
 import View1 from './screens/View1';
@@ -16,8 +16,8 @@ import View2 from './screens/View2';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
 };
 function PublishModal({ isOpen, onClose, update, data }: Props) {
   const router = useRouter();

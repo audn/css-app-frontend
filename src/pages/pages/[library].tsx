@@ -9,7 +9,7 @@ import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useCategories } from '../../common/utils/hooks/categories';
-import { useSearchPosts } from '../../common/utils/hooks/posts';
+import { useSearchPosts } from '../../common/utils/hooks/components';
 
 export default function BrowsePages({ query }: { query: { library: string } }) {
   const router = useRouter();

@@ -15,11 +15,11 @@ import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
 import toDate from '../../../common/utils/helpers/toDate';
 import {
-  deletePost,
-  getPostFromId,
-} from '../../../common/utils/hooks/api/posts';
+  deleteComponent,
+  getComponentFromId,
+} from '../../../common/utils/hooks/api/components';
 
-function Post({ post }: { post: API.Models.Post }) {
+function Post({ post }: { post: API.Models.Component }) {
   const {
     author,
     description,
@@ -110,7 +110,7 @@ function Post({ post }: { post: API.Models.Post }) {
       setWarning(true);
     } else {
       const msg = toast.loading('Deleting...');
-      const deleted = await deletePost(post.id);
+      const deleted = await deleteComponent(post.id);
       if (!deleted.error) {
         router.push('/');
         toast.success('Deleted', { id: msg });
@@ -261,7 +261,7 @@ export default Post;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await getPostFromId(id);
+  const data = await getComponentFromId(id);
   1;
   if (data.error) {
     return {
