@@ -10,8 +10,9 @@ function SelectCreateType({ isOpen, onClose }: Props) {
       <h1 className="justify-center text-xl font-bold text-center text-white">
         Select Category
       </h1>
-      <h4 className="max-w-xs mx-auto mt-2 text-base text-center">
-        What kind of component are you going to create?
+      <h4 className="max-w-sm mx-auto mt-3 text-base text-center">
+        Are you creating a single component, or a whole page that consists of
+        multiple components?
       </h4>
       <div className="flex flex-col w-full mt-5">
         <button className="flex items-center p-2 text-left group bg-types-50/20 hover:bg-brand-primary-100/20 rounded-xl animate text-on-50 hover:text-white/60">

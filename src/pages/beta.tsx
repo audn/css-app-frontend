@@ -130,14 +130,14 @@ export default function Beta() {
             </ul>
           </div>
         </div>
-        <div className="col-span-2">
+        {/* <div className="col-span-2">
           <h1 className="px-2 text-lg text-white">
             🥳 New features & Changelog
           </h1>
           <div className="p-4 mt-2 border rounded-md bg-types-100 border-types-150">
             heh
           </div>
-        </div>
+        </div> */}
       </div>
     </DefaultLayout>
   );

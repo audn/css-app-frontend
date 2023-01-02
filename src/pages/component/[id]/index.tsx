@@ -133,6 +133,17 @@ function Component({ component }: { component: API.Models.Component }) {
   //   };
   return (
     <DefaultLayout>
+      <div className="flex flex-col mb-5 space-y-4">
+        <div className="flex">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center justify-center mr-2 rounded-full w-7 h-7 text-white/50 bg-types-150/50"
+          >
+            <i className="text-sm fa-regular fa-arrow-left" />
+          </button>
+        </div>
+        <h1 className="text-xl font-medium text-white">{component.title}</h1>
+      </div>
       <NextSeo
         title={title}
         openGraph={{

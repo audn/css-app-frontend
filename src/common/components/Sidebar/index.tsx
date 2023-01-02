@@ -6,7 +6,7 @@ import Dropdown from '../Dropdown';
 import Link from '../layout/Link';
 import NavItem from './components/NavItem';
 
-function Sidebar() {
+function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   const isLoggedIn = useAuthState((s) => s.isLoggedIn);
   const user = useAuthState((s) => s.user);
   const library = useFilterState((s) => s.library);
@@ -91,16 +91,16 @@ function Sidebar() {
         <img
           src={`/logo.svg`}
           className="ml-[0.35rem] rounded-full w-7 h-7 mr-2"
-        />{' '}
-        <Link
-          href="/new"
+        />
+        <button
+          onClick={toggleCreateType}
           className="flex group items-center px-3 py-[0.4rem] text-sm font-medium rounded-full bg-types-150/30 hover:text-white/80 hover:bg-types-150/50 animate"
         >
           Create
           <div className="flex items-center justify-center w-5 h-5 ml-2 rounded-full group-hover:bg-types-250 bg-types-150 ">
             <i className={'text-sm fa-regular fa-plus'} />
           </div>
-        </Link>
+        </button>
       </div>
       <div className="flex flex-col mt-5 space-y-1">
         {items.map((x) => (
