@@ -7,6 +7,7 @@ import Link from '../layout/Link';
 import NavItem from './components/NavItem';
 
 function Sidebar() {
+  const isLoggedIn = useAuthState((s) => s.isLoggedIn);
   const user = useAuthState((s) => s.user);
   const library = useFilterState((s) => s.library);
   async function handleLogout() {
@@ -16,24 +17,60 @@ function Sidebar() {
     }
   }
   const items = [
-    { label: 'Home', icon: 'fa-solid fa-home', route: '/' },
+    { label: 'Home', icon: 'fa-regular fa-home', route: '/' },
+
     {
       label: 'Components',
-      icon: 'fa-solid fa-cube',
+      icon: 'fa-regular fa-cube',
       route: `/components/${library.toLowerCase()}`,
     },
     {
       label: 'Pages',
-      icon: 'fa-solid fa-memo',
+      icon: 'fa-regular fa-memo',
       route: `/pages/${library.toLowerCase()}`,
     },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },
     {
       label: 'Beta Roadmap',
-      icon: 'fa-solid fa-info-circle',
+      icon: 'fa-regular fa-info-circle',
       route: '/beta',
     },
-    // { label: 'Settings', icon: 'fa-regular fa-cog', route: '/settings' },
+
+    // {
+    //   condition: isLoggedIn,
+    //   customIcon: (
+    //     <div className="flex justify-start w-7 text-brand-primary-100 group-hover:text-types-50">
+    //       <div className="flex items-center justify-center group-hover:bg-brand-primary-150/60  w-5 h-5 mr-1 rounded-md -ml-[0.2rem] bg-brand-primary-100/30 ">
+    //         <i className={'text-sm fa-regular fa-plus'} />
+    //       </div>
+    //     </div>
+    //   ),
+    //   label: (
+    //     <div className="flex items-center text-brand-primary-100 group-hover:text-types-50">
+    //       Create new
+    //     </div>
+    //   ),
+    //   route: '/new',
+    // },
+    // {
+    //   label: (
+    //     <div className="flex justify-between w-full">
+    //       Search
+    //       <div className="flex items-center space-x-1">
+    //         <div className="px-2 py-1 text-xs rounded-md bg-types-150/30">
+    //           <abbr title="Command" className="no-underline">
+    //             ⌘{' '}
+    //           </abbr>
+    //         </div>
+    //         <div className="px-2 py-1 text-xs rounded-md bg-types-150/30">
+    //           K
+    //         </div>
+    //       </div>
+    //     </div>
+    //   ),
+    //   icon: 'fa-solid fa-magnifying-glass',
+    //   route: '/search',
+    // },
   ];
   const userMenu = [
     {
@@ -49,15 +86,25 @@ function Sidebar() {
   ] as INavItem[];
 
   return (
-    <div className="min-w-[290px] fixed left-0 inset-y-0 p-4 bg-types-body border-r border-types-150 min-h-screen">
+    <div className="min-w-[290px] fixed left-0 inset-y-0 py-8 px-4 bg-types-body border-r border-types-150 min-h-screen">
       <div className="flex items-center justify-between">
-        <img src={`/logo.svg`} className="w-10 h-10 rounded-full" />
+        <img
+          src={`/logo.svg`}
+          className="ml-[0.35rem] rounded-full w-7 h-7 mr-2"
+        />{' '}
+        <div className="flex items-center px-3 py-[0.4rem] text-sm font-medium rounded-full bg-types-150/30  group-hover:text-types-50">
+          Create
+          <div className="flex items-center justify-center w-5 h-5 ml-2 rounded-full bg-types-150 ">
+            <i className={'text-sm fa-regular fa-plus'} />
+          </div>
+        </div>
       </div>
       <div className="flex flex-col mt-5 space-y-1">
         {items.map((x) => (
           <NavItem {...x} />
         ))}
-        <div className="relative flex items-center !mt-2">
+
+        <div className="relative flex items-center !mt-3">
           <div className="absolute left-4">
             <i className="fa-solid fa-magnifying-glass" />
           </div>
