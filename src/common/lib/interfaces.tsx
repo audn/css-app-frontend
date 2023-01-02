@@ -35,7 +35,7 @@ export type IDropdown = {
   };
 };
 
-export type Distribution = { [key: string]: number };
+export type Distribution = { components: number; pages: number };
 export declare namespace API {
   namespace Requests {
     interface SearchComponents {
@@ -72,9 +72,7 @@ export declare namespace API {
       label: string;
       value: string;
       versions: string[];
-      _count: {
-        components: number;
-      };
+      _count: Distribution;
     }
 
     interface User {
@@ -148,7 +146,7 @@ export declare namespace Hydration {
   };
 
   interface Components extends ReactQueryProps {
-    data?: API.Response<API.Models.Component[]>;
+    data?: API.Models.Component[];
   }
   interface Category extends ReactQueryProps {
     data?: API.Response<API.Models.Category[]>;

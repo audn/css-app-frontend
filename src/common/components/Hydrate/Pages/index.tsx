@@ -32,14 +32,14 @@ function PagesHydration({
         isLoading={isRefetching}
       />
     );
-  } else if (data?.payload?.count! >= 1) {
+  } else if (data) {
     return (
       <AnimatePresence initial={false}>
         <Animate
           variants={fadeIn}
           className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
-          {data?.payload?.results?.map((page) => (
+          {data.map((page) => (
             <PageCard {...page} key={page.id} />
           ))}
         </Animate>

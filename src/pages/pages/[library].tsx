@@ -99,7 +99,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
 
   useEffect(() => {
     if (data?.payload?.distribution)
-      setDistribution(data?.payload?.distribution);
+      setDistribution(data?.payload?.distribution.pages);
   }, [data]);
 
   const {
@@ -134,9 +134,9 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
           onClearFilters={resetQueries}
         />
       </div>
-      <div className="mt-10 ">
+      <div className="mt-10">
         <Hydrate.Pages
-          data={data}
+          data={data?.payload?.results.pages}
           error={fetchError}
           isLoading={isLoading}
           refetch={refetch}

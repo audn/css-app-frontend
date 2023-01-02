@@ -60,8 +60,8 @@ function ListItem({
       {_count && (
         <span className="flex items-center justify-center px-2 py-1 h-[24px] text-[12px] rounded-full bg-types-150/60 text-on-50">
           {router.pathname == '/pages/[library]'
-            ? _count[Object.keys(_count)[1]]
-            : _count[Object.keys(_count)[0]]}
+            ? _count.pages
+            : _count.components}
         </span>
       )}
     </li>

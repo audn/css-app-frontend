@@ -99,7 +99,7 @@ export default function Browse({ query }: { query: { library: string } }) {
 
   useEffect(() => {
     if (data?.payload?.distribution)
-      setDistribution(data?.payload?.distribution);
+      setDistribution(data?.payload?.distribution.components);
   }, [data]);
 
   const {
@@ -138,7 +138,7 @@ export default function Browse({ query }: { query: { library: string } }) {
       </div>
       <div className="mt-10 ">
         <Hydrate.Components
-          data={data}
+          data={data?.payload?.results.components}
           error={fetchError}
           isLoading={isLoading}
           refetch={refetch}

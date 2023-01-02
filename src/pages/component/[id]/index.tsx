@@ -20,6 +20,7 @@ import {
   deleteComponent,
   getComponentFromId,
 } from '../../../common/utils/hooks/api/components';
+import useGenerateThumbnail from '../../../common/utils/useGenerateThumbnail';
 
 function Component({ component }: { component: API.Models.Component }) {
   const {
@@ -126,13 +127,13 @@ function Component({ component }: { component: API.Models.Component }) {
     return user.id == component.authorId || user.role === 'ADMIN';
   };
 
-  //   const onRefreshThumbnail = async () => {
-  //     const msg = toast.loading('Refreshing...');
-  //     const updated = await useGenerateThumbnail(component.id);
-  //     if (updated.payload?.results) {
-  //       toast.success('Refreshed!', { id: msg });
-  //     } else toast.error('Failed to refresh', { id: msg });
-  //   };
+  const onRefreshThumbnail = async () => {
+    const msg = toast.loading('Refreshing...');
+    const updated = await useGenerateThumbnail(component.id);
+    if (updated.payload?.results) {
+      toast.success('Refreshed!', { id: msg });
+    } else toast.error('Failed to refresh', { id: msg });
+  };
 
   const dropdownList = [
     {
@@ -268,6 +269,13 @@ function Component({ component }: { component: API.Models.Component }) {
                     title="Bookmark"
                     onClick={toggleEdit}
                   />
+                  <Auth.Admin>
+                    <Button.Secondary
+                      onClick={onRefreshThumbnail}
+                      icon="fa-regular fa-image"
+                      title={'Refresh thumbnail'}
+                    />
+                  </Auth.Admin>
                 </Button.Wrapper>
               </div>
             </div>
