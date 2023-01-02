@@ -4,33 +4,31 @@ import '../assets/css/style.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DefaultSeo } from 'next-seo';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import SEO from '../../next-seo.config';
-import { Header } from '../common/components/Header';
 import ReactToaster from '../common/components/layout/Toaster';
 import Sidebar from '../common/components/Sidebar';
 import { useCurrentUser } from '../common/utils/hooks/user';
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const nextRouter = useRouter();
+  //   const nextRouter = useRouter();
   useEffect(() => {
     useCurrentUser();
   }, []);
-  const pagesWithoutHeader = [
-    '/new',
-    '/component/[id]/preview',
-    '/component/[id]/edit',
-  ];
+  //   const pagesWithoutHeader = [
+  //     '/new',
+  //     '/component/[id]/preview',
+  //     '/component/[id]/edit',
+  //   ];
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen ml-[290px]">
         <Sidebar />
         <div className="flex flex-col w-full">
-          {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />}
-          <div className="px-10 pb-10">
+          {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />} */}
+          <div className="px-10 py-10">
             <Analytics /> <ReactToaster />
             <DefaultSeo {...SEO} />
             <Component {...pageProps} key={router.route} />

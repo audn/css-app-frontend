@@ -3,6 +3,7 @@ import useAuthState from '../../store/auth';
 import useFilterState from '../../store/filter';
 import { signOutUser } from '../../utils/hooks/api/user';
 import Dropdown from '../Dropdown';
+import Link from '../layout/Link';
 import NavItem from './components/NavItem';
 
 function Sidebar() {
@@ -84,9 +85,12 @@ function Sidebar() {
             </Dropdown>
           </div>
           <div className="flex items-center space-x-[1px] overflow-hidden rounded-lg bg-types-50">
-            <button className="flex items-center justify-center w-9 h-9 hover:bg-types-200 bg-types-100 hover:bg-types-150 animate">
+            <Link
+              href="/user/settings"
+              className="flex items-center justify-center w-9 h-9 hover:bg-types-200 bg-types-100 hover:bg-types-150 animate"
+            >
               <i className="text-base fa-regular fa-cog" />
-            </button>
+            </Link>
             <button className="flex items-center justify-center w-9 h-9 hover:bg-types-200 bg-types-100 hover:bg-types-150 animate">
               <i className="text-xl fa-regular fa-arrow-left-from-line" />
             </button>

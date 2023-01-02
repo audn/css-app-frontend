@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import LibrarySelector from '../../common/components/Header/components/LibrarySelector';
 import { Hydrate } from '../../common/components/Hydrate';
 import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
@@ -115,7 +116,8 @@ export default function Browse({ query }: { query: { library: string } }) {
   return (
     <DefaultLayout>
       <NextSeo title={`Browse components for ${library}`} />
-      <h1 className="mb-3 text-2xl font-semibold text-white">
+      <LibrarySelector />{' '}
+      <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">
         {library} Components
       </h1>
       <h4 className="text-lg">

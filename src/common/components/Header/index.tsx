@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LibrarySelector from './components/LibrarySelector';
 import Navigation from './Navigation';
 
@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <header className={'px-10 pt-8 pb-5 flex justify-between w-full'}>
       {router.pathname !== '/beta' && (
-        <>
+        <React.Fragment>
           {pagesWithLibrarySelector.includes(router.pathname) ? (
             <LibrarySelector />
           ) : (
@@ -31,7 +31,7 @@ export const Header = () => {
             isOpenPhoneMenu={isOpenPhoneMenu}
             setIsOpenPhoneMenu={setIsOpenPhoneMenu}
           />
-        </>
+        </React.Fragment>
       )}
     </header>
   );

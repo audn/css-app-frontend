@@ -58,7 +58,7 @@ export default function Beta() {
     },
   ];
   return (
-    <DefaultLayout className="-mt-1d0">
+    <DefaultLayout className="-mt-10ss">
       <NextSeo title={`Browse components for `} />
       <div className="grid grid-cols-5 gap-5">
         <div className="col-span-3">
