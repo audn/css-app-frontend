@@ -23,6 +23,7 @@ function LibrarySelector({
       shallow: true,
     });
   };
+
   return (
     <Dropdown
       className={className}

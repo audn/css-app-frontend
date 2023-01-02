@@ -6,7 +6,7 @@ type Store = {
 };
 const useFilterState = create<Store>(() => ({
   library: 'CSS3',
-  version: '3.2.4',
+  version: '',
 }));
 
 export default useFilterState;
