@@ -47,7 +47,7 @@ function SidebarFooter() {
       {isSidebarCollapsed && (
         <button
           onClick={toggleSidebar}
-          className="flex items-center justify-center rounded-md w-9 h-9 bg-types-100 hover:bg-types-150 animate"
+          className="flex items-center justify-center mb-5 rounded-md w-9 h-9 bg-types-100 hover:bg-types-150 animate"
         >
           <i className="text-xl fa-regular fa-arrow-right-from-line" />
         </button>

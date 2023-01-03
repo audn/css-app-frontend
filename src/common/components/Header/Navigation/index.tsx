@@ -18,8 +18,6 @@ function Navigation({
     handleScrollbarChange(isOpenPhoneMenu);
   }, [isOpenPhoneMenu]);
 
-  useEffect(() => {});
-
   return (
     <div>
       <DesktopMenu />

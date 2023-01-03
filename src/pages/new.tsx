@@ -14,7 +14,11 @@ function NewComponent() {
   const user = useAuthState((s) => s.user);
   const [data, setData] = useState<Partial<API.Models.Component>>({
     // title: '',
-    code: '',
+    code: `<!-- 
+The results on the right are automatically centered.
+
+Avoid adding elements such as <body> that make it difficult to copy and paste your component.
+-->`,
     responsive: false,
     animated: false,
     library: 'TailwindCSS',

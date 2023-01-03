@@ -4,6 +4,7 @@ import '../assets/css/style.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import SEO from '../../next-seo.config';
 import Footer from '../common/components/Footer';
@@ -19,10 +20,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const isSidebarCollapsed = useSidebarState((s) => s.isCollapsed);
 
-  //   const nextRouter = useRouter();
+  const nextRouter = useRouter();
   useEffect(() => {
     useCurrentUser();
   }, []);
+  useEffect(() => {
+    setIsCreateOpen(false);
+    return () => setIsCreateOpen(false);
+  }, [nextRouter.pathname]);
   //   const pagesWithoutSidebar = ['/layout/[id]'];
 
   return (
