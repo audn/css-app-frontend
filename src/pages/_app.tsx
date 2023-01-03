@@ -9,11 +9,14 @@ import SEO from '../../next-seo.config';
 import SelectCreateType from '../common/components/Header/SelectType';
 import ReactToaster from '../common/components/layout/Toaster';
 import Sidebar from '../common/components/Sidebar';
+import useSidebarState from '../common/store/sidebar';
+import concat from '../common/utils/helpers/concat';
 import { useCurrentUser } from '../common/utils/hooks/user';
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const isSidebarCollapsed = useSidebarState((s) => s.isCollapsed);
 
   //   const nextRouter = useRouter();
   useEffect(() => {
@@ -27,7 +30,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen ml-[290px]">
+      <div
+        className={concat(
+          isSidebarCollapsed ? 'ml-[70px]' : 'ml-[290px]',
+          'flex min-h-screen ',
+        )}
+      >
         <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
         {isCreateOpen && (
           <SelectCreateType
