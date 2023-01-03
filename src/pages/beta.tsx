@@ -26,7 +26,7 @@ export default function Beta() {
     },
     {
       label: `Remove "Landing Page" from tags, and rather create a completely new schema just for "Pages" as we have done with "Components".`,
-      done: false,
+      done: true,
     },
     {
       label: `Add visibility setting to component and pages. (hidden|public|unlisted)`,

@@ -1,27 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import { API } from '../../lib/interfaces';
-import { getAllComponents, searchComponents } from './api/components';
+import { getAllPages, searchPages } from './api/pages';
 
-export const useAllComponents = () => {
+export const useAllPages = () => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`/components`],
-    () => getAllComponents(),
+    [`/pages`],
+    () => getAllPages(),
     {
       refetchOnWindowFocus: false,
-      onError: (e) => console.error(`Error getting components: ${e}`),
+      onError: (e) => console.error(`Error getting pages: ${e}`),
     },
   );
 
   return { isLoading, error, data: data, refetch, isRefetching };
 };
-export const useSearchComponents = (filter: API.Requests.SearchComponents) => {
+export const useSearchPages = (filter: API.Requests.SearchComponents) => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`components/search?q=${filter.q}&options=${JSON.stringify(filter)}`],
-    () => searchComponents(filter),
+    [`pages/search?q=${filter.q}&options=${JSON.stringify(filter)}`],
+    () => searchPages(filter),
     {
       refetchOnWindowFocus: false,
       staleTime: Infinity,
-      onError: (e) => console.error(`Error searching for components: ${e}`),
+      onError: (e) => console.error(`Error searching for pages: ${e}`),
     },
   );
 

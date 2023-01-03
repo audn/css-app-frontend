@@ -9,7 +9,7 @@ import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useCategories } from '../../common/utils/hooks/categories';
-import { useSearchPosts } from '../../common/utils/hooks/components';
+import { useSearchPages } from '../../common/utils/hooks/pages';
 
 export default function BrowsePages({ query }: { query: { library: string } }) {
   const router = useRouter();
@@ -95,11 +95,11 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
     error: fetchError,
     refetch,
     isRefetching,
-  } = useSearchPosts(apiQuery);
+  } = useSearchPages(apiQuery);
 
   useEffect(() => {
     if (data?.payload?.distribution)
-      setDistribution(data?.payload?.distribution.pages);
+      setDistribution(data?.payload?.distribution);
   }, [data]);
 
   const {
@@ -113,6 +113,8 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
   const [distribution, setDistribution] = useState<any>(
     data?.payload?.distribution,
   );
+  console.log(data);
+
   return (
     <DefaultLayout>
       <NextSeo title={`Browse Landing Pages made with ${library}`} />
@@ -136,7 +138,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
       </div>
       <div className="mt-10">
         <Hydrate.Pages
-          data={data?.payload?.results.pages}
+          data={data?.payload?.results}
           error={fetchError}
           isLoading={isLoading}
           refetch={refetch}

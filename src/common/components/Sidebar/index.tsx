@@ -24,8 +24,8 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
       route: `/components/${library.toLowerCase()}`,
     },
     {
-      label: 'Pages',
-      icon: 'fa-regular fa-memo',
+      label: 'Layouts',
+      icon: 'fa-regular fa-table-layout',
       route: `/pages/${library.toLowerCase()}`,
     },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },

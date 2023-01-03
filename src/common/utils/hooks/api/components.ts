@@ -3,13 +3,8 @@ import { del, get, post, put } from './api';
 
 export async function searchComponents(
   data: API.Requests.SearchComponents,
-): Promise<
-  API.Response<{
-    components: API.Models.Component[];
-    pages: API.Models.Component[];
-  }>
-> {
-  const res = await post('/search', false, data);
+): Promise<API.Response<API.Models.Component[]>> {
+  const res = await post('/search/components', false, data);
   return res.json();
 }
 

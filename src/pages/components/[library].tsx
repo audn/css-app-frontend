@@ -9,7 +9,7 @@ import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useCategories } from '../../common/utils/hooks/categories';
-import { useSearchPosts } from '../../common/utils/hooks/components';
+import { useSearchComponents } from '../../common/utils/hooks/components';
 
 export default function Browse({ query }: { query: { library: string } }) {
   const router = useRouter();
@@ -95,11 +95,11 @@ export default function Browse({ query }: { query: { library: string } }) {
     error: fetchError,
     refetch,
     isRefetching,
-  } = useSearchPosts(apiQuery);
+  } = useSearchComponents(apiQuery);
 
   useEffect(() => {
     if (data?.payload?.distribution)
-      setDistribution(data?.payload?.distribution.components);
+      setDistribution(data?.payload?.distribution);
   }, [data]);
 
   const {
@@ -116,7 +116,7 @@ export default function Browse({ query }: { query: { library: string } }) {
   return (
     <DefaultLayout>
       <NextSeo title={`Browse components for ${library}`} />
-      <LibrarySelector />{' '}
+      <LibrarySelector />
       <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">
         {library} Components
       </h1>
@@ -138,7 +138,7 @@ export default function Browse({ query }: { query: { library: string } }) {
       </div>
       <div className="mt-10 ">
         <Hydrate.Components
-          data={data?.payload?.results.components}
+          data={data?.payload?.results}
           error={fetchError}
           isLoading={isLoading}
           refetch={refetch}
