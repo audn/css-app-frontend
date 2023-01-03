@@ -40,7 +40,7 @@ export const HeaderEditingComponent = ({
       toast.success('Saved!', { id: msg });
 
       router.push(`/component/${data.id}`);
-      await useGenerateThumbnail(data.id!);
+      await useGenerateThumbnail('component', data.id!);
     } else {
       toast.error('Failed to save', { id: msg });
     }

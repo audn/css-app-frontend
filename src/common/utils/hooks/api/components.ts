@@ -39,6 +39,7 @@ export async function editComponent(
 
 export async function uploadThumbnail(
   id: string,
+  type: 'layout' | 'component',
   data: {
     fieldname: string;
     originalname: string;
@@ -47,7 +48,7 @@ export async function uploadThumbnail(
     buffer: Buffer;
   },
 ): Promise<API.Response<API.Models.Component>> {
-  const res = await put(`/thumbnail/${id}`, true, data);
+  const res = await put(`/thumbnail/${id}?type=${type}`, true, data);
   return res.json();
 }
 

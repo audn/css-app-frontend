@@ -129,7 +129,7 @@ function Component({ component }: { component: API.Models.Component }) {
 
   const onRefreshThumbnail = async () => {
     const msg = toast.loading('Refreshing...');
-    const updated = await useGenerateThumbnail(component.id);
+    const updated = await useGenerateThumbnail('component', component.id);
     if (updated.payload?.results) {
       toast.success('Refreshed!', { id: msg });
     } else toast.error('Failed to refresh', { id: msg });

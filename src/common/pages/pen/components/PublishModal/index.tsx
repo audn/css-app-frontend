@@ -51,7 +51,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
         library: data.library!.toLowerCase(),
       });
       if (posted.payload?.results) {
-        await useGenerateThumbnail(posted.payload.results.id);
+        await useGenerateThumbnail('component', posted.payload.results.id);
         toast.success('Success!', { id: toaster });
         router.push(`/component/${posted.payload.results.id}`);
       } else {

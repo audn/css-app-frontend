@@ -4,6 +4,7 @@ import { useLocalhost } from './helpers/useOnLocal';
 import { uploadThumbnail } from './hooks/api/components';
 
 export async function useGenerateThumbnail(
+  type: 'layout' | 'component',
   id: string,
 ): Promise<API.Response<API.Models.Component>> {
   const iframe = document.getElementsByTagName('iframe');
@@ -12,10 +13,10 @@ export async function useGenerateThumbnail(
   return html2canvas(screen, {
     allowTaint: true,
     useCORS: true,
-    height: 600,
-    //   width: 800,
-    windowWidth: 800,
-    windowHeight: 600,
+    height: type === 'component' ? 600 : 936,
+    width: type === 'component' ? 800 : 626,
+    windowWidth: type === 'component' ? 800 : 626,
+    windowHeight: type === 'component' ? 600 : 936,
   }).then(async (canvas) => {
     const base64image = canvas.toDataURL('image/png');
 
@@ -26,7 +27,7 @@ export async function useGenerateThumbnail(
     {
       useLocalhost && document.body.appendChild(canvas);
     }
-    return await uploadThumbnail(id, {
+    return await uploadThumbnail(id, type, {
       buffer: buffer,
       encoding: '7bit',
       fieldname: 'image',

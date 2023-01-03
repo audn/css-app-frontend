@@ -63,6 +63,10 @@ export default function Beta() {
       label: `Thumbnails seems to ignore clipped gradients.`,
       done: false,
     },
+    {
+      label: `Images from third party websites won't be included in thumbnails. (90% of the time)`,
+      done: false,
+    },
   ];
   return (
     <DefaultLayout className="-mt-10ss">
