@@ -1,10 +1,12 @@
 import create from 'zustand';
 
 type Store = {
-  isCollapsed: boolean;
+  isCollapsed?: boolean;
+  isHoveringCollapsedSidebar?: boolean;
 };
 const useSidebarState = create<Store>(() => ({
   isCollapsed: false,
+  isHoveringCollapsedSidebar: false,
 }));
 
 export default useSidebarState;

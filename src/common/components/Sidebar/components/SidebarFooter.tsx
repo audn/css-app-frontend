@@ -6,10 +6,16 @@ import Dropdown from '../../Dropdown';
 import Link from '../../layout/Link';
 
 function SidebarFooter() {
-  const isSidebarCollapsed = useSidebarState((s) => s.isCollapsed);
+  const { isSidebarCollapsed, isHoveringCollapsedSidebar } = useSidebarState(
+    (s) => ({
+      isSidebarCollapsed: s.isCollapsed,
+      isHoveringCollapsedSidebar: s.isHoveringCollapsedSidebar,
+    }),
+  );
   const toggleSidebar = () => {
     useSidebarState.setState({ isCollapsed: !isSidebarCollapsed });
   };
+
   const user = useAuthState((s) => s.user);
   async function handleLogout() {
     const signedOut = await signOutUser();
@@ -53,7 +59,7 @@ function SidebarFooter() {
             }}
           >
             <img src={user.avatar} className="w-8 h-8 rounded-full" />
-            {!isSidebarCollapsed && (
+            {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
               <div className="flex flex-col justify-start ml-2">
                 <h2 className="font-medium text-white">{user.displayName}</h2>
                 <h3 className="text-sm text-white/60 text-start">
@@ -63,7 +69,7 @@ function SidebarFooter() {
             )}
           </Dropdown>
         </div>
-        {!isSidebarCollapsed && (
+        {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
           <div className="flex items-center space-x-[1px] overflow-hidden rounded-lg bg-types-50">
             <Link
               href="/user/settings"
@@ -75,7 +81,11 @@ function SidebarFooter() {
               onClick={toggleSidebar}
               className="flex items-center justify-center w-9 h-9 bg-types-100 hover:bg-types-150 animate"
             >
-              <i className="text-xl fa-regular fa-arrow-left-from-line" />
+              {isSidebarCollapsed ? (
+                <i className="text-xl fa-regular fa-arrow-right-from-line" />
+              ) : (
+                <i className="text-xl fa-regular fa-arrow-left-from-line" />
+              )}
             </button>
           </div>
         )}

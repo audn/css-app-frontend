@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useFilterState from '../../store/filter';
 import useSidebarState from '../../store/sidebar';
 import concat from '../../utils/helpers/concat';
@@ -8,7 +9,31 @@ import SidebarFooter from './components/SidebarFooter';
 
 function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   const library = useFilterState((s) => s.library);
-  const isSidebarCollapsed = useSidebarState((s) => s.isCollapsed);
+  const setHoveringSidebar = (val: boolean) => {
+    useSidebarState.setState({ isHoveringCollapsedSidebar: val });
+  };
+
+  const { isSidebarCollapsed, isHoveringCollapsedSidebar } = useSidebarState(
+    (s) => ({
+      isSidebarCollapsed: s.isCollapsed,
+      isHoveringCollapsedSidebar: s.isHoveringCollapsedSidebar,
+    }),
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 900) {
+        useSidebarState.setState({ isCollapsed: true });
+      } else {
+        // if (!isSidebarCollapsed) {
+        useSidebarState.setState({ isCollapsed: false });
+        // }
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const items = [
     { label: 'Home', icon: 'fa-regular fa-home', route: '/' },
@@ -33,14 +58,19 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
 
   return (
     <div
+      onMouseEnter={() => setHoveringSidebar(true)}
+      onMouseLeave={() => setHoveringSidebar(false)}
       className={concat(
+        isHoveringCollapsedSidebar ? '!max-w-[290px]' : '',
         isSidebarCollapsed ? 'max-w-[70px]' : 'max-w-[290px] ',
-        'fixed left-0 inset-y-0 py-8 px-4 w-full bg-types-body border-r border-types-150 min-h-screen transition-all ease-out durtion-200 z-10',
+        'fixed left-0 inset-y-0 py-8 px-4 w-full bg-types-body border-r border-types-150 min-h-screen transition-all ease-out durtion-200 z-30',
       )}
     >
       <div
         className={concat(
-          isSidebarCollapsed ? 'justify-center' : 'justify-between',
+          isSidebarCollapsed && !isHoveringCollapsedSidebar
+            ? 'justify-center'
+            : 'justify-between',
           'flex items-center transition-all ease-out durtion-200',
         )}
       >
@@ -51,17 +81,19 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
         <img
           src={`/logo1.svg`}
           className={concat(
-            isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-10 h-10 ml-[0.35rem]',
+            isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-10 h-10',
             '',
           )}
         />
-        {!isSidebarCollapsed && (
+        {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
           <CreatNew toggleCreateType={toggleCreateType} />
         )}
       </div>
       <div
         className={concat(
-          isSidebarCollapsed ? 'items-center space-y-2' : 'space-y-1',
+          isSidebarCollapsed && !isHoveringCollapsedSidebar
+            ? 'items-center space-y-2'
+            : 'space-y-1',
           'flex flex-col mt-5 ',
         )}
       >
@@ -71,8 +103,7 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
         {!isSidebarCollapsed && <SearchBar />}
       </div>
       <div className="mt-10">
-        <h3 className="text-sm font-medium text-white uppercase">Pinned</h3>
-
+        {/* <h3 className="text-sm font-medium text-white uppercase">Pinned</h3> */}
         <SidebarFooter />
       </div>
     </div>

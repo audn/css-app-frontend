@@ -13,8 +13,12 @@ type Props = {
 };
 function NavItem({ label, icon, route, condition }: Props) {
   const router = useRouter();
-  const isSidebarCollapsed = useSidebarState((s) => s.isCollapsed);
-
+  const { isSidebarCollapsed, isHoveringCollapsedSidebar } = useSidebarState(
+    (s) => ({
+      isSidebarCollapsed: s.isCollapsed,
+      isHoveringCollapsedSidebar: s.isHoveringCollapsedSidebar,
+    }),
+  );
   const active =
     route == '/' ? route == router.pathname : router.asPath.includes(route);
   if (typeof condition !== 'boolean' || condition) {
@@ -22,8 +26,8 @@ function NavItem({ label, icon, route, condition }: Props) {
       <Link
         href={route}
         className={concat(
-          isSidebarCollapsed
-            ? 'w-8 h-8 flex justify-center items-center'
+          isSidebarCollapsed && !isHoveringCollapsedSidebar
+            ? 'w-9 h-9 flex justify-center items-center'
             : 'px-3 py-[6px]',
           active
             ? 'bg-brand-primary-100 !text-types-50'
@@ -33,13 +37,15 @@ function NavItem({ label, icon, route, condition }: Props) {
       >
         <div
           className={concat(
-            isSidebarCollapsed ? 'text-lg' : ' w-7 text-sm',
+            isSidebarCollapsed && !isHoveringCollapsedSidebar
+              ? 'text-lg'
+              : ' w-7 text-sm',
             'flex justify-start',
           )}
         >
           <i className={icon} />
         </div>
-        {!isSidebarCollapsed && label}
+        {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && label}
       </Link>
     );
   } else return <></>;

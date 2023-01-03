@@ -33,7 +33,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <div
         className={concat(
           isSidebarCollapsed ? 'ml-[70px]' : 'ml-[290px]',
-          'flex min-h-screen ',
+          'flex min-h-screen transition-all ease-out duration-200',
         )}
       >
         <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
