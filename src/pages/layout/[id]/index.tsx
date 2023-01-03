@@ -10,6 +10,7 @@ import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
+import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
 import { getPageFromId } from '../../../common/utils/hooks/api/pages';
 
@@ -130,7 +131,10 @@ function Layout({ layout }: { layout: API.Models.Page }) {
                     <button
                       onClick={() => setView(x)}
                       key={x}
-                      className="relative z-20 flex flex-col justify-center h-8 px-3 hover:text-white"
+                      className={concat(
+                        x === view ? 'text-white' : 'hover:text-white',
+                        'relative z-20 flex flex-col justify-center h-8 px-3',
+                      )}
                     >
                       {x}
                       {view === x ? (
