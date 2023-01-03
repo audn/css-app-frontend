@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DefaultSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 import SEO from '../../next-seo.config';
+import Footer from '../common/components/Footer';
 import SelectCreateType from '../common/components/Header/SelectType';
 import ReactToaster from '../common/components/layout/Toaster';
 import Sidebar from '../common/components/Sidebar';
@@ -22,21 +23,20 @@ export default function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     useCurrentUser();
   }, []);
-  //   const pagesWithoutHeader = [
-  //     '/new',
-  //     '/component/[id]/preview',
-  //     '/component/[id]/edit',
-  //   ];
+  const pagesWithoutSidebar = ['/layout/[id]'];
 
   return (
     <QueryClientProvider client={queryClient}>
       <div
         className={concat(
+          !pagesWithoutSidebar.includes(router.pathname) ? '' : '!ml-0',
           isSidebarCollapsed ? 'ml-[70px]' : 'ml-[290px]',
-          'flex min-h-screen transition-all ease-out duration-200',
+          'flex min-h-screen transition-all ease-out duration-75',
         )}
       >
-        <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+        {!pagesWithoutSidebar.includes(router.pathname) && (
+          <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+        )}
         {isCreateOpen && (
           <SelectCreateType
             isOpen={isCreateOpen}
@@ -45,12 +45,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         )}
         <div className="flex flex-col w-full">
           {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />} */}
-          <div className="px-10 py-8">
+          <div className="relative min-h-screen px-10 py-8">
             <Analytics /> <ReactToaster />
             <DefaultSeo {...SEO} />
             <Component {...pageProps} key={router.route} />
           </div>
-          {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Footer />} */}
+          <Footer />
         </div>
       </div>
     </QueryClientProvider>

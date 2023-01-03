@@ -63,7 +63,7 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
       className={concat(
         isHoveringCollapsedSidebar ? '!max-w-[290px]' : '',
         isSidebarCollapsed ? 'max-w-[70px]' : 'max-w-[290px] ',
-        'fixed left-0 inset-y-0 py-8 px-4 w-full bg-types-body border-r border-types-150 min-h-screen transition-all ease-out durtion-200 z-30',
+        'fixed left-0 inset-y-0 py-8 px-4 w-full bg-types-body border-r border-types-150 min-h-screen transition-all ease-out duration-75 z-30',
       )}
     >
       <div
@@ -81,7 +81,7 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
         <img
           src={`/logo1.svg`}
           className={concat(
-            isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-10 h-10',
+            isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-8 h-8',
             '',
           )}
         />
