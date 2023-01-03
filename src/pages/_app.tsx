@@ -23,20 +23,20 @@ export default function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     useCurrentUser();
   }, []);
-  const pagesWithoutSidebar = ['/layout/[id]'];
+  //   const pagesWithoutSidebar = ['/layout/[id]'];
 
   return (
     <QueryClientProvider client={queryClient}>
       <div
         className={concat(
-          !pagesWithoutSidebar.includes(router.pathname) ? '' : '!ml-0',
+          //   !pagesWithoutSidebar.includes(router.pathname) ? '' : '!ml-0',
           isSidebarCollapsed ? 'ml-[70px]' : 'ml-[290px]',
           'flex min-h-screen transition-all ease-out duration-75',
         )}
       >
-        {!pagesWithoutSidebar.includes(router.pathname) && (
-          <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
-        )}
+        {/* {!pagesWithoutSidebar.includes(router.pathname) && ( */}
+        <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+        {/* )} */}
         {isCreateOpen && (
           <SelectCreateType
             isOpen={isCreateOpen}

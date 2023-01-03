@@ -6,12 +6,9 @@ import Dropdown from '../../Dropdown';
 import Link from '../../layout/Link';
 
 function SidebarFooter() {
-  const { isSidebarCollapsed, isHoveringCollapsedSidebar } = useSidebarState(
-    (s) => ({
-      isSidebarCollapsed: s.isCollapsed,
-      isHoveringCollapsedSidebar: s.isHoveringCollapsedSidebar,
-    }),
-  );
+  const { isSidebarCollapsed } = useSidebarState((s) => ({
+    isSidebarCollapsed: s.isCollapsed,
+  }));
   const toggleSidebar = () => {
     useSidebarState.setState({ isCollapsed: !isSidebarCollapsed });
   };
@@ -47,6 +44,14 @@ function SidebarFooter() {
   ] as INavItem[];
   return (
     <div className="absolute inset-x-0 bottom-0 p-4">
+      {isSidebarCollapsed && (
+        <button
+          onClick={toggleSidebar}
+          className="flex items-center justify-center rounded-md w-9 h-9 bg-types-100 hover:bg-types-150 animate"
+        >
+          <i className="text-xl fa-regular fa-arrow-right-from-line" />
+        </button>
+      )}
       <div className="flex items-center justify-between pt-4 border-t border-types-150">
         <div className="relative flex items-center max-w-fit">
           <Dropdown
@@ -59,7 +64,7 @@ function SidebarFooter() {
             }}
           >
             <img src={user.avatar} className="w-8 h-8 rounded-full" />
-            {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
+            {!isSidebarCollapsed && (
               <div className="flex flex-col justify-start ml-2">
                 <h2 className="font-medium text-white">{user.displayName}</h2>
                 <h3 className="text-sm text-white/60 text-start">
@@ -69,7 +74,7 @@ function SidebarFooter() {
             )}
           </Dropdown>
         </div>
-        {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
+        {!isSidebarCollapsed && (
           <div className="flex items-center space-x-[1px] overflow-hidden rounded-lg bg-types-50">
             <Link
               href="/user/settings"

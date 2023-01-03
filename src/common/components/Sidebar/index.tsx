@@ -9,16 +9,10 @@ import SidebarFooter from './components/SidebarFooter';
 
 function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   const library = useFilterState((s) => s.library);
-  const setHoveringSidebar = (val: boolean) => {
-    useSidebarState.setState({ isHoveringCollapsedSidebar: val });
-  };
 
-  const { isSidebarCollapsed, isHoveringCollapsedSidebar } = useSidebarState(
-    (s) => ({
-      isSidebarCollapsed: s.isCollapsed,
-      isHoveringCollapsedSidebar: s.isHoveringCollapsedSidebar,
-    }),
-  );
+  const { isSidebarCollapsed } = useSidebarState((s) => ({
+    isSidebarCollapsed: s.isCollapsed,
+  }));
 
   useEffect(() => {
     function handleResize() {
@@ -58,19 +52,14 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
 
   return (
     <div
-      onMouseEnter={() => setHoveringSidebar(true)}
-      onMouseLeave={() => setHoveringSidebar(false)}
       className={concat(
-        isHoveringCollapsedSidebar ? '!max-w-[290px]' : '',
         isSidebarCollapsed ? 'max-w-[70px]' : 'max-w-[290px] ',
         'fixed left-0 inset-y-0 py-8 px-4 w-full bg-types-body border-r border-types-150 min-h-screen transition-all ease-out duration-75 z-30',
       )}
     >
       <div
         className={concat(
-          isSidebarCollapsed && !isHoveringCollapsedSidebar
-            ? 'justify-center'
-            : 'justify-between',
+          isSidebarCollapsed ? 'justify-center' : 'justify-between',
           'flex items-center transition-all ease-out durtion-200',
         )}
       >
@@ -85,15 +74,13 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
             '',
           )}
         />
-        {(!isSidebarCollapsed || isHoveringCollapsedSidebar) && (
+        {!isSidebarCollapsed && (
           <CreatNew toggleCreateType={toggleCreateType} />
         )}
       </div>
       <div
         className={concat(
-          isSidebarCollapsed && !isHoveringCollapsedSidebar
-            ? 'items-center space-y-2'
-            : 'space-y-1',
+          isSidebarCollapsed ? 'items-center space-y-2' : 'space-y-1',
           'flex flex-col mt-5 ',
         )}
       >
