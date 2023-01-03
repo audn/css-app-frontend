@@ -102,7 +102,7 @@ function Layout({ layout }: { layout: API.Models.Page }) {
   ];
 
   return (
-    <DefaultLayout className="h-screen -m-8 -mx-10">
+    <DefaultLayout className="-m-8 -mx-10">
       <NextSeo
         title={title}
         openGraph={{
@@ -123,8 +123,8 @@ function Layout({ layout }: { layout: API.Models.Page }) {
         description={layout.description}
       />{' '}
       <EditModal isOpen={isEditing} onClose={toggleEdit} component={layout} />
-      <div className="relative flex h-full items-s bg-tdypes-50 ">
-        <div className="flex flex-col w-full h-[3500px]">
+      <div className="relative flex h-full">
+        <div className="flex flex-col w-full ">
           <div className="grid w-full grid-cols-3 py-10">
             <button
               onClick={() => router.back()}
@@ -179,7 +179,6 @@ function Layout({ layout }: { layout: API.Models.Page }) {
                         templateCode={layout.code}
                         fullHeight={false}
                         initialContent={layout.code}
-                        // onChange={(val) => update('code', val)}
                       />
                     </div>
                   )}

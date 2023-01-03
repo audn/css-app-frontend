@@ -15,7 +15,8 @@ function Footer() {
             <span className="text-sm ">
               by{' '}
               <a
-                href="#"
+                href="https://audun.gg"
+                target={'_blank'}
                 className="pb-1 border-b border-transparent hover:border-types-250 animate hover:text-white"
               >
                 Audun Hilden
