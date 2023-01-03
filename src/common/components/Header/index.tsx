@@ -10,7 +10,7 @@ export const Header = () => {
   const pagesWithLibrarySelector = [
     '/components/[library]',
     '/',
-    '/pages/[library]',
+    '/layouts/[library]',
   ];
 
   useEffect(() => {

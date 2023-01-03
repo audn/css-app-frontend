@@ -25,6 +25,10 @@ export default function Beta() {
       done: false,
     },
     {
+      label: `Improve thumbnails. Look at possibly including the Component's code in thumbnail so you can interact with it before opening.`,
+      done: false,
+    },
+    {
       label: `Remove "Landing Page" from tags, and rather create a completely new schema just for "Pages" as we have done with "Components".`,
       done: true,
     },

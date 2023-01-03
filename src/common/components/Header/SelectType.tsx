@@ -11,7 +11,7 @@ function SelectCreateType({ isOpen, onClose }: Props) {
         Select Category
       </h1>
       <h4 className="max-w-sm mx-auto mt-3 text-base text-center">
-        Are you creating a single component, or a whole page that consists of
+        Are you creating a single component, or a layout that consists of
         multiple components?
       </h4>
       <div className="flex flex-col w-full mt-5">
@@ -34,7 +34,7 @@ function SelectCreateType({ isOpen, onClose }: Props) {
             />
           </div>
           <div>
-            <h2 className="font-medium text-white">Page</h2>
+            <h2 className="font-medium text-white">Layout</h2>
             <p className="mt-1 text-sm">Eg. Landing page, Pricing page etc.</p>
           </div>
         </button>

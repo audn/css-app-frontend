@@ -7,7 +7,7 @@ function PageCard({ author, id, title, generatedImage }: API.Models.Component) {
     <div className="flex flex-col items-start">
       <Link
         className="border border-types-150 shadow-md relative w-full h-[450px]  bg-types-150 rounded-md overflow-hidden group"
-        href={`/page/${id}`}
+        href={`/layout/${id}`}
       >
         {generatedImage && (
           <Image src={generatedImage} layout="fill" className="scale-150" />

@@ -119,9 +119,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
     <DefaultLayout>
       <NextSeo title={`Browse Landing Pages made with ${library}`} />
       <LibrarySelector />{' '}
-      <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">
-        {library} Pages
-      </h1>
+      <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">Layouts</h1>
       <h4 className="text-lg">Browsing pages posted by community members.</h4>
       <div className="flex-col mt-5">
         <Hydrate.Categories

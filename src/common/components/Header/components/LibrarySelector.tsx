@@ -19,8 +19,8 @@ function LibrarySelector({
     useFilterState.setState({
       library: val,
     });
-    if (router.pathname == '/pages/[library]') {
-      router.push(`/pages/${val.toLowerCase()}`, undefined, {
+    if (router.pathname == '/layouts/[library]') {
+      router.push(`/layouts/${val.toLowerCase()}`, undefined, {
         shallow: true,
       });
     } else {
