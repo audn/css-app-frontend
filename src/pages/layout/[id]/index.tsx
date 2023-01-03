@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
+import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
-import useAuthState from '../../../common/store/auth';
 import toDate from '../../../common/utils/helpers/toDate';
 import { getPageFromId } from '../../../common/utils/hooks/api/pages';
 
@@ -28,11 +28,7 @@ function Layout({ layout }: { layout: API.Models.Page }) {
   } = layout;
 
   const router = useRouter();
-  const user = useAuthState((s) => s.user);
 
-  const [showToggle, setShowToggle] = useState<boolean>(false);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-  const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
 
   const [view, setView] = useState<'Code' | 'Preview'>('Preview');
@@ -123,15 +119,9 @@ function Layout({ layout }: { layout: API.Models.Page }) {
         description={layout.description}
       />{' '}
       <EditModal isOpen={isEditing} onClose={toggleEdit} component={layout} />
-      <div className="relative flex h-full">
+      <div className="relative flex">
         <div className="flex flex-col w-full ">
-          <div className="grid w-full grid-cols-3 py-10">
-            <button
-              onClick={() => router.back()}
-              className="fixed flex items-center justify-center w-10 h-10 mr-2 rounded-full left-10 top-10 text-white/50 bg-types-100"
-            >
-              <i className="text-lg fa-regular fa-arrow-left" />
-            </button>
+          <div className="grid w-full grid-cols-3 py-5">
             <div></div>
             <div className="flex justify-center">
               <AnimateSharedLayout>
@@ -157,8 +147,8 @@ function Layout({ layout }: { layout: API.Models.Page }) {
               </AnimateSharedLayout>
             </div>
           </div>
-          <div className="flex w-full h-full px-16">
-            <div className="flex items-start justify-center flex-1 w-full">
+          <div className="flex w-full h-full px-10 ">
+            <div className="flex items-start justify-center w-full">
               <AnimatePresence exitBeforeEnter>
                 <motion.div
                   className="flex items-center justify-center w-full"
@@ -169,10 +159,13 @@ function Layout({ layout }: { layout: API.Models.Page }) {
                   transition={{ duration: 0.2 }}
                 >
                   {view === 'Preview' ? (
-                    <img
-                      src="https://land-book-storage.s3.eu-central-1.amazonaws.com/website/40639/2ab8a831c7944f27-urich-webflow-io.webp"
-                      className="max-w-[750px] relative"
-                    />
+                    <div className="relative w-full h-screen overflow-hidden rounded-lg">
+                      <Preview
+                        initialCode={layout.code}
+                        library={library}
+                        version={libraryVersion}
+                      />
+                    </div>
                   ) : (
                     <div className="w-full overflow-hidden border rounded-xl border-types-150 bg-types-50">
                       <PenEditor
@@ -188,11 +181,13 @@ function Layout({ layout }: { layout: API.Models.Page }) {
           </div>
         </div>
 
-        <div className="sticky top-0 max-w-[350px] h-screen w-full pt-10 right-0 border-l bg-types-100 border-types-150">
-          {simpleInfo.map((x) => (
-            <InfoTag {...x} />
-          ))}
-        </div>
+        {view === 'Code' && (
+          <div className="sticky top-0 max-w-[350px] h-screen w-full pt-10 right-0 border-l bg-types-100 border-types-150">
+            {simpleInfo.map((x) => (
+              <InfoTag {...x} />
+            ))}
+          </div>
+        )}
       </div>
     </DefaultLayout>
   );

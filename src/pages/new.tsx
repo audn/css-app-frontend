@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { useBeforeUnload } from 'react-use';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
+import LibraryDropdown from '../common/components/layout/Pen/components/LibraryDropdown';
 import PenEditor from '../common/components/layout/Pen/Editor';
 import Preview from '../common/components/layout/Pen/Preview';
 import NotLoggedInModal from '../common/components/layout/shared/NotLoggedIn';
@@ -146,7 +147,7 @@ function NewComponent() {
   }, []);
   useBeforeUnload(data.code.length >= 1, 'd');
   return (
-    <div>
+    <div className="-mx-10 -my-8">
       {!user.id && <NotLoggedInModal />}
       <NextSeo title={`New component`} />{' '}
       <HeaderAddingComponent data={data} update={update} />
@@ -158,7 +159,6 @@ function NewComponent() {
         size={size.current}
         onChange={updateCurrentSize}
         className="!relative !h-[fit-content]"
-        paneStyle={{ marginTop: -1 }}
         onDragStarted={() => setResizing(true)}
         onDragFinished={() => setResizing(false)}
         allowResize={true}
@@ -166,14 +166,19 @@ function NewComponent() {
           true && size.layout !== 'preview' ? 'Resizer' : 'Resizer-collapsed'
         }
       >
-        <PenEditor
-          initialContent={data.code}
-          onChange={(val) => update('code', val)}
-        />
+        <div className="border-r border-types-150">
+          <div className="w-full px-5 py-2 border-b border-types-150">
+            <LibraryDropdown data={data} update={update} />
+          </div>
+          <PenEditor
+            initialContent={data.code}
+            onChange={(val) => update('code', val)}
+          />
+        </div>
         <Preview
           library={data.library && data?.library.toLowerCase()}
           version={data.libraryVersion}
-          className="-z-10"
+          className="-z-10 !bg-types-50"
         />
       </SplitPane>
     </div>
