@@ -59,7 +59,6 @@ export declare namespace API {
     message?: string;
   }
   type UserRoles = 'ADMIN' | 'USER' | 'MOD';
-  type UserPreferences = { preferredLibrary: string };
 
   namespace Models {
     interface Category {
@@ -78,18 +77,16 @@ export declare namespace API {
 
     interface User {
       id: string;
-      twitterId?: string;
-      discordId?: string;
-      bio?: string;
-      location?: string;
-      websiteUrl?: string;
-      tokens?: string;
-      twitterUsername?: string;
+      githubId: string;
       username: string;
+      displayName: string;
+      bio: string;
+      location: string;
+      websiteUrl: string;
+      tokens?: any;
       avatar: string;
-      displayName?: string;
-      role: UserRoles;
-      createdAt: string;
+      role: string;
+      createdAt: Date;
       components?: API.Models.Component[];
       layouts?: API.Models.Layout[];
     }
