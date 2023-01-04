@@ -50,15 +50,15 @@ function UserSettings() {
           </div>
         </div>
         <div className="p-6">
-          <div className="flex items-center p-4 mb-4 text-sm text-white bg-blue-500 rounded-md bg-opacity-20">
+          <div className="flex items-center p-4 mb-4 text-sm text-white rounded-md bg-types-150">
             <div className="flex mr-4">
-              <i className="text-2xl text-blue-500 fa-brands fa-twitter" />
+              <i className="text-2xl text-white fa-brands fa-github" />
             </div>
             <div className="flex items-center">
-              This account is connected to your Twitter account{' '}
+              This account is connected to your GitHub account{' '}
               <span className="font-semibold contents">{user.username}</span>.
               Some of your details such as profile picture can only be changed
-              from Twitter.
+              from GitHub.
             </div>
           </div>
           <Form.Wrapper column={true}>
