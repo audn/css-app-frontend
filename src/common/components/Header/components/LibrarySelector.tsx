@@ -46,7 +46,10 @@ function LibrarySelector({
     >
       <div className="flex items-center text-[15px] border rounded-lg border-types-150">
         <div className="flex items-center justify-center w-8 h-8 bg-types-100 rounded-l-md">
-          <img src={`/libraries/${library}.svg`} className="w-5 h-5" />
+          <img
+            src={`/libraries/${library.toLowerCase()}.svg`}
+            className="w-5 h-5"
+          />
         </div>
         <div className="px-3 font-normal">
           {library}

@@ -38,7 +38,10 @@ function Layout({ layout }: { layout: API.Models.Layout }) {
       label: 'Library',
       value: (
         <>
-          <img src={`/libraries/${library}.svg`} className="w-5 h-5 mr-2" />{' '}
+          <img
+            src={`/libraries/${library.toLowerCase()}.svg`}
+            className="w-5 h-5 mr-2"
+          />{' '}
           {library}@{libraryVersion}
         </>
       ),

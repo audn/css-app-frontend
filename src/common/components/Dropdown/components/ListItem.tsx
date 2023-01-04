@@ -53,7 +53,10 @@ function ListItem({
           </div>
         )}
         {showLibraryVector && (
-          <img src={`/libraries/${value}.svg`} className="w-4 h-4 mr-2" />
+          <img
+            src={`/libraries/${value?.toLowerCase()}.svg`}
+            className="w-4 h-4 mr-2"
+          />
         )}
         {label}
       </div>
