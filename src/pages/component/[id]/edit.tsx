@@ -157,6 +157,7 @@ function EditComponent({ post }: { post: API.Models.Component }) {
           onChange={(val) => update('code', val)}
         />
         <Preview
+          type="component"
           library={data.library!.toLowerCase()}
           version={data.libraryVersion!}
           className="-z-10"

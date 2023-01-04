@@ -10,6 +10,7 @@ function PostPreview({ post }: { post: API.Models.Component }) {
     <div>
       <NextSeo title={post.title} />
       <Preview
+        type="component"
         initialCode={post.code}
         library={post.library}
         version={post.libraryVersion}

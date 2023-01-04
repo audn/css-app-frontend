@@ -35,8 +35,8 @@ export type IDropdown = {
   };
 };
 
-export type IPostSchemas = 'components' | 'layouts';
-export type Distribution = { components: number; pages: number };
+export type IPostSchemas = 'component' | 'layout';
+export type Distribution = { components: number; layouts: number };
 export declare namespace API {
   namespace Requests {
     interface SearchComponents {
@@ -91,7 +91,7 @@ export declare namespace API {
       role: UserRoles;
       createdAt: string;
       components?: API.Models.Component[];
-      pages?: API.Models.Page[];
+      layouts?: API.Models.Layout[];
     }
     interface Component {
       id: string;
@@ -108,10 +108,10 @@ export declare namespace API {
       authorId: string;
       author: User;
       library: string;
-      libraryVersion: string;
+      libraryVersion?: string;
       createdAt: string;
     }
-    interface Page {
+    interface Layout {
       id: string;
       title: string;
       code: any;
@@ -130,7 +130,7 @@ export declare namespace API {
       authorId: string;
       author: User;
       library: string;
-      libraryVersion: string;
+      libraryVersion?: string;
       createdAt: string;
     }
   }

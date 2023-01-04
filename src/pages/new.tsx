@@ -19,11 +19,14 @@ function NewComponent() {
 
   const [data, setData] = useState<Partial<API.Models.Component>>({
     // title: '',
-    code: `<!-- 
+    code:
+      type === 'component'
+        ? `<!-- 
 The results on the right are automatically centered.
 
 Avoid adding elements such as <body> that make it difficult to copy and paste your component.
--->`,
+-->`
+        : '',
     responsive: false,
     animated: false,
     library: 'TailwindCSS',
@@ -199,6 +202,7 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
           />
         </div>
         <Preview
+          type={type}
           library={data.library && data?.library.toLowerCase()}
           version={data.libraryVersion}
           className="-z-10 !bg-types-50"

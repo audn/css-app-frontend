@@ -65,11 +65,9 @@ function SidebarFooter() {
           >
             <img src={user.avatar} className="w-8 h-8 rounded-full" />
             {!isSidebarCollapsed && (
-              <div className="flex flex-col justify-start ml-2">
+              <div className="flex flex-col justify-start ml-3 text-start">
                 <h2 className="font-medium text-white">{user.displayName}</h2>
-                <h3 className="text-sm text-white/60 text-start">
-                  @{user.username}
-                </h3>
+                <h3 className="text-sm text-white/60">@{user.username}</h3>
               </div>
             )}
           </Dropdown>

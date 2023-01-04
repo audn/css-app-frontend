@@ -1,7 +1,6 @@
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from '../../../common/components/layout/Link';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
@@ -12,9 +11,9 @@ import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
-import { getPageFromId } from '../../../common/utils/hooks/api/pages';
+import { getLayoutFromId } from '../../../common/utils/hooks/api/layouts';
 
-function Layout({ layout }: { layout: API.Models.Page }) {
+function Layout({ layout }: { layout: API.Models.Layout }) {
   const {
     author,
     // description,
@@ -28,7 +27,7 @@ function Layout({ layout }: { layout: API.Models.Page }) {
     title,
   } = layout;
 
-  const router = useRouter();
+  //   const router = useRouter();
 
   const [isEditing, setEdit] = useState<boolean>(false);
 
@@ -165,7 +164,8 @@ function Layout({ layout }: { layout: API.Models.Page }) {
                   {view === 'Preview' ? (
                     <div className="relative w-full h-screen overflow-hidden rounded-lg">
                       <Preview
-                        initialCode={layout.code}
+                        type="layout"
+                        initialCode={code}
                         library={library}
                         version={libraryVersion}
                       />
@@ -173,9 +173,9 @@ function Layout({ layout }: { layout: API.Models.Page }) {
                   ) : (
                     <div className="w-full overflow-hidden border rounded-xl border-types-150 bg-types-50">
                       <PenEditor
-                        templateCode={layout.code}
+                        templateCode={code}
                         fullHeight={false}
-                        initialContent={layout.code}
+                        initialContent={code}
                       />
                     </div>
                   )}
@@ -202,7 +202,7 @@ export default Layout;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = (ctx.params?.id || '') as string;
 
-  const data = await getPageFromId(id);
+  const data = await getLayoutFromId(id);
   1;
   if (data.error) {
     return {

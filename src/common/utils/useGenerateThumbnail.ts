@@ -1,10 +1,10 @@
 import html2canvas from 'html2canvas';
-import { API } from '../lib/interfaces';
+import { API, IPostSchemas } from '../lib/interfaces';
 import { useLocalhost } from './helpers/useOnLocal';
 import { uploadThumbnail } from './hooks/api/components';
 
 export async function useGenerateThumbnail(
-  type: 'layout' | 'component',
+  type: IPostSchemas,
   id: string,
 ): Promise<API.Response<API.Models.Component>> {
   const iframe = document.getElementsByTagName('iframe');

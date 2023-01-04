@@ -16,7 +16,7 @@ function View1({ update, data, categories }: Props) {
           autoFocus={true}
           label="Title"
           required={true}
-          placeholder={data.title}
+          placeholder={data.title ?? 'Title'}
           value={data.title}
           onChange={(val) => update('title', val)}
           id="name"
@@ -25,7 +25,7 @@ function View1({ update, data, categories }: Props) {
       </div>
       <div className="flex flex-col w-full">
         <Form.Textarea
-          placeholder={data.description}
+          placeholder={data.description ?? 'Description'}
           label="Description"
           value={data.description}
           onChange={(val) => update('description', val)}
@@ -38,7 +38,6 @@ function View1({ update, data, categories }: Props) {
           <h2 className="text-[14px] text-white font-medium mb-3">
             Category <span className="text-red-500">*</span>
           </h2>
-          You've selected Component{' '}
         </div>
 
         <div className="flex flex-wrap gap-2 mb-3">

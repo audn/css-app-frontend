@@ -32,7 +32,7 @@ function Component({ component }: { component: API.Models.Component }) {
     theme,
     library,
     libraryVersion,
-    // createdAt,
+    createdAt,
     title,
   } = component;
 
@@ -58,7 +58,7 @@ function Component({ component }: { component: API.Models.Component }) {
     },
     {
       label: 'Animated',
-      value: component.animated ? (
+      value: animated ? (
         <i className="text-green-500 fa-solid fa-check" />
       ) : (
         <i className="text-red-500 fa-solid fa-times" />
@@ -67,7 +67,7 @@ function Component({ component }: { component: API.Models.Component }) {
     },
     {
       label: 'Responsive',
-      value: component.responsive ? (
+      value: responsive ? (
         <i className="text-green-500 fa-solid fa-check" />
       ) : (
         <i className="text-red-500 fa-solid fa-times" />
@@ -98,7 +98,7 @@ function Component({ component }: { component: API.Models.Component }) {
     {
       label: 'Added',
       value: toDate({
-        dateString: String(new Date(component.createdAt)),
+        dateString: String(new Date(createdAt)),
         options: {
           show: { month: 'short', day: '2-digit', year: 'numeric' },
         },
@@ -228,6 +228,7 @@ function Component({ component }: { component: API.Models.Component }) {
                 </button>
               )}
               <Preview
+                type="component"
                 className={darkMode ? '!bg-[#121212]' : ''}
                 initialCode={code}
                 library={library}

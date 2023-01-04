@@ -45,6 +45,7 @@ function CategoryHydration({
             // .sort((a, b) => Number(distribution) - Number(a._count?.posts))
             .map((category) => (
               <CategoryCard
+                //  @ts-ignore
                 count={distribution ? distribution[category.value] : 0}
                 {...category}
                 key={category.value}

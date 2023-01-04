@@ -23,7 +23,7 @@ function SelectCreateType({ isOpen, onClose }: Props) {
       </h4>
       <div className="flex flex-col w-full mt-5">
         <button
-          onClick={() => onClick('components')}
+          onClick={() => onClick('component')}
           className="flex items-center p-2 text-left group bg-types-50/20 hover:bg-brand-primary-100/20 rounded-xl animate text-on-50 hover:text-white/60"
         >
           <div className="flex items-start justify-start flex-shrink-0 p-4 mr-4 rounded-lg bg-types-50/40">
@@ -37,7 +37,7 @@ function SelectCreateType({ isOpen, onClose }: Props) {
           </div>
         </button>{' '}
         <button
-          onClick={() => onClick('layouts')}
+          onClick={() => onClick('layout')}
           className="flex items-center p-2 mt-3 text-left group bg-types-50/20 hover:bg-brand-primary-100/20 rounded-xl animate text-on-50 hover:text-white/60"
         >
           <div className="flex justify-start items-end overflow-hidden h-[80px] w-[80px] flex-shrink-0 px-2 mr-4 rounded-lg bg-types-50/40">

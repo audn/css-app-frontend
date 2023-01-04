@@ -9,7 +9,7 @@ import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useCategories } from '../../common/utils/hooks/categories';
-import { useSearchPages } from '../../common/utils/hooks/pages';
+import { useSearchLayouts } from '../../common/utils/hooks/layouts';
 
 export default function BrowsePages({ query }: { query: { library: string } }) {
   const router = useRouter();
@@ -95,7 +95,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
     error: fetchError,
     refetch,
     isRefetching,
-  } = useSearchPages(apiQuery);
+  } = useSearchLayouts(apiQuery);
 
   useEffect(() => {
     if (data?.payload?.distribution)
@@ -108,7 +108,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
     error: fetchCategoriesError,
     refetch: refetchCategories,
     isRefetching: isRefetchingCategories,
-  } = useCategories('pages');
+  } = useCategories('layout');
 
   const [distribution, setDistribution] = useState<any>(
     data?.payload?.distribution,
@@ -135,7 +135,7 @@ export default function BrowsePages({ query }: { query: { library: string } }) {
         />
       </div>
       <div className="mt-10">
-        <Hydrate.Pages
+        <Hydrate.Layouts
           data={data?.payload?.results}
           error={fetchError}
           isLoading={isLoading}

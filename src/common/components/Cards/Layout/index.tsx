@@ -1,7 +1,12 @@
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function PageCard({ author, id, title, generatedImage }: API.Models.Component) {
+function LayoutCard({
+  author,
+  id,
+  title,
+  generatedImage,
+}: API.Models.Component) {
   return (
     <div className="flex flex-col items-start">
       <Link
@@ -33,4 +38,4 @@ function PageCard({ author, id, title, generatedImage }: API.Models.Component) {
   );
 }
 
-export default PageCard;
+export default LayoutCard;
