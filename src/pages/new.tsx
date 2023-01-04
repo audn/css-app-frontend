@@ -205,7 +205,7 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
           type={type}
           library={data.library && data?.library.toLowerCase()}
           version={data.libraryVersion}
-          className="-z-10 !bg-types-50"
+          className="-z-10"
         />
       </SplitPane>
     </div>

@@ -61,9 +61,9 @@ function PublishModal({ isOpen, onClose, update, data, type }: Props) {
       if (posted.payload?.results) {
         await useGenerateThumbnail(type, posted.payload.results.id);
         toast.success('Success!', { id: toaster });
-        router.push(`/component/${posted.payload.results.id}`);
+        router.push(`/${type}/${posted.payload.results.id}`);
       } else {
-        toast.error('Failed to post component', { id: toaster });
+        toast.error(`Failed to post ${type}`, { id: toaster });
       }
       setIsPosting(false);
     }
