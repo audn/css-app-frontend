@@ -13,7 +13,7 @@ export default class extends Document {
           />
           <meta name="application-TileColor" content="#4d7fff" />
           <meta name="theme-color" content="#4d7fff" />
-          <link rel="icon shortcut" href="/logo.svg" type="image/svg+xml" />
+          <link rel="icon shortcut" href="/logo1.svg" type="image/svg+xml" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
