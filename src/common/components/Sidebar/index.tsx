@@ -81,12 +81,15 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
           (isLoggedIn ? (
             <CreatNew toggleCreateType={toggleCreateType} />
           ) : (
-            <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}>
+            <Link
+              target="_self"
+              href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
+            >
               <Button.White
                 icon="fa-brands fa-github"
                 trustRoute={true}
                 title="Sign in"
-                className="!bg-types-100 !text-white/60 rounded-full !px-3 !py-2"
+                className="!bg-types-100 !text-white/60 rounded-full !px-3 !py-[0.4rem]"
               />
             </Link>
           ))}
