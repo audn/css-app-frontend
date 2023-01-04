@@ -156,8 +156,8 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
   }, []);
 
   useEffect(() => {
-    if (router.isReady) {
-      if (type !== 'components' || type !== 'components') {
+    if (router.isReady && type !== 'layout' && type !== 'component') {
+      if (type !== 'component' && type !== 'layout') {
         setIsSelectTypeModalOpen(true);
       }
     }
