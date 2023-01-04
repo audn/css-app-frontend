@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import useAuthState from '../../store/auth';
 import useFilterState from '../../store/filter';
 import useSidebarState from '../../store/sidebar';
 import concat from '../../utils/helpers/concat';
@@ -13,7 +12,6 @@ import SidebarFooter from './components/SidebarFooter';
 
 function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   const library = useFilterState((s) => s.library);
-  const isLoggedIn = useAuthState((s) => s.isLoggedIn);
   const { isSidebarCollapsed } = useSidebarState((s) => ({
     isSidebarCollapsed: s.isCollapsed,
   }));
