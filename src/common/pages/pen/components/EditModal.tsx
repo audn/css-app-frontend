@@ -80,7 +80,7 @@ function EditModal({ isOpen, onClose, component }: Props) {
             <h3 className="font-medium text-[14px]">Settings</h3>
             <div className="flex space-y-2">
               <button
-                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-50/20 border-types-250"
+                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-150 border-types-250"
                 onClick={() => update('animated', !data.animated)}
               >
                 <h3 className="flex-1 font-medium">Animated</h3>
@@ -92,7 +92,7 @@ function EditModal({ isOpen, onClose, component }: Props) {
               </button>
             </div>
             <button
-              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-50/20 border-types-250"
+              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-150 border-types-250"
               onClick={() => update('responsive', !data.responsive)}
             >
               <h3 className="flex-1 font-medium">Responsive</h3>

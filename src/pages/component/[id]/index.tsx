@@ -58,22 +58,20 @@ function Component({ component }: { component: API.Models.Component }) {
     },
     {
       label: 'Animated',
-      value:
-        JSON.stringify(animated) !== 'null' ? (
-          <i className="text-green-500 fa-solid fa-check" />
-        ) : (
-          <i className="text-red-500 fa-solid fa-times" />
-        ),
+      value: component.animated ? (
+        <i className="text-green-500 fa-solid fa-check" />
+      ) : (
+        <i className="text-red-500 fa-solid fa-times" />
+      ),
       icon: 'fa-regular fa-circle-play',
     },
     {
       label: 'Responsive',
-      value:
-        JSON.stringify(responsive) !== 'null' ? (
-          <i className="text-green-500 fa-solid fa-check" />
-        ) : (
-          <i className="text-red-500 fa-solid fa-times" />
-        ),
+      value: component.responsive ? (
+        <i className="text-green-500 fa-solid fa-check" />
+      ) : (
+        <i className="text-red-500 fa-solid fa-times" />
+      ),
       icon: 'fa-regular fa-up-right-and-down-left-from-center',
     },
     {
@@ -153,6 +151,7 @@ function Component({ component }: { component: API.Models.Component }) {
       className: 'hover:!bg-red-500 hover:!bg-opacity-10 hover:text-red-500',
     },
   ] as INavItem[];
+  console.log(component);
 
   return (
     <DefaultLayout>
@@ -171,7 +170,7 @@ function Component({ component }: { component: API.Models.Component }) {
             <Dropdown
               list={dropdownList}
               className="z-50"
-              options={{ caret: false, position: 'end' }}
+              options={{ caret: false, position: 'start' }}
             >
               <button className="flex items-center justify-center w-6 h-6 text-lg rounded-full bg-types-150 text-on-50 hover:bg-types-200 hover:text-white animate">
                 <i className="text-sm fa-solid fa-ellipsis-vertical" />

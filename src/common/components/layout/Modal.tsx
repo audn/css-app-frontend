@@ -78,7 +78,7 @@ function Modal({ onClose, className, children, open, options }: Props) {
             className={concat(
               getExtraClassNames(),
               className ? className : '',
-              'border-types-250 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 bg-types-150',
+              'border-types-150 max-h-[800px] overflow-scroll scrollbar-none z-50 w-full max-w-md p-6 bg-types-100',
             )}
           >
             {children}

@@ -16,7 +16,7 @@ function PrimaryButton({
       disabled={disabled}
       className={concat(
         className ? className : '',
-        'flex items-center shadow justify-center px-4 py-[0.7em] font-semibold text-white bg-brand-primary-150 outline-none active:opacity-90 rounded-lg disabled:bg-types-100 hover:bg-opacity-80 animate disabled:opacity-50 text-[15px]',
+        'flex items-center shadow justify-center px-4 py-[0.7em] font-semibold text-white bg-brand-primary-150 outline-none active:opacity-90 rounded-lg disabled:bg-opacity-50 disabled:cursor-not-allowed hover:bg-opacity-80 animate disabled:opacity-50 text-[15px]',
       )}
     >
       {isLoading ? (

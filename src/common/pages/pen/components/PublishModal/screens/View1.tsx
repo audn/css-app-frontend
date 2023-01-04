@@ -34,9 +34,12 @@ function View1({ update, data, categories }: Props) {
         />
       </div>
       <div className="flex flex-col">
-        <h2 className="text-[14px] text-white font-medium mb-3">
-          Category <span className="text-red-500">*</span>
-        </h2>
+        <div className="flex flex-col space-y-1">
+          <h2 className="text-[14px] text-white font-medium mb-3">
+            Category <span className="text-red-500">*</span>
+          </h2>
+          You've selected Component{' '}
+        </div>
 
         <div className="flex flex-wrap gap-2 mb-3">
           {categories?.payload?.results.map((x) => (
@@ -45,8 +48,8 @@ function View1({ update, data, categories }: Props) {
               className={concat(
                 data.category == x.value
                   ? 'bg-brand-primary-150/80 text-white '
-                  : 'bg-types-250/70 text-white/80',
-                'px-3 py-[0.3rem] text-[15px] rounded-md font-medium',
+                  : 'bg-types-150/50 text-white/60',
+                'px-3 py-[0.3rem] text-[15px] rounded-md font-medium hover:text-white animate',
               )}
             >
               {x.label}

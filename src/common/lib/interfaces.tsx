@@ -35,6 +35,7 @@ export type IDropdown = {
   };
 };
 
+export type IPostSchemas = 'components' | 'layouts';
 export type Distribution = { components: number; pages: number };
 export declare namespace API {
   namespace Requests {

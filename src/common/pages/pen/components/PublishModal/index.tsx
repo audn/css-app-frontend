@@ -6,7 +6,7 @@ import { Button } from '../../../../components/Buttons';
 import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
-import { API } from '../../../../lib/interfaces';
+import { API, IPostSchemas } from '../../../../lib/interfaces';
 import { addComponent } from '../../../../utils/hooks/api/components';
 import { useCategories } from '../../../../utils/hooks/categories';
 import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
@@ -18,10 +18,11 @@ type Props = {
   onClose: () => void;
   update: (key: keyof API.Models.Component, value: string | boolean) => void;
   data: Partial<API.Models.Component>;
+  type: IPostSchemas;
 };
-function PublishModal({ isOpen, onClose, update, data }: Props) {
+function PublishModal({ isOpen, onClose, update, data, type }: Props) {
   const router = useRouter();
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategories(type);
 
   const [isPosting, setIsPosting] = useState<boolean>(false);
   const [view, setView] = useState<'1' | '2'>('1');
@@ -66,7 +67,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       <div className="flex flex-col justify-between h-full transition-all duration-100 ease-out">
         <Form.Wrapper column={true} className="w-full">
           <h1 className="justify-center text-xl font-bold text-center text-white">
-            {view == '1' ? 'Pen Meta' : 'Pen Settings'}
+            {view == '1' ? `Meta` : 'Settings'}
           </h1>{' '}
           <AnimatePresence exitBeforeEnter>
             {view == '1' ? (

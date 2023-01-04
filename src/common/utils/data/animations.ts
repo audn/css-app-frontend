@@ -10,21 +10,21 @@ export const fadeIn = {
   },
 };
 
-export const fadeInFromTopAndOutTop = {
-  initial: { y: -30, x: 0, opacity: 0 },
-  enter: { y: 0, opacity: 1 },
+export const fadeInFromLeftAndOutLeft = {
+  initial: { x: -10, opacity: 0 },
+  enter: { x: 0, opacity: 1 },
   exit: {
-    y: -25,
+    x: -10,
     opacity: 0,
     transition: { duration: 0.2 },
   },
 };
 
-export const fadeInFromTopAndOutBottom = {
-  initial: { y: -30, x: 0, opacity: 0 },
-  enter: { y: 0, opacity: 1 },
+export const fadeInFromRightAndOutRight = {
+  initial: { x: 10, opacity: 0 },
+  enter: { x: 0, opacity: 1 },
   exit: {
-    y: 25,
+    x: 10,
     opacity: 0,
     transition: { duration: 0.2 },
   },

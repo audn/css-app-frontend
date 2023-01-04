@@ -1,12 +1,14 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { API } from '../../lib/interfaces';
+import { API, IPostSchemas } from '../../lib/interfaces';
 import PublishModal from '../../pages/pen/components/PublishModal';
 import { Button } from '../Buttons';
 
 export const HeaderAddingComponent = ({
+  type,
   data,
   update,
 }: {
+  type: IPostSchemas;
   update: (key: keyof API.Models.Component, value: string | boolean) => void;
   data: Partial<API.Models.Component>;
 }) => {
@@ -24,6 +26,7 @@ export const HeaderAddingComponent = ({
   return (
     <header className="z-50 border-b border-types-150 flex items-center justify-between px-6 h-[60px]">
       <PublishModal
+        type={type}
         update={update}
         data={data}
         onClose={() => setIsPublishingOpen(!isPublishingOpen)}
