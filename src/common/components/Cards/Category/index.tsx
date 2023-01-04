@@ -23,11 +23,13 @@ function CategoryCard({
       disabled={count! < 1}
       onClick={handleClick}
       className={concat(
-        count! < 1 ? 'opacity-50' : '',
-        selectedValues.includes(value)
-          ? 'text-white '
-          : 'text-white/60 hover:text-white',
-        'text-[15px] rounded-md flex items-center animate group',
+        count! < 1
+          ? 'opacity-50 cursor-not-allowed'
+          : selectedValues.includes(value)
+          ? 'text-white bg-types-150 group'
+          : 'text-white/60 hover:text-white bg-types-100 group',
+
+        'text-[15px] px-2 text-xs py-[0.25rem] rounded-md flex items-center animate ',
       )}
     >
       {label}

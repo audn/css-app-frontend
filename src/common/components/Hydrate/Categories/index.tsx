@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
-import { Distribution, Hydration } from '../../../lib/interfaces';
+import { Hydration } from '../../../lib/interfaces';
 import { fadeIn } from '../../../utils/data/animations';
 import CategoryCard from '../../Cards/Category';
 import HydrationError from '../../layout/Alerts/HydrationError';
@@ -16,7 +16,7 @@ function CategoryHydration({
   setSelectedValues,
   distribution,
 }: Hydration.Category & {
-  distribution?: Distribution;
+  distribution?: { [key: string]: number };
   selectedValues: string[];
   setSelectedValues: (val: string) => void;
 }) {
@@ -38,14 +38,19 @@ function CategoryHydration({
       />
     );
   } else if (data?.payload && data?.payload?.count! >= 1) {
+    console.log(distribution);
+
     return (
       <AnimatePresence initial={false}>
         <Animate variants={fadeIn} className="flex flex-wrap gap-2">
           {data.payload.results
-            // .sort((a, b) => Number(distribution) - Number(a._count?.posts))
+            .sort((a, b) =>
+              distribution
+                ? Number(distribution[b.value]) - Number(distribution[a.value])
+                : 0,
+            )
             .map((category) => (
               <CategoryCard
-                //  @ts-ignore
                 count={distribution ? distribution[category.value] : 0}
                 {...category}
                 key={category.value}

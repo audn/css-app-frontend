@@ -70,13 +70,15 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
           src={`/logo.svg`}
           className="ml-[0.35rem] rounded-full w-7 h-7 mr-2"
         /> */}
-        <img
-          src={`/logo1.svg`}
-          className={concat(
-            isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-8 h-8',
-            '',
-          )}
-        />
+        <Link href="/">
+          <img
+            src={`/logo1.svg`}
+            className={concat(
+              isSidebarCollapsed ? 'w-8 h-8' : 'mr-2 w-8 h-8',
+              '',
+            )}
+          />
+        </Link>
         {!isSidebarCollapsed &&
           (isLoggedIn ? (
             <CreatNew toggleCreateType={toggleCreateType} />
