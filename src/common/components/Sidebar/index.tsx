@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
+import useAuthState from '../../store/auth';
 import useFilterState from '../../store/filter';
 import useSidebarState from '../../store/sidebar';
 import concat from '../../utils/helpers/concat';
+import { Button } from '../Buttons';
+import Link from '../layout/Link';
 import CreatNew from './components/CreatNew';
 import NavItem from './components/NavItem';
 import SearchBar from './components/SearchBar';
@@ -9,7 +12,7 @@ import SidebarFooter from './components/SidebarFooter';
 
 function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
   const library = useFilterState((s) => s.library);
-
+  const isLoggedIn = useAuthState((s) => s.isLoggedIn);
   const { isSidebarCollapsed } = useSidebarState((s) => ({
     isSidebarCollapsed: s.isCollapsed,
   }));
@@ -74,9 +77,19 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
             '',
           )}
         />
-        {!isSidebarCollapsed && (
-          <CreatNew toggleCreateType={toggleCreateType} />
-        )}
+        {!isSidebarCollapsed &&
+          (isLoggedIn ? (
+            <CreatNew toggleCreateType={toggleCreateType} />
+          ) : (
+            <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}>
+              <Button.White
+                icon="fa-brands fa-github"
+                trustRoute={true}
+                title="Sign in"
+                className="!bg-types-100 !text-white/60 rounded-full !px-3 !py-2"
+              />
+            </Link>
+          ))}
       </div>
       <div
         className={concat(
