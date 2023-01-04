@@ -3,8 +3,8 @@ import { API } from '../../../../../lib/interfaces';
 import concat from '../../../../../utils/helpers/concat';
 
 type Props = {
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
 };
 
 function View2({ update, data }: Props) {

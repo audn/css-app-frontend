@@ -25,13 +25,23 @@ function CategoryCard({
       className={concat(
         count! < 1 ? 'opacity-50' : '',
         selectedValues.includes(value)
-          ? 'bg-brand-primary-150/80 text-white '
-          : 'bg-types-250/70 text-white/80',
-        'px-3 py-[0.3rem] text-[15px] rounded-md font-medium flex items-center',
+          ? 'text-white '
+          : 'text-white/60 hover:text-white',
+        'text-[15px] rounded-md flex items-center animate group',
       )}
     >
       {label}
-      <div className="ml-2 text-sm text-white/60"> {count}</div>
+      <div
+        className={concat(
+          selectedValues.includes(value)
+            ? 'text-white/50'
+            : 'text-white/30 group-hover:text-white/50',
+          'ml-1 text-sm animate',
+        )}
+      >
+        {' '}
+        {count}
+      </div>
     </button>
   );
 }

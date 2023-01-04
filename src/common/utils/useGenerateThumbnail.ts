@@ -1,21 +1,22 @@
 import html2canvas from 'html2canvas';
-import { API } from '../lib/interfaces';
+import { API, IPostSchemas } from '../lib/interfaces';
 import { useLocalhost } from './helpers/useOnLocal';
-import { uploadThumbnail } from './hooks/api/posts';
+import { uploadThumbnail } from './hooks/api/components';
 
 export async function useGenerateThumbnail(
+  type: IPostSchemas,
   id: string,
-): Promise<API.Response<API.Models.Post>> {
+): Promise<API.Response<API.Models.Component>> {
   const iframe = document.getElementsByTagName('iframe');
   const screen = iframe[0]?.contentDocument?.body as HTMLElement;
 
   return html2canvas(screen, {
     allowTaint: true,
     useCORS: true,
-    height: 600,
-    //   width: 800,
-    windowWidth: 800,
-    windowHeight: 600,
+    height: type === 'component' ? 600 : 936,
+    width: type === 'component' ? 800 : 626,
+    windowWidth: type === 'component' ? 800 : 626,
+    windowHeight: type === 'component' ? 600 : 936,
   }).then(async (canvas) => {
     const base64image = canvas.toDataURL('image/png');
 
@@ -26,7 +27,7 @@ export async function useGenerateThumbnail(
     {
       useLocalhost && document.body.appendChild(canvas);
     }
-    return await uploadThumbnail(id, {
+    return await uploadThumbnail(id, type, {
       buffer: buffer,
       encoding: '7bit',
       fieldname: 'image',

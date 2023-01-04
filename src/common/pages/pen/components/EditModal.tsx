@@ -5,18 +5,18 @@ import { Form } from '../../../components/Form';
 import Modal from '../../../components/layout/Modal';
 import { API } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
-import { editPost } from '../../../utils/hooks/api/posts';
+import { editComponent } from '../../../utils/hooks/api/components';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  post: API.Models.Post;
+  component: API.Models.Component;
 };
-function EditModal({ isOpen, onClose, post }: Props) {
-  const [data, setData] = useState<API.Models.Post>(post);
-  const unsavedChanges = JSON.stringify(data) !== JSON.stringify(post);
+function EditModal({ isOpen, onClose, component }: Props) {
+  const [data, setData] = useState<API.Models.Component>(component);
+  const unsavedChanges = JSON.stringify(data) !== JSON.stringify(component);
 
-  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+  const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,
@@ -25,11 +25,10 @@ function EditModal({ isOpen, onClose, post }: Props) {
 
   async function onSave() {
     const newData = (({ author, authorId, ...o }) => o)(data);
-    2;
-    const saved = await editPost(post.id, newData);
+    const saved = await editComponent(component.id, newData);
     if (!saved.error) {
       toast.success('Saved');
-      post = data;
+      component = data;
       onClose();
     } else {
       toast.error('Failed to update');
@@ -60,28 +59,28 @@ function EditModal({ isOpen, onClose, post }: Props) {
           <div className="flex flex-col w-full">
             <h3 className="mb-2 font-medium text-[14px]">Title</h3>
             <Form.Input
-              placeholder={post.title}
+              placeholder={component.title}
               value={data.title}
               onChange={(val) => update('title', val)}
               id="name"
-              inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              inputClassName="px-4 py-4 bg-types-50/20 border border-types-250"
             />
           </div>
           <div className="flex flex-col w-full">
             <h3 className="mb-2 font-medium text-[14px]">Description</h3>
             <Form.Textarea
-              placeholder={post.description}
+              placeholder={component.description}
               value={data.description}
               onChange={(val) => update('description', val)}
               id="description"
-              inputClassName="px-4 py-4 bg-types-100/20 border border-types-250"
+              inputClassName="px-4 py-4 bg-types-50/20 border border-types-250"
             />
           </div>
           <div className="flex flex-col space-y-3">
             <h3 className="font-medium text-[14px]">Settings</h3>
             <div className="flex space-y-2">
               <button
-                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-100/20 border-types-250"
+                className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-150 border-types-250"
                 onClick={() => update('animated', !data.animated)}
               >
                 <h3 className="flex-1 font-medium">Animated</h3>
@@ -93,7 +92,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
               </button>
             </div>
             <button
-              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-100/20 border-types-250"
+              className="flex items-center w-full px-4 py-4 border rounded-lg text-start hover:bg-types-200 animate bg-types-150 border-types-250"
               onClick={() => update('responsive', !data.responsive)}
             >
               <h3 className="flex-1 font-medium">Responsive</h3>
@@ -107,7 +106,7 @@ function EditModal({ isOpen, onClose, post }: Props) {
           <div className="flex flex-col space-y-3">
             <h3 className="font-medium text-[14px]">Apperance</h3>
             <div className="flex space-y-2">
-              <div className="flex flex-col items-start w-full px-4 py-4 border rounded-lg bg-types-100/20 border-types-250">
+              <div className="flex flex-col items-start w-full px-4 py-4 border rounded-lg bg-types-50/20 border-types-250">
                 <h3 className="flex-1 text-sm font-medium">Theme</h3>
                 <div className="flex flex-col w-full mt-2 space-y-1">
                   <button

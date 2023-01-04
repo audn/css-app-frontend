@@ -3,8 +3,8 @@ import { API } from '../../../../../lib/interfaces';
 import concat from '../../../../../utils/helpers/concat';
 
 type Props = {
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
   categories?: API.Response<API.Models.Category[]>;
 };
 
@@ -16,7 +16,7 @@ function View1({ update, data, categories }: Props) {
           autoFocus={true}
           label="Title"
           required={true}
-          placeholder={data.title}
+          placeholder={data.title ?? 'Title'}
           value={data.title}
           onChange={(val) => update('title', val)}
           id="name"
@@ -25,7 +25,7 @@ function View1({ update, data, categories }: Props) {
       </div>
       <div className="flex flex-col w-full">
         <Form.Textarea
-          placeholder={data.description}
+          placeholder={data.description ?? 'Description'}
           label="Description"
           value={data.description}
           onChange={(val) => update('description', val)}
@@ -34,9 +34,11 @@ function View1({ update, data, categories }: Props) {
         />
       </div>
       <div className="flex flex-col">
-        <h2 className="text-[14px] text-white font-medium mb-3">
-          Category <span className="text-red-500">*</span>
-        </h2>
+        <div className="flex flex-col space-y-1">
+          <h2 className="text-[14px] text-white font-medium mb-3">
+            Category <span className="text-red-500">*</span>
+          </h2>
+        </div>
 
         <div className="flex flex-wrap gap-2 mb-3">
           {categories?.payload?.results.map((x) => (
@@ -45,8 +47,8 @@ function View1({ update, data, categories }: Props) {
               className={concat(
                 data.category == x.value
                   ? 'bg-brand-primary-150/80 text-white '
-                  : 'bg-types-250/70 text-white/80',
-                'px-3 py-[0.3rem] text-[15px] rounded-md font-medium',
+                  : 'bg-types-150/50 text-white/60',
+                'px-3 py-[0.3rem] text-[15px] rounded-md font-medium hover:text-white animate',
               )}
             >
               {x.label}

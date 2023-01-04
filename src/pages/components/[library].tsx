@@ -5,14 +5,13 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import LibrarySelector from '../../common/components/Header/components/LibrarySelector';
 import { Hydrate } from '../../common/components/Hydrate';
-import H2 from '../../common/components/layout/headings/H2';
 import { DefaultLayout } from '../../common/layouts/Default';
 import useFilterState from '../../common/store/filter';
 import { useLibraryLabel } from '../../common/utils/data/libraries';
 import { useCategories } from '../../common/utils/hooks/categories';
-import { useSearchPosts } from '../../common/utils/hooks/posts';
+import { useSearchComponents } from '../../common/utils/hooks/components';
 
-export default function Home({ query }: { query: { library: string } }) {
+export default function Browse({ query }: { query: { library: string } }) {
   const router = useRouter();
   const filters = useFilterState();
 
@@ -96,7 +95,8 @@ export default function Home({ query }: { query: { library: string } }) {
     error: fetchError,
     refetch,
     isRefetching,
-  } = useSearchPosts(apiQuery);
+  } = useSearchComponents(apiQuery);
+
   useEffect(() => {
     if (data?.payload?.distribution)
       setDistribution(data?.payload?.distribution);
@@ -108,46 +108,37 @@ export default function Home({ query }: { query: { library: string } }) {
     error: fetchCategoriesError,
     refetch: refetchCategories,
     isRefetching: isRefetchingCategories,
-  } = useCategories(library!);
+  } = useCategories('component');
 
   const [distribution, setDistribution] = useState<any>(
     data?.payload?.distribution,
   );
   return (
     <DefaultLayout>
-      <div className="flex flex-col mt-3 md:mt-8">
-        <H2 className="text-white">{library} Components</H2>
-        <h4 className="text-lg mt-3 !font-medium">
-          Browsing components posted by community members.
-        </h4>
-        <div className="flex-col mt-5">
-          <h3 className="flex mb-2 font-semibold sm:hidden text-on-100">
-            Categories
-          </h3>
-          <Hydrate.Categories
-            data={categories}
-            distribution={distribution}
-            error={fetchCategoriesError}
-            selectedValues={selectedValues}
-            setSelectedValues={updateCategories}
-            isLoading={isLoadingCategories}
-            refetch={refetchCategories}
-            isRefetching={isRefetchingCategories}
-            onClearFilters={resetQueries}
-          />
-        </div>
-        <div className="flex flex-col w-full mt-5 sm:hidden">
-          <h3 className="mb-2 font-semibold text-on-100">Library</h3>
-          <LibrarySelector
-            className="w-full !py-2 text-base !font-medium"
-            wrapperClassName="!max-w-[500px] !w-full mt-2"
-          />
-        </div>{' '}
-      </div>
       <NextSeo title={`Browse components for ${library}`} />
+      <LibrarySelector />
+      <h1 className="mt-5 mb-3 text-2xl font-semibold text-white">
+        {library} Components
+      </h1>
+      <h4 className="text-lg">
+        Browsing components posted by community members.
+      </h4>
+      <div className="flex-col mt-5">
+        <Hydrate.Categories
+          data={categories}
+          distribution={distribution}
+          error={fetchCategoriesError}
+          selectedValues={selectedValues}
+          setSelectedValues={updateCategories}
+          isLoading={isLoadingCategories}
+          refetch={refetchCategories}
+          isRefetching={isRefetchingCategories}
+          onClearFilters={resetQueries}
+        />
+      </div>
       <div className="mt-10 ">
-        <Hydrate.Posts
-          data={data}
+        <Hydrate.Components
+          data={data?.payload?.results}
           error={fetchError}
           isLoading={isLoading}
           refetch={refetch}

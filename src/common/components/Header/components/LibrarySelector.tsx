@@ -19,10 +19,17 @@ function LibrarySelector({
     useFilterState.setState({
       library: val,
     });
-    router.push(`/components/${val.toLowerCase()}`, undefined, {
-      shallow: true,
-    });
+    if (router.pathname == '/layouts/[library]') {
+      router.push(`/layouts/${val.toLowerCase()}`, undefined, {
+        shallow: true,
+      });
+    } else {
+      router.push(`/components/${val.toLowerCase()}`, undefined, {
+        shallow: true,
+      });
+    }
   };
+
   return (
     <Dropdown
       className={className}
@@ -30,15 +37,22 @@ function LibrarySelector({
       active={library}
       options={{
         animateCaret: true,
-        box: true,
-        caret: true,
         toggleOnClick: true,
       }}
       isLoading={isLoading}
       list={data?.payload?.results}
+      showLibraryVector={true}
       onClick={setLibrary}
     >
-      {library}
+      <div className="flex items-center text-[15px] border rounded-lg border-types-150">
+        <div className="flex items-center justify-center w-8 h-8 bg-types-100 rounded-l-md">
+          <img src={`/libraries/${library}.svg`} className="w-5 h-5" />
+        </div>
+        <div className="px-3 font-normal">
+          {library}
+          <i className="ml-2 text-sm fa-regular fa-angle-down " />
+        </div>
+      </div>
     </Dropdown>
   );
 }

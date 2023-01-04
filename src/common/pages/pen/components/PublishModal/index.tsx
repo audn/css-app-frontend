@@ -6,8 +6,9 @@ import { Button } from '../../../../components/Buttons';
 import { Form } from '../../../../components/Form';
 import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
-import { API } from '../../../../lib/interfaces';
-import { addPost } from '../../../../utils/hooks/api/posts';
+import { API, IPostSchemas } from '../../../../lib/interfaces';
+import { addComponent } from '../../../../utils/hooks/api/components';
+import { addLayout } from '../../../../utils/hooks/api/layouts';
 import { useCategories } from '../../../../utils/hooks/categories';
 import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
 import View1 from './screens/View1';
@@ -16,12 +17,13 @@ import View2 from './screens/View2';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
+  type: IPostSchemas;
 };
-function PublishModal({ isOpen, onClose, update, data }: Props) {
+function PublishModal({ isOpen, onClose, update, data, type }: Props) {
   const router = useRouter();
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategories(type);
 
   const [isPosting, setIsPosting] = useState<boolean>(false);
   const [view, setView] = useState<'1' | '2'>('1');
@@ -42,20 +44,26 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
     );
   };
 
-  async function publishPen() {
+  async function publish() {
     if (canPost()) {
       const toaster = toast.loading('Working...');
       setIsPosting(true);
-      const posted = await addPost({
-        ...data,
-        library: data.library!.toLowerCase(),
-      });
+      const posted =
+        type === 'component'
+          ? await addComponent({
+              ...data,
+              library: data.library!.toLowerCase(),
+            })
+          : await addLayout({
+              ...data,
+              library: data.library!.toLowerCase(),
+            });
       if (posted.payload?.results) {
-        await useGenerateThumbnail(posted.payload.results.id);
+        await useGenerateThumbnail(type, posted.payload.results.id);
         toast.success('Success!', { id: toaster });
-        router.push(`/component/${posted.payload.results.id}`);
+        router.push(`/${type}/${posted.payload.results.id}`);
       } else {
-        toast.error('Failed to post', { id: toaster });
+        toast.error(`Failed to post ${type}`, { id: toaster });
       }
       setIsPosting(false);
     }
@@ -66,7 +74,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
       <div className="flex flex-col justify-between h-full transition-all duration-100 ease-out">
         <Form.Wrapper column={true} className="w-full">
           <h1 className="justify-center text-xl font-bold text-center text-white">
-            {view == '1' ? 'Pen Meta' : 'Pen Settings'}
+            {view == '1' ? `New ${type}` : 'Settings'}
           </h1>{' '}
           <AnimatePresence exitBeforeEnter>
             {view == '1' ? (
@@ -103,7 +111,7 @@ function PublishModal({ isOpen, onClose, update, data }: Props) {
               />
               <Button.Primary
                 className="flex-1"
-                onClick={publishPen}
+                onClick={publish}
                 title={
                   isPosting ? (
                     <div className="flex justify-center">

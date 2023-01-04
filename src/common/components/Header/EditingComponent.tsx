@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { API } from '../../lib/interfaces';
-import { editPost } from '../../utils/hooks/api/posts';
+import { editComponent } from '../../utils/hooks/api/components';
 import useGenerateThumbnail from '../../utils/useGenerateThumbnail';
 import { Button } from '../Buttons';
 import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
@@ -12,8 +12,8 @@ export const HeaderEditingComponent = ({
   update,
 }: //   onSettings,
 {
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
   //   onSetting: () => void;
 }) => {
   const router = useRouter();
@@ -32,7 +32,7 @@ export const HeaderEditingComponent = ({
     const msg = toast.loading('Saving...');
     setIsSaving(true);
     const newData = (({ author, authorId, ...o }) => o)(data);
-    const posted = await editPost(data.id!, {
+    const posted = await editComponent(data.id!, {
       ...newData,
       library: data.library?.toLowerCase(),
     });
@@ -40,7 +40,7 @@ export const HeaderEditingComponent = ({
       toast.success('Saved!', { id: msg });
 
       router.push(`/component/${data.id}`);
-      await useGenerateThumbnail(data.id!);
+      await useGenerateThumbnail('component', data.id!);
     } else {
       toast.error('Failed to save', { id: msg });
     }

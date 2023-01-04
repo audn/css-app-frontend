@@ -35,10 +35,11 @@ export type IDropdown = {
   };
 };
 
-export type Distribution = { [key: string]: number };
+export type IPostSchemas = 'component' | 'layout';
+export type Distribution = { components: number; layouts: number };
 export declare namespace API {
   namespace Requests {
-    interface SearchPosts {
+    interface SearchComponents {
       q?: string;
       filter?: {
         animated?: boolean;
@@ -58,37 +59,38 @@ export declare namespace API {
     message?: string;
   }
   type UserRoles = 'ADMIN' | 'USER' | 'MOD';
-  type UserPreferences = { preferredLibrary: string };
 
   namespace Models {
     interface Category {
       label: string;
       value: string;
       //   _count?: {
-      //     posts: number;
+      //     components: number;
       //   };
     }
     interface Library {
       label: string;
       value: string;
       versions: string[];
-      _count: {
-        posts: number;
-      };
+      _count: Distribution;
     }
 
     interface User {
       id: string;
-      twitterId?: string;
-      discordId?: string;
+      githubId: string;
       username: string;
+      displayName: string;
+      bio: string;
+      location: string;
+      websiteUrl: string;
+      tokens?: any;
       avatar: string;
-      displayName?: string;
-      role: UserRoles;
-      createdAt: string;
-      posts?: API.Models.Post[];
+      role: string;
+      createdAt: Date;
+      components?: API.Models.Component[];
+      layouts?: API.Models.Layout[];
     }
-    interface Post {
+    interface Component {
       id: string;
       title: string;
       code: any;
@@ -103,7 +105,29 @@ export declare namespace API {
       authorId: string;
       author: User;
       library: string;
-      libraryVersion: string;
+      libraryVersion?: string;
+      createdAt: string;
+    }
+    interface Layout {
+      id: string;
+      title: string;
+      code: any;
+      description: string;
+      generatedImage?: string;
+      animated: boolean;
+      theme: string;
+      responsive: boolean;
+      bio?: string;
+      location?: string;
+      websiteUrl?: string;
+      tokens?: string;
+
+      //   author: User;
+      category: string;
+      authorId: string;
+      author: User;
+      library: string;
+      libraryVersion?: string;
       createdAt: string;
     }
   }
@@ -119,8 +143,8 @@ export declare namespace Hydration {
     onClearFilters?: () => void;
   };
 
-  interface Posts extends ReactQueryProps {
-    data?: API.Response<API.Models.Post[]>;
+  interface Components extends ReactQueryProps {
+    data?: API.Models.Component[];
   }
   interface Category extends ReactQueryProps {
     data?: API.Response<API.Models.Category[]>;

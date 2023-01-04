@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
+import { IPostSchemas } from './../../lib/interfaces';
 import { getCategories } from './api/categories';
 
-export const useCategories = (library?: string) => {
+export const useCategories = (type: IPostSchemas) => {
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [`/categories`],
-    () => getCategories(library),
+    [`/categories?type=${type}`],
+    () => getCategories(type),
     {
       refetchOnWindowFocus: false,
-      onError: (e) => console.error(`Error getting categories: ${e}`),
+      onError: (e) =>
+        console.error(`Error getting categorie for ${type}: ${e}`),
     },
   );
 

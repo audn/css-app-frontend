@@ -13,25 +13,25 @@ export default class extends Document {
           />
           <meta name="application-TileColor" content="#4d7fff" />
           <meta name="theme-color" content="#4d7fff" />
-          <link rel="icon shortcut" href="/logo.svg" type="image/svg+xml" />
+          <link rel="icon shortcut" href="/logo1.svg" type="image/svg+xml" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />{' '}
-          {/* <link
+          <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
-          /> */}
+          />
           {/* <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           /> */}
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
             rel="stylesheet"
-          />
+          /> */}
           {/* <link
             href="https://fonts.googleapis.com/css2?family=Poppins+Sans:wght@400;500;600;700&display=swap"
             rel="stylesheet"

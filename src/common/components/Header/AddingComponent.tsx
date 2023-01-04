@@ -1,18 +1,16 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { API } from '../../lib/interfaces';
+import { API, IPostSchemas } from '../../lib/interfaces';
 import PublishModal from '../../pages/pen/components/PublishModal';
 import { Button } from '../Buttons';
-import Link from '../layout/Link';
-import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
 export const HeaderAddingComponent = ({
+  type,
   data,
   update,
-}: //   onSettings,
-{
-  update: (key: keyof API.Models.Post, value: string | boolean) => void;
-  data: Partial<API.Models.Post>;
-  //   onSetting: () => void;
+}: {
+  type: IPostSchemas;
+  update: (key: keyof API.Models.Component, value: string | boolean) => void;
+  data: Partial<API.Models.Component>;
 }) => {
   const [editingTitle, setEditingTitle] = useState<boolean>(false);
   const [isPublishingOpen, setIsPublishingOpen] = useState<boolean>(false);
@@ -26,8 +24,9 @@ export const HeaderAddingComponent = ({
   }
 
   return (
-    <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
+    <header className="z-50 border-b border-types-150 flex items-center justify-between px-6 h-[60px]">
       <PublishModal
+        type={type}
         update={update}
         data={data}
         onClose={() => setIsPublishingOpen(!isPublishingOpen)}
@@ -35,13 +34,6 @@ export const HeaderAddingComponent = ({
       />
       <div className="flex flex-col w-full">
         <div className="flex items-center">
-          <Link
-            href="/"
-            className="flex items-center justify-center mr-3 rounded-full w-7 h-7 bg-types-200"
-          >
-            <i className="text-xs fa-solid fa-arrow-left" />
-          </Link>
-
           {editingTitle ? (
             <form onSubmit={handleTitleUpdate} className="w-full">
               <input
@@ -69,20 +61,14 @@ export const HeaderAddingComponent = ({
             </button>
           )}
         </div>
-        {/* <div className="flex items-center mt-3 text-sm">
-          <i className="mr-2 fa-solid fa-info-circle" /> Draft saved just now
-        </div> */}
       </div>
       <div className="flex items-center space-x-2">
-        <LibraryDropdown data={data} update={update} />
         <Button.Secondary
+          className="!border-0 !bg-brand-primary-100 !text-white"
           title={'Publish'}
           onClick={() => setIsPublishingOpen(true)}
           icon={'fa-solid fa-upload text-sm'}
         />
-        {/* <Link href="/new">
-          <Button.Secondary title="Settings" icon={'fa-solid fa-cog text-sm'} />
-        </Link> */}
       </div>
     </header>
   );

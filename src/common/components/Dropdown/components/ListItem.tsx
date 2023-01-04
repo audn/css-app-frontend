@@ -7,12 +7,15 @@ function ListItem({
   label,
   active,
   icon,
+  showLibraryVector,
   _count,
   onClick,
   route,
+  value,
   className,
   onGlobalClick,
 }: INavItem & {
+  showLibraryVector?: boolean;
   onGlobalClick: (val: string) => void;
 }) {
   const activeItem = active == label;
@@ -29,11 +32,12 @@ function ListItem({
     }
     onGlobalClick(label);
   }
+
   return (
     <li
       className={concat(
         className ? className : '',
-        'flex items-center p-2 rounded cursor-pointer font-medium animate text-sm text-white/90 hover:text-white justify-between active:bg-opacity-80 hover:bg-brand-primary-150/10',
+        'flex items-center p-2 rounded cursor-pointer font-medium animate text-sm text-white/60 hover:text-white justify-between active:bg-opacity-80 hover:bg-types-150/50',
       )}
       onClick={handleClick}
     >
@@ -48,11 +52,16 @@ function ListItem({
             <i className={`${icon}`} />
           </div>
         )}
+        {showLibraryVector && (
+          <img src={`/libraries/${value}.svg`} className="w-4 h-4 mr-2" />
+        )}
         {label}
       </div>
       {_count && (
         <span className="flex items-center justify-center px-2 py-1 h-[24px] text-[12px] rounded-full bg-types-150/60 text-on-50">
-          {_count[Object.keys(_count)[0]]}
+          {router.pathname == '/layouts/[library]'
+            ? _count.layouts
+            : _count.components}
         </span>
       )}
     </li>

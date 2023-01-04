@@ -13,10 +13,11 @@ export async function getUser(
   return res.json();
 }
 
-export async function editUserPreferences(
-  data: API.UserPreferences,
+export async function editUser(
+  id: string,
+  data: API.Models.User,
 ): Promise<API.Response<API.Models.User>> {
-  const res = await put(`/users/me/preferences`, true, data);
+  const res = await put(`/users/${id}`, true, data);
   return res.json();
 }
 

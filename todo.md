@@ -4,6 +4,8 @@
 
 **todo**
 
+- [ ] check bg-types-200 as the color changed
+
 - [x] update category count on library change
 - [ ] tab focus on elements
 - [ ] let users edit the category after posting

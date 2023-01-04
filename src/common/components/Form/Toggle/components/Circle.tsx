@@ -24,7 +24,7 @@ function Circle({ disabled, isLoading, active, onClick, id }: Props) {
       <span
         aria-hidden="true"
         className={concat(
-          active ? 'translate-x-5 bg-white' : 'translate-x-0 bg-types-200',
+          active ? 'translate-x-5 bg-white' : 'translate-x-0 bg-types-150',
           'relative inline-block w-5 h-5  transition duration-200 ease-in-out transform rounded-full shadow ',
         )}
       >

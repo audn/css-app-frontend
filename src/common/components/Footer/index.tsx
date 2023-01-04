@@ -1,26 +1,32 @@
-import Logo from '../misc/Logo';
-import NavItem from './components/NavItem';
-import VercelMark from './components/VercelMark';
-import { lists } from './routes';
-
 function Footer() {
   return (
-    <footer className="flex justify-center w-full mt-10 bg-types-100 text-white/80 sm:text-sm">
-      <div className="grid w-full max-w-6xl gap-8 p-4 py-8 sm:grid-cols-4 sm:gap-y-16 sm:py-16">
-        <div className="flex flex-col space-y-5 sm:block">
-          <Logo />
-          <VercelMark />
+    <footer className="flex flex-col items-center justify-center w-full px-10 py-5 mt-10 border-t sm:justify-between sm:flex-row flex-cold border-types-150 bg-types text-white/60 ">
+      <p className="max-w-sm mb-3 text-xs leading-6 text-center sm:text-left sm:mb-0">
+        All content (UI elements) on this site are published under the MIT
+        License (Free for personal and commercial use)
+      </p>
+      <div className="flex items-center mt-2 space-x-2">
+        <div className="flex items-center">
+          <img src={`/logo1.svg`} className={'w-6 h-6 mr-3'} />{' '}
         </div>
-        {lists.map((x, i) => (
-          <nav className="flex flex-col gap-6 sm:gap-4" key={'list_' + i}>
-            <h3 className="font-semibold">{x.label}</h3>
-            <ul className="flex flex-col gap-4 sm:gap-2">
-              {x.list.map((x, i) => (
-                <NavItem {...x} key={i} />
-              ))}
-            </ul>
-          </nav>
-        ))}
+        <div className="flex flex-col">
+          <div className="flex items-center space-x-1">
+            <h3 className="font-semibold text-white">CSS.app</h3> <div>•</div>
+            <span className="text-sm ">
+              by{' '}
+              <a
+                href="https://audun.gg"
+                target={'_blank'}
+                className="pb-1 border-b border-transparent hover:border-types-250 animate hover:text-white"
+              >
+                Audun Hilden
+              </a>
+            </span>
+          </div>
+          <div className="mt-1 text-xs text-white/50">
+            Copyright &copy; {new Date().getFullYear()} CSS.app
+          </div>
+        </div>
       </div>
     </footer>
   );

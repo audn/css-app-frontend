@@ -1,19 +1,32 @@
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { useBeforeUnload } from 'react-use';
 import { HeaderAddingComponent } from '../common/components/Header/AddingComponent';
+import SelectCreateType from '../common/components/Header/SelectType';
+import LibraryDropdown from '../common/components/layout/Pen/components/LibraryDropdown';
 import PenEditor from '../common/components/layout/Pen/Editor';
 import Preview from '../common/components/layout/Pen/Preview';
-import NotLoggedInModal from '../common/components/layout/shared/NotLoggedIn';
-import { API } from '../common/lib/interfaces';
-import useAuthState from '../common/store/auth';
+import { API, IPostSchemas } from '../common/lib/interfaces';
 
 function NewComponent() {
-  const user = useAuthState((s) => s.user);
-  const [data, setData] = useState<Partial<API.Models.Post>>({
+  const router = useRouter();
+  const type = router.query.type as IPostSchemas;
+
+  const [isSelectTypeModalOpen, setIsSelectTypeModalOpen] =
+    useState<boolean>(false);
+
+  const [data, setData] = useState<Partial<API.Models.Component>>({
     // title: '',
-    code: '',
+    code:
+      type === 'component'
+        ? `<!-- 
+The results on the right are automatically centered.
+
+Avoid adding elements such as <body> that make it difficult to copy and paste your component.
+-->`
+        : '',
     responsive: false,
     animated: false,
     library: 'TailwindCSS',
@@ -21,7 +34,7 @@ function NewComponent() {
     theme: 'Light',
   });
 
-  const update = (key: keyof API.Models.Post, value: string | boolean) => {
+  const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
       ...d,
       [key]: value,
@@ -144,12 +157,26 @@ function NewComponent() {
       };
     });
   }, []);
-  useBeforeUnload(data.code.length >= 1, 'd');
+
+  useEffect(() => {
+    if (router.isReady && type !== 'layout' && type !== 'component') {
+      if (type !== 'component' && type !== 'layout') {
+        setIsSelectTypeModalOpen(true);
+      }
+    }
+  }, [router.isReady]);
+  useBeforeUnload(data.code.length >= 1, '');
+
   return (
-    <div>
-      {!user.id && <NotLoggedInModal />}
-      <NextSeo title={`New component`} />{' '}
-      <HeaderAddingComponent data={data} update={update} />
+    <div className="-mx-10 -my-8">
+      {isSelectTypeModalOpen && (
+        <SelectCreateType
+          isOpen={isSelectTypeModalOpen}
+          onClose={() => setIsSelectTypeModalOpen(false)}
+        />
+      )}
+      <NextSeo title={`New ${type}`} />
+      <HeaderAddingComponent data={data} update={update} type={type} />
       {/* @ts-ignore */}
       <SplitPane
         split={'vertical'}
@@ -158,7 +185,6 @@ function NewComponent() {
         size={size.current}
         onChange={updateCurrentSize}
         className="!relative !h-[fit-content]"
-        paneStyle={{ marginTop: -1 }}
         onDragStarted={() => setResizing(true)}
         onDragFinished={() => setResizing(false)}
         allowResize={true}
@@ -166,11 +192,17 @@ function NewComponent() {
           true && size.layout !== 'preview' ? 'Resizer' : 'Resizer-collapsed'
         }
       >
-        <PenEditor
-          initialContent={data.code}
-          onChange={(val) => update('code', val)}
-        />
+        <div className="border-r border-types-150">
+          <div className="w-full px-5 py-2 border-b border-types-150">
+            <LibraryDropdown data={data} update={update} />
+          </div>
+          <PenEditor
+            initialContent={data.code}
+            onChange={(val) => update('code', val)}
+          />
+        </div>
         <Preview
+          type={type}
           library={data.library && data?.library.toLowerCase()}
           version={data.libraryVersion}
           className="-z-10"

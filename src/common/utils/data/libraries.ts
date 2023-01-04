@@ -1,3 +1,4 @@
+import { IPostSchemas } from './../../lib/interfaces';
 export const getLibrarySource = (library?: string, version?: string) => {
   if (library === 'tailwindcss') {
     switch (version) {
@@ -36,15 +37,19 @@ export const useLibraryLabel = (val?: string) => {
       return 'Bulma';
     case 'bootstrap':
       return 'Bootstrap';
+    case 'css3':
+      return 'CSS3';
     default:
       return val;
   }
 };
 export const iframeSrcDoc = ({
+  type,
   initialCode = '',
   library,
   version,
 }: {
+  type: IPostSchemas;
   initialCode?: string;
   library?: string;
   version?: string;
@@ -63,6 +68,22 @@ export const iframeSrcDoc = ({
         })
         </script>
         </head>
+        <style>
+        ${
+          type == 'component' &&
+          `body{
+            background:transparent;
+            width:100%;
+            flex-direction:column;
+            display:flex;
+            min-height:100vh;
+            align-items:center;
+            justify-content:center;
+        }`
+        }
+</style>
+
+
         <body>${initialCode}</body>
     </html>`;
 };

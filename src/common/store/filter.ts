@@ -5,8 +5,8 @@ type Store = {
   version: string;
 };
 const useFilterState = create<Store>(() => ({
-  library: 'TailwindCSS',
-  version: '3.2.4',
+  library: 'CSS3',
+  version: '',
 }));
 
 export default useFilterState;
