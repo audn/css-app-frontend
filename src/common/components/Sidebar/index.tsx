@@ -4,6 +4,7 @@ import useFilterState from '../../store/filter';
 import useSidebarState from '../../store/sidebar';
 import concat from '../../utils/helpers/concat';
 import { Button } from '../Buttons';
+import Auth from '../layout/Auth';
 import Link from '../layout/Link';
 import CreatNew from './components/CreatNew';
 import NavItem from './components/NavItem';
@@ -79,10 +80,9 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
             )}
           />
         </Link>
-        {!isSidebarCollapsed &&
-          (isLoggedIn ? (
+        {!isSidebarCollapsed && (
+          <Auth.User>
             <CreatNew toggleCreateType={toggleCreateType} />
-          ) : (
             <Link
               target="_self"
               href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
@@ -94,7 +94,8 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
                 className="!bg-types-100 !text-white/60 rounded-full !px-3 !py-[0.4rem]"
               />
             </Link>
-          ))}
+          </Auth.User>
+        )}
       </div>
       <div
         className={concat(

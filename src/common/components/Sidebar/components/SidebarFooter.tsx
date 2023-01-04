@@ -3,6 +3,7 @@ import useAuthState from '../../../store/auth';
 import useSidebarState from '../../../store/sidebar';
 import { signOutUser } from '../../../utils/hooks/api/user';
 import Dropdown from '../../Dropdown';
+import Auth from '../../layout/Auth';
 import Link from '../../layout/Link';
 
 function SidebarFooter() {
@@ -13,9 +14,8 @@ function SidebarFooter() {
     useSidebarState.setState({ isCollapsed: !isSidebarCollapsed });
   };
 
-  const { user, isLoggedIn } = useAuthState((s) => ({
+  const { user } = useAuthState((s) => ({
     user: s.user,
-    isLoggedIn: s.isLoggedIn,
   }));
   async function handleLogout() {
     const signedOut = await signOutUser();
@@ -56,7 +56,7 @@ function SidebarFooter() {
         </button>
       )}
       <div className="flex items-center justify-between pt-4 border-t border-types-150">
-        {isLoggedIn && (
+        <Auth.User>
           <div className="relative flex items-center max-w-fit">
             <Dropdown
               wrapperClassName="!bottom-10 !top-[inherit]"
@@ -76,17 +76,17 @@ function SidebarFooter() {
               )}
             </Dropdown>
           </div>
-        )}
+        </Auth.User>
         {!isSidebarCollapsed && (
           <div className="flex items-center space-x-[1px] overflow-hidden rounded-lg bg-types-50">
-            {isLoggedIn && (
+            <Auth.User>
               <Link
                 href="/user/settings"
                 className="flex items-center justify-center w-9 h-9 bg-types-100 hover:bg-types-150 animate"
               >
                 <i className="text-base fa-regular fa-cog" />
               </Link>
-            )}
+            </Auth.User>
             <button
               onClick={toggleSidebar}
               className="flex items-center justify-center w-9 h-9 bg-types-100 hover:bg-types-150 animate"

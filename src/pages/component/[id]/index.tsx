@@ -262,16 +262,20 @@ function Component({ component }: { component: API.Models.Component }) {
                     title="Fork"
                     onClick={toggleEdit}
                   /> */}
-                  <Button.Secondary
-                    icon="fa-regular fa-heart"
-                    title="Like"
-                    onClick={toggleEdit}
-                  />
-                  <Button.Secondary
-                    icon="fa-regular fa-bookmark"
-                    title="Bookmark"
-                    onClick={toggleEdit}
-                  />
+                  <Auth.User>
+                    <>
+                      <Button.Secondary
+                        icon="fa-regular fa-heart"
+                        title="Like"
+                        onClick={toggleEdit}
+                      />
+                      <Button.Secondary
+                        icon="fa-regular fa-bookmark"
+                        title="Bookmark"
+                        onClick={toggleEdit}
+                      />
+                    </>
+                  </Auth.User>
                   <Auth.Admin>
                     <Button.Secondary
                       onClick={onRefreshThumbnail}
