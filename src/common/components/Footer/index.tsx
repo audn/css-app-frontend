@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center w-full px-10 py-5 mt-10 border-t sm:justify-between sm:flex-wrap flex-cold border-types-150 bg-types text-white/60 ">
+    <footer className="flex flex-col items-center justify-center w-full px-10 py-5 mt-10 border-t sm:justify-between sm:flex-row flex-cold border-types-150 bg-types text-white/60 ">
       <p className="max-w-sm mb-3 text-xs leading-6 text-center sm:text-left sm:mb-0">
         All content (UI elements) on this site are published under the MIT
         License (Free for personal and commercial use)
