@@ -19,10 +19,15 @@ function PhoneMenu({ toggle }: { toggle: (val: boolean) => void }) {
   }
   const items = [
     { label: 'Home', route: '/' },
+    { label: 'Components', route: '/components/css3' },
     {
       label: 'New component',
       route: '/new',
       condition: currentUser.isLoggedIn,
+    },
+    {
+      label: 'Beta Roadmap',
+      route: '/beta',
     },
     {
       label: 'Sign out',
@@ -32,7 +37,7 @@ function PhoneMenu({ toggle }: { toggle: (val: boolean) => void }) {
   ] as INavItem[];
 
   return (
-    <div className="p-4 pt-2 h-screen absolute inset-0 bg-types-body mt-[70px] border-t border-types-200">
+    <div className="p-4 pt-2 h-screen absolute inset-0 bg-types-75 mt-[65px] border-t border-types-150">
       {items.map((x) => (
         <NavItem {...x} />
       ))}

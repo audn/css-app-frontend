@@ -29,7 +29,7 @@ export default function Beta() {
       done: false,
     },
     {
-      label: `Remove "Landing Page" from tags, and rather create a completely new schema just for "Pages" as we have done with "Components".`,
+      label: `Remove "Layouts" from tags, and rather create a completely new schema as we have done with "Components". (Layouts are currently disabled)`,
       done: true,
     },
     {

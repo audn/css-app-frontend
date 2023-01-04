@@ -7,6 +7,7 @@ import { DefaultSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 import SEO from '../../next-seo.config';
 import Footer from '../common/components/Footer';
+import { Header } from '../common/components/Header';
 import SelectCreateType from '../common/components/Header/SelectType';
 import ReactToaster from '../common/components/layout/Toaster';
 import Sidebar from '../common/components/Sidebar';
@@ -29,12 +30,15 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <div
         className={concat(
           //   !pagesWithoutSidebar.includes(router.pathname) ? '' : '!ml-0',
-          isSidebarCollapsed ? 'ml-[70px]' : 'ml-[290px]',
+          isSidebarCollapsed ? 'sm:ml-[70px]' : 'sm:ml-[290px]',
           'flex min-h-screen transition-all ease-out duration-75',
         )}
       >
         {/* {!pagesWithoutSidebar.includes(router.pathname) && ( */}
-        <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+
+        <div className="hidden sm:flex">
+          <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+        </div>
         {/* )} */}
         {isCreateOpen && (
           <SelectCreateType
@@ -42,9 +46,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
             onClose={() => setIsCreateOpen(false)}
           />
         )}
-        <div className="flex flex-col w-full">
-          {/* {!pagesWithoutHeader.includes(nextRouter.pathname) && <Header />} */}
-          <div className="relative min-h-screen px-10 py-8">
+        <div className="flex flex-col w-full ">
+          <div className="sticky top-0 z-50 flex sm:hidden">
+            <Header />
+          </div>{' '}
+          <div className="relative min-h-screen p-6 md:px-10 md:py-8">
             <Analytics /> <ReactToaster />
             <DefaultSeo {...SEO} />
             <Component {...pageProps} key={router.route} />

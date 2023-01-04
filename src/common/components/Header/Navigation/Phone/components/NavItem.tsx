@@ -13,7 +13,7 @@ function NavItem({ route, icon, label, onClick }: INavItem) {
   return (
     <button
       onClick={handleClick}
-      className="relative flex justify-start w-full px-2 py-3 text-lg font-medium border-b border-types-200 animate active:text-white/80 sm:text-base sm:font-semibold"
+      className="relative flex justify-start w-full px-2 py-3 text-lg font-medium border-b border-types-150 animate active:text-white/80 sm:text-base sm:font-semibold"
     >
       <span className="flex items-center animate">
         {label}

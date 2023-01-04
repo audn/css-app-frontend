@@ -37,11 +37,11 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
       icon: 'fa-regular fa-cube',
       route: `/components/${library.toLowerCase()}`,
     },
-    {
-      label: 'Layouts',
-      icon: 'fa-regular fa-table-layout',
-      route: `/layouts/${library.toLowerCase()}`,
-    },
+    // {
+    //   label: 'Layouts',
+    //   icon: 'fa-regular fa-table-layout',
+    //   route: `/layouts/${library.toLowerCase()}`,
+    // },
     // { label: 'Following', icon: 'fa-solid fa-users', route: '/followers' },
     {
       label: 'Beta Roadmap',
