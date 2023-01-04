@@ -69,9 +69,9 @@ export default function Beta() {
     },
   ];
   return (
-    <DefaultLayout className="-mt-10ss">
+    <DefaultLayout>
       <NextSeo title={`Beta Roadmap`} />
-      <div className="grid grid-cols-5 gap-5">
+      <div className="grid-cols-5 gap-5 xl:grid">
         <div className="col-span-3">
           <h1 className="px-2 text-lg text-white">
             👀 In progress & known bugs
