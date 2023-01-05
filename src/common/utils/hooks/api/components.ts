@@ -27,6 +27,12 @@ export async function likeComponent(
   const res = await put(`/components/${id}/like`, true);
   return res.json();
 }
+export async function bookmarkComponent(
+  id: string,
+): Promise<API.Response<API.Models.Component>> {
+  const res = await put(`/components/${id}/save`, true);
+  return res.json();
+}
 export async function addComponent(
   data: Partial<API.Models.Component>,
 ): Promise<API.Response<API.Models.Component>> {

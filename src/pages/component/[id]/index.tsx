@@ -18,6 +18,7 @@ import useAuthState from '../../../common/store/auth';
 import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
 import {
+  bookmarkComponent,
   deleteComponent,
   getComponentFromId,
   likeComponent,
@@ -50,6 +51,9 @@ function Component({ component }: { component: API.Models.Component }) {
 
   const [isLikingComponent, setIsLikingComponent] = useState<boolean>(false);
   const [isComponentLiked, setIsComponentLiked] = useState<boolean>(false);
+
+  const [isSavingComponent, setisSavingComponent] = useState<boolean>(false);
+  const [isComponentSaved, setIsComponentSaved] = useState<boolean>(false);
 
   const toggleEdit = () => setEdit(!isEditing);
   const simpleInfo = [
@@ -93,6 +97,11 @@ function Component({ component }: { component: API.Models.Component }) {
       label: 'Likes',
       value: likes.length,
       icon: 'fa-regular fa-heart',
+    },
+    {
+      label: 'Saves',
+      value: saves.length,
+      icon: 'fa-regular fa-bookmark',
     },
     {
       label: 'Author',
@@ -141,6 +150,11 @@ function Component({ component }: { component: API.Models.Component }) {
         setIsComponentLiked(true);
       }
     });
+    saves.forEach((x) => {
+      if (x.userId == user.id) {
+        setIsComponentSaved(true);
+      }
+    });
   }, [user]);
 
   const canManagePost = () => {
@@ -154,6 +168,14 @@ function Component({ component }: { component: API.Models.Component }) {
       setIsComponentLiked(!isComponentLiked);
     }
     setIsLikingComponent(false);
+  }
+  async function handleSaveComponent() {
+    setisSavingComponent(true);
+    const { error } = await bookmarkComponent(component.id);
+    if (!error) {
+      setIsComponentSaved(!isComponentSaved);
+    }
+    setisSavingComponent(false);
   }
 
   const onRefreshThumbnail = async () => {
@@ -315,9 +337,27 @@ function Component({ component }: { component: API.Models.Component }) {
                         }
                       />
                       <Button.Secondary
-                        icon="fa-regular fa-bookmark"
-                        title="Bookmark"
-                        onClick={toggleEdit}
+                        className={concat(
+                          isComponentLiked
+                            ? '!bg-red-500/20 !text-red-500 !border-red-500/30'
+                            : '',
+                          '',
+                        )}
+                        icon={concat(
+                          isComponentSaved
+                            ? 'fa-solid fa-bookmark text-white'
+                            : 'fa-regular fa-bookmark',
+                        )}
+                        onClick={handleSaveComponent}
+                        title={
+                          isComponentSaved ? (
+                            'Saved'
+                          ) : isSavingComponent ? (
+                            <LoaderIcon />
+                          ) : (
+                            'Save'
+                          )
+                        }
                       />
                     </>
                   </Auth.User>
