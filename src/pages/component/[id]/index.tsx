@@ -337,12 +337,6 @@ function Component({ component }: { component: API.Models.Component }) {
                         }
                       />
                       <Button.Secondary
-                        className={concat(
-                          isComponentLiked
-                            ? '!bg-red-500/20 !text-red-500 !border-red-500/30'
-                            : '',
-                          '',
-                        )}
                         icon={concat(
                           isComponentSaved
                             ? 'fa-solid fa-bookmark text-white'
