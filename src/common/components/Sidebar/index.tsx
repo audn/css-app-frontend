@@ -5,6 +5,7 @@ import concat from '../../utils/helpers/concat';
 import { Button } from '../Buttons';
 import Auth from '../layout/Auth';
 import Link from '../layout/Link';
+import Bookmarks from './components/Bookmarks';
 import CreatNew from './components/CreatNew';
 import NavItem from './components/NavItem';
 import SearchBar from './components/SearchBar';
@@ -107,7 +108,7 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
         {!isSidebarCollapsed && <SearchBar />}
       </div>
       <div className="mt-10">
-        {/* <h3 className="text-sm font-medium text-white uppercase">Pinned</h3> */}
+        <Bookmarks />
         <SidebarFooter />
       </div>
     </div>

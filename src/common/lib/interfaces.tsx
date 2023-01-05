@@ -117,6 +117,8 @@ export declare namespace API {
       avatar: string;
       role: string;
       createdAt: Date;
+      componentsLiked: ComponentLike[];
+      componentsSaved: ComponentSave[];
     }
 
     interface Component {
@@ -141,6 +143,7 @@ export declare namespace API {
     interface ComponentLike {
       id: string;
       componentLike: string;
+      component?: Component;
       userId: string;
       createdAt: Date;
       user: User;
@@ -149,6 +152,7 @@ export declare namespace API {
     interface ComponentSave {
       id: string;
       componentSave: string;
+      component?: Component;
       userId: string;
       createdAt: Date;
       user: User;
