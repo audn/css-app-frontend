@@ -90,24 +90,70 @@ export declare namespace API {
       components?: API.Models.Component[];
       layouts?: API.Models.Layout[];
     }
+
+    export interface Author {
+      id: string;
+      githubId: string;
+      username: string;
+      displayName: string;
+      bio: string;
+      location: string;
+      websiteUrl: string;
+      tokens?: any;
+      avatar: string;
+      role: string;
+      createdAt: Date;
+    }
+
+    export interface User {
+      id: string;
+      githubId: string;
+      username: string;
+      displayName: string;
+      bio: string;
+      location: string;
+      websiteUrl: string;
+      tokens?: any;
+      avatar: string;
+      role: string;
+      createdAt: Date;
+    }
+
     interface Component {
       id: string;
       title: string;
-      code: any;
+      code: string;
+      css?: any;
       description: string;
-      generatedImage?: string;
+      generatedImage: string;
       animated: boolean;
-      theme: string;
       responsive: boolean;
-
-      //   author: User;
-      category: string;
+      theme: string;
       authorId: string;
-      author: User;
+      category: string;
       library: string;
-      libraryVersion?: string;
-      createdAt: string;
+      libraryVersion: string;
+      createdAt: Date;
+      author: User;
+      likes: ComponentLike[];
+      saves: ComponentSave[];
     }
+    interface ComponentLike {
+      id: string;
+      componentLike: string;
+      userId: string;
+      createdAt: Date;
+      user: User;
+    }
+
+    interface ComponentSave {
+      id: string;
+      componentSave: string;
+      userId: string;
+      createdAt: Date;
+      user: User;
+    }
+
     interface Layout {
       id: string;
       title: string;

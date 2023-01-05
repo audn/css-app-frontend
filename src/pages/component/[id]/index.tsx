@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
+import toast, { LoaderIcon } from 'react-hot-toast';
 import { Button } from '../../../common/components/Buttons';
 import Dropdown from '../../../common/components/Dropdown';
 import Auth from '../../../common/components/layout/Auth';
@@ -15,10 +15,12 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
 import {
   deleteComponent,
   getComponentFromId,
+  likeComponent,
 } from '../../../common/utils/hooks/api/components';
 import useGenerateThumbnail from '../../../common/utils/useGenerateThumbnail';
 
@@ -28,6 +30,8 @@ function Component({ component }: { component: API.Models.Component }) {
     // description,
     responsive,
     code,
+    likes,
+    saves,
     animated,
     theme,
     library,
@@ -43,6 +47,9 @@ function Component({ component }: { component: API.Models.Component }) {
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const [warning, setWarning] = useState<boolean>(false);
   const [isEditing, setEdit] = useState<boolean>(false);
+
+  const [isLikingComponent, setIsLikingComponent] = useState<boolean>(false);
+  const [isComponentLiked, setIsComponentLiked] = useState<boolean>(false);
 
   const toggleEdit = () => setEdit(!isEditing);
   const simpleInfo = [
@@ -81,6 +88,11 @@ function Component({ component }: { component: API.Models.Component }) {
       label: 'Theme',
       value: theme || 'Dark',
       icon: 'fa-regular fa-eye',
+    },
+    {
+      label: 'Likes',
+      value: likes.length,
+      icon: 'fa-regular fa-heart',
     },
     {
       label: 'Author',
@@ -123,10 +135,26 @@ function Component({ component }: { component: API.Models.Component }) {
       }
     }
   }
+  useEffect(() => {
+    likes.forEach((x) => {
+      if (x.userId == user.id) {
+        setIsComponentLiked(true);
+      }
+    });
+  }, [user]);
 
   const canManagePost = () => {
     return user.id == component.authorId || user.role === 'ADMIN';
   };
+
+  async function handleLikeComponent() {
+    setIsLikingComponent(true);
+    const { error } = await likeComponent(component.id);
+    if (!error) {
+      setIsComponentLiked(!isComponentLiked);
+    }
+    setIsLikingComponent(false);
+  }
 
   const onRefreshThumbnail = async () => {
     const msg = toast.loading('Refreshing...');
@@ -154,7 +182,6 @@ function Component({ component }: { component: API.Models.Component }) {
       className: 'hover:!bg-red-500 hover:!bg-opacity-10 hover:text-red-500',
     },
   ] as INavItem[];
-  console.log(component);
 
   return (
     <DefaultLayout>
@@ -265,9 +292,27 @@ function Component({ component }: { component: API.Models.Component }) {
                   <Auth.User>
                     <>
                       <Button.Secondary
-                        icon="fa-regular fa-heart"
-                        title="Like"
-                        onClick={toggleEdit}
+                        className={concat(
+                          isComponentLiked
+                            ? '!bg-red-500/20 !text-red-500 !border-red-500/30'
+                            : '',
+                          '',
+                        )}
+                        icon={concat(
+                          isComponentLiked
+                            ? 'fa-solid fa-heart text-red-500'
+                            : 'fa-regular fa-heart',
+                        )}
+                        onClick={handleLikeComponent}
+                        title={
+                          isComponentLiked ? (
+                            'Liked'
+                          ) : isLikingComponent ? (
+                            <LoaderIcon />
+                          ) : (
+                            'Like'
+                          )
+                        }
                       />
                       <Button.Secondary
                         icon="fa-regular fa-bookmark"

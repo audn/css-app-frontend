@@ -21,7 +21,12 @@ export async function getComponentFromId(
   const res = await get(`/components/${id}`, false);
   return res.json();
 }
-
+export async function likeComponent(
+  id: string,
+): Promise<API.Response<API.Models.Component>> {
+  const res = await put(`/components/${id}/like`, true);
+  return res.json();
+}
 export async function addComponent(
   data: Partial<API.Models.Component>,
 ): Promise<API.Response<API.Models.Component>> {
