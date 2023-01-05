@@ -19,7 +19,7 @@ function Bookmarks() {
         {user.componentsSaved && user.componentsSaved?.length >= 1 && (
           <React.Fragment>
             <h3 className="text-base font-medium text-white/60">Bookmarks</h3>
-            <div className="mt-2">
+            <div className="mt-2 space-y-2">
               {user.componentsSaved?.map(({ component }) => (
                 <Item active={active(component!.id)} component={component!} />
               ))}

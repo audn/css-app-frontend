@@ -1,13 +1,21 @@
+import { API } from '../../../../../lib/interfaces';
 import concat from '../../../../../utils/helpers/concat';
 
-const Icon = ({ active }: { active: boolean }) => {
+const Icon = ({
+  active,
+  component,
+}: {
+  active?: boolean;
+  component: API.Models.Component;
+}) => {
   return (
-    <div
+    <img
+      src={`/libraries/${component.library.toLowerCase()}.svg`}
       className={concat(
-        active ? 'bg-types-100' : '',
-        'w-4 h-4 mr-2 border rounded-full border-types-250 group-hover:bg-types-100 animate',
+        active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
+        'w-5 h-5 mr-2  animate ',
       )}
-    ></div>
+    />
   );
 };
 

@@ -27,7 +27,6 @@ function EditModal({ isOpen, onClose, component }: Props) {
 
   async function onSave() {
     setIsSaving(true);
-    // const newData = (({ author, authorId, id, ...o }) => o)(data);
     const { animated, title, description, responsive, theme } = data;
 
     const saved = await editComponent(component.id, {
