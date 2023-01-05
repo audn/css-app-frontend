@@ -21,6 +21,10 @@ export default function Beta() {
       done: false,
     },
     {
+      label: `Sorting (Theme, Animated, Views, Responsive etc.√)`,
+      done: false,
+    },
+    {
       label: `Interactions such as comment, rate, like & bookmark. This can later be added to the sorting methods.`,
       done: false,
     },
