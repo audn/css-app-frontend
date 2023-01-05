@@ -37,7 +37,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
         {/* {!pagesWithoutSidebar.includes(router.pathname) && ( */}
 
         <div className="hidden sm:flex">
-          <Sidebar toggleCreateType={() => setIsCreateOpen(!isCreateOpen)} />
+          <Sidebar
+          //   toggleCreateType={() => setIsCreateOpen(!isCreateOpen)}
+          />
         </div>
         {/* )} */}
         {isCreateOpen && (

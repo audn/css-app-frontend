@@ -7,7 +7,7 @@ export const Hydrate = {
   Components: ({ ...props }: Hydration.Components) => {
     return <ComponentsHydration {...props} />;
   },
-  Layouts: ({ ...props }: Hydration.Components) => {
+  Layouts: ({ ...props }: Hydration.Layouts) => {
     return <LayoutsHydration {...props} />;
   },
   Categories: ({

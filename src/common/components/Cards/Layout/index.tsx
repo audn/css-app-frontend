@@ -1,12 +1,7 @@
 import { API } from '../../../lib/interfaces';
 import Link from '../../layout/Link';
 
-function LayoutCard({
-  author,
-  id,
-  title,
-  generatedImage,
-}: API.Models.Component) {
+function LayoutCard({ author, id, title, generatedImage }: API.Models.Layout) {
   return (
     <div className="flex flex-col items-start">
       <Link

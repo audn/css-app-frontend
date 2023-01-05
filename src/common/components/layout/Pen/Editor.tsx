@@ -4,7 +4,7 @@ import * as monaco from 'monaco-editor';
 // import * as monaco from '@monaco-editor/react';
 
 type Props = {
-  initialContent: string;
+  initialContent?: string;
   templateCode?: string;
   onChange?: (value: string) => void;
   fullHeight?: boolean;

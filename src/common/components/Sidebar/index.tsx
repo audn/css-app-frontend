@@ -11,7 +11,8 @@ import NavItem from './components/NavItem';
 import SearchBar from './components/SearchBar';
 import SidebarFooter from './components/SidebarFooter';
 
-function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
+function Sidebar() {
+// { toggleCreateType }: { toggleCreateType: () => void }
   const library = useFilterState((s) => s.library);
   const { isSidebarCollapsed } = useSidebarState((s) => ({
     isSidebarCollapsed: s.isCollapsed,
@@ -81,7 +82,9 @@ function Sidebar({ toggleCreateType }: { toggleCreateType: () => void }) {
         </Link>
         {!isSidebarCollapsed && (
           <Auth.User>
-            <CreatNew toggleCreateType={toggleCreateType} />
+            <CreatNew
+            //   toggleCreateType={toggleCreateType}
+            />
             <Link
               target="_self"
               href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}

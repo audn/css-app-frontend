@@ -165,7 +165,7 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
       }
     }
   }, [router.isReady]);
-  useBeforeUnload(data.code.length >= 1, '');
+  useBeforeUnload(data.code!.length >= 1, '');
 
   return (
     <div className="-mx-10 -my-8">
@@ -197,7 +197,7 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
             <LibraryDropdown data={data} update={update} />
           </div>
           <PenEditor
-            initialContent={data.code}
+            initialContent={data.code ?? ''}
             onChange={(val) => update('code', val)}
           />
         </div>

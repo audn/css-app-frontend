@@ -8,7 +8,6 @@ import Modal from '../../../../components/layout/Modal';
 import LoadingIcon from '../../../../components/misc/LoadingIcon';
 import { API, IPostSchemas } from '../../../../lib/interfaces';
 import { addComponent } from '../../../../utils/hooks/api/components';
-import { addLayout } from '../../../../utils/hooks/api/layouts';
 import { useCategories } from '../../../../utils/hooks/categories';
 import useGenerateThumbnail from '../../../../utils/useGenerateThumbnail';
 import View1 from './screens/View1';
@@ -49,15 +48,16 @@ function PublishModal({ isOpen, onClose, update, data, type }: Props) {
       const toaster = toast.loading('Working...');
       setIsPosting(true);
       const posted =
-        type === 'component'
-          ? await addComponent({
-              ...data,
-              library: data.library!.toLowerCase(),
-            })
-          : await addLayout({
-              ...data,
-              library: data.library!.toLowerCase(),
-            });
+        // type === 'component'
+        //       ?
+        await addComponent({
+          ...data,
+          library: data.library!.toLowerCase(),
+        });
+      //   : await addLayout({
+      //       ...data,
+      //       library: data.library!.toLowerCase(),
+      //     });
       if (posted.payload?.results) {
         await useGenerateThumbnail(type, posted.payload.results.id);
         toast.success('Success!', { id: toaster });

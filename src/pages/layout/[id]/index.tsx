@@ -7,7 +7,6 @@ import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
-import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
@@ -29,10 +28,10 @@ function Layout({ layout }: { layout: API.Models.Layout }) {
 
   //   const router = useRouter();
 
-  const [isEditing, setEdit] = useState<boolean>(false);
+  //   const [isEditing, setEdit] = useState<boolean>(false);
 
   const [view, setView] = useState<'Code' | 'Preview'>('Preview');
-  const toggleEdit = () => setEdit(!isEditing);
+  //   const toggleEdit = () => setEdit(!isEditing);
   const simpleInfo = [
     {
       label: 'Library',
@@ -121,7 +120,7 @@ function Layout({ layout }: { layout: API.Models.Layout }) {
         }}
         description={layout.description}
       />{' '}
-      <EditModal isOpen={isEditing} onClose={toggleEdit} component={layout} />
+      {/* <EditModal isOpen={isEditing} onClose={toggleEdit} component={layout} /> */}
       <div className="relative flex">
         <div className="flex flex-col w-full ">
           <div className="grid w-full grid-cols-3 py-5">

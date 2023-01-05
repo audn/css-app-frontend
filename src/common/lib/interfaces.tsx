@@ -134,7 +134,7 @@ export declare namespace API {
       authorId: string;
       category: string;
       library: string;
-      libraryVersion: string;
+      libraryVersion?: string;
       createdAt: Date;
       author: User;
       likes: ComponentLike[];
@@ -179,6 +179,8 @@ export declare namespace API {
       library: string;
       libraryVersion?: string;
       createdAt: string;
+      likes: ComponentLike[];
+      saves: ComponentSave[];
     }
   }
 }
@@ -195,6 +197,9 @@ export declare namespace Hydration {
 
   interface Components extends ReactQueryProps {
     data?: API.Models.Component[];
+  }
+  interface Layouts extends ReactQueryProps {
+    data?: API.Models.Layout[];
   }
   interface Category extends ReactQueryProps {
     data?: API.Response<API.Models.Category[]>;

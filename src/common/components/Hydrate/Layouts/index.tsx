@@ -14,7 +14,7 @@ function LayoutsHydration({
   refetch,
   isRefetching,
   onClearFilters,
-}: Hydration.Components) {
+}: Hydration.Layouts) {
   if (isLoading) {
     return (
       <SkeletonTheme baseColor="#272e39" highlightColor="#38414f">
