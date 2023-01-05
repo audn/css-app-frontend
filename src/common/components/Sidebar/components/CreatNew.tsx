@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Link from '../../layout/Link';
 
 function CreatNew() {
-// { toggleCreateType }: { toggleCreateType: () => void }
+  // { toggleCreateType }: { toggleCreateType: () => void }
   return (
     <Link
-      href="/new?type=Component"
+      href="/new?type=component"
       //   onClick={toggleCreateType}
       className="flex group items-center px-3 py-[0.4rem] text-sm font-medium rounded-full bg-types-150/30 hover:text-white/80 hover:bg-types-150/50 animate"
     >
