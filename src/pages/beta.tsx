@@ -24,9 +24,14 @@ export default function Beta() {
       label: `Sorting (Theme, Animated, Views, Responsive etc.√)`,
       done: false,
     },
+
     {
-      label: `Interactions such as comment, rate, like & bookmark. This can later be added to the sorting methods.`,
+      label: `Comment on other components / layouts.`,
       done: false,
+    },
+    {
+      label: `Like & Bookmark components`,
+      done: true,
     },
     {
       label: `Improve thumbnails. Look at possibly including the Component's code in thumbnail so you can interact with it before opening.`,
