@@ -16,7 +16,7 @@ function Bookmarks() {
   if (!isSidebarCollapsed) {
     return (
       <div>
-        {user.componentsSaved?.length && (
+        {user.componentsSaved && user.componentsSaved?.length >= 1 && (
           <React.Fragment>
             <h3 className="text-base font-medium text-white/60">Bookmarks</h3>
             <div className="mt-2">
