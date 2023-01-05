@@ -28,7 +28,6 @@ function CategoryCard({
           : selectedValues.includes(value)
           ? 'text-white bg-types-150 group'
           : 'text-white/60 hover:text-white bg-types-100 group',
-
         'text-[15px] px-2 text-xs py-[0.25rem] rounded-md flex items-center animate ',
       )}
     >
@@ -41,7 +40,6 @@ function CategoryCard({
           'ml-1 text-sm animate',
         )}
       >
-        {' '}
         {count}
       </div>
     </button>

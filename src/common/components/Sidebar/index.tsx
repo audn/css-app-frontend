@@ -12,7 +12,7 @@ import SearchBar from './components/SearchBar';
 import SidebarFooter from './components/SidebarFooter';
 
 function Sidebar() {
-// { toggleCreateType }: { toggleCreateType: () => void }
+  // { toggleCreateType }: { toggleCreateType: () => void }
   const library = useFilterState((s) => s.library);
   const { isSidebarCollapsed } = useSidebarState((s) => ({
     isSidebarCollapsed: s.isCollapsed,
@@ -51,6 +51,13 @@ function Sidebar() {
       label: 'Beta Roadmap',
       icon: 'fa-regular fa-info-circle',
       route: '/beta',
+    },
+  ];
+  const items2 = [
+    {
+      label: 'Join Discord',
+      icon: 'fa-brands fa-discord',
+      route: 'https://discord.gg/YA39qjzwNy',
     },
   ];
 
@@ -109,6 +116,11 @@ function Sidebar() {
           <NavItem {...x} />
         ))}
         {!isSidebarCollapsed && <SearchBar />}
+        <div className="!mt-3">
+          {items2.map((x) => (
+            <NavItem {...x} />
+          ))}
+        </div>
       </div>
       <div className="mt-10">
         <Bookmarks />
