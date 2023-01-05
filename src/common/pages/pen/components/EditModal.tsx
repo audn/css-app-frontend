@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { Button } from '../../../components/Buttons';
 import { Form } from '../../../components/Form';
 import Modal from '../../../components/layout/Modal';
+import LoadingIcon from '../../../components/misc/LoadingIcon';
 import { API } from '../../../lib/interfaces';
 import concat from '../../../utils/helpers/concat';
 import { editComponent } from '../../../utils/hooks/api/components';
@@ -15,6 +16,7 @@ type Props = {
 function EditModal({ isOpen, onClose, component }: Props) {
   const [data, setData] = useState<API.Models.Component>(component);
   const unsavedChanges = JSON.stringify(data) !== JSON.stringify(component);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
@@ -24,8 +26,17 @@ function EditModal({ isOpen, onClose, component }: Props) {
   };
 
   async function onSave() {
-    const newData = (({ author, authorId, ...o }) => o)(data);
-    const saved = await editComponent(component.id, newData);
+    setIsSaving(true);
+    // const newData = (({ author, authorId, id, ...o }) => o)(data);
+    const { animated, title, description, responsive, theme } = data;
+
+    const saved = await editComponent(component.id, {
+      animated,
+      title,
+      description,
+      responsive,
+      theme,
+    });
     if (!saved.error) {
       toast.success('Saved');
       component = data;
@@ -33,6 +44,7 @@ function EditModal({ isOpen, onClose, component }: Props) {
     } else {
       toast.error('Failed to update');
     }
+    setIsSaving(false);
   }
   return (
     <Modal
@@ -159,7 +171,15 @@ function EditModal({ isOpen, onClose, component }: Props) {
           </div>
           <Button.Primary
             onClick={onSave}
-            title="Save"
+            title={
+              isSaving ? (
+                <div className="flex justify-center">
+                  <LoadingIcon />
+                </div>
+              ) : (
+                `Save`
+              )
+            }
             disabled={!unsavedChanges}
           />
         </Form.Wrapper>
