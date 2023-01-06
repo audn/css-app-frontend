@@ -80,7 +80,7 @@ export const iframeSrcDoc = ({
         ${library === 'css3' && files && files['CSS']?.value}
         ${
           type == 'component' &&
-          `body{
+          `body,html{
             background:transparent;
             width:100%;
             flex-direction:column;
