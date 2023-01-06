@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useCallback, useEffect, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import { HeaderEditingComponent } from '../../../common/components/Header/EditingComponent';
+import LibraryDropdown from '../../../common/components/layout/Pen/components/LibraryDropdown';
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
@@ -133,7 +134,7 @@ function EditComponent({ post }: { post: API.Models.Component }) {
   }, []);
 
   return (
-    <div>
+    <div className="-mx-10 -my-8">
       <NextSeo title={`Editing ${post.title}`} />{' '}
       <HeaderEditingComponent data={data} update={update} />
       {/* @ts-ignore */}
@@ -152,10 +153,15 @@ function EditComponent({ post }: { post: API.Models.Component }) {
           true && size.layout !== 'preview' ? 'Resizer' : 'Resizer-collapsed'
         }
       >
-        <PenEditor
-          initialContent={data.code}
-          onChange={(val) => update('code', val)}
-        />
+        <div className="border-r border-types-150">
+          <div className="w-full px-5 py-2 border-b border-types-150">
+            <LibraryDropdown data={data} update={update} />
+          </div>
+          <PenEditor
+            initialContent={data.code ?? ''}
+            onChange={(val) => update('code', val)}
+          />
+        </div>
         <Preview
           type="component"
           library={data.library!.toLowerCase()}

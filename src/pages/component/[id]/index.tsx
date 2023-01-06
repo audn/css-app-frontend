@@ -15,6 +15,7 @@ import { INavItem } from '../../../common/lib/types';
 import EditModal from '../../../common/pages/pen/components/EditModal';
 import InfoTag from '../../../common/pages/pen/components/InfoTag';
 import useAuthState from '../../../common/store/auth';
+import { useLibraryLabel } from '../../../common/utils/data/libraries';
 import concat from '../../../common/utils/helpers/concat';
 import toDate from '../../../common/utils/helpers/toDate';
 import {
@@ -64,8 +65,9 @@ function Component({ component }: { component: API.Models.Component }) {
           <img
             src={`/libraries/${library.toLowerCase()}.svg`}
             className="w-5 h-5 mr-2"
-          />{' '}
-          {library}@{libraryVersion}
+          />
+          {useLibraryLabel(library)}{' '}
+          {library !== 'css3' && `@${libraryVersion}`}
         </>
       ),
       icon: 'fa-regular fa-at',

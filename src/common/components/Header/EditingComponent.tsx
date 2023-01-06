@@ -5,7 +5,6 @@ import { API } from '../../lib/interfaces';
 import { editComponent } from '../../utils/hooks/api/components';
 import useGenerateThumbnail from '../../utils/useGenerateThumbnail';
 import { Button } from '../Buttons';
-import LibraryDropdown from '../layout/Pen/components/LibraryDropdown';
 
 export const HeaderEditingComponent = ({
   data,
@@ -47,7 +46,7 @@ export const HeaderEditingComponent = ({
     setIsSaving(false);
   }
   return (
-    <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-200">
+    <header className="z-50 flex items-center justify-between px-6 h-[60px] border-b border-b-types-150">
       <div className="flex flex-col w-full">
         <div className="flex items-center">
           <button
@@ -89,7 +88,6 @@ export const HeaderEditingComponent = ({
         </div> */}
       </div>
       <div className="flex items-center space-x-2">
-        <LibraryDropdown data={data} update={update} />
         <Button.Secondary
           title={'Save'}
           disabled={isSaving}
