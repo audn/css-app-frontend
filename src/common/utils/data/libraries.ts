@@ -84,6 +84,7 @@ export const iframeSrcDoc = ({
             background:transparent;
             width:100%;
             flex-direction:column;
+            margin:0;
             display:flex;
             min-height:100vh;
             align-items:center;
