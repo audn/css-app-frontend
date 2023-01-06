@@ -33,7 +33,6 @@ function LibraryDropdown({
     const version = event.target.value;
     update('libraryVersion', version);
   }
-  console.log(data.library);
 
   return (
     <Dropdown

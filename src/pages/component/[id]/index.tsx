@@ -207,6 +207,30 @@ function Component({ component }: { component: API.Models.Component }) {
     },
   ] as INavItem[];
 
+  const files = {
+    CSS: {
+      name: 'style.css',
+      language: 'css',
+      value: component.css,
+    },
+    HTML: {
+      name: 'index.html',
+      language: 'html',
+      value: component.code,
+    },
+  } as any;
+  const [fileName, setFileName] = useState('HTML');
+
+  const file = files[fileName];
+
+  //   function onChange(x: any) {
+  //     if (fileName == 'CSS') {
+  //       update('css', x);
+  //     } else {
+  //       update('code', x);
+  //     }
+  //   }
+
   return (
     <DefaultLayout>
       <div className="flex flex-col mb-5 space-y-4">
@@ -282,6 +306,7 @@ function Component({ component }: { component: API.Models.Component }) {
                 </button>
               )}
               <Preview
+                files={files}
                 type="component"
                 className={darkMode ? '!bg-[#121212]' : ''}
                 initialCode={code}
@@ -376,12 +401,18 @@ function Component({ component }: { component: API.Models.Component }) {
 
           <div className="xl:col-span-2 rounded-xl border border-types-150 py-3 overflow-hidden h-[450px] bg-types-50">
             <PenEditor
-              templateCode={component.code}
-              fullHeight={false}
-              initialContent={component.code}
-              // onChange={(val) => update('code', val)}
-            />{' '}
+              file={files['HTML']}
+              //   onChange={(val) => onChange('code', val)}
+            />
           </div>
+          {library === 'css3' && (
+            <div className="xl:col-span-2 rounded-xl border border-types-150 py-3 overflow-hidden h-[450px] bg-types-50">
+              <PenEditor
+                file={files['CSS']}
+                //   onChange={(val) => onChange('code', val)}
+              />
+            </div>
+          )}
         </div>
       </div>
     </DefaultLayout>

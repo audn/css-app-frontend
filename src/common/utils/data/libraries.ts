@@ -44,11 +44,19 @@ export const useLibraryLabel = (val?: string) => {
   }
 };
 export const iframeSrcDoc = ({
+  files,
   type,
   initialCode = '',
   library,
   version,
 }: {
+  files?: {
+    [key: string]: {
+      language: 'html' | 'css';
+      name: string;
+      value: string;
+    };
+  };
   type: IPostSchemas;
   initialCode?: string;
   library?: string;
@@ -69,6 +77,7 @@ export const iframeSrcDoc = ({
         </script>
         </head>
         <style>
+        ${library === 'css3' && files && files['CSS']?.value}
         ${
           type == 'component' &&
           `body{

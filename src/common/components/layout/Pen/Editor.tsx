@@ -8,8 +8,15 @@ type Props = {
   templateCode?: string;
   onChange?: (value: string) => void;
   fullHeight?: boolean;
+  language?: 'html' | 'css';
+
+  file: {
+    language: 'html' | 'css';
+    name: string;
+    value: string;
+  };
 };
-function PenEditor({ initialContent, onChange }: Props) {
+function PenEditor({ initialContent, onChange, file }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
     fontFamily:
       'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -21,7 +28,9 @@ function PenEditor({ initialContent, onChange }: Props) {
     wordWrap: 'on',
     wordWrapColumn: 40,
     wrappingIndent: 'indent',
-
+    glyphMargin: true,
+    lineNumbersMinChars: 2,
+    folding: false,
     fixedOverflowWidgets: true,
     scrollbar: {
       horizontalScrollbarSize: 21,
@@ -36,14 +45,13 @@ function PenEditor({ initialContent, onChange }: Props) {
   return (
     <Editor
       theme="vs-dark"
-      onChange={
-        onChange ? (value) => onChange(value ?? '') : () => console.log('s')
-      }
+      onChange={onChange ? (value) => onChange(value!) : () => console.log('s')}
       options={MONACO_OPTIONS}
       height={'calc(100vh - 60px)'}
-      defaultLanguage="html"
-      value={initialContent || ''}
-      defaultValue={initialContent || ''}
+      language={file.language}
+      value={file.value}
+      defaultValue={file.value}
+      path={file.name}
     />
   );
 }

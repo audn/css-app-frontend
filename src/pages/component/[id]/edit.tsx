@@ -7,10 +7,15 @@ import LibraryDropdown from '../../../common/components/layout/Pen/components/Li
 import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { API } from '../../../common/lib/interfaces';
+import { useLibraryLabel } from '../../../common/utils/data/libraries';
+import concat from '../../../common/utils/helpers/concat';
 import { getComponentFromId } from '../../../common/utils/hooks/api/components';
 
 function EditComponent({ post }: { post: API.Models.Component }) {
   const [data, setData] = useState<Partial<API.Models.Component>>(post);
+  const [activeTab, setActiveTab] = useState<'HTML' | 'CSS'>('HTML');
+
+  const library = useLibraryLabel(data.library);
 
   const update = (key: keyof API.Models.Component, value: string | boolean) => {
     setData((d) => ({
@@ -133,6 +138,30 @@ function EditComponent({ post }: { post: API.Models.Component }) {
     });
   }, []);
 
+  const files = {
+    CSS: {
+      name: 'style.css',
+      language: 'css',
+      value: data.css,
+    },
+    HTML: {
+      name: 'index.html',
+      language: 'html',
+      value: data.code,
+    },
+  } as any;
+
+  const [fileName, setFileName] = useState('HTML');
+  const file = files[fileName];
+
+  function onChange(x: any) {
+    if (fileName == 'CSS') {
+      update('css', x);
+    } else {
+      update('code', x);
+    }
+  }
+
   return (
     <div className="-mx-10 -my-8">
       <NextSeo title={`Editing ${post.title}`} />{' '}
@@ -154,15 +183,28 @@ function EditComponent({ post }: { post: API.Models.Component }) {
         }
       >
         <div className="border-r border-types-150">
-          <div className="w-full px-5 py-2 border-b border-types-150">
+          <div className="flex justify-between w-full px-5 py-2 border-b border-types-150">
+            {library === 'CSS3' && (
+              <div className="flex items-center space-x-2">
+                {['HTML', 'CSS'].map((x: any) => (
+                  <button
+                    onClick={() => (setFileName(x), setActiveTab(x))}
+                    className={concat(
+                      activeTab === x ? 'text-white' : 'hover:text-white',
+                      'text-sm font-semibold animate',
+                    )}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </div>
+            )}
             <LibraryDropdown data={data} update={update} />
           </div>
-          <PenEditor
-            initialContent={data.code ?? ''}
-            onChange={(val) => update('code', val)}
-          />
+          <PenEditor file={file} onChange={(v) => onChange(v)} />
         </div>
         <Preview
+          files={files}
           type="component"
           library={data.library!.toLowerCase()}
           version={data.libraryVersion!}
