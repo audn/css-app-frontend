@@ -219,17 +219,6 @@ function Component({ component }: { component: API.Models.Component }) {
       value: component.code,
     },
   } as any;
-  const [fileName, setFileName] = useState('HTML');
-
-  const file = files[fileName];
-
-  //   function onChange(x: any) {
-  //     if (fileName == 'CSS') {
-  //       update('css', x);
-  //     } else {
-  //       update('code', x);
-  //     }
-  //   }
 
   return (
     <DefaultLayout>
@@ -314,7 +303,7 @@ function Component({ component }: { component: API.Models.Component }) {
                 version={libraryVersion}
               />
             </div>
-            <div className="flex flex-wrap items-center justify-between mt-5 space-y-3 gap-x-3 ">
+            <div className="flex flex-wrap items-center justify-between gap-3 mt-5 ">
               <Button.Secondary
                 icon="fa-brands fa-twitter"
                 title="Share"
