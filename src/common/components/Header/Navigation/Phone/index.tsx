@@ -42,7 +42,7 @@ function PhoneMenu({ toggle }: { toggle: (val: boolean) => void }) {
         <NavItem {...x} />
       ))}
       {!currentUser.isLoggedIn && (
-        <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`}>
+        <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}>
           <Button.White
             title="Sign in with GitHub"
             icon={'fa-brands fa-github'}
