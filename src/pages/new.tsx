@@ -9,10 +9,12 @@ import LibraryDropdown from '../common/components/layout/Pen/components/LibraryD
 import PenEditor from '../common/components/layout/Pen/Editor';
 import Preview from '../common/components/layout/Pen/Preview';
 import { API, IPostSchemas } from '../common/lib/interfaces';
+import concat from '../common/utils/helpers/concat';
 
 function NewComponent() {
   const router = useRouter();
   const type = router.query.type as IPostSchemas;
+  const [activeTab, setActiveTab] = useState<'HTML' | 'CSS'>('HTML');
 
   const [isSelectTypeModalOpen, setIsSelectTypeModalOpen] =
     useState<boolean>(false);
@@ -166,6 +168,29 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
     }
   }, [router.isReady]);
   useBeforeUnload(data.code!.length >= 1, '');
+  const files = {
+    CSS: {
+      name: 'style.css',
+      language: 'css',
+      value: data.css,
+    },
+    HTML: {
+      name: 'index.html',
+      language: 'html',
+      value: data.code,
+    },
+  } as any;
+
+  const [fileName, setFileName] = useState('HTML');
+  const file = files[fileName];
+
+  function onChange(x: any) {
+    if (fileName == 'CSS') {
+      update('css', x);
+    } else {
+      update('code', x);
+    }
+  }
 
   return (
     <div className="-mx-10 -my-8">
@@ -193,16 +218,29 @@ Avoid adding elements such as <body> that make it difficult to copy and paste yo
         }
       >
         <div className="border-r border-types-150">
-          <div className="w-full px-5 py-2 border-b border-types-150">
+          <div className="flex justify-between w-full px-5 py-2 border-b border-types-150">
+            {data.library === 'CSS3' && (
+              <div className="flex items-center space-x-2">
+                {['HTML', 'CSS'].map((x: any) => (
+                  <button
+                    onClick={() => (setFileName(x), setActiveTab(x))}
+                    className={concat(
+                      activeTab === x ? 'text-white' : 'hover:text-white',
+                      'text-sm font-semibold animate',
+                    )}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </div>
+            )}
             <LibraryDropdown data={data} update={update} />
           </div>
-          <PenEditor
-            initialContent={data.code ?? ''}
-            onChange={(val) => update('code', val)}
-          />
+          <PenEditor file={file} onChange={(v) => onChange(v)} />
         </div>
         <Preview
           type={type}
+          files={files}
           library={data.library && data?.library.toLowerCase()}
           version={data.libraryVersion}
           className="-z-10"

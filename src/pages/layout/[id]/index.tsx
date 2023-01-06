@@ -3,7 +3,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import Link from '../../../common/components/layout/Link';
-import PenEditor from '../../../common/components/layout/Pen/Editor';
 import Preview from '../../../common/components/layout/Pen/Preview';
 import { DefaultLayout } from '../../../common/layouts/Default';
 import { API } from '../../../common/lib/interfaces';
@@ -174,11 +173,11 @@ function Layout({ layout }: { layout: API.Models.Layout }) {
                     </div>
                   ) : (
                     <div className="w-full overflow-hidden border rounded-xl border-types-150 bg-types-50">
-                      <PenEditor
+                      {/* <PenEditor
                         templateCode={code}
                         fullHeight={false}
                         initialContent={code}
-                      />
+                      /> */}
                     </div>
                   )}
                 </motion.div>

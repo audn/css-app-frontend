@@ -16,7 +16,7 @@ type Props = {
     value: string;
   };
 };
-function PenEditor({ initialContent, onChange, file }: Props) {
+function PenEditor({ onChange, file }: Props) {
   const MONACO_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
     fontFamily:
       'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
