@@ -24,13 +24,13 @@ function NotLoggedInModal() {
         <div className="flex flex-col items-center justify-center w-full mt-3 text-center">
           You need to login in order to access this page, sorry!
           <Link
-            href={`${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`}
+            href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
             className="mt-8"
           >
             <Button.White
-              title="Sign in with Twitter"
-              icon={'fa-brands fa-twitter'}
-              className="w-full !py-3 !text-white bg-blue-500"
+              title="Sign in with GitHub"
+              icon={'fa-brands fa-github'}
+              className="w-full !py-3 !text-white bg-types-100"
             />
           </Link>
         </div>
