@@ -77,7 +77,6 @@ export const iframeSrcDoc = ({
         </script>
         </head>
         <style>
-        ${library === 'css3' ? files && files['CSS']?.value : ''}
         ${
           type == 'component' &&
           `body{
@@ -91,7 +90,9 @@ export const iframeSrcDoc = ({
             justify-content:center;
         }`
         }
-</style>
+        ${library === 'css3' ? files && files['CSS']?.value : ''}
+
+        </style>
 
 
         <body>${initialCode}</body>
