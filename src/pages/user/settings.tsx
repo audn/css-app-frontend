@@ -29,8 +29,11 @@ function UserSettings() {
     event.preventDefault();
     const msg = toast.loading('Saving...');
     setIsSaving(true);
+    const newData = (({ componentsSaved, createdAt, role, tokens, ...o }) => o)(
+      data,
+    );
 
-    const { error } = await editUser(user.id!, data as any);
+    const { error } = await editUser(user.id!, newData as any);
     if (!error) {
       toast.success('Saved!', { id: msg });
     } else {
