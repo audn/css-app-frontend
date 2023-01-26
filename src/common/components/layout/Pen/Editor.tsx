@@ -41,6 +41,15 @@ function PenEditor({ onChange, file }: Props) {
       strings: true,
     },
   };
+  function renderCode() {
+    const banned = ['fetch', 'onload'];
+    const code = file.value;
+    const includesBannedWord = banned?.some((x) => code?.includes(x));
+
+    if (includesBannedWord) {
+      return 'invalid component';
+    } else return code;
+  }
 
   return (
     <Editor
@@ -49,8 +58,8 @@ function PenEditor({ onChange, file }: Props) {
       options={MONACO_OPTIONS}
       height={'calc(100vh - 60px)'}
       language={file.language}
-      value={file.value}
-      defaultValue={file.value}
+      value={renderCode()}
+      defaultValue={renderCode()}
       path={file.name}
     />
   );
