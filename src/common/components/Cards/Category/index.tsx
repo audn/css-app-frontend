@@ -27,8 +27,8 @@ function CategoryCard({
           ? 'opacity-50 cursor-not-allowed'
           : selectedValues.includes(value)
           ? 'text-white bg-types-150 group'
-          : 'text-white/60 hover:text-white bg-types-100 group',
-        'text-[15px] px-2 text-xs py-[0.25rem] rounded-md flex items-center animate ',
+          : 'text-white/60 hover:text-white bg-types-150/50 group',
+        'px-2 py-[0.25rem] rounded-md flex items-center animate ',
       )}
     >
       {label}
@@ -37,7 +37,7 @@ function CategoryCard({
           selectedValues.includes(value)
             ? 'text-white/50'
             : 'text-white/30 group-hover:text-white/50',
-          'ml-1 text-sm animate',
+          'ml-1 font-medium animate',
         )}
       >
         {count}
